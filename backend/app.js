@@ -9,7 +9,7 @@ require("dotenv").config();
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 console.log(port);
 const app = express();
 app.use(cors());
