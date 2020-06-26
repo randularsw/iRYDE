@@ -1,4 +1,5 @@
 import Home from "components/home";
+import serviceProviders from "components/booking/serviceProviders";
 
 var sidebarRoutes = [
   {
@@ -42,6 +43,14 @@ var sidebarRoutes = [
     icon: "ni ni-planet text-blue",
     component: Home,
     actor: "admin",
+  },
+  //routes for service providers
+  {
+    path: "/service-providers",
+    name: "Service Providers",
+    icon: "ni ni-planet text-blue",
+    component: serviceProviders ,
+    actor: "vehicle-owner",
   },
 ];
 export default sidebarRoutes;

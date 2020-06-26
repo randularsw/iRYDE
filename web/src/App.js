@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
 import { Route, Switch } from "react-router-dom";
 import Home from "./components/home";
 import Sidebar from "components/shared/sidebar";
 import sidebarRoutes from "sidebarRoutes";
 import NavigationBar from "components/shared/navigationBar";
+import serviceProviders from "components/booking/serviceProviders";
 
 function App(props) {
   return (
@@ -25,6 +26,8 @@ function App(props) {
         />
         <Switch>
           {/* Routes */}
+          
+          <Route path="/service-providers" component={serviceProviders}></Route>
           <Route path="/" component={Home}></Route>
         </Switch>
       </div>
