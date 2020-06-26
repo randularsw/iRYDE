@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import Header from "../shared/header";
 import { Row, Card, CardHeader, CardBody, CardImg,CardTitle,CardText,Container ,Button} from "reactstrap";
+import { Link } from "react-router-dom";
+
+
 
 class serviceProviders extends Component {
   state = {
@@ -34,19 +37,10 @@ class serviceProviders extends Component {
                             top
                             />
                             <CardBody>
-                            <CardTitle><a href="">LAUGFS CarCare</a></CardTitle>
+                            <CardTitle>
+                                <Link to={"/"}>LAUGFS CarCare</Link>
+                            </CardTitle>
 
-                            {/* <CardText>
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </CardText> */}
-                            {/* <Button
-                                color="primary"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Go somewhere
-                            </Button> */}
                             </CardBody>
                         </Card>  
                         <Card style={{ width: "18rem" , marginRight:5}}>
@@ -57,7 +51,7 @@ class serviceProviders extends Component {
                             top
                             />
                             <CardBody>
-                            <CardTitle><a href="">Micro CarCare</a></CardTitle>
+                            <CardTitle><Link>Micro CarCare</Link></CardTitle>
                             
                             {/* <CardText>
                                 Some quick example text to build on the card title and make up
@@ -80,19 +74,7 @@ class serviceProviders extends Component {
                             top
                             />
                             <CardBody>
-                            <CardTitle><a href="">Auto Miraj</a></CardTitle>
-                            
-                            {/* <CardText>
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </CardText> */}
-                            {/* <Button
-                                color="primary"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Go somewhere
-                            </Button> */}
+                            <CardTitle><Link>Auto Miraj</Link></CardTitle>
                             </CardBody>
                         </Card>   
                         <Card style={{ width: "18rem", marginRight:5 }}>
@@ -103,7 +85,7 @@ class serviceProviders extends Component {
                             top
                             />
                             <CardBody>
-                            <CardTitle><a href="">AMW Service Center</a></CardTitle>
+                            <CardTitle><Link>AMW Service Center</Link></CardTitle>
                             
                             {/* <CardText>
                                 Some quick example text to build on the card title and make up

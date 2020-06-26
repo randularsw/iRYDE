@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import Home from "./components/home";
 import Sidebar from "components/shared/sidebar";
 import sidebarRoutes from "sidebarRoutes";
@@ -29,6 +29,7 @@ function App(props) {
           
           <Route path="/service-providers" component={serviceProviders}></Route>
           <Route path="/" component={Home}></Route>
+
         </Switch>
       </div>
     </React.Fragment>
