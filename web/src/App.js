@@ -29,6 +29,7 @@ function App(props) {
           
           <Route path="/service-providers" component={serviceProviderList}></Route>
           <Route path="/" component={Home}></Route>
+          <Route path="/"></Route>
 
         </Switch>
       </div>
