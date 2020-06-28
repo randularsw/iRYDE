@@ -16,7 +16,7 @@ class Home extends Component {
           {/* Table */}
           <Row>
             <div className=" col">
-              <Card className="mb-4 shadow">
+              <Card className=" shadow">
                 <CardHeader className=" bg-transparent">
                   <h3 className=" mb-0">Title</h3>
                 </CardHeader>

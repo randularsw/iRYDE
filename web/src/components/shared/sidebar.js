@@ -26,6 +26,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import AuthButtons from "./authButtons";
 
 class Sidebar extends React.Component {
   state = {
@@ -63,7 +64,7 @@ class Sidebar extends React.Component {
               onClick={this.closeCollapse}
               activeClassName="active"
             >
-              <i class={prop.icon}></i>
+              <i className={prop.icon}></i>
               {prop.name}
             </NavLink>
           </NavItem>
@@ -142,6 +143,7 @@ class Sidebar extends React.Component {
               </DropdownToggle>
               <UserDropdown />
             </UncontrolledDropdown>
+            <AuthButtons text="black" />
           </Nav>
           {/* Collapse */}
           <Collapse navbar isOpen={this.state.collapseOpen}>

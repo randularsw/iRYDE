@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 // reactstrap components
 import {
   UncontrolledDropdown,
@@ -17,6 +17,7 @@ import {
   NavItem,
 } from "reactstrap";
 import UserDropdown from "./userDropdown";
+import AuthButtons from "./authButtons";
 
 class NavigationBar extends React.Component {
   render() {
@@ -61,26 +62,7 @@ class NavigationBar extends React.Component {
                 </DropdownToggle>
                 <UserDropdown />
               </UncontrolledDropdown>
-              <NavItem className="ml-4 d-none d-lg-block">
-                <NavLink
-                  className="mb-0 text-sm font-weight-bold text-white"
-                  to="/auth/login"
-                  tag={Link}
-                >
-                  <i className="ni ni-circle-08" />
-                  <span className="nav-link-inner--text ">Login</span>
-                </NavLink>
-              </NavItem>
-              <NavItem className="ml-4 d-none d-lg-block">
-                <NavLink
-                  className="mb-0 text-sm font-weight-bold text-white"
-                  to="/auth/register"
-                  tag={Link}
-                >
-                  <i className="ni ni-circle-08" />
-                  <span className="nav-link-inner--text ">Register</span>
-                </NavLink>
-              </NavItem>
+              <AuthButtons text="white" />
             </Nav>
           </Container>
         </Navbar>
