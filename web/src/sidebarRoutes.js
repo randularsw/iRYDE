@@ -1,4 +1,5 @@
 import Home from "components/home";
+import ServicesView from "components/servicelist/servicesView";
 
 var sidebarRoutes = [
   {
@@ -19,7 +20,7 @@ var sidebarRoutes = [
     path: "/services",
     name: "Services",
     icon: "ni ni-tv-2 text-primary",
-    component: Home,
+    component: ServicesView,
     actor: "service-provider",
   },
   {
