@@ -24,27 +24,28 @@ class serviceProviderList extends Component {
                   <h3 className=" mb-0" style={{fontSize:40}}>Service Providers</h3>
                 </CardHeader>
                 <CardBody>
-                  <div style={{ minHeight: 400 }}>
+                  <div style={{ minHeight: 300 }}>
                     {/* Page Content */} 
                     <b style={{fontSize:30, marginBottom:0}}>Service Centers</b>
                     <div className="m-5 mt-0">
                         <Row>
-                        <Card style={{ width: "18rem" ,marginLeft:9, marginRight:5}}>
+                        <Card style={{ width: "18rem",height:230 ,marginLeft:9, marginRight:5}}>
                             <CardImg
                             alt="..."
-                            style={{ height:150 }}
+                            style={{ height:200 }}
                             src={require("assets/images/sp/laugfsCarCare.jpg")}
                             top
                             />
                             <CardBody>
                             <CardTitle>
                                 <Link to={"/"}>LAUGFS CarCare</Link>
+                                <br/>
                                 <Rating name="size-small" defaultValue={2} size="small" />
                             </CardTitle>
 
                             </CardBody>
                         </Card>  
-                        <Card style={{ width: "18rem" , marginRight:5}}>
+                        <Card style={{ width: "18rem" ,height:230 , marginRight:5}}>
                             <CardImg
                             alt="..."
                             style={{ height:150 }}
@@ -52,10 +53,15 @@ class serviceProviderList extends Component {
                             top
                             />
                             <CardBody>
-                            <CardTitle><Link>Micro CarCare</Link></CardTitle>
+                            <CardTitle>
+                              <Link>Micro CarCare</Link>
+                              <br/>
+                              <Rating name="size-small" defaultValue={2} size="small" />
+                            </CardTitle>
+                            
                             </CardBody>
                         </Card>  
-                        <Card style={{ width: "18rem", marginRight:5 }}>
+                        <Card style={{ width: "18rem",height:230 , marginRight:5 }}>
                             <CardImg
                             alt="..."
                             style={{ height:150 }}
@@ -63,10 +69,15 @@ class serviceProviderList extends Component {
                             top
                             />
                             <CardBody>
-                            <CardTitle><Link>Auto Miraj</Link></CardTitle>
+                            <CardTitle>
+                              <Link>Auto Miraj</Link>
+                              <br/>
+                              <Rating name="size-small" defaultValue={2} size="small" />
+                            </CardTitle>
+                            
                             </CardBody>
                         </Card>   
-                        <Card style={{ width: "18rem", marginRight:5 }}>
+                        <Card style={{ width: "18rem",height:230 , marginRight:5 }}>
                             <CardImg
                             alt="..."
                             style={{ height:150 }}
@@ -74,7 +85,11 @@ class serviceProviderList extends Component {
                             top
                             />
                             <CardBody>
-                            <CardTitle><Link>AMW Service Center</Link></CardTitle>
+                            <CardTitle>
+                              <Link>AMW Service Center</Link>
+                              <br/>
+                              <Rating name="size-small" defaultValue={2} size="small" />
+                            </CardTitle>
                             </CardBody>
                         </Card>   
                         </Row>
