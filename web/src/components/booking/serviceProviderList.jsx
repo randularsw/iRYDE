@@ -2,10 +2,10 @@ import React, { Component } from "react";
 import Header from "../shared/header";
 import { Row, Card, CardHeader, CardBody, CardImg,CardTitle,CardText,Container ,Button} from "reactstrap";
 import { Link } from "react-router-dom";
+import { Rating } from '@material-ui/lab';
 
 
-
-class serviceProviders extends Component {
+class serviceProviderList extends Component {
   state = {
     items: [],
   };
@@ -39,6 +39,7 @@ class serviceProviders extends Component {
                             <CardBody>
                             <CardTitle>
                                 <Link to={"/"}>LAUGFS CarCare</Link>
+                                <Rating name="size-small" defaultValue={2} size="small" />
                             </CardTitle>
 
                             </CardBody>
@@ -52,18 +53,6 @@ class serviceProviders extends Component {
                             />
                             <CardBody>
                             <CardTitle><Link>Micro CarCare</Link></CardTitle>
-                            
-                            {/* <CardText>
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </CardText> */}
-                            {/* <Button
-                                color="primary"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Go somewhere
-                            </Button> */}
                             </CardBody>
                         </Card>  
                         <Card style={{ width: "18rem", marginRight:5 }}>
@@ -86,18 +75,6 @@ class serviceProviders extends Component {
                             />
                             <CardBody>
                             <CardTitle><Link>AMW Service Center</Link></CardTitle>
-                            
-                            {/* <CardText>
-                                Some quick example text to build on the card title and make up
-                                the bulk of the card's content.
-                            </CardText> */}
-                            {/* <Button
-                                color="primary"
-                                href="#pablo"
-                                onClick={e => e.preventDefault()}
-                            >
-                                Go somewhere
-                            </Button> */}
                             </CardBody>
                         </Card>   
                         </Row>
@@ -113,4 +90,4 @@ class serviceProviders extends Component {
   }
 }
 
-export default serviceProviders;
+export default serviceProviderList;

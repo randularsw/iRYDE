@@ -1,5 +1,5 @@
 import Home from "components/home";
-import serviceProviders from "components/booking/serviceProviders";
+import serviceProviders from "components/booking/serviceProviderList";
 
 var sidebarRoutes = [
   {
