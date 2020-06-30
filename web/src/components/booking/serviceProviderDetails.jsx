@@ -1,7 +1,31 @@
 import React, { Component } from 'react';
+import { Row, Card, CardHeader, CardBody,  Container } from "reactstrap";
+import Header from "../shared/header";
+import { getServiceProvider } from 'services/userService';
+import { selectedSp } from 'services/userService';
 
 class serviceProviderDetails extends Component {
-    state = {  }
+    constructor(props){
+      super(props);
+
+      this.state ={
+        details:[]
+      }
+    }
+
+  async componentDidMount(){
+      try {
+        // const {data:details} = await getServiceProvider(this.props.match.params.id);
+        
+        const data = await selectedSp();
+        console.log(data);
+        this.setState({details:data});
+        console.log(this.state);
+      } catch (err) {
+        console.log("Error",err);
+      }
+    }
+
     render() { 
         return ( 
             <>
