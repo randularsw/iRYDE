@@ -7,6 +7,7 @@ import sidebarRoutes from "sidebarRoutes";
 import NavigationBar from "components/shared/navigationBar";
 import serviceProviderList from "components/booking/serviceProviderList";
 import serviceProviderDetails from "components/booking/serviceProviderDetails";
+import ServiceProviderBooking from "components/booking/serviceProviderBooking";
 
 function App(props) {
   return (
@@ -30,6 +31,7 @@ function App(props) {
           
           <Route exact path="/service-providers" component={serviceProviderList}></Route>
           <Route exact path="/service-provider/:id" component={serviceProviderDetails}></Route>
+          <Route exact path="/booking/:id" component={ServiceProviderBooking}></Route>
           <Route path="/" component={Home}></Route>
           
 

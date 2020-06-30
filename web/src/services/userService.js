@@ -7,6 +7,7 @@ const serviceProviders = [
         email:"LAUGFSCarCare@gmail.com",
         address :"25/p,pannipitya",
         profileImage:"https://d3dz4rogqkqh6r.cloudfront.net/uploads/files/2016/11/yimg_09384I-640x338.jpg",
+        logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRku3IvlGnEq7Bn3mlC-vZqrtFu8a-jwXsoqA&usqp=CAU",
         contact:5556555458,
         ratings:[
             {_id:"1332256",rate:3,review:"fgtgygyuhuuuuhu"},
@@ -67,33 +68,10 @@ const serviceProviders = [
       },
 ];
 
-const selected = [
-    {
-        _id: "5b21ca3eeb7f6fbccd471815",
-        name:"LAUGFS CarCare",
-        email:"LAUGFSCarCare@gmail.com",
-        address :"25/p,pannipitya",
-        profileImage:"https://d3dz4rogqkqh6r.cloudfront.net/uploads/files/2016/11/yimg_09384I-640x338.jpg",
-        contact:5556555458,
-        ratings:[
-            {_id:"1332256",rate:3,review:"fgtgygyuhuuuuhu"},
-            {_id:"1332255",rate:3,review:"fgtgygyuhuuuuhu"},
-        ],
-        services:[
-            {_id:"1332256",title:"oil change",description:"hghdg hsgysgy hgaygyst",image:"assets/images/sp/laugfsCarCare.jpg"},
-            {_id:"1332255",title:"oil change",description:"dyhujdidokjdi",image:"assets/images/sp/laugfsCarCare.jpg"},
-        ],
-      },
-];
 
 export function sp(){
     return serviceProviders;
 }
-
-export function selectedSp(){
-    return selected;
-}
-
 
 //get all service providers
 export function getServiceProviders(){

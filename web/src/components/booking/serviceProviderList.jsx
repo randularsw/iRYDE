@@ -6,6 +6,7 @@ import { Rating } from '@material-ui/lab';
 import { sp } from '../../services/userService';
 
 
+
 class serviceProviderList extends Component {
 
   constructor(props){
@@ -59,7 +60,7 @@ class serviceProviderList extends Component {
                               <CardTitle>
                                 <Link to={`/service-provider/${serviceProvider._id}`}>{serviceProvider.name}</Link>
                                 <br />
-                                <Rating name="size-small" defaultValue={2} size="small" />
+                                <Rating name="half-rating" defaultValue={2.5} precision={0.5} size="small" readOnly />
                               </CardTitle>
                             </CardBody>
                           </Card>

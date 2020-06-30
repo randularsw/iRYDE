@@ -8,6 +8,7 @@ import "@fortawesome/fontawesome-free/css/all.css";
 import { BrowserRouter } from "react-router-dom";
 import "assets/css/argon-dashboard-react.css";
 
+
 ReactDOM.render(
   <BrowserRouter>
     <App />
