@@ -1,13 +1,28 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+
 import {
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
 } from "reactstrap";
+import Axios from "axios";
 
 class ServiceTableRow extends Component {
+  constructor(props) {
+    super(props);
+    this.deleteStudent = this.deleteStudent.bind(this);
+  }
+
+  deleteStudent() {
+    Axios.delete("http://localhost:4000/services/" + this.props.obj._id)
+      .then((res) => {
+        console.log("Service deleted successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   render() {
     return (
       <tr>
@@ -28,7 +43,7 @@ class ServiceTableRow extends Component {
               <i className="fas fa-ellipsis-v" />
             </DropdownToggle>
             <DropdownMenu className="dropdown-menu-arrow" right>
-              <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+              <DropdownItem href="#pablo" onClick={this.deleteStudent}>
                 Delete
               </DropdownItem>
             </DropdownMenu>
