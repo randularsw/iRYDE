@@ -35,10 +35,10 @@ const Login = (props) => {
     <>
       <Header />
       <div className="justify-content-center row mt--7 ml-0 mr-0">
-        <Col lg="6" md="8">
-          <Card className="bg-secondary shadow border-0">
-            <CardHeader className="bg-transparent pb-5">
-              <div className="text-muted text-center mt-2 mb-3">
+        <Col lg="5" md="7">
+          <Card className="bg-secondary shadow border-0 pt-3">
+            {/* <CardHeader className="bg-transparent pb-5">
+              <div className="text-muted text-center mt-2 mb-2">
                 <small>Login with</small>
               </div>
               <div className="btn-wrapper text-center">
@@ -49,10 +49,10 @@ const Login = (props) => {
                   onClick={(e) => e.preventDefault()}
                 >
                   <span className="btn-inner--icon">
-                    {/* <img
+                    <img
                       alt="..."
                       src={require("assets/img/icons/common/google.svg")}
-                    /> */}
+                    />
                   </span>
                   <span className="btn-inner--text">Google</span>
                 </Button>
@@ -63,18 +63,18 @@ const Login = (props) => {
                   onClick={(e) => e.preventDefault()}
                 >
                   <span className="btn-inner--icon">
-                    {/* <img
+                    <img
                       alt="..."
                       src={require("assets/img/icons/common/facebook.svg")}
-                    /> */}
+                    />
                   </span>
                   <span className="btn-inner--text">Facebook</span>
                 </Button>
               </div>
-            </CardHeader>
-            <CardBody className="px-lg-5 py-lg-5">
-              <div className="text-center text-muted mb-4">
-                <small>Or login with credentials</small>
+            </CardHeader> */}
+            <CardBody className="px-lg-5">
+              <div className="text-center text-muted pt-4 mb-5">
+                <small>Login with credentials</small>
               </div>
               <Form role="form" onSubmit={handleSubmit(onSubmit)}>
                 <FormGroup className="mb-3">

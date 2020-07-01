@@ -14,7 +14,6 @@ import {
   Nav,
   Container,
   Media,
-  NavItem,
 } from "reactstrap";
 import UserDropdown from "./userDropdown";
 import AuthButtons from "./authButtons";
