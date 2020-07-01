@@ -1,25 +1,20 @@
 import React, { Component } from "react";
 import Header from "../shared/header";
 import { Button } from "reactstrap";
-import { CardImg, CardTitle, CardText } from "reactstrap";
 import {
-  Badge,
   DropdownMenu,
   DropdownItem,
   UncontrolledDropdown,
   DropdownToggle,
-  Media,
-  Progress,
   Table,
-  UncontrolledTooltip,
 } from "reactstrap";
 
 import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 
 class ServicesView extends Component {
-  state = {
-    items: [],
-  };
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     // const { items } = this.state;
@@ -59,9 +54,8 @@ class ServicesView extends Component {
                       </thead>
                       <tbody>
                         <tr>
-                          <th scope="row">
-                            <td>General repairs</td>
-                          </th>
+                          <td>General repairs</td>
+
                           <td>
                             2K heated booth painting with 3 year warranty on all
                             paint jobs
@@ -83,12 +77,6 @@ class ServicesView extends Component {
                                 className="dropdown-menu-arrow"
                                 right
                               >
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={(e) => e.preventDefault()}
-                                >
-                                  Edit
-                                </DropdownItem>
                                 <DropdownItem
                                   href="#pablo"
                                   onClick={(e) => e.preventDefault()}
