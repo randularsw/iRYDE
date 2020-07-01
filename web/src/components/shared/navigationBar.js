@@ -17,9 +17,24 @@ import {
 } from "reactstrap";
 import UserDropdown from "./userDropdown";
 import AuthButtons from "./authButtons";
+import { UserContext } from "core/userContext";
 
 class NavigationBar extends React.Component {
+  static contextType = UserContext;
+
+  componentDidMount() {
+    this.currentUser();
+  }
+
+  currentUser = async () => {
+    try {
+      this.context.currentUser();
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
   render() {
+    const { user, isAuthenticated } = this.context.state;
     return (
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -43,25 +58,27 @@ class NavigationBar extends React.Component {
               </FormGroup>
             </Form>
             <Nav className="align-items-center d-none d-md-flex" navbar>
-              <UncontrolledDropdown nav>
-                <DropdownToggle className="pr-0" nav>
-                  <Media className="align-items-center">
-                    <span className="avatar avatar-sm rounded-circle">
-                      {/* <img
+              {isAuthenticated && (
+                <UncontrolledDropdown nav>
+                  <DropdownToggle className="pr-0" nav>
+                    <Media className="align-items-center">
+                      <span className="avatar avatar-sm rounded-circle">
+                        {/* <img
                         alt="..."
                         src={require("assets/img/theme/team-4-800x800.jpg")}
                       /> */}
-                    </span>
-                    <Media className="ml-2 d-none d-lg-block">
-                      <span className="mb-0 text-sm font-weight-bold">
-                        Jessica Jones
                       </span>
+                      <Media className="ml-2 d-none d-lg-block">
+                        <span className="mb-0 text-sm font-weight-bold">
+                          {user.name}
+                        </span>
+                      </Media>
                     </Media>
-                  </Media>
-                </DropdownToggle>
-                <UserDropdown />
-              </UncontrolledDropdown>
-              <AuthButtons text="white" />
+                  </DropdownToggle>
+                  <UserDropdown />
+                </UncontrolledDropdown>
+              )}
+              {!isAuthenticated && <AuthButtons text="white" />}
             </Nav>
           </Container>
         </Navbar>

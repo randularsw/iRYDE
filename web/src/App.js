@@ -7,10 +7,12 @@ import sidebarRoutes from "sidebarRoutes";
 import NavigationBar from "components/shared/navigationBar";
 import Login from "components/auth/login";
 import Register from "components/auth/register";
+import UserProvider from "core/userContext";
+import Logout from "components/auth/logout";
 
 function App(props) {
   return (
-    <React.Fragment>
+    <UserProvider>
       <Sidebar
         // {...props}
         routes={sidebarRoutes}
@@ -29,10 +31,11 @@ function App(props) {
           {/* Routes */}
           <Route path="/auth/login" component={Login}></Route>
           <Route path="/auth/register" component={Register}></Route>
+          <Route path="/auth/logout" component={Logout}></Route>
           <Route path="/" component={Home}></Route>
         </Switch>
       </div>
-    </React.Fragment>
+      </UserProvider>
   );
 }
 

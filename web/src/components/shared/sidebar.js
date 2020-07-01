@@ -27,8 +27,10 @@ import {
   Col,
 } from "reactstrap";
 import AuthButtons from "./authButtons";
+import { UserContext } from "core/userContext";
 
 class Sidebar extends React.Component {
+  static contextType = UserContext;
   state = {
     collapseOpen: false,
   };
@@ -74,6 +76,8 @@ class Sidebar extends React.Component {
     });
   };
   render() {
+    const { user, isAuthenticated } = this.context.state;
+
     const { routes, logo } = this.props;
     let navbarBrandProps;
     if (logo && logo.innerLink) {
@@ -115,35 +119,22 @@ class Sidebar extends React.Component {
           ) : null}
           {/* User */}
           <Nav className="align-items-center d-md-none">
-            <UncontrolledDropdown nav>
-              <DropdownToggle nav className="nav-link-icon">
-                <i className="ni ni-bell-55" />
-              </DropdownToggle>
-              <DropdownMenu
-                aria-labelledby="navbar-default_dropdown_1"
-                className="dropdown-menu-arrow"
-                right
-              >
-                <DropdownItem>Action</DropdownItem>
-                <DropdownItem>Another action</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Something else here</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
-            <UncontrolledDropdown nav>
-              <DropdownToggle nav>
-                <Media className="align-items-center">
-                  <span className="avatar avatar-sm rounded-circle">
-                    {/* <img
+            {isAuthenticated && (
+              <UncontrolledDropdown nav>
+                <DropdownToggle nav>
+                  <Media className="align-items-center">
+                    <span className="avatar avatar-sm rounded-circle">
+                      {/* <img
                       alt="..."
                       src={require("assets/img/theme/team-1-800x800.jpg")}
                     /> */}
-                  </span>
-                </Media>
-              </DropdownToggle>
-              <UserDropdown />
-            </UncontrolledDropdown>
-            <AuthButtons text="black" />
+                    </span>
+                  </Media>
+                </DropdownToggle>
+                <UserDropdown />
+              </UncontrolledDropdown>
+            )}
+            {!isAuthenticated && <AuthButtons text="black" />}
           </Nav>
           {/* Collapse */}
           <Collapse navbar isOpen={this.state.collapseOpen}>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -11,16 +11,19 @@ import {
   Col,
   Button,
 } from "reactstrap";
+import { UserContext } from "core/userContext";
 
 const VoRegister = (props) => {
+  const context = useContext(UserContext);
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
     try {
-        data.type="vo";
-        console.log(data);
-      // await context.register(data);
-      // props.history.push("/");
+      data.type = "vo";
+      console.log(data);
+      await context.register(data);
+      //   props.history.push("/");
+      window.location = "/";
     } catch (ex) {
       console.log("exception", ex);
     }
@@ -84,7 +87,7 @@ const VoRegister = (props) => {
         <InputGroup className="input-group-alternative">
           <InputGroupAddon addonType="prepend">
             <InputGroupText>
-            <i className="fas fa-phone"></i>
+              <i className="fas fa-phone"></i>
             </InputGroupText>
           </InputGroupAddon>
           <Input

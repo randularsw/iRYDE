@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -11,16 +11,19 @@ import {
   Col,
   Button,
 } from "reactstrap";
+import { UserContext } from "core/userContext";
 
 const SpRegister = (props) => {
+  const context = useContext(UserContext);
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
     try {
       data.type="sp";
       console.log(data);
-      // await context.register(data);
+      await context.register(data);
       // props.history.push("/");
+      window.location = "/";
     } catch (ex) {
       console.log("exception", ex);
     }

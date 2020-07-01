@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 // reactstrap components
 import {
   Button,
   Card,
-  CardHeader,
   CardBody,
   FormGroup,
   Form,
@@ -17,15 +16,18 @@ import {
 import Header from "components/shared/header";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { UserContext } from "core/userContext";
 
 const Login = (props) => {
+  const context = useContext(UserContext);
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = async (data) => {
     try {
       console.log(data);
-      // await context.login(data);
+      await context.login(data);
       // props.history.push("/");
+      window.location = "/";
     } catch (ex) {
       console.log("exception", ex);
     }
