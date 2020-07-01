@@ -15,9 +15,32 @@ import {
   Input,
 } from "reactstrap";
 import Header from "components/shared/header";
+import Datetime from "react-datetime";
 
 class ServiceProviderBooking extends Component {
-  state = {};
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      details: [],
+      date: new Date(),
+      logo:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRku3IvlGnEq7Bn3mlC-vZqrtFu8a-jwXsoqA&usqp=CAU",
+    };
+  }
+
+  async componentDidMount() {
+    try {
+      // const {data:details} = await getServiceProvider(this.props.match.params.id);
+      // this.setState({details});
+      // console.log(this.state.details.username);
+    } catch (err) {
+      console.log("Error", err);
+    }
+  }
+
+  onChange = (date) => this.setState({ date });
+
   render() {
     return (
       <>
@@ -26,190 +49,87 @@ class ServiceProviderBooking extends Component {
           {/* Table */}
           <Row>
             <div className=" col">
-              <Card className=" shadow">
+              <Card className=" shadow ">
                 <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0" style={{ fontSize: 30 }}>
-                    Online Service Booking
-                  </h3>
+                  <Row>
+                    <div className="col-1">
+                      <img
+                        src={this.state.logo}
+                        style={{ width: 100, height: 50 }}
+                      />
+                    </div>
+                    <div className="col-6 m-0">
+                      <h3 className=" mb-0" style={{ fontSize: 30 }}>
+                        Online Service Booking
+                      </h3>
+                    </div>
+                  </Row>
                 </CardHeader>
                 <CardBody>
-                  <div style={{ minHeight: 400 }}>
-                    {/* Page Content */}
-                    <Form>
-                      <h6 className="heading-small text-muted mb-4">
-                        User information
-                      </h6>
-                      <div className="pl-lg-4">
-                        <Row>
-                          <Col lg="6">
-                            <FormGroup>
-                              <label
-                                className="form-control-label"
-                                htmlFor="input-username"
-                              >
-                                Username
-                              </label>
-                              <Input
-                                className="form-control-alternative"
-                                defaultValue="lucky.jesse"
-                                id="input-username"
-                                placeholder="Username"
-                                type="text"
+                  <Row>
+                    <div className="col   mr-5 ml-4 ">
+                      <div style={{ minHeight: 400, padding: 3 }}>
+                        {/* Page Content */}
+                        <Form role="form">
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                              htmlFor="input-email"
+                            >
+                              Select Your Vehicle
+                            </label>
+                            <Input
+                              placeholder="Select your vehicle"
+                              type="select"
+                            >
+                              <option>Toyota AM1235</option>
+                              <option>2</option>
+                              <option>3</option>
+                            </Input>
+                          </FormGroup>
+                          <FormGroup>
+                            <label
+                              className="form-control-label"
+                              htmlFor="input-email"
+                            >
+                              Select Service
+                            </label>
+                            <Input
+                              placeholder="Select your vehicle"
+                              type="select"
+                            >
+                              <option>Oil Change</option>
+                              <option>2</option>
+                              <option>3</option>
+                            </Input>
+                          </FormGroup>
+                          <FormGroup>
+                            <InputGroup className="input-group-alternative">
+                              <InputGroupAddon addonType="prepend">
+                                <InputGroupText></InputGroupText>
+                              </InputGroupAddon>
+                              <Datetime
+                                inputProps={{
+                                  placeholder: "Date Picker Here",
+                                }}
+                                timeFormat={true}
                               />
-                            </FormGroup>
-                          </Col>
-                          <Col lg="6">
-                            <FormGroup>
-                              <label
-                                className="form-control-label"
-                                htmlFor="input-email"
-                              >
-                                Email address
-                              </label>
-                              <Input
-                                className="form-control-alternative"
-                                id="input-email"
-                                placeholder="jesse@example.com"
-                                type="email"
-                              />
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col lg="6">
-                            <FormGroup>
-                              <label
-                                className="form-control-label"
-                                htmlFor="input-first-name"
-                              >
-                                First name
-                              </label>
-                              <Input
-                                className="form-control-alternative"
-                                defaultValue="Lucky"
-                                id="input-first-name"
-                                placeholder="First name"
-                                type="text"
-                              />
-                            </FormGroup>
-                          </Col>
-                          <Col lg="6">
-                            <FormGroup>
-                              <label
-                                className="form-control-label"
-                                htmlFor="input-last-name"
-                              >
-                                Last name
-                              </label>
-                              <Input
-                                className="form-control-alternative"
-                                defaultValue="Jesse"
-                                id="input-last-name"
-                                placeholder="Last name"
-                                type="text"
-                              />
-                            </FormGroup>
-                          </Col>
-                        </Row>
+                            </InputGroup>
+                          </FormGroup>
+
+                          <div className="text-center">
+                            <Button
+                              className="my-4"
+                              color="primary"
+                              type="button"
+                            >
+                              Submit
+                            </Button>
+                          </div>
+                        </Form>
                       </div>
-                      <hr className="my-4" />
-                      {/* Address */}
-                      <h6 className="heading-small text-muted mb-4">
-                        Contact information
-                      </h6>
-                      <div className="pl-lg-4">
-                        <Row>
-                          <Col md="12">
-                            <FormGroup>
-                              <label
-                                className="form-control-label"
-                                htmlFor="input-address"
-                              >
-                                Address
-                              </label>
-                              <Input
-                                className="form-control-alternative"
-                                defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                                id="input-address"
-                                placeholder="Home Address"
-                                type="text"
-                              />
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                        <Row>
-                          <Col lg="4">
-                            <FormGroup>
-                              <label
-                                className="form-control-label"
-                                htmlFor="input-city"
-                              >
-                                City
-                              </label>
-                              <Input
-                                className="form-control-alternative"
-                                defaultValue="New York"
-                                id="input-city"
-                                placeholder="City"
-                                type="text"
-                              />
-                            </FormGroup>
-                          </Col>
-                          <Col lg="4">
-                            <FormGroup>
-                              <label
-                                className="form-control-label"
-                                htmlFor="input-country"
-                              >
-                                Country
-                              </label>
-                              <Input
-                                className="form-control-alternative"
-                                defaultValue="United States"
-                                id="input-country"
-                                placeholder="Country"
-                                type="text"
-                              />
-                            </FormGroup>
-                          </Col>
-                          <Col lg="4">
-                            <FormGroup>
-                              <label
-                                className="form-control-label"
-                                htmlFor="input-country"
-                              >
-                                Postal code
-                              </label>
-                              <Input
-                                className="form-control-alternative"
-                                id="input-postal-code"
-                                placeholder="Postal code"
-                                type="number"
-                              />
-                            </FormGroup>
-                          </Col>
-                        </Row>
-                      </div>
-                      <hr className="my-4" />
-                      {/* Description */}
-                      <h6 className="heading-small text-muted mb-4">
-                        About me
-                      </h6>
-                      <div className="pl-lg-4">
-                        <FormGroup>
-                          <label>About Me</label>
-                          <Input
-                            className="form-control-alternative"
-                            placeholder="A few words about you ..."
-                            rows="4"
-                            defaultValue="A beautiful Dashboard for Bootstrap 4. It is Free and
-                          Open Source."
-                            type="textarea"
-                          />
-                        </FormGroup>
-                      </div>
-                    </Form>
-                  </div>
+                    </div>
+                  </Row>
                 </CardBody>
               </Card>
             </div>
