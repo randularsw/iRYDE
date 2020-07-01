@@ -44,7 +44,7 @@ class ServicesAdd extends Component {
       .post("http://localhost:4000/services/add", service)
       .then((res) => console.log(res.data));
 
-    window.location = "/servicesadd";
+    window.location = "/services";
   }
 
   render() {

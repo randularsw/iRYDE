@@ -1,19 +1,33 @@
 import React, { Component } from "react";
 import Header from "../shared/header";
-import { Button } from "reactstrap";
-import {
-  DropdownMenu,
-  DropdownItem,
-  UncontrolledDropdown,
-  DropdownToggle,
-  Table,
-} from "reactstrap";
+import ServiceTableRow from "./serviceTableRow";
+import axios from "axios";
+import { Button, Table } from "reactstrap";
 
 import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 
 class ServicesView extends Component {
   constructor(props) {
     super(props);
+
+    this.state = { services: [] };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:4000/services/")
+      .then((response) => {
+        this.setState({ services: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  serviceList() {
+    return this.state.services.map((currentservice) => {
+      return <ServiceTableRow obj={currentservice} key={currentservice._id} />;
+    });
   }
 
   render() {
@@ -52,42 +66,7 @@ class ServicesView extends Component {
                           <th scope="col" />
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>General repairs</td>
-
-                          <td>
-                            2K heated booth painting with 3 year warranty on all
-                            paint jobs
-                          </td>
-
-                          <td className="text-right">
-                            <UncontrolledDropdown>
-                              <DropdownToggle
-                                className="btn-icon-only text-light"
-                                href="#pablo"
-                                role="button"
-                                size="sm"
-                                color=""
-                                onClick={(e) => e.preventDefault()}
-                              >
-                                <i className="fas fa-ellipsis-v" />
-                              </DropdownToggle>
-                              <DropdownMenu
-                                className="dropdown-menu-arrow"
-                                right
-                              >
-                                <DropdownItem
-                                  href="#pablo"
-                                  onClick={(e) => e.preventDefault()}
-                                >
-                                  Delete
-                                </DropdownItem>
-                              </DropdownMenu>
-                            </UncontrolledDropdown>
-                          </td>
-                        </tr>
-                      </tbody>
+                      <tbody>{this.serviceList()}</tbody>
                     </Table>
                   </div>
                 </CardBody>

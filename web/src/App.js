@@ -6,8 +6,8 @@ import Sidebar from "components/shared/sidebar";
 import sidebarRoutes from "sidebarRoutes";
 import NavigationBar from "components/shared/navigationBar";
 import ServicesView from "components/servicelist/servicesView";
-import ServicesAdd from "components/servicelist/servicesAdd"; 
-
+import ServicesAdd from "components/servicelist/servicesAdd";
+import StudentTableRow from "components/servicelist/serviceTableRow";
 
 function App(props) {
   return (
@@ -31,7 +31,6 @@ function App(props) {
           <Route path="/services" component={ServicesView}></Route>
           <Route path="/servicesadd" component={ServicesAdd}></Route>
           <Route path="/" component={Home}></Route>
-          
         </Switch>
       </div>
     </React.Fragment>
