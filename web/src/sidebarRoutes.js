@@ -1,18 +1,12 @@
 import Home from "components/home";
 import serviceProviders from "components/booking/serviceProviderList";
+import Vehicles from "components/vehicles/vehicles";
 
 var sidebarRoutes = [
   {
     path: "/profile",
     name: "Profile",
     icon: "ni ni-tv-2 text-primary",
-    component: Home,
-    actor: "vehicle-owner",
-  },
-  {
-    path: "/vehicles",
-    name: "Vehicles",
-    icon: "ni ni-planet text-blue",
     component: Home,
     actor: "vehicle-owner",
   },
@@ -52,5 +46,14 @@ var sidebarRoutes = [
     component: serviceProviders ,
     actor: "vehicle-owner",
   },
+//routes for vehicle
+  {
+    path: "/vehicles",
+    name: "Vehicles",
+    icon: "ni ni-planet text-blue",
+    component: Vehicles ,
+    actor: "vehicle-owner",
+  },
+
 ];
 export default sidebarRoutes;
