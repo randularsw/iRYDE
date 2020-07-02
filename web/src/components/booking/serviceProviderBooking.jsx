@@ -18,16 +18,13 @@ import Header from "components/shared/header";
 import Datetime from "react-datetime";
 
 class ServiceProviderBooking extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      details: [],
+  state = {
+    details: [],
       date: new Date(),
       logo:
         "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRku3IvlGnEq7Bn3mlC-vZqrtFu8a-jwXsoqA&usqp=CAU",
-    };
-  }
+  };
+ 
 
   async componentDidMount() {
     try {
@@ -76,16 +73,25 @@ class ServiceProviderBooking extends Component {
                               className="form-control-label"
                               htmlFor="input-email"
                             >
-                              Select Your Vehicle
+                              Select your vehicle
                             </label>
-                            <Input
-                              placeholder="Select your vehicle"
-                              type="select"
-                            >
-                              <option>Toyota AM1235</option>
-                              <option>2</option>
-                              <option>3</option>
-                            </Input>
+                            <InputGroup className="input-group-alternative">
+                              <Input
+                                placeholder="Select your vehicle"
+                                type="select"
+                                className="input-group-alternative"
+                              >
+                                <option className="input-group-alternative">
+                                  Oil Change
+                                </option>
+                                <option className="input-group-alternative">
+                                  2
+                                </option>
+                                <option className="input-group-alternative">
+                                  3
+                                </option>
+                              </Input>
+                            </InputGroup>
                           </FormGroup>
                           <FormGroup>
                             <label
@@ -94,15 +100,25 @@ class ServiceProviderBooking extends Component {
                             >
                               Select Service
                             </label>
-                            <Input
-                              placeholder="Select your vehicle"
-                              type="select"
-                            >
-                              <option>Oil Change</option>
-                              <option>2</option>
-                              <option>3</option>
-                            </Input>
+                            <InputGroup className="input-group-alternative">
+                              <Input
+                                placeholder="Select your vehicle"
+                                type="select"
+                                className="input-group-alternative"
+                              >
+                                <option className="input-group-alternative">
+                                  Oil Change
+                                </option>
+                                <option className="input-group-alternative">
+                                  2
+                                </option>
+                                <option className="input-group-alternative">
+                                  3
+                                </option>
+                              </Input>
+                            </InputGroup>
                           </FormGroup>
+
                           <FormGroup>
                             <InputGroup className="input-group-alternative">
                               <InputGroupAddon addonType="prepend">
