@@ -7,6 +7,7 @@ import sidebarRoutes from "sidebarRoutes";
 import NavigationBar from "components/shared/navigationBar";
 import ServicesView from "components/servicelist/servicesView";
 import ServicesAdd from "components/servicelist/servicesAdd";
+import PromotionsView from "components/promotionlist/promotionsView";
 import StudentTableRow from "components/servicelist/serviceTableRow";
 
 function App(props) {
@@ -30,6 +31,7 @@ function App(props) {
           {/* Routes */}
           <Route path="/services" component={ServicesView}></Route>
           <Route path="/servicesadd" component={ServicesAdd}></Route>
+          <Route path="/promotions" component={PromotionsView}></Route>
           <Route path="/" component={Home}></Route>
         </Switch>
       </div>
