@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "../shared/header";
 import ServiceTableRow from "./serviceTableRow";
 import axios from "axios";
+
 import { Button, Table } from "reactstrap";
 
 import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
@@ -9,7 +10,7 @@ import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 class ServicesView extends Component {
   constructor(props) {
     super(props);
-
+    this.deleteService = this.deleteService.bind(this);
     this.state = { services: [] };
   }
 
@@ -26,12 +27,33 @@ class ServicesView extends Component {
 
   serviceList() {
     return this.state.services.map((currentservice) => {
-      return <ServiceTableRow obj={currentservice} key={currentservice._id} />;
+      return (
+        <ServiceTableRow
+          obj={currentservice}
+          deleteService={this.deleteService}
+          key={currentservice._id}
+        />
+      );
+    });
+  }
+
+  deleteService(id) {
+    axios
+      .delete("http://localhost:4000/services/" + id)
+      .then((res) => {
+        console.log("Service deleted successfully");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+    this.setState({
+      services: this.state.services.filter((el) => el._id !== id),
     });
   }
 
   render() {
     // const { items } = this.state;
+
     return (
       <>
         <Header />
