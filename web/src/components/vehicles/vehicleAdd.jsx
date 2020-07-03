@@ -11,15 +11,11 @@ import {
 } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { addVehicle } from "services/vehicleService";
 
 const VehicleAdd = (props) => {
   const { register, handleSubmit, errors } = useForm();
-
-  const onSubmit = (data) => {
-    data.type = type;
-    console.log(data);
-  };
-
+  const id = "hsjhwjsjksis";
   const [brands, setBrands] = useState([
     {
       _id: "dgurhildrdfhshsd87sdr",
@@ -45,6 +41,19 @@ const VehicleAdd = (props) => {
   const [brand, setBrand] = useState("");
   const [models, setModels] = useState([]);
   const [type, setType] = useState("");
+
+  
+  const onSubmit = async (data) => {
+    data.type = type;
+    data.ownerId =id;
+    console.log(data);
+    try {
+      const res = await addVehicle(data);
+      //console.log(res);
+    } catch (error) {
+      
+    }
+  };
 
   const onChangeBrand = (e) => {
     brands.forEach((b) => {
