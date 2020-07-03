@@ -25,6 +25,7 @@ import {
   Container,
   Row,
   Col,
+  Button,
 } from "reactstrap";
 import AuthButtons from "./authButtons";
 import { UserContext } from "core/userContext";
@@ -109,16 +110,29 @@ class Sidebar extends React.Component {
                 <span className="navbar-toggler-icon" />
               </button>
               {/* Brand */}
-              {/* {logo ? (
-                <NavbarBrand className="pt-0" {...navbarBrandProps}>
+              {/* <div className="d-none d-md-block">
+                <Button
+                  className="ml-9 mb--4"
+                  color="secondary"
+                  // onClick={}
+                  size="sm"
+                >
+                  <i className="fas fa-camera"></i>
+                </Button>
+              </div> */}
+              {logo ? (
+                <NavbarBrand
+                  className="pt-0 d-none d-md-block"
+                  {...navbarBrandProps}
+                >
                   <img
                     alt={logo.imgAlt}
-                    className="navbar-brand-img"
+                    className="navbar-brand-img rounded-circle"
                     src={logo.imgSrc}
-                    height="40"
+                    
                   />
                 </NavbarBrand>
-              ) : null} */}
+              ) : null}
               {/* User */}
               <Nav className="align-items-center d-md-none">
                 {isAuthenticated && (
@@ -126,10 +140,10 @@ class Sidebar extends React.Component {
                     <DropdownToggle nav>
                       <Media className="align-items-center">
                         <span className="avatar avatar-sm rounded-circle">
-                          {/* <img
+                          <img
                       alt="..."
-                      src={require("assets/img/theme/team-1-800x800.jpg")}
-                    /> */}
+                      src={require("assets/images/dp.png")}
+                    />
                         </span>
                       </Media>
                     </DropdownToggle>
@@ -185,14 +199,19 @@ class Sidebar extends React.Component {
                   </InputGroup>
                 </Form>
 
-                <h6 className="navbar-heading text-muted">Vehicle Owner</h6>
-                <Nav navbar>{this.createLinks(routes, "vehicle-owner")}</Nav>
-                <hr className="my-3" />
-                <h6 className="navbar-heading text-muted">Service Provider</h6>
-                <Nav navbar>{this.createLinks(routes, "service-provider")}</Nav>
-                <hr className="my-3" />
-                <h6 className="navbar-heading text-muted">Admin</h6>
-                <Nav navbar>{this.createLinks(routes, "admin")}</Nav>
+                {isAuthenticated && (
+                  <>
+                    <h6 className="navbar-heading text-muted">
+                      {user.type === "vo"
+                        ? "Vehicle Owner"
+                        : user.type === "sp"
+                        ? "Service Provider"
+                        : "Admin"}
+                    </h6>
+                    <hr className="my-3" />
+                    <Nav navbar>{this.createLinks(routes, user.type)}</Nav>
+                  </>
+                )}
               </Collapse>
             </Container>
           </Navbar>

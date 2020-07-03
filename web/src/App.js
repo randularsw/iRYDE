@@ -9,6 +9,8 @@ import Login from "components/auth/login";
 import Register from "components/auth/register";
 import UserProvider from "core/userContext";
 import Logout from "components/auth/logout";
+import About from "components/auth/about";
+import Profile from "components/auth/profile";
 
 function App(props) {
   return (
@@ -18,7 +20,7 @@ function App(props) {
         routes={sidebarRoutes}
         logo={{
           innerLink: "/",
-          // imgSrc: require("assets/images/logo.png"),
+          imgSrc: require("assets/images/logo.png"),
           imgAlt: "...",
         }}
       />
@@ -29,6 +31,8 @@ function App(props) {
         />
         <Switch>
           {/* Routes */}
+          <Route path="/vo/profile" component={Profile}></Route>
+          <Route path="/sp/about" component={About}></Route>
           <Route path="/auth/login" component={Login}></Route>
           <Route path="/auth/register" component={Register}></Route>
           <Route path="/auth/logout" component={Logout}></Route>

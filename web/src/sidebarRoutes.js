@@ -1,47 +1,55 @@
 import Home from "components/home";
+import About from "components/auth/about";
 
 var sidebarRoutes = [
   {
-    path: "/profile",
+    path: "/vo/profile",
     name: "Profile",
     icon: "ni ni-tv-2 text-primary",
     component: Home,
-    actor: "vehicle-owner",
+    actor: "vo",
   },
   {
-    path: "/vehicles",
+    path: "/vo/vehicles",
     name: "Vehicles",
     icon: "ni ni-planet text-blue",
     component: Home,
-    actor: "vehicle-owner",
+    actor: "vo",
   },
   {
-    path: "/services",
+    path: "/sp/about",
+    name: "About",
+    icon: "ni ni-tv-2 text-primary",
+    component: About,
+    actor: "sp",
+  },
+  {
+    path: "/sp/services",
     name: "Services",
     icon: "ni ni-tv-2 text-primary",
     component: Home,
-    actor: "service-provider",
+    actor: "sp",
   },
   {
-    path: "/promotions",
+    path: "/sp/promotions",
     name: "Promotions",
     icon: "ni ni-planet text-blue",
     component: Home,
-    actor: "service-provider",
+    actor: "sp",
   },
   {
-    path: "/types",
+    path: "/ad/types",
     name: "Vehicle Types",
     icon: "ni ni-tv-2 text-primary",
     component: Home,
-    actor: "admin",
+    actor: "ad",
   },
   {
-    path: "/tags",
+    path: "/ad/tags",
     name: "Tags",
     icon: "ni ni-planet text-blue",
     component: Home,
-    actor: "admin",
+    actor: "ad",
   },
 ];
 export default sidebarRoutes;

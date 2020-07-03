@@ -22,7 +22,7 @@ const VoRegister = (props) => {
       data.type = "vo";
       console.log(data);
       await context.register(data);
-        props.history.push("/");
+      props.history.push("/");
       // window.location = "/";
     } catch (ex) {
       console.log("exception", ex);
@@ -39,7 +39,7 @@ const VoRegister = (props) => {
             </InputGroupText>
           </InputGroupAddon>
           <Input
-            placeholder="Name"
+            placeholder="Full Name"
             type="text"
             name="name"
             innerRef={register({
@@ -145,6 +145,8 @@ const VoRegister = (props) => {
               className="custom-control-input"
               id="customCheckRegistervo"
               type="checkbox"
+              name="agree"
+              ref={register({ required: true })}
             />
             <label
               className="custom-control-label"
@@ -157,6 +159,13 @@ const VoRegister = (props) => {
                 </a>
               </span>
             </label>
+            {errors.agree?.type === "required" && (
+              <div className="text-muted font-italic">
+                <small className="text-danger">
+                  You must agree with the privacy policy
+                </small>
+              </div>
+            )}
           </div>
         </Col>
       </Row>

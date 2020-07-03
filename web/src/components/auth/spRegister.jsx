@@ -19,7 +19,7 @@ const SpRegister = (props) => {
 
   const onSubmit = async (data) => {
     try {
-      data.type="sp";
+      data.type = "sp";
       console.log(data);
       await context.register(data);
       props.history.push("/");
@@ -87,7 +87,7 @@ const SpRegister = (props) => {
         <InputGroup className="input-group-alternative">
           <InputGroupAddon addonType="prepend">
             <InputGroupText>
-            <i className="fas fa-phone"></i>
+              <i className="fas fa-phone"></i>
             </InputGroupText>
           </InputGroupAddon>
           <Input
@@ -145,6 +145,8 @@ const SpRegister = (props) => {
               className="custom-control-input"
               id="customCheckRegistersp"
               type="checkbox"
+              name="agree"
+              ref={register({ required: true })}
             />
             <label
               className="custom-control-label"
@@ -157,6 +159,13 @@ const SpRegister = (props) => {
                 </a>
               </span>
             </label>
+            {errors.agree?.type === "required" && (
+              <div className="text-muted font-italic">
+                <small className="text-danger">
+                  You must agree with the privacy policy
+                </small>
+              </div>
+            )}
           </div>
         </Col>
       </Row>

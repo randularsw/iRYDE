@@ -43,8 +43,8 @@ class NavigationBar extends React.Component {
               className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
               to="/"
             >
-              <img alt="..."
-              width="180" src={require("assets/images/logo.png")} />
+              {/* <img alt="..."
+              width="180" src={require("assets/images/logo.png")} /> */}
               {/* {this.props.brandText} */}
             </Link>
             <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
@@ -65,10 +65,10 @@ class NavigationBar extends React.Component {
                   <DropdownToggle className="pr-0" nav>
                     <Media className="align-items-center">
                       <span className="avatar avatar-sm rounded-circle">
-                        {/* <img
+                        <img
                         alt="..."
-                        src={require("assets/img/theme/team-4-800x800.jpg")}
-                      /> */}
+                        src={require("assets/images/dp.png")}
+                      />
                       </span>
                       <Media className="ml-2 d-none d-lg-block">
                         <span className="mb-0 text-sm font-weight-bold">
