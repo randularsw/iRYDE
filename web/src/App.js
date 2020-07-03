@@ -5,6 +5,7 @@ import Home from "./components/home";
 import Sidebar from "components/shared/sidebar";
 import sidebarRoutes from "sidebarRoutes";
 import NavigationBar from "components/shared/navigationBar";
+import VehicleType from "components/admin/vehicleType";
 
 function App(props) {
   return (
@@ -25,7 +26,9 @@ function App(props) {
         />
         <Switch>
           {/* Routes */}
+          <Route path="/admin/" component={VehicleType}></Route>
           <Route path="/" component={Home}></Route>
+          
         </Switch>
       </div>
     </React.Fragment>
