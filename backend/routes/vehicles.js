@@ -8,7 +8,7 @@ router.post('/', async (req,res) =>{
         model:req.body.model,
         type:req.body.type,
         vehicleNo:req.body.vehicleNo,
-        ownerId:req.body.vehicleNo,
+        ownerId:req.body.ownerId,
     })
     try {
         const saved = await newVehicle.save();
@@ -19,8 +19,10 @@ router.post('/', async (req,res) =>{
 });
 
 router.get('/:id',async (req,res)=>{
+    console.log(req.params.id);
     try {
-        const vehicles = await Vehicle.findById(req.params.id);
+        const vehicles = await Vehicle.find({ownerId : req.params.id});
+        console.log(vehicles);
         res.json(vehicles)
     } catch (error) {
         res.json({ message: error });
