@@ -18,7 +18,7 @@ function App(props) {
         routes={sidebarRoutes}
         logo={{
           innerLink: "/",
-          imgSrc: require("assets/images/logo.png"),
+          // imgSrc: require("assets/images/logo.png"),
           imgAlt: "...",
         }}
       />

@@ -92,108 +92,112 @@ class Sidebar extends React.Component {
       };
     }
     return (
-      <Navbar
-        className="navbar-vertical fixed-left navbar-light bg-white"
-        expand="md"
-        id="sidenav-main"
-      >
-        <Container fluid>
-          {/* Toggler */}
-          <button
-            className="navbar-toggler"
-            type="button"
-            onClick={this.toggleCollapse}
+      <>
+        {isAuthenticated && (
+          <Navbar
+            className="navbar-vertical fixed-left navbar-light bg-white"
+            expand="md"
+            id="sidenav-main"
           >
-            <span className="navbar-toggler-icon" />
-          </button>
-          {/* Brand */}
-          {logo ? (
-            <NavbarBrand className="pt-0" {...navbarBrandProps}>
-              <img
-                alt={logo.imgAlt}
-                className="navbar-brand-img"
-                src={logo.imgSrc}
-                height="40"
-              />
-            </NavbarBrand>
-          ) : null}
-          {/* User */}
-          <Nav className="align-items-center d-md-none">
-            {isAuthenticated && (
-              <UncontrolledDropdown nav>
-                <DropdownToggle nav>
-                  <Media className="align-items-center">
-                    <span className="avatar avatar-sm rounded-circle">
-                      {/* <img
+            <Container fluid>
+              {/* Toggler */}
+              <button
+                className="navbar-toggler"
+                type="button"
+                onClick={this.toggleCollapse}
+              >
+                <span className="navbar-toggler-icon" />
+              </button>
+              {/* Brand */}
+              {/* {logo ? (
+                <NavbarBrand className="pt-0" {...navbarBrandProps}>
+                  <img
+                    alt={logo.imgAlt}
+                    className="navbar-brand-img"
+                    src={logo.imgSrc}
+                    height="40"
+                  />
+                </NavbarBrand>
+              ) : null} */}
+              {/* User */}
+              <Nav className="align-items-center d-md-none">
+                {isAuthenticated && (
+                  <UncontrolledDropdown nav>
+                    <DropdownToggle nav>
+                      <Media className="align-items-center">
+                        <span className="avatar avatar-sm rounded-circle">
+                          {/* <img
                       alt="..."
                       src={require("assets/img/theme/team-1-800x800.jpg")}
                     /> */}
-                    </span>
-                  </Media>
-                </DropdownToggle>
-                <UserDropdown />
-              </UncontrolledDropdown>
-            )}
-            {!isAuthenticated && <AuthButtons text="black" />}
-          </Nav>
-          {/* Collapse */}
-          <Collapse navbar isOpen={this.state.collapseOpen}>
-            {/* Collapse header */}
-            <div className="navbar-collapse-header d-md-none">
-              <Row>
-                {logo ? (
-                  <Col className="collapse-brand" xs="6">
-                    {logo.innerLink ? (
-                      <Link to={logo.innerLink}>
-                        <img alt={logo.imgAlt} src={logo.imgSrc} />
-                      </Link>
-                    ) : (
-                      <a href={logo.outterLink}>
-                        <img alt={logo.imgAlt} src={logo.imgSrc} />
-                      </a>
-                    )}
-                  </Col>
-                ) : null}
-                <Col className="collapse-close" xs="6">
-                  <button
-                    className="navbar-toggler"
-                    type="button"
-                    onClick={this.toggleCollapse}
-                  >
-                    <span />
-                    <span />
-                  </button>
-                </Col>
-              </Row>
-            </div>
-            {/* Form */}
-            <Form className="mt-4 mb-3 d-md-none">
-              <InputGroup className="input-group-rounded input-group-merge">
-                <Input
-                  aria-label="Search"
-                  className="form-control-rounded form-control-prepended"
-                  placeholder="Search"
-                  type="search"
-                />
-                <InputGroupAddon addonType="prepend">
-                  <InputGroupText>
-                    <span className="fa fa-search" />
-                  </InputGroupText>
-                </InputGroupAddon>
-              </InputGroup>
-            </Form>
+                        </span>
+                      </Media>
+                    </DropdownToggle>
+                    <UserDropdown />
+                  </UncontrolledDropdown>
+                )}
+                {!isAuthenticated && <AuthButtons text="black" />}
+              </Nav>
+              {/* Collapse */}
+              <Collapse navbar isOpen={this.state.collapseOpen}>
+                {/* Collapse header */}
+                <div className="navbar-collapse-header d-md-none">
+                  <Row>
+                    {logo ? (
+                      <Col className="collapse-brand" xs="6">
+                        {logo.innerLink ? (
+                          <Link to={logo.innerLink}>
+                            <img alt={logo.imgAlt} src={logo.imgSrc} />
+                          </Link>
+                        ) : (
+                          <a href={logo.outterLink}>
+                            <img alt={logo.imgAlt} src={logo.imgSrc} />
+                          </a>
+                        )}
+                      </Col>
+                    ) : null}
+                    <Col className="collapse-close" xs="6">
+                      <button
+                        className="navbar-toggler"
+                        type="button"
+                        onClick={this.toggleCollapse}
+                      >
+                        <span />
+                        <span />
+                      </button>
+                    </Col>
+                  </Row>
+                </div>
+                {/* Form */}
+                <Form className="mt-4 mb-3 d-md-none">
+                  <InputGroup className="input-group-rounded input-group-merge">
+                    <Input
+                      aria-label="Search"
+                      className="form-control-rounded form-control-prepended"
+                      placeholder="Search"
+                      type="search"
+                    />
+                    <InputGroupAddon addonType="prepend">
+                      <InputGroupText>
+                        <span className="fa fa-search" />
+                      </InputGroupText>
+                    </InputGroupAddon>
+                  </InputGroup>
+                </Form>
 
-            <h6 className="navbar-heading text-muted">Vehicle Owner</h6>
-            <Nav navbar>{this.createLinks(routes, "vehicle-owner")}</Nav>
-            <hr className="my-3" />
-            <h6 className="navbar-heading text-muted">Service Provider</h6>
-            <Nav navbar>{this.createLinks(routes, "service-provider")}</Nav>
-            <hr className="my-3" />
-            <h6 className="navbar-heading text-muted">Admin</h6>
-            <Nav navbar>{this.createLinks(routes, "admin")}</Nav>
-          </Collapse>
-        </Container>
-      </Navbar>
+                <h6 className="navbar-heading text-muted">Vehicle Owner</h6>
+                <Nav navbar>{this.createLinks(routes, "vehicle-owner")}</Nav>
+                <hr className="my-3" />
+                <h6 className="navbar-heading text-muted">Service Provider</h6>
+                <Nav navbar>{this.createLinks(routes, "service-provider")}</Nav>
+                <hr className="my-3" />
+                <h6 className="navbar-heading text-muted">Admin</h6>
+                <Nav navbar>{this.createLinks(routes, "admin")}</Nav>
+              </Collapse>
+            </Container>
+          </Navbar>
+        )}
+      </>
     );
   }
 }

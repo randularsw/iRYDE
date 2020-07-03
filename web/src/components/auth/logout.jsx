@@ -8,8 +8,8 @@ class Logout extends Component {
     console.log(555);
 
     this.context.logout();
-    // this.props.history.push("/");
-    window.location = "/";
+    this.props.history.push("/");
+    // window.location = "/";
   }
   render() {
     return null;

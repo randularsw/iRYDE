@@ -26,8 +26,8 @@ const Login = (props) => {
     try {
       console.log(data);
       await context.login(data);
-      // props.history.push("/");
-      window.location = "/";
+      props.history.push("/");
+      // window.location = "/";
     } catch (ex) {
       console.log("exception", ex);
     }
