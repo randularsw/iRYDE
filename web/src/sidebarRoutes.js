@@ -1,6 +1,6 @@
 import Home from "components/home";
 import ServicesView from "components/servicelist/servicesView";
-import PromotionsView from "components/promotions/promotionsView";
+import PromotionsView from "components/promotionlist/promotionsView";
 
 var sidebarRoutes = [
   {
