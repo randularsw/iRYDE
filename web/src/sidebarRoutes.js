@@ -1,4 +1,5 @@
 import Home from "components/home";
+import VehicleType from "components/admin/vehicleType";
 
 var sidebarRoutes = [
   {
@@ -30,10 +31,10 @@ var sidebarRoutes = [
     actor: "service-provider",
   },
   {
-    path: "/types",
+    path: "/admin/vehicleType",
     name: "Vehicle Types",
     icon: "ni ni-tv-2 text-primary",
-    component: Home,
+    component: VehicleType,
     actor: "admin",
   },
   {
