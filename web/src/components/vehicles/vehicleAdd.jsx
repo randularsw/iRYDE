@@ -129,7 +129,7 @@ const VehicleAdd = (props) => {
       </FormGroup>
       <FormGroup className="mb-3">
         <Input
-          name="number"
+          name="vehicleNo"
           placeholder="Vehicle Registration No"
           type="text"
           className="input-group-alternative text-muted"
@@ -137,7 +137,7 @@ const VehicleAdd = (props) => {
           innerRef={register({ required: true, maxLength: 10 })}
         />
         <InputGroup className="input-group-alternative"></InputGroup>
-        {errors.number?.type === "required" && (
+        {errors.vehicleNo?.type === "required" && (
           <div className="text-muted font-italic ml-4">
             <small className="text-danger">
               Vehicle Registration No Required
