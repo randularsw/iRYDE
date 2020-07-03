@@ -9,10 +9,49 @@ import {
   CardTitle,
   Col,
   Button,
+  Modal,
+  Form,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  FormGroup,
+  Input,
+  CustomInput,
 } from "reactstrap";
+import VehicleAdd from "./vehicleAdd";
 
-class Vehicles extends Component {
-  state = {};
+class VehiclesList extends Component {
+  state = {
+    defaultModal: false,
+    brands: [
+      {
+        _id: "dgurhildrdfhshsd87sdr",
+        brandName: "Toyota",
+        models: [
+          { _id: "dguislghsls5h786sh67", modelName: "Vitz", type: "Car" },
+          { _id: "dwuislghsls5h786sh67", modelName: "Prius", type: "Car" },
+          { _id: "dguisllhsls5h786sh67", modelName: "Hiace", type: "Van" },
+          { _id: "dguislghsls5h78ush67", modelName: "Axio", type: "Car" },
+        ],
+      },
+      {
+        _id: "dgurhwldgdfhshsd87sdr",
+        brandName: "Suzuki",
+        models: [
+          { _id: "dguislghsls5h786sk67", modelName: "Alto", type: "Car" },
+          { _id: "dguislghsls5hd86sh67", modelName: "Swift", type: "Car" },
+          { _id: "dguislghkls5h786sh67", modelName: "SX4", type: "Car" },
+          { _id: "dguislghrls5h786sh67", modelName: "Every", type: "Lorry" },
+        ],
+      },
+    ],
+
+  };
+  toggleModal = (state) => {
+    this.setState({
+      [state]: !this.state[state],
+    });
+  };
   render() {
     return (
       <>
@@ -31,7 +70,33 @@ class Vehicles extends Component {
                     <div className="row">
                       <div className="col-10"></div>
                       <div className="col">
-                        <Button>+ ADD</Button>
+                        <Button
+                          color="default"
+                          type="button"
+                          onClick={() => this.toggleModal("formModal")}
+                        >
+                          + ADD
+                        </Button>
+
+                        <Modal
+                          className="modal-dialog-centered"
+                          size="sm"
+                          isOpen={this.state.formModal}
+                          toggle={() => this.toggleModal("formModal")}
+                        >
+                          <div className="modal-body p-0">
+                            <Card className="bg-secondary shadow border-0">
+                              <CardHeader className="bg-transparent">
+                                <div className="text-muted text-center ">
+                                  <h1>Add your vehicle</h1>
+                                </div>
+                              </CardHeader>
+                              <CardBody className="px-lg-5 py-lg-5">
+                                <VehicleAdd/>
+                              </CardBody>
+                            </Card>
+                          </div>
+                        </Modal>
                       </div>
                     </div>
                     <div className=" row m-5">
@@ -127,4 +192,4 @@ class Vehicles extends Component {
   }
 }
 
-export default Vehicles;
+export default VehiclesList;

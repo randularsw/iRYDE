@@ -1,6 +1,6 @@
 import Home from "components/home";
 import serviceProviders from "components/booking/serviceProviderList";
-import Vehicles from "components/vehicles/vehicles";
+import VehiclesList from "components/vehicles/vehiclesList";
 
 var sidebarRoutes = [
   {
@@ -51,7 +51,7 @@ var sidebarRoutes = [
     path: "/vehicles",
     name: "Vehicles",
     icon: "ni ni-planet text-blue",
-    component: Vehicles ,
+    component: VehiclesList ,
     actor: "vehicle-owner",
   },
 
