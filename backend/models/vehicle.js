@@ -1,29 +1,26 @@
-const mongoose = require('mongoose');
-const Schema =  mongoose.Schema;
+const mongoose = require("mongoose");
 
-const vehicleSchema = new Schema({
-    brand:{
-        type:String,
-        required:true,
-    },
-    model:{
-        type:String,
-        required:true,
-    },
-    type:{
-        type:String,
-        required:true,
-    },
-    vehicleNo:{
-        type:String,
-        required:true,
-    },
-    ownerId:{
-        type:String,
-        required:true,
-    }
+const vehicleSchema = mongoose.Schema({
+  brand: {
+    type: String,
+    required: true,
+  },
+  model: {
+    type: String,
+    required: true,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  vehicleNo: {
+    type: String,
+    required: true,
+  },
+  ownerId: {
+    type: String,
+    required: true,
+  },
 });
 
-const Vehicle = mongoose.model('Vehicle',vehicleSchema);
-
-module.exports = Vehicle;
+module.exports = mongoose.model("Vehicles", vehicleSchema);

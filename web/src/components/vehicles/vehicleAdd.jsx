@@ -46,12 +46,11 @@ const VehicleAdd = (props) => {
   const onSubmit = async (data) => {
     data.type = type;
     data.ownerId =id;
-    console.log(data);
     try {
       const res = await addVehicle(data);
-      //console.log(res);
+      console.log(res);
     } catch (error) {
-      
+      console.log(error);
     }
   };
 

@@ -18,4 +18,13 @@ router.post('/', async (req,res) =>{
     }
 });
 
+router.get('/:id',async (req,res)=>{
+    try {
+        const vehicles = await Vehicle.findById(req.params.id);
+        res.json(vehicles)
+    } catch (error) {
+        res.json({ message: error });
+    }
+})
+
 module.exports = router;
