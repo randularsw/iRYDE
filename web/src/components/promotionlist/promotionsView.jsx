@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Header from "../shared/header";
-import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
+import { Row, Card, CardHeader, CardBody, Container, Button } from "reactstrap";
 
 class PromotionsView extends Component {
   state = {
@@ -18,13 +18,20 @@ class PromotionsView extends Component {
             <div className=" col">
               <Card className=" shadow">
                 <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0">Title</h3>
+                  <h3 className=" mb-0">Promotions</h3>
+                  <Button
+                    color="warning"
+                    type="button"
+                    style={{ float: "right" }}
+                    onClick={(event) =>
+                      (window.location.href = "/promotionsadd")
+                    }
+                  >
+                    Add Promotions
+                  </Button>
                 </CardHeader>
                 <CardBody>
-                  <div style={{ minHeight: 400 }}>
-                    {/* Page Content */}
-                    Content
-                  </div>
+                  <div style={{ minHeight: 400 }}>{/* Page Content */}</div>
                 </CardBody>
               </Card>
             </div>
