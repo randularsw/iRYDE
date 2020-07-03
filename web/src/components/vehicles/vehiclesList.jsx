@@ -23,8 +23,6 @@ import VehicleAdd from "./vehicleAdd";
 class VehiclesList extends Component {
   state = {
     defaultModal: false,
-  
-
   };
   toggleModal = (state) => {
     this.setState({
