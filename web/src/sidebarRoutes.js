@@ -1,5 +1,6 @@
 import Home from "components/home";
 import ServicesView from "components/servicelist/servicesView";
+import PromotionsView from "components/promotions/promotionsView";
 
 var sidebarRoutes = [
   {
@@ -27,7 +28,7 @@ var sidebarRoutes = [
     path: "/promotions",
     name: "Promotions",
     icon: "ni ni-planet text-blue",
-    component: Home,
+    component: PromotionsView,
     actor: "service-provider",
   },
   {
