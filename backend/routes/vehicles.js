@@ -18,7 +18,7 @@ router.post('/', async (req,res) =>{
     }
 });
 
-router.get('/:id',async (req,res)=>{
+router.get('/vo/:id',async (req,res)=>{
     console.log(req.params.id);
     try {
         const vehicles = await Vehicle.find({ownerId : req.params.id});
