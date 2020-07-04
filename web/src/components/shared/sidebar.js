@@ -129,7 +129,6 @@ class Sidebar extends React.Component {
                     alt={logo.imgAlt}
                     className="navbar-brand-img rounded-circle"
                     src={logo.imgSrc}
-                    
                   />
                 </NavbarBrand>
               ) : null}
@@ -140,10 +139,18 @@ class Sidebar extends React.Component {
                     <DropdownToggle nav>
                       <Media className="align-items-center">
                         <span className="avatar avatar-sm rounded-circle">
-                          <img
-                      alt="..."
-                      src={require("assets/images/dp.png")}
-                    />
+                          {user?.type === "vo" && (
+                            <img
+                              alt="..."
+                              src={require("assets/images/voPhoto.png")}
+                            />
+                          )}
+                          {user?.type === "sp" && (
+                            <img
+                              alt="..."
+                              src={require("assets/images/spPhoto.png")}
+                            />
+                          )}
                         </span>
                       </Media>
                     </DropdownToggle>

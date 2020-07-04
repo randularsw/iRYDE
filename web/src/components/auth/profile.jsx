@@ -34,7 +34,7 @@ class Profile extends Component {
                         <img
                           alt="..."
                           className="rounded-circle"
-                          src={require("assets/images/dp.png")}
+                          src={require("assets/images/voPhoto.png")}
                         />
                       </a>
                     </div>
@@ -112,7 +112,7 @@ class Profile extends Component {
               </Card>
             </Col>
             <Col className="order-xl-1" xl="8">
-              <Card className="bg-secondary shadow">
+              <Card className="bg-secondary shadow mb-5">
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
@@ -191,11 +191,11 @@ class Profile extends Component {
                         </Col>
                       </Row>
                     </div>
-                    <hr className="my-4" />
+                    {/* <hr className="my-4" /> */}
                     {/* Address */}
-                    <h6 className="heading-small text-muted mb-4">
+                    {/* <h6 className="heading-small text-muted mb-4">
                       Contact information
-                    </h6>
+                    </h6> */}
                     <div className="pl-lg-4">
                       <Row>
                         <Col md="12">

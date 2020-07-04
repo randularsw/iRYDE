@@ -23,7 +23,7 @@ class Home extends Component {
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
-                    Content
+                    
                   </div>
                 </CardBody>
               </Card>

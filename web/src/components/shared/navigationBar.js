@@ -65,10 +65,18 @@ class NavigationBar extends React.Component {
                   <DropdownToggle className="pr-0" nav>
                     <Media className="align-items-center">
                       <span className="avatar avatar-sm rounded-circle">
-                        <img
-                        alt="..."
-                        src={require("assets/images/dp.png")}
-                      />
+                        {user?.type==="vo" && (
+                          <img
+                          alt="..."
+                          src={require("assets/images/voPhoto.png")}
+                        />
+                        )}
+                        {user?.type==="sp" && (
+                          <img
+                          alt="..."
+                          src={require("assets/images/spPhoto.png")}
+                        />
+                        )}
                       </span>
                       <Media className="ml-2 d-none d-lg-block">
                         <span className="mb-0 text-sm font-weight-bold">
