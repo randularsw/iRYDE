@@ -8,6 +8,7 @@ require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const vehiclesRouter = require('./routes/vehicles');
 
 const port = process.env.PORT || 4000;
 console.log(port);
@@ -22,6 +23,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
+app.use("/vehicles",vehiclesRouter);
 
 mongoose.connect(
   process.env.DB_URL,

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch} from "react-router-dom";
 import Home from "./components/home";
 import Sidebar from "components/shared/sidebar";
 import sidebarRoutes from "sidebarRoutes";
@@ -11,6 +11,11 @@ import UserProvider from "core/userContext";
 import Logout from "components/auth/logout";
 import About from "components/auth/about";
 import Profile from "components/auth/profile";
+import serviceProviderList from "components/booking/serviceProviderList";
+import serviceProviderDetails from "components/booking/serviceProviderDetails";
+import ServiceProviderBooking from "components/booking/serviceProviderBooking";
+import VehiclesList from "components/vehicles/vehiclesList";
+import VehicleDetails from "components/vehicles/vehicleDetails";
 
 function App(props) {
   return (
@@ -31,12 +36,19 @@ function App(props) {
         />
         <Switch>
           {/* Routes */}
-          <Route path="/vo/profile" component={Profile}></Route>
-          <Route path="/sp/about" component={About}></Route>
-          <Route path="/auth/login" component={Login}></Route>
-          <Route path="/auth/register" component={Register}></Route>
-          <Route path="/auth/logout" component={Logout}></Route>
-          <Route path="/" component={Home}></Route>
+          <Route exact path="/profile" component={Profile}></Route>
+          <Route exact path="/about" component={About}></Route>
+          <Route exact path="/auth/login" component={Login}></Route>
+          <Route exact path="/auth/register" component={Register}></Route>
+          <Route exact path="/auth/logout" component={Logout}></Route>
+          <Route exact path="/vehicles" component={VehiclesList}></Route>
+          <Route exact path="/vehicle/:id" component={VehicleDetails} ></Route>
+          <Route exact path="/service-providers" component={serviceProviderList}></Route>
+          <Route exact path="/service-provider/:id" component={serviceProviderDetails}></Route>
+          <Route exact path="/booking/:id" component={ServiceProviderBooking}></Route>
+          <Route exact path="/" component={Home}></Route>
+          
+
         </Switch>
       </div>
       </UserProvider>
