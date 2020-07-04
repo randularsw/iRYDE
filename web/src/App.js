@@ -9,6 +9,7 @@ import serviceProviderList from "components/booking/serviceProviderList";
 import serviceProviderDetails from "components/booking/serviceProviderDetails";
 import ServiceProviderBooking from "components/booking/serviceProviderBooking";
 import VehiclesList from "components/vehicles/vehiclesList";
+import VehicleDetails from "components/vehicles/vehicleDetails";
 
 function App(props) {
   return (
@@ -30,6 +31,7 @@ function App(props) {
         <Switch>
           {/* Routes */}
           <Route exact path="/vehicles" component={VehiclesList}></Route>
+          <Route exact path="/vehicle-details" component={VehicleDetails} ></Route>
           <Route exact path="/service-providers" component={serviceProviderList}></Route>
           <Route exact path="/service-provider/:id" component={serviceProviderDetails}></Route>
           <Route exact path="/booking/:id" component={ServiceProviderBooking}></Route>
