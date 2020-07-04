@@ -23,7 +23,7 @@ class UserDropdown extends Component {
             <span>Support</span>
           </DropdownItem>
           <DropdownItem divider />
-          <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+          <DropdownItem to="/auth/logout" tag={Link}>
             <i className="ni ni-user-run" />
             <span>Logout</span>
           </DropdownItem>

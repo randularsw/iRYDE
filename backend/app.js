@@ -8,6 +8,7 @@ require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const vehiclesRouter = require("./routes/vehicles");
 const servicesRouter = require("./routes/services");
 
 const port = process.env.PORT || 4000;
@@ -22,7 +23,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
+app.use("/api/users", usersRouter);
+app.use("/vehicles", vehiclesRouter);
+
 app.use("/services", servicesRouter);
 
 mongoose.connect(

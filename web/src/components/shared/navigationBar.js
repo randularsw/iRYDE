@@ -16,9 +16,25 @@ import {
   Media,
 } from "reactstrap";
 import UserDropdown from "./userDropdown";
+import AuthButtons from "./authButtons";
+import { UserContext } from "core/userContext";
 
 class NavigationBar extends React.Component {
+  static contextType = UserContext;
+
+  componentDidMount() {
+    this.currentUser();
+  }
+
+  currentUser = async () => {
+    try {
+      this.context.currentUser();
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
   render() {
+    const { user, isAuthenticated } = this.context.state;
     return (
       <>
         <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -27,6 +43,8 @@ class NavigationBar extends React.Component {
               className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
               to="/"
             >
+              {/* <img alt="..."
+              width="180" src={require("assets/images/logo.png")} /> */}
               {/* {this.props.brandText} */}
             </Link>
             <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
@@ -42,24 +60,35 @@ class NavigationBar extends React.Component {
               </FormGroup>
             </Form>
             <Nav className="align-items-center d-none d-md-flex" navbar>
-              <UncontrolledDropdown nav>
-                <DropdownToggle className="pr-0" nav>
-                  <Media className="align-items-center">
-                    <span className="avatar avatar-sm rounded-circle">
-                      {/* <img
-                        alt="..."
-                        src={require("assets/img/theme/team-4-800x800.jpg")}
-                      /> */}
-                    </span>
-                    <Media className="ml-2 d-none d-lg-block">
-                      <span className="mb-0 text-sm font-weight-bold">
-                        Jessica Jones
+              {isAuthenticated && (
+                <UncontrolledDropdown nav>
+                  <DropdownToggle className="pr-0" nav>
+                    <Media className="align-items-center">
+                      <span className="avatar avatar-sm rounded-circle">
+                        {user?.type==="vo" && (
+                          <img
+                          alt="..."
+                          src={require("assets/images/voPhoto.png")}
+                        />
+                        )}
+                        {user?.type==="sp" && (
+                          <img
+                          alt="..."
+                          src={require("assets/images/spPhoto.png")}
+                        />
+                        )}
                       </span>
+                      <Media className="ml-2 d-none d-lg-block">
+                        <span className="mb-0 text-sm font-weight-bold">
+                          {user.name}
+                        </span>
+                      </Media>
                     </Media>
-                  </Media>
-                </DropdownToggle>
-                <UserDropdown />
-              </UncontrolledDropdown>
+                  </DropdownToggle>
+                  <UserDropdown />
+                </UncontrolledDropdown>
+              )}
+              {!isAuthenticated && <AuthButtons text="white" />}
             </Nav>
           </Container>
         </Navbar>

@@ -76,6 +76,7 @@ class ServicesAdd extends Component {
                               className="form-control-alternative"
                               placeholder="Service Category"
                               type="text"
+                              required="true"
                               value={this.state.servicename}
                               onChange={this.onChangeServicename}
                             />
@@ -93,6 +94,7 @@ class ServicesAdd extends Component {
                               placeholder="Enter the description"
                               type="textarea"
                               rows="2"
+                              required="true"
                               value={this.state.description}
                               onChange={this.onChangeDescription}
                             />
