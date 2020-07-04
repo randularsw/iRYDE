@@ -42,4 +42,16 @@ router.get('/:id',async (req,res)=>{
     }
 });
 
+//delete specific vehicle
+router.delete('/:id',async (req,res)=>{
+    console.log('vvvvvvvvvvvvvvvvv',req.params.id);
+    try {
+        const vehicle = await Vehicle.findByIdAndDelete({ _id: req.params.id });
+        res.send('deleted');
+    } catch (error) {
+        res.json({ message: error });
+    }
+});
+
+
 module.exports = router;

@@ -16,6 +16,7 @@ export function getVehicle(id){
 }
 
 //delete a vehicle
-export function getVehicle(id){
-    return axios.get('http://localhost:4000/vehicles/'+id);
+export function deleteVehicle(id){
+    console.log('dddddddddd',id);
+    return axios.delete('http://localhost:4000/vehicles/'+id);
 }

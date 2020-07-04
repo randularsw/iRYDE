@@ -6,17 +6,9 @@ import {
   CardHeader,
   CardBody,
   Container,
-  CardTitle,
-  Col,
   Button,
   Modal,
-  Form,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  FormGroup,
-  Input,
-  CustomInput,
+  
 } from "reactstrap";
 import VehicleAdd from "./vehicleAdd";
 import { getVehicles } from "services/vehicleService";
@@ -24,11 +16,12 @@ import { Link } from "react-router-dom";
 
 class VehiclesList extends Component {
   state = {
-    defaultModal: false,
+    formModal: false,
     id: "hsjhwjsjksis",
     vehicles: [],
   };
   toggleModal = (state) => {
+    console.log(55555);
     this.setState({
       [state]: !this.state[state],
     });
@@ -79,7 +72,6 @@ class VehiclesList extends Component {
                         >
                           + ADD
                         </Button>
-
                         <Modal
                           className="modal-dialog-centered"
                           size="sm"
@@ -94,7 +86,10 @@ class VehiclesList extends Component {
                                 </div>
                               </CardHeader>
                               <CardBody className="px-lg-5 py-lg-5">
-                                <VehicleAdd />
+                                <VehicleAdd 
+                                onToggle={this.toggleModal}
+                                onSubmit={this.componentDidMount}
+                                />
                               </CardBody>
                             </Card>
                           </div>
@@ -103,10 +98,10 @@ class VehiclesList extends Component {
                     </div>
                     <div className=" row m-5">
                       {this.state.vehicles.map((v) => (
-                        <div className="col-6 mb-3">
+                        
                           <Card
-                            className="card-stats mb-4 mb-lg-0 bg-secondary"
-                            key={v._id}
+                            className="card-stats  bg-secondary col-5  m-1 "
+                            key={v._id} 
                           >
                             <CardBody>
                               <Row>
@@ -138,57 +133,20 @@ class VehiclesList extends Component {
                                   </span>
                                 </div>
                                 <div className="col-1">
-                                  <div className="icon icon-shape bg-default text-white rounded-circle shadow">
-                                    <Link to={`/vehicle/${v._id}`}><i className={this.getType(v.type)} /></Link>
-                                  </div>
+                                 
+                                    <Link to={`/vehicle/${v._id}`}>
+                                    <div className="icon icon-shape bg-default text-white rounded-circle shadow">
+                                      <i className={this.getType(v.type)} />
+                                      </div>
+                                      </Link>
+                                  
                                 </div>
                               </Row>
                             </CardBody>
                           </Card>
-                        </div>
+                      
                       ))}
-                      {/*                       
-                      <div className="col-6 ">
-                        <Card className="card-stats mb-4 mb-lg-0 bg-secondary">
-                          <CardBody>
-                            <Row>
-                              <div className="col-3">
-                                <small className=" text-muted ">
-                                  Vehicle Brand
-                                </small>
-                                <br />
-                                <span className="h3 font-weight-bold mb-0 m-0">
-                                  Honda
-                                </span>
-                              </div>
-                              <div className="col-3">
-                                <small className=" text-muted mb-0">
-                                  Vehicle Model
-                                </small>
-                                <br />
-                                <span className="h3 font-weight-bold  m-0">
-                                  TPS
-                                </span>
-                              </div>
-                              <div className="col-3">
-                                <small className=" text-muted m-0">
-                                  Vehicle No
-                                </small>
-                                <br />
-                                <span className="h3 font-weight-bold  m-0">
-                                  DW-4590
-                                </span>
-                              </div>
-                              <div className="col-1">
-                                <div className="icon icon-shape bg-default text-white rounded-circle shadow">
-                                  <i className="fas fa-biking" />
-                                </div>
-                              </div>
-                            </Row>
-                          </CardBody>
-                        </Card>
-                      </div>
-                     */}
+                     
                     </div>
                   </div>
                 </CardBody>

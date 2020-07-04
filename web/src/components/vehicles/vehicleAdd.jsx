@@ -2,18 +2,18 @@ import React, { Component } from "react";
 import {
   Form,
   InputGroup,
-  InputGroupAddon,
-  InputGroupText,
   Button,
   FormGroup,
   Input,
   CustomInput,
+  Label,
 } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { addVehicle } from "services/vehicleService";
 
 const VehicleAdd = (props) => {
+  
   const { register, handleSubmit, errors } = useForm();
   const id = "hsjhwjsjksis";
   const [brands, setBrands] = useState([
@@ -38,9 +38,10 @@ const VehicleAdd = (props) => {
       ],
     },
   ]);
-  const [brand, setBrand] = useState("");
+  const [brand, setBrand] = useState("x");
   const [models, setModels] = useState([]);
   const [type, setType] = useState("");
+  const [model,setModel] = useState('y');
 
   
   const onSubmit = async (data) => {
@@ -49,17 +50,19 @@ const VehicleAdd = (props) => {
     try {
       const res = await addVehicle(data);
       console.log(res);
-    } catch (error) {
+    } catch (error){
       console.log(error);
     }
+    props.onToggle("formModal")
   };
 
   const onChangeBrand = (e) => {
     brands.forEach((b) => {
       if (b.brandName === e.target.value) {
         setModels(b.models);
+        setBrand(b.brandName);
       }
-      setBrand(b.brandName);
+      
     });
   };
 
@@ -67,6 +70,7 @@ const VehicleAdd = (props) => {
     models.forEach((m) => {
       if (m.modelName === e.target.value) {
         setType(m.type);
+        setModel(m.modelName);
       }
     });
   };
@@ -78,6 +82,7 @@ const VehicleAdd = (props) => {
           <CustomInput
             name="brand"
             type="select"
+            value= {brand}
             className="input-group-alternative"
             onChange={onChangeBrand}
             innerRef={register({ required: true })}
@@ -103,7 +108,7 @@ const VehicleAdd = (props) => {
         <InputGroup className="input-group-alternative">
           <CustomInput
             name="model"
-            // value={this.state.model}
+            value={model}
             type="select"
             className="input-group-alternative"
             onChange={onChangeModel}
@@ -145,7 +150,7 @@ const VehicleAdd = (props) => {
         )}
       </FormGroup>
       <div className="text-center">
-        <Button className="my-4" color="primary" type="submit">
+        <Button className="my-4" color="primary" type="submit" >
           Add My Vehicle
         </Button>
       </div>

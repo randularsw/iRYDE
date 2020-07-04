@@ -6,19 +6,12 @@ import {
   CardBody,
   Container,
   Button,
-  Modal,
-  FormGroup,
-  Form,
-  Input,
-  InputGroupAddon,
-  InputGroupText,
-  InputGroup,
-  Col,
+  
 } from "reactstrap";
 import Header from "../shared/header";
-import { getServiceProvider } from "services/userService";
+// import { getServiceProvider } from "services/userService";
 import { Rating } from "@material-ui/lab";
-import Datetime from "react-datetime";
+
 
 class serviceProviderDetails extends Component {
   state = {
