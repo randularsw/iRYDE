@@ -13,29 +13,34 @@ import { getVehicle } from "services/vehicleService";
 
 class VehicleDetails extends Component {
   state = {
-    details:[],
+    vehicle:null,
   };
 
  async componentDidMount(){
   try {
-    const {data:details} = await getVehicle(this.props.match.params.id);
-    this.setState({details});
-    console.log(this.state.details.username);
+    const {data:vehicle} = await getVehicle(this.props.match.params.id);
+    this.setState({vehicle});
   } catch (err) {
     console.log("Error", err);
   }
   }
+
+  onDelete = () => {
+    
+  };
+
   render() {
     return (
       <>
         <Header />
         <Container className=" mt--9" fluid>
+         
           {/* Table */}
           <Row>
             <div className=" col">
               <Card className=" shadow">
                 <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0">WD 4152</h3>
+                  <h3 className=" mb-0">{this.state.vehicle?.vehicleNo}</h3>
                 </CardHeader>
                 <CardBody>
                   <div className="ml-5 mr-5" style={{ minHeight: 400}}>
@@ -48,7 +53,7 @@ class VehicleDetails extends Component {
                         <Button color="info" type="button" >
                         <i class="far fa-edit"></i>
                         </Button>
-                        <Button color="danger" type="button">
+                        <Button color="danger" type="button" onClick={this.onDelete}>
                         <i class="far fa-trash-alt"></i>
                         </Button>
                       </Col>
@@ -56,10 +61,10 @@ class VehicleDetails extends Component {
                     <hr/>
                     <Row>
                       <div className="col-6 m-3">
-                        <Row><b>Vehicle Brand :</b><p className="pl-2">Toyota</p></Row>
-                        <Row><b>Vehicle Model :</b><p className="pl-2">Vitz</p></Row>
-                        <Row><b>Vehicle Class :</b><p className="pl-2">Car</p></Row>
-                        <Row><b>Vehicle Registration No :</b><p className="pl-2">WD 4152</p></Row>
+                        <Row><b>Vehicle Brand :</b><p className="pl-2"> {this.state.vehicle?.brand}</p></Row>
+                        <Row><b>Vehicle Model :</b><p className="pl-2">{this.state.vehicle?.model}</p></Row>
+                        <Row><b>Vehicle Class :</b><p className="pl-2">{this.state.vehicle?.type}</p></Row>
+                        <Row><b>Vehicle Registration No :</b><p className="pl-2">{this.state.vehicle?.vehicleNo}</p></Row>
                         {/* <Row><b>Fuel Type :</b><p className="pl-2">Petrol</p></Row> */}
                       </div>
                       <div className="col border-left">

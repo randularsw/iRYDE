@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const Vehicle = require('../models/vehicle');
 
+//add vehicle details
 router.post('/', async (req,res) =>{
     console.log(req.body);
     const newVehicle = new Vehicle({
@@ -17,7 +18,7 @@ router.post('/', async (req,res) =>{
         res.json({ message: error });
     }
 });
-
+//gegt specific vehicle owner's vehicle
 router.get('/vo/:id',async (req,res)=>{
     console.log(req.params.id);
     try {
@@ -27,6 +28,18 @@ router.get('/vo/:id',async (req,res)=>{
     } catch (error) {
         res.json({ message: error });
     }
-})
+});
+
+//get specific vehicle details
+router.get('/:id',async (req,res)=>{
+    console.log('vvvvvvvvvvvvvvvvv',req.params.id);
+    try {
+        const vehicle = await Vehicle.findById({ _id: req.params.id });
+        console.log(vehicle);
+        res.json(vehicle)
+    } catch (error) {
+        res.json({ message: error });
+    }
+});
 
 module.exports = router;

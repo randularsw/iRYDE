@@ -14,3 +14,8 @@ export function getVehicles(id){
 export function getVehicle(id){
     return axios.get('http://localhost:4000/vehicles/'+id);
 }
+
+//delete a vehicle
+export function getVehicle(id){
+    return axios.get('http://localhost:4000/vehicles/'+id);
+}

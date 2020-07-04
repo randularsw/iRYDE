@@ -31,7 +31,7 @@ function App(props) {
         <Switch>
           {/* Routes */}
           <Route exact path="/vehicles" component={VehiclesList}></Route>
-          <Route exact path="/vehicle-details" component={VehicleDetails} ></Route>
+          <Route exact path="/vehicle/:id" component={VehicleDetails} ></Route>
           <Route exact path="/service-providers" component={serviceProviderList}></Route>
           <Route exact path="/service-provider/:id" component={serviceProviderDetails}></Route>
           <Route exact path="/booking/:id" component={ServiceProviderBooking}></Route>
