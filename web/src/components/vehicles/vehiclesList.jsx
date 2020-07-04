@@ -139,7 +139,7 @@ class VehiclesList extends Component {
                                 </div>
                                 <div className="col-1">
                                   <div className="icon icon-shape bg-default text-white rounded-circle shadow">
-                                    <Link to='/vehicle-details'><i className={this.getType(v.type)} /></Link>
+                                    <Link to={`/vehicle/${v._id}`}><i className={this.getType(v.type)} /></Link>
                                   </div>
                                 </div>
                               </Row>
