@@ -9,10 +9,45 @@ import "react-datepicker/dist/react-datepicker.css";
 import { InputGroupAddon, InputGroupText, InputGroup } from "reactstrap";
 
 class PromotionsAdd extends Component {
-  state = {
-    items: [],
-  };
+  constructor(props) {
+    super(props);
 
+    this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeStartDate = this.onChangeStartDate.bind(this);
+    this.onChangeEndDate = this.onChangeEndDate.bind(this);
+    this.state = {
+      //items: [],
+      title: "",
+      description: "",
+      startDate: new Date(),
+      endDate: new Date(),
+    };
+  }
+
+  onChangeTitle(e) {
+    this.setState({
+      title: e.target.value,
+    });
+  }
+
+  onChangeDescription(e) {
+    this.setState({
+      description: e.target.value,
+    });
+  }
+
+  onChangeStartDate(date) {
+    this.setState({
+      startDate: date,
+    });
+  }
+
+  onChangeEndDate(date) {
+    this.setState({
+      endDate: date,
+    });
+  }
   render() {
     // const { items } = this.state;
     return (
@@ -24,7 +59,7 @@ class PromotionsAdd extends Component {
             <div className=" col">
               <Card className=" shadow" style={{ backgroundColor: "#f4f5f7" }}>
                 <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0">Title</h3>
+                  <h3 className=" mb-0">Add promotions</h3>
                 </CardHeader>
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
@@ -41,7 +76,8 @@ class PromotionsAdd extends Component {
                               className="form-control-alternative"
                               placeholder="Title"
                               type="text"
-                              value={this.state.servicename}
+                              value={this.state.title}
+                              onChange={this.onChangeTitle}
                             />
                           </FormGroup>
                         </Col>
@@ -58,6 +94,7 @@ class PromotionsAdd extends Component {
                               type="textarea"
                               rows="2"
                               value={this.state.description}
+                              onChange={this.onChangeDescription}
                             />
                           </FormGroup>
                         </Col>
@@ -71,13 +108,13 @@ class PromotionsAdd extends Component {
                           <FormGroup>
                             <InputGroup className="input-group-alternative">
                               <DatePicker
-                                onChange={this.onChange}
-                                value={this.state.date}
+                                onChange={this.onChangeStartDate}
+                                selected={this.state.startDate}
                                 placeholderText="From date"
                                 inputProps={{
                                   placeholder: "Date Picker Here",
                                 }}
-                                timeFormat={false}
+                                timeFormat={true}
                               />
                             </InputGroup>
                           </FormGroup>
@@ -87,8 +124,8 @@ class PromotionsAdd extends Component {
                           <FormGroup>
                             <InputGroup className="input-group-alternative">
                               <DatePicker
-                                onChange={this.onChange}
-                                value={this.state.date}
+                                onChange={this.onChangeEndDate}
+                                selected={this.state.endDate}
                                 placeholderText="To date"
                                 inputProps={{
                                   placeholder: "Date Picker Here",
