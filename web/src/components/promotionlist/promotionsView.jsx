@@ -20,7 +20,7 @@ class PromotionsView extends Component {
                 <CardHeader className=" bg-transparent">
                   <h3 className=" mb-0">Promotions</h3>
                   <Button
-                    color="warning"
+                    color="primary"
                     type="button"
                     style={{ float: "right" }}
                     onClick={(event) =>
