@@ -19,6 +19,7 @@ import VehicleDetails from "components/vehicles/vehicleDetails";
 import ServicesView from "components/servicelist/servicesView";
 import ServicesAdd from "components/servicelist/servicesAdd";
 import StudentTableRow from "components/servicelist/serviceTableRow";
+import VehicleType from "components/admin/vehicleType";
 
 function App(props) {
   return (
@@ -63,7 +64,9 @@ function App(props) {
           ></Route>
           <Route exact path="/services" component={ServicesView}></Route>
           <Route exact path="/servicesadd" component={ServicesAdd}></Route>
-          <Route exact path="/" component={Home}></Route>
+          <Route path="/admin/" component={VehicleType}></Route>
+          <Route path="/" component={Home}></Route>
+          
         </Switch>
       </div>
     </UserProvider>

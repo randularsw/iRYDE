@@ -5,6 +5,7 @@ import VehiclesList from "components/vehicles/vehiclesList";
 import Profile from "components/auth/profile";
 import ServicesView from "components/servicelist/servicesView";
 import PromotionsView from "components/promotions/promotionsView";
+import VehicleType from "components/admin/vehicleType";
 
 var sidebarRoutes = [
   {
@@ -36,10 +37,10 @@ var sidebarRoutes = [
     actor: "sp",
   },
   {
-    path: "/types",
+    path: "/admin/vehicleType",
     name: "Vehicle Types",
     icon: "ni ni-tv-2 text-primary",
-    component: Home,
+    component: VehicleType,
     actor: "ad",
   },
   {
