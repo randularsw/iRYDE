@@ -24,9 +24,12 @@ class UserProvider extends Component {
 
   currentUser = async () => {
     try {
-      const { data: user } = await authService.getCurrentUser();
-      const isAuthenticated = true;
-      this.setState({ isAuthenticated, user });
+      if (!this.state.isAuthenticated) {
+        const { data: user } = await authService.getCurrentUser();
+        const isAuthenticated = true;
+        this.setState({ isAuthenticated, user });
+      }
+      return this.state;
     } catch (ex) {
       console.log("exception", ex);
     }

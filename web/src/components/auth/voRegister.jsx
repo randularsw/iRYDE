@@ -20,7 +20,7 @@ const VoRegister = (props) => {
   const onSubmit = async (data) => {
     try {
       data.type = "vo";
-      console.log(data);
+      // console.log(data);
       await context.register(data);
       props.history.push("/");
       // window.location = "/";
