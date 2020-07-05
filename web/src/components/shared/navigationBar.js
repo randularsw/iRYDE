@@ -40,8 +40,11 @@ class NavigationBar extends React.Component {
               className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
               to="/"
             >
-              {/* <img alt="..."
-              width="180" src={require("assets/images/logo.png")} /> */}
+              {!isAuthenticated && (
+                <img alt="..."
+                width="200" src={require("assets/images/logo.png")} />
+              )}
+
               {/* {this.props.brandText} */}
             </Link>
             <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">

@@ -1,34 +1,41 @@
 import React, { Component } from "react";
 import Header from "./shared/header";
-import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
+import {
+  Row,
+  Card,
+  CardHeader,
+  CardBody,
+  Container,
+  CardImg,
+} from "reactstrap";
+import ServiceProviderList from "./booking/serviceProviderList";
+import HomeCarousel from "./shared/homeCarousel";
+import { UserContext } from "core/userContext";
 
 class Home extends Component {
+  static contextType = UserContext;
   state = {
     items: [],
   };
 
   render() {
-    // const { items } = this.state;
+    const { user, isAuthenticated } = this.context.state;
     return (
       <>
         <Header />
         <Container className=" mt--9" fluid>
           {/* Table */}
           <Row>
-            <div className=" col">
-              <Card className=" shadow">
-                <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0">Title</h3>
-                </CardHeader>
-                <CardBody>
-                  <div style={{ minHeight: 400 }}>
-                    {/* Page Content */}
-                    
-                  </div>
-                </CardBody>
-              </Card>
+            <div className=" col mb-4">
+              {/* <img
+                  alt="..."
+                  // width={200}
+                  src={require("assets/images/w4.jpg")}
+                /> */}
+              {!isAuthenticated && <HomeCarousel />}
             </div>
           </Row>
+          <ServiceProviderList />
         </Container>
       </>
     );

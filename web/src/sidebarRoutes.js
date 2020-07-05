@@ -51,13 +51,13 @@ var sidebarRoutes = [
     actor: "ad",
   },
   //routes for service providers
-  {
-    path: "/service-providers",
-    name: "Service Providers",
-    icon: "ni ni-planet text-blue",
-    component: serviceProviders,
-    actor: "vo",
-  },
+  // {
+  //   path: "/service-providers",
+  //   name: "Service Providers",
+  //   icon: "ni ni-planet text-blue",
+  //   component: serviceProviders,
+  //   actor: "vo",
+  // },
   //routes for vehicle
   {
     path: "/vehicles",

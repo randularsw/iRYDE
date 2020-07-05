@@ -44,7 +44,7 @@ class Sidebar extends React.Component {
   //   this.setState(userData);
   //   console.log("userData",userData);
   // }
-  
+
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
     return this.props.location.pathname.indexOf(routeName) > -1 ? "active" : "";
