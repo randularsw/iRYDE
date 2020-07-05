@@ -17,8 +17,14 @@ import Header from "components/shared/header";
 class About extends Component {
   static contextType = UserContext;
 
+  // async componentDidMount() {
+  //   const userData = await this.context.currentUser();
+  //   this.setState(userData);
+  //   // console.log(data);
+  // }
+
   render() {
-    const { user, isAuthenticated } = this.context.state;
+    const { user, isAuthenticated } = this.state.userData;
     return (
       <>
         <Header />

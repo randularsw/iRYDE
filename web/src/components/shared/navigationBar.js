@@ -21,18 +21,13 @@ import { UserContext } from "core/userContext";
 
 class NavigationBar extends React.Component {
   static contextType = UserContext;
-
-  componentDidMount() {
-    this.currentUser();
-  }
-
-  currentUser = async () => {
-    try {
-      this.context.currentUser();
-    } catch (ex) {
-      console.log("exception", ex);
-    }
-  };
+  
+  // async componentDidMount() {
+  //   const userData = await this.context.currentUser();
+  //   this.setState(userData);
+  //   // console.log(data);
+  // }
+  
   render() {
     const { user, isAuthenticated } = this.context.state;
     return (
