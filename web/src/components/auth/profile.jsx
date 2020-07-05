@@ -24,7 +24,7 @@ class Profile extends Component {
   // }
 
   render() {
-    const { user, isAuthenticated } = this.state.userData;
+    const { user, isAuthenticated } = this.context.state;
     return (
       <>
         <Header />
