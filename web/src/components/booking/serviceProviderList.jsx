@@ -54,32 +54,47 @@ class serviceProviderList extends Component {
                             key={serviceProvider._id}
                             style={{
                               width: "16rem",
-                              height: 230,
+                              height: 240,
                               marginLeft: 5,
                               marginRight: 5,
                             }}
                           >
-                            <CardImg
-                              alt="..."
-                              style={{ height: 170}}
-                              src={require("assets/images/spPhoto.png")}
-                              top
-                            />
+                            <Link
+                              to={`/service-provider/${serviceProvider._id}`}
+                            >
+                              <CardImg
+                                alt="..."
+                                style={{ height: 180 }}
+                                src={require("assets/images/spPhoto.png")}
+                                top
+                              />
+                            </Link>
+
                             <CardBody className="p-2">
                               <CardTitle>
                                 <Link
                                   to={`/service-provider/${serviceProvider._id}`}
+                                  className="text-default"
                                 >
                                   {serviceProvider.name}
                                 </Link>
+
                                 <br />
-                                <Rating
-                                  name="half-rating"
-                                  defaultValue={2.5}
-                                  precision={0.5}
-                                  size="small"
-                                  readOnly
-                                />
+                                <Row className="pl-3">
+                                  <div className="col-7 m-0 p-0">
+                                    <small className="text-gray">
+                                      <i class="fas fa-map-marker-alt pr-2"></i>
+                                      {serviceProvider.address}
+                                    </small>
+                                  </div>
+                                  <div className="col m-0 p-0">
+                                    <Rating
+                                      name="size-small"
+                                      defaultValue={2}
+                                      size="small"
+                                    />
+                                  </div>
+                                </Row>
                               </CardTitle>
                             </CardBody>
                           </Card>

@@ -1,8 +1,17 @@
 import React, { Component } from "react";
-import { Row, Card, CardHeader, CardBody, Container, Button } from "reactstrap";
+import {
+  Row,
+  Card,
+  CardHeader,
+  CardBody,
+  Container,
+  Button,
+  UncontrolledCollapse,
+} from "reactstrap";
 import Header from "../shared/header";
 // import { getServiceProvider } from "services/userService";
 import { Rating } from "@material-ui/lab";
+import { Link } from "react-router-dom";
 
 class serviceProviderDetails extends Component {
   state = {
@@ -78,32 +87,47 @@ class serviceProviderDetails extends Component {
                     {/* Page Content */}
                     <Row
                       className="container bg-default"
-                      style={{ height: 200,margin:1 }}
+                      style={{ height: 200, margin: 1 }}
                     >
-                      <div className="col-8">
-
-                      </div>
+                      <div className="col-8"></div>
                       <div className="col ">
-                      <h1 className="text-white pt-5">{this.state.name}</h1>
-                      <h3 className="text-white ">{this.state.address}</h3>
-                      <div className="m-0 p-0 row"> 
-                      <div className="col-7 m-0 p-0">
-                      <Rating
+                        <h1 className="text-white pt-5">{this.state.name}</h1>
+                        <h3 className="text-white ">{this.state.address}</h3>
+                        <div className="m-0 p-0 row">
+                          <div className="col-7 m-0 p-0">
+                            <Rating
                               name="half-rating"
                               defaultValue={3}
                               precision={0.5}
                               size="large"
                               readOnly
                             />
-                      </div>
-                      <div className="col m-0 p-0">
-                        <Button size="sm" color="primary">Book Now</Button>
-                      </div>
-                      </div>
+                          </div>
+                          <div className="col m-0 p-0">
+                            <Button size="sm" color="primary">
+                              Book Now
+                            </Button>
+                          </div>
+                        </div>
                       </div>
                     </Row>
                     <div>
                       <h2>Our Services</h2>
+                      <div>
+                      
+                      <Link id="toggler">Oil Change</Link>
+                        <UncontrolledCollapse toggler="#toggler">
+                          <Card>
+                            <CardBody>
+                              Lorem ipsum dolor sit amet consectetur adipisicing
+                              elit. Nesciunt magni, voluptas debitis similique
+                              porro a molestias consequuntur earum odio officiis
+                              natus, amet hic, iste sed dignissimos esse fuga!
+                              Minus, alias.
+                            </CardBody>
+                          </Card>
+                        </UncontrolledCollapse>
+                      </div>
                     </div>
 
                     {/* 
