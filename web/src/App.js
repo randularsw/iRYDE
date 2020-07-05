@@ -18,6 +18,8 @@ import VehiclesList from "components/vehicles/vehiclesList";
 import VehicleDetails from "components/vehicles/vehicleDetails";
 import ServicesView from "components/servicelist/servicesView";
 import ServicesAdd from "components/servicelist/servicesAdd";
+import PromotionsView from "components/promotionlist/promotionsView";
+import PromotionsAdd from "components/promotionlist/promotionsAdd";
 import StudentTableRow from "components/servicelist/serviceTableRow";
 import VehicleType from "components/admin/vehicleType";
 
@@ -40,6 +42,10 @@ function App(props) {
         />
         <Switch>
           {/* Routes */}
+          <Route path="/services" component={ServicesView}></Route>
+          <Route path="/servicesadd" component={ServicesAdd}></Route>
+          <Route path="/promotions" component={PromotionsView}></Route>
+          <Route path="/promotionsadd" component={PromotionsAdd}></Route>
           <Route exact path="/profile" component={Profile}></Route>
           <Route exact path="/about" component={About}></Route>
           <Route exact path="/auth/login" component={Login}></Route>
@@ -47,6 +53,8 @@ function App(props) {
           <Route exact path="/auth/logout" component={Logout}></Route>
           <Route exact path="/vehicles" component={VehiclesList}></Route>
           <Route exact path="/vehicle/:id" component={VehicleDetails}></Route>
+          <Route path="/admin/" component={VehicleType}></Route>
+
           <Route
             exact
             path="/service-providers"
@@ -62,11 +70,7 @@ function App(props) {
             path="/booking/:id"
             component={ServiceProviderBooking}
           ></Route>
-          <Route exact path="/services" component={ServicesView}></Route>
-          <Route exact path="/servicesadd" component={ServicesAdd}></Route>
-          <Route path="/admin/" component={VehicleType}></Route>
           <Route path="/" component={Home}></Route>
-          
         </Switch>
       </div>
     </UserProvider>

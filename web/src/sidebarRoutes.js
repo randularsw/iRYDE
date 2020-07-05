@@ -4,7 +4,7 @@ import serviceProviders from "components/booking/serviceProviderList";
 import VehiclesList from "components/vehicles/vehiclesList";
 import Profile from "components/auth/profile";
 import ServicesView from "components/servicelist/servicesView";
-import PromotionsView from "components/promotions/promotionsView";
+import PromotionsView from "components/promotionlist/promotionsView";
 import VehicleType from "components/admin/vehicleType";
 
 var sidebarRoutes = [
