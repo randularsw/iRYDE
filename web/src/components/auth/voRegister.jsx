@@ -22,8 +22,8 @@ const VoRegister = (props) => {
       data.type = "vo";
       // console.log(data);
       await context.register(data);
-      props.history.push("/");
-      // window.location = "/";
+      // props.history.push("/");
+      window.location = "/";
     } catch (ex) {
       console.log("exception", ex);
     }
