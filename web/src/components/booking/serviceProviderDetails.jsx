@@ -18,6 +18,7 @@ class serviceProviderDetails extends Component {
   state = {
     defaultModal: false,
     details: {},
+    services:[],
    
   };
 
@@ -30,7 +31,9 @@ class serviceProviderDetails extends Component {
   async componentDidMount() {
     try {
       const {data:details} = await getUser(this.props.match.params.id);
+      
       this.setState({details});
+
     } catch (err) {
       console.log("Error", err);
     }
