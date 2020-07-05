@@ -110,7 +110,7 @@ class ServicesAdd extends Component {
                         }}
                       >
                         <Button
-                          color="warning"
+                          color="primary"
                           type="submit"
                           size="lg"
                           style={{ marginTop: "2.5rem", width: "150px" }}
