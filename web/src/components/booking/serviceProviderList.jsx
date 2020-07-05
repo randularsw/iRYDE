@@ -41,35 +41,31 @@ class serviceProviderList extends Component {
             <div className=" col">
               <Card className=" shadow">
                 <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0" style={{ fontSize: 40 }}>
-                    Service Providers
-                  </h3>
+                  <h3 className=" mb-0">Service Providers</h3>
                 </CardHeader>
                 <CardBody>
                   <div style={{ minHeight: 300 }}>
                     {/* Page Content */}
-                    <b style={{ fontSize: 30, marginBottom: 0 }}>
-                      Service Centers
-                    </b>
+                    <b>Service Centers</b>
                     <div className="m-5 mt-0">
                       <Row>
                         {this.state.serviceProviders.map((serviceProvider) => (
                           <Card
                             key={serviceProvider._id}
                             style={{
-                              width: "18rem",
+                              width: "16rem",
                               height: 230,
-                              marginLeft: 9,
+                              marginLeft: 5,
                               marginRight: 5,
                             }}
                           >
                             <CardImg
                               alt="..."
-                              style={{ height: 150 }}
-                              src={serviceProvider.profileImage}
+                              style={{ height: 170}}
+                              src={require("assets/images/spPhoto.png")}
                               top
                             />
-                            <CardBody>
+                            <CardBody className="p-2">
                               <CardTitle>
                                 <Link
                                   to={`/service-provider/${serviceProvider._id}`}
