@@ -13,6 +13,10 @@ const User = mongoose.Schema({
     type: Number,
     required: true,
   },
+  city:{
+    type: String,
+    required: true,
+  },
   type:{
     type: String,
     required: true,

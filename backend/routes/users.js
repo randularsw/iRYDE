@@ -16,10 +16,11 @@ router.post("/", async (req, res) => {
       email: req.body.email,
       name: req.body.name,
       phone: req.body.phone,
+      city: req.body.city,
       type: req.body.type,
       password: hash,
     });
-    
+
     const saved = await user.save();
     const tokenSecret = "gj56ubrtb2yesyv63jhn6rt3j";
     const token = jwt.sign({ _id: user._id }, tokenSecret);
@@ -48,6 +49,16 @@ router.post("/login", async (req, res) => {
       .header("token", token)
       .header("access-control-expose-headers", "token")
       .send(user);
+  } catch (error) {
+    res.send({ data: error });
+  }
+});
+
+router.get("/sp", async (req, res) => {
+  try {
+    const sps = await User.find({ type: "sp" });
+    console.log(sps);
+    res.send(sps);
   } catch (error) {
     res.send({ data: error });
   }
