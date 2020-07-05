@@ -89,12 +89,11 @@ class Profile extends Component {
                   </Row>
                   <div className="text-center">
                     <h3>
-                      <span className="mr-3">{user?.name}</span>
-                      <span className="h5 font-weight-300 text-muted">
-                        <i className="fas fa-map-marker-alt"></i> {user?.city}
-                        Colombo
-                      </span>
+                      <span>{user?.name}</span>
                     </h3>
+                    <div className="h5 font-weight-300 text-muted">
+                      <i className="fas fa-map-marker-alt"></i> {user?.city}
+                    </div>
 
                     {/* <div className="h5 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
