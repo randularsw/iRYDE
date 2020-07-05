@@ -105,6 +105,28 @@ const SpRegister = (props) => {
           </div>
         )}
       </FormGroup>
+      <FormGroup className="mb-3">
+        <InputGroup className="input-group-alternative">
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>
+              <i className="fas fa-map-marker-alt"></i>
+            </InputGroupText>
+          </InputGroupAddon>
+          <Input
+            placeholder="City"
+            type="text"
+            name="city"
+            innerRef={register({
+              required: true,
+            })}
+          />
+        </InputGroup>
+        {errors.city?.type === "required" && (
+          <div className="text-muted font-italic ml-4">
+            <small className="text-danger">City Required</small>
+          </div>
+        )}
+      </FormGroup>
       <FormGroup>
         <InputGroup className="input-group-alternative">
           <InputGroupAddon addonType="prepend">
