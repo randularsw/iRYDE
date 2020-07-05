@@ -1,17 +1,8 @@
 import React, { Component } from "react";
-import {
-  Row,
-  Card,
-  CardHeader,
-  CardBody,
-  Container,
-  Button,
-  
-} from "reactstrap";
+import { Row, Card, CardHeader, CardBody, Container, Button } from "reactstrap";
 import Header from "../shared/header";
 // import { getServiceProvider } from "services/userService";
 import { Rating } from "@material-ui/lab";
-
 
 class serviceProviderDetails extends Component {
   state = {
@@ -77,22 +68,45 @@ class serviceProviderDetails extends Component {
               <Card className=" shadow">
                 <CardHeader className=" bg-transparent">
                   <div className="row">
-                    <div className="col-1">
-                      <img
-                        src={this.state.logo}
-                        style={{ width: 100, height: 50 }}
-                      />
-                    </div>
                     <div className="col-6 m-0">
-                      <h3 className=" mb-0" style={{ fontSize: 30 }}>
-                        {this.state.name}
-                      </h3>
+                      <h3 className=" mb-0">{this.state.name}</h3>
                     </div>
                   </div>
                 </CardHeader>
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
+                    <Row
+                      className="container bg-default"
+                      style={{ height: 200,margin:1 }}
+                    >
+                      <div className="col-8">
+
+                      </div>
+                      <div className="col ">
+                      <h1 className="text-white pt-5">{this.state.name}</h1>
+                      <h3 className="text-white ">{this.state.address}</h3>
+                      <div className="m-0 p-0 row"> 
+                      <div className="col-7 m-0 p-0">
+                      <Rating
+                              name="half-rating"
+                              defaultValue={3}
+                              precision={0.5}
+                              size="large"
+                              readOnly
+                            />
+                      </div>
+                      <div className="col m-0 p-0">
+                        <Button size="sm" color="primary">Book Now</Button>
+                      </div>
+                      </div>
+                      </div>
+                    </Row>
+                    <div>
+                      <h2>Our Services</h2>
+                    </div>
+
+                    {/* 
                     <div className="col-5">
                       <div className="mb-2">
                         <img
@@ -129,6 +143,7 @@ class serviceProviderDetails extends Component {
                       </div>
                     </div>
                     <div className="col"></div>
+                     */}
                   </div>
                 </CardBody>
               </Card>
