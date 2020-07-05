@@ -111,8 +111,9 @@ class serviceProviderDetails extends Component {
                         </div>
                       </div>
                     </Row>
-                    <div>
+                    <div className="mt-5">
                       <h2>Our Services</h2>
+                     
                       <div>
                       
                       <Link id="toggler">Oil Change</Link>

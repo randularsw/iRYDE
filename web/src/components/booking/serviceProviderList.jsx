@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Rating } from "@material-ui/lab";
-import { sp } from "../../services/userService";
+import { getServiceProviders } from "../../services/userService";
 
 class serviceProviderList extends Component {
   state = {
@@ -20,11 +20,11 @@ class serviceProviderList extends Component {
 
   async componentDidMount() {
     try {
-      // const serviceProviders = await getServiceProviders();
-      const serviceProviders = await sp();
+      const res = await getServiceProviders();
+      console.log('wwwwwwwwwwwwwwwwwwwwwww',res.data);
       this.setState({
-        serviceProviders,
-      });
+        serviceProviders:res.data
+      });  
     } catch (err) {
       console.log("Error", err);
     }
@@ -49,9 +49,9 @@ class serviceProviderList extends Component {
                     <b>Service Centers</b>
                     <div className="m-5 mt-0">
                       <Row>
-                        {this.state.serviceProviders.map((serviceProvider) => (
+                        {this.state.serviceProviders?.map((serviceProvider) => (
                           <Card
-                            key={serviceProvider._id}
+                            key={serviceProvider?._id}
                             style={{
                               width: "16rem",
                               height: 240,
@@ -60,7 +60,7 @@ class serviceProviderList extends Component {
                             }}
                           >
                             <Link
-                              to={`/service-provider/${serviceProvider._id}`}
+                              to={`/service-provider/${serviceProvider?._id}`}
                             >
                               <CardImg
                                 alt="..."
@@ -73,10 +73,10 @@ class serviceProviderList extends Component {
                             <CardBody className="p-2">
                               <CardTitle>
                                 <Link
-                                  to={`/service-provider/${serviceProvider._id}`}
+                                  to={`/service-provider/${serviceProvider?._id}`}
                                   className="text-default"
                                 >
-                                  {serviceProvider.name}
+                                  {serviceProvider?.name}
                                 </Link>
 
                                 <br />
@@ -84,7 +84,7 @@ class serviceProviderList extends Component {
                                   <div className="col-7 m-0 p-0">
                                     <small className="text-gray">
                                       <i class="fas fa-map-marker-alt pr-2"></i>
-                                      {serviceProvider.address}
+                                      {serviceProvider?.city}
                                     </small>
                                   </div>
                                   <div className="col m-0 p-0">
