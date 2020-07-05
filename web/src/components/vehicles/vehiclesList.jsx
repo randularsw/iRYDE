@@ -27,8 +27,9 @@ class VehiclesList extends Component {
   };
   async componentDidMount() {
     try {
+      const userData = await this.context.currentUser();
       const { data: vehicles } = await getVehicles(
-        this.context.state.user?._id
+        userData.user?._id
       );
       this.setState({ vehicles });
     } catch (error) {
