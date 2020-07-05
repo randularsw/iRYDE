@@ -21,13 +21,15 @@ import { UserContext } from "core/userContext";
 
 class NavigationBar extends React.Component {
   static contextType = UserContext;
-  
-  // async componentDidMount() {
-  //   const userData = await this.context.currentUser();
-  //   this.setState(userData);
-  //   // console.log(data);
-  // }
-  
+
+  async componentDidMount() {
+    try {
+      this.context.getUserOnPageLoad();
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  }
+
   render() {
     const { user, isAuthenticated } = this.context.state;
     return (
@@ -60,17 +62,17 @@ class NavigationBar extends React.Component {
                   <DropdownToggle className="pr-0" nav>
                     <Media className="align-items-center">
                       <span className="avatar avatar-sm rounded-circle">
-                        {user?.type==="vo" && (
+                        {user?.type === "vo" && (
                           <img
-                          alt="..."
-                          src={require("assets/images/voPhoto.png")}
-                        />
+                            alt="..."
+                            src={require("assets/images/voPhoto.png")}
+                          />
                         )}
-                        {user?.type==="sp" && (
+                        {user?.type === "sp" && (
                           <img
-                          alt="..."
-                          src={require("assets/images/spPhoto.png")}
-                        />
+                            alt="..."
+                            src={require("assets/images/spPhoto.png")}
+                          />
                         )}
                       </span>
                       <Media className="ml-2 d-none d-lg-block">

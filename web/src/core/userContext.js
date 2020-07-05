@@ -35,8 +35,17 @@ class UserProvider extends Component {
     }
   };
 
+  getUserOnPageLoad = async () => {
+    try {
+      const { data: user } = await authService.getCurrentUser();
+      const isAuthenticated = true;
+      this.setState({ isAuthenticated, user });
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
+
   logoutUser = () => {
-    console.log(555);
     authService.logout();
     const isAuthenticated = false;
     const user = null;
@@ -60,6 +69,7 @@ class UserProvider extends Component {
           logout: this.logoutUser,
           register: this.registerUser,
           currentUser: this.currentUser,
+          getUserOnPageLoad: this.getUserOnPageLoad,
         }}
       >
         {this.props.children}
