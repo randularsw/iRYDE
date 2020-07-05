@@ -34,7 +34,7 @@ class serviceProviderList extends Component {
     // const { items } = this.state;
     return (
       <>
-        <Header />
+        {/* <Header />
         <Container className=" mt--9" fluid>
           {/* Table */}
           <Row>
@@ -46,8 +46,8 @@ class serviceProviderList extends Component {
                 <CardBody>
                   <div style={{ minHeight: 300 }}>
                     {/* Page Content */}
-                    <b>Service Centers</b>
-                    <div className="m-5 mt-0">
+                    {/* <b>Service Centers</b> */}
+                    <div className="mx-5 mt-0">
                       <Row>
                         {this.state.serviceProviders?.map((serviceProvider) => (
                           <Card
@@ -106,7 +106,7 @@ class serviceProviderList extends Component {
               </Card>
             </div>
           </Row>
-        </Container>
+        {/* </Container> */}
       </>
     );
   }

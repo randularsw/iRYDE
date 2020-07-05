@@ -23,7 +23,7 @@ const SpRegister = (props) => {
       // console.log(data);
       await context.register(data);
       // props.history.push("/");
-      window.location = "/";
+      window.location = "/about";
     } catch (ex) {
       console.log("exception", ex);
     }
