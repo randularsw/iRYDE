@@ -13,7 +13,7 @@ router.post('/', async (req,res) =>{
     })
     try {
         const saved = await newVehicle.save();
-        res.json('vehicle added successfully');    
+        res.json(saved);    
     } catch (error) {
         res.json({ message: error });
     }
