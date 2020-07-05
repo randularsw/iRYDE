@@ -12,38 +12,13 @@ import Header from "../shared/header";
 // import { getServiceProvider } from "services/userService";
 import { Rating } from "@material-ui/lab";
 import { Link } from "react-router-dom";
+import { getUser } from "services/userService";
 
 class serviceProviderDetails extends Component {
   state = {
     defaultModal: false,
-    details: [],
-    _id: "5b21ca3eeb7f6fbccd471815",
-    name: "LAUGFS CarCare",
-    email: "LAUGFSCarCare@gmail.com",
-    address: "25/p,pannipitya",
-    profileImage:
-      "https://d3dz4rogqkqh6r.cloudfront.net/uploads/files/2016/11/yimg_09384I-640x338.jpg",
-    logo:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRku3IvlGnEq7Bn3mlC-vZqrtFu8a-jwXsoqA&usqp=CAU",
-    contact: 5556555458,
-    ratings: [
-      { _id: "1332256", rate: 3, review: "fgtgygyuhuuuuhu" },
-      { _id: "1332255", rate: 3, review: "fgtgygyuhuuuuhu" },
-    ],
-    services: [
-      {
-        _id: "1332256",
-        title: "oil change",
-        description: "hghdg hsgysgy hgaygyst",
-        image: "assets/images/sp/laugfsCarCare.jpg",
-      },
-      {
-        _id: "1332255",
-        title: "oil change",
-        description: "dyhujdidokjdi",
-        image: "assets/images/sp/laugfsCarCare.jpg",
-      },
-    ],
+    details: {},
+   
   };
 
   toggleModal = (state) => {
@@ -54,9 +29,8 @@ class serviceProviderDetails extends Component {
 
   async componentDidMount() {
     try {
-      // const {data:details} = await getServiceProvider(this.props.match.params.id);
-      // this.setState({details});
-      // console.log(this.state.details.username);
+      const {data:details} = await getUser(this.props.match.params.id);
+      this.setState({details});
     } catch (err) {
       console.log("Error", err);
     }
@@ -78,7 +52,7 @@ class serviceProviderDetails extends Component {
                 <CardHeader className=" bg-transparent">
                   <div className="row">
                     <div className="col-6 m-0">
-                      <h3 className=" mb-0">{this.state.name}</h3>
+                      <h3 className=" mb-0">{this.state.details.name}</h3>
                     </div>
                   </div>
                 </CardHeader>
@@ -91,8 +65,8 @@ class serviceProviderDetails extends Component {
                     >
                       <div className="col-8"></div>
                       <div className="col ">
-                        <h1 className="text-white pt-5">{this.state.name}</h1>
-                        <h3 className="text-white ">{this.state.address}</h3>
+                        <h1 className="text-white pt-5">{this.state.details.name}</h1>
+                        <h3 className="text-white ">{this.state.details.city}</h3>
                         <div className="m-0 p-0 row">
                           <div className="col-7 m-0 p-0">
                             <Rating
