@@ -13,13 +13,13 @@ import Header from "../shared/header";
 import { Rating } from "@material-ui/lab";
 import { Link } from "react-router-dom";
 import { getUser } from "services/userService";
+import { getServices } from "services/serviceService";
 
 class serviceProviderDetails extends Component {
   state = {
     defaultModal: false,
     details: {},
-    services:[],
-   
+    services: [],
   };
 
   toggleModal = (state) => {
@@ -30,10 +30,9 @@ class serviceProviderDetails extends Component {
 
   async componentDidMount() {
     try {
-      const {data:details} = await getUser(this.props.match.params.id);
-      
-      this.setState({details});
-
+      const { data: details } = await getUser(this.props.match.params.id);
+      const { data: services } = await getServices();
+      this.setState({ details, services });
     } catch (err) {
       console.log("Error", err);
     }
@@ -68,8 +67,12 @@ class serviceProviderDetails extends Component {
                     >
                       <div className="col-8"></div>
                       <div className="col ">
-                        <h1 className="text-white pt-5">{this.state.details.name}</h1>
-                        <h3 className="text-white ">{this.state.details.city}</h3>
+                        <h1 className="text-white pt-5">
+                          {this.state.details.name}
+                        </h1>
+                        <h3 className="text-white ">
+                          {this.state.details.city}
+                        </h3>
                         <div className="m-0 p-0 row">
                           <div className="col-7 m-0 p-0">
                             <Rating
@@ -88,23 +91,16 @@ class serviceProviderDetails extends Component {
                         </div>
                       </div>
                     </Row>
-                    <div className="mt-5">
+                    <div className="mt-5 ml-3">
                       <h2>Our Services</h2>
-                     
-                      <div>
-                      
-                      <Link id="toggler">Oil Change</Link>
-                        <UncontrolledCollapse toggler="#toggler">
-                          <Card>
-                            <CardBody>
-                              Lorem ipsum dolor sit amet consectetur adipisicing
-                              elit. Nesciunt magni, voluptas debitis similique
-                              porro a molestias consequuntur earum odio officiis
-                              natus, amet hic, iste sed dignissimos esse fuga!
-                              Minus, alias.
-                            </CardBody>
-                          </Card>
-                        </UncontrolledCollapse>
+                      <div className="ml-4">
+                        {this.state.services.map((s) => (
+                          <p key={s._id}>
+                            <Link className="text-gray" >
+                              {s.servicename}
+                            </Link>   
+                          </p>
+                        ))}
                       </div>
                     </div>
 
