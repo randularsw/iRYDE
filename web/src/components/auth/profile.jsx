@@ -17,14 +17,29 @@ import Header from "components/shared/header";
 class Profile extends Component {
   static contextType = UserContext;
 
+  state = {
+    edit: false,
+  };
+
   // async componentDidMount() {
   //   const userData = await this.context.currentUser();
   //   this.setState(userData);
-  //   // console.log(data);
+  //   console.log(this.state.userData);
   // }
+
+  toggleEdit = () => {
+    if (this.state.edit) {
+      //
+    } else {
+      //
+    }
+    const edit = !this.state.edit;
+    this.setState({ edit });
+  };
 
   render() {
     const { user, isAuthenticated } = this.context.state;
+    const { edit } = this.state;
     return (
       <>
         <Header />
@@ -126,11 +141,11 @@ class Profile extends Component {
                     <Col className="text-right" xs="4">
                       <Button
                         color="primary"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
                         size="sm"
+                        onClick={this.toggleEdit}
                       >
-                        Edit Profile
+                        <i class="fas fa-pen"></i>{" "}
+                        {edit ? "Save" : "Edit"}
                       </Button>
                     </Col>
                   </Row>
@@ -152,10 +167,11 @@ class Profile extends Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              // defaultValue="Lucky"
+                              defaultValue={user?.name}
                               id="input-name"
                               placeholder="Full Name"
                               type="text"
+                              disabled={edit ? "" : "true"}
                             />
                           </FormGroup>
                         </Col>
@@ -171,9 +187,11 @@ class Profile extends Component {
                             </label>
                             <Input
                               className="form-control-alternative"
+                              defaultValue={user?.email}
                               id="input-email"
                               placeholder="Email Address"
                               type="email"
+                              disabled
                             />
                           </FormGroup>
                         </Col>
@@ -187,10 +205,11 @@ class Profile extends Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              // defaultValue="0771234567"
+                              defaultValue={user?.phone}
                               id="input-phone"
                               placeholder="Phone"
                               type="text"
+                              disabled={edit ? "" : "true"}
                             />
                           </FormGroup>
                         </Col>
@@ -213,10 +232,11 @@ class Profile extends Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              // defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
+                              defaultValue={user?.address}
                               id="input-address"
                               placeholder="Home Address"
                               type="text"
+                              disabled={edit ? "" : "true"}
                             />
                           </FormGroup>
                         </Col>
@@ -232,10 +252,11 @@ class Profile extends Component {
                             </label>
                             <Input
                               className="form-control-alternative"
-                              // defaultValue="New York"
+                              defaultValue={user?.city}
                               id="input-city"
                               placeholder="City"
                               type="text"
+                              disabled={edit ? "" : "true"}
                             />
                           </FormGroup>
                         </Col>
@@ -250,8 +271,10 @@ class Profile extends Component {
                             <Input
                               className="form-control-alternative"
                               id="input-postal-code"
+                              defaultValue={user?.postal}
                               placeholder="Postal code"
                               type="number"
+                              disabled={edit ? "" : "true"}
                             />
                           </FormGroup>
                         </Col>

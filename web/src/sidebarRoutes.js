@@ -43,13 +43,13 @@ var sidebarRoutes = [
     component: VehicleType,
     actor: "ad",
   },
-  {
-    path: "/tags",
-    name: "Tags",
-    icon: "ni ni-planet text-blue",
-    component: Home,
-    actor: "ad",
-  },
+  // {
+  //   path: "/tags",
+  //   name: "Tags",
+  //   icon: "ni ni-planet text-blue",
+  //   component: Home,
+  //   actor: "ad",
+  // },
   //routes for service providers
   // {
   //   path: "/service-providers",

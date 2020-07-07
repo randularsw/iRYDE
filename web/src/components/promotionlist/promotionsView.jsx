@@ -22,7 +22,7 @@ class PromotionsView extends Component {
     return (
       <>
         <Header />
-        <Container className=" mt--9" fluid>
+        <Container className=" mt--9" fluid >
           {/* Table */}
           <Row>
             <div className=" col">
@@ -37,11 +37,11 @@ class PromotionsView extends Component {
                       (window.location.href = "/promotionsadd")
                     }
                   >
-                    Add Promotions
+                    New Promotion
                   </Button>
                 </CardHeader>
                 <CardBody>
-                  <div style={{ minHeight: 400 }}>
+                  <div>
                     {/* Page Content */}
                     <Row>
                       <Card
@@ -52,11 +52,11 @@ class PromotionsView extends Component {
                           marginRight: 15,
                         }}
                       >
-                        <CardImg
+                        {/* <CardImg
                           alt="..."
                           src={require("assets/images/promotions/offer1.jpg")}
                           top
-                        />
+                        /> */}
                         <CardBody>
                           <CardText>
                             Special offer for WAGONR customers to get their full
@@ -71,15 +71,15 @@ class PromotionsView extends Component {
                         style={{
                           width: "18rem",
                           height: 230,
-                          marginLeft: 35,
+                          // marginLeft: 35,
                           marginRight: 15,
                         }}
                       >
-                        <CardImg
+                        {/* <CardImg
                           alt="..."
                           src={require("assets/images/promotions/offer2.jpg")}
                           top
-                        />
+                        /> */}
                         <CardBody>
                           <CardText>
                             Special offer for Suzuki ALTO 800 customers to get
@@ -93,38 +93,20 @@ class PromotionsView extends Component {
                         style={{
                           width: "18rem",
                           height: 230,
-                          marginLeft: 35,
+                          // marginLeft: 35,
                           marginRight: 15,
                         }}
                       >
-                        <CardImg
+                        {/* <CardImg
                           alt="..."
                           src={require("assets/images/promotions/offer3.jpg")}
                           top
-                        />
+                        /> */}
                         <CardBody>
                           <CardText>
                             Get the premium offer. Free Quick wax along with 25%
                             offer on each full service
                           </CardText>
-                        </CardBody>
-                      </Card>
-
-                      <Card
-                        style={{
-                          width: "18rem",
-                          height: 230,
-                          marginLeft: 35,
-                          marginRight: 15,
-                        }}
-                      >
-                        <CardImg
-                          alt="..."
-                          src={require("assets/images/promotions/offer4.jpg")}
-                          top
-                        />
-                        <CardBody>
-                          <CardTitle>Exclusive Offer!</CardTitle>
                         </CardBody>
                       </Card>
                     </Row>

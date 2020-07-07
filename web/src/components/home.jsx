@@ -18,6 +18,17 @@ class Home extends Component {
     items: [],
   };
 
+  async componentDidMount() {
+    const userData = await this.context.currentUser();
+    if (userData?.user?.type === "sp") {
+      this.props.history.push("/about");
+      // window.location = "/";
+    }else if (userData?.user?.type === "ad") {
+      this.props.history.push("/admin/vehicleType");
+      // window.location = "/";
+    }
+  }
+
   render() {
     const { user, isAuthenticated } = this.context.state;
     return (
