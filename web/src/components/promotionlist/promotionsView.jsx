@@ -47,19 +47,19 @@ class PromotionsView extends Component {
                       <Card
                         style={{
                           width: "18rem",
-                          height: 230,
+                          height: 150,
                           marginLeft: 35,
                           marginRight: 15,
                         }}
                       >
                         <CardImg
                           alt="..."
-                          src={require("assets/images/promotions/offer1.jpg")}
+                          src={require("assets/images/promotions/offer 5.jpg")}
                           top
                         />
                         <CardBody>
                           <CardText>
-                            Special offer for WAGONR customers to get their full
+                            Special offer for customers to get their full
                             vehicle service for a special price.Available at our
                             all outlets.This offer is valid until the end of
                             July
@@ -77,14 +77,13 @@ class PromotionsView extends Component {
                       >
                         <CardImg
                           alt="..."
-                          src={require("assets/images/promotions/offer2.jpg")}
+                          src={require("assets/images/promotions/src.jpg")}
                           top
                         />
                         <CardBody>
                           <CardText>
-                            Special offer for Suzuki ALTO 800 customers to get
-                            their full vehicle service for a special price.This
-                            offer is valid until the end of July
+                            Special offer for WAGON R customers to get their
+                            full vehicle service for a special price.
                           </CardText>
                         </CardBody>
                       </Card>
@@ -107,24 +106,6 @@ class PromotionsView extends Component {
                             Get the premium offer. Free Quick wax along with 25%
                             offer on each full service
                           </CardText>
-                        </CardBody>
-                      </Card>
-
-                      <Card
-                        style={{
-                          width: "18rem",
-                          height: 230,
-                          marginLeft: 35,
-                          marginRight: 15,
-                        }}
-                      >
-                        <CardImg
-                          alt="..."
-                          src={require("assets/images/promotions/offer4.jpg")}
-                          top
-                        />
-                        <CardBody>
-                          <CardTitle>Exclusive Offer!</CardTitle>
                         </CardBody>
                       </Card>
                     </Row>
