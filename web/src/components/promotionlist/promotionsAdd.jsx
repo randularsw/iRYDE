@@ -78,6 +78,7 @@ class PromotionsAdd extends Component {
                               className="form-control-alternative"
                               placeholder="Title"
                               type="text"
+                              required={true}
                               value={this.state.title}
                               onChange={this.onChangeTitle}
                             />
@@ -95,6 +96,7 @@ class PromotionsAdd extends Component {
                               placeholder="Enter the description"
                               type="textarea"
                               rows="2"
+                              required={true}
                               value={this.state.description}
                               onChange={this.onChangeDescription}
                             />
