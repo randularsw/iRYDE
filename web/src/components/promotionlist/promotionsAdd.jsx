@@ -4,9 +4,10 @@ import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 import { FormGroup, Form, Input, Col, Button } from "reactstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-//import Datetime from "react-datetime";
-
+import moment from "react-moment";
 import { InputGroupAddon, InputGroupText, InputGroup } from "reactstrap";
+
+const minDate = new Date(Date.now());
 
 class PromotionsAdd extends Component {
   constructor(props) {
@@ -48,6 +49,7 @@ class PromotionsAdd extends Component {
       endDate: date,
     });
   }
+
   render() {
     // const { items } = this.state;
     return (
@@ -110,6 +112,7 @@ class PromotionsAdd extends Component {
                               <DatePicker
                                 onChange={this.onChangeStartDate}
                                 selected={this.state.startDate}
+                                minDate={minDate}
                                 placeholderText="From date"
                                 inputProps={{
                                   placeholder: "Date Picker Here",
