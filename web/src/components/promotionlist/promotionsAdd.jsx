@@ -61,7 +61,7 @@ class PromotionsAdd extends Component {
           <Col lg="10">
             <Card
               className="bg-secondary shadow border-0 mb-7"
-              style={({ backgroundColor: "#f4f5f7" }, { marginLeft: "7.8rem" })}
+              style={({ backgroundColor: "#f4f5f7" }, { marginLeft: "9.8rem" })}
             >
               <CardHeader className=" bg-transparent">
                 <h3 className=" mb-0">Add promotions</h3>
@@ -98,7 +98,7 @@ class PromotionsAdd extends Component {
                             className="form-control-alternative"
                             placeholder="Enter the description"
                             type="textarea"
-                            rows="2"
+                            rows="3"
                             required={true}
                             value={this.state.description}
                             onChange={this.onChangeDescription}
@@ -159,7 +159,7 @@ class PromotionsAdd extends Component {
                         size="lg"
                         style={{ marginTop: "2.5rem", width: "150px" }}
                       >
-                        Add
+                        Save Promotion
                       </Button>
                     </div>
                   </Form>
