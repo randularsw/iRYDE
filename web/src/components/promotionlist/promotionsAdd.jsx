@@ -131,6 +131,7 @@ class PromotionsAdd extends Component {
                               <DatePicker
                                 onChange={this.onChangeEndDate}
                                 selected={this.state.endDate}
+                                minDate={this.state.startDate}
                                 placeholderText="To date"
                                 inputProps={{
                                   placeholder: "Date Picker Here",
