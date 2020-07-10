@@ -6,6 +6,14 @@ import {
   CardBody,
   Container,
   Button,
+  FormGroup,
+  Form,
+  Input,
+  InputGroupAddon,
+  InputGroupText,
+  InputGroup,
+  Modal,
+  Col,
   UncontrolledCollapse,
 } from "reactstrap";
 import Header from "../shared/header";
@@ -14,12 +22,19 @@ import { Rating } from "@material-ui/lab";
 import { Link } from "react-router-dom";
 import { getUser } from "services/userService";
 import { getServices } from "services/serviceService";
+import ServiceProviderBooking from "./serviceProviderBooking";
+import { UserContext } from "core/userContext";
+import { getVehicle } from "services/vehicleService";
+import { getVehicles } from "services/vehicleService";
 
 class serviceProviderDetails extends Component {
+  static contextType = UserContext;
   state = {
     defaultModal: false,
     details: {},
     services: [],
+    formModal: false,
+    vehicles: [],
   };
 
   toggleModal = (state) => {
@@ -33,6 +48,9 @@ class serviceProviderDetails extends Component {
       const { data: details } = await getUser(this.props.match.params.id);
       const { data: services } = await getServices();
       this.setState({ details, services });
+      const userData = await this.context.currentUser();
+      const { data: vehicles } = await getVehicles(userData.user?._id);
+      this.setState({ vehicles });
     } catch (err) {
       console.log("Error", err);
     }
@@ -84,9 +102,35 @@ class serviceProviderDetails extends Component {
                             />
                           </div>
                           <div className="col m-0 p-0">
-                            <Button size="sm" color="primary" onClick={this.onBooking}>
+                            {/* <Button size="sm" color="primary" onClick={this.onBooking}>
+                              Book Now
+                            </Button> */}
+                            <Button
+                              size="sm"
+                              color="primary"
+                              onClick={() => this.toggleModal("formModal")}
+                            >
                               Book Now
                             </Button>
+                            <Modal
+                              className="modal-dialog-centered"
+                              size="sm"
+                              isOpen={this.state.formModal}
+                              toggle={() => this.toggleModal("formModal")}
+                            >
+                              <div className="modal-body p-0">
+                                <Card className="bg-secondary shadow border-0">
+                                  <CardHeader className="bg-transparent">
+                                    Online Service Booking
+                                  </CardHeader>
+                                  <CardBody className="px-lg-5 py-lg-5">
+                                   <ServiceProviderBooking
+                                   
+                                   />
+                                  </CardBody>
+                                </Card>
+                              </div>
+                            </Modal>
                           </div>
                         </div>
                       </div>
@@ -96,52 +140,11 @@ class serviceProviderDetails extends Component {
                       <div className="ml-4">
                         {this.state.services.map((s) => (
                           <p key={s._id}>
-                            <Link className="text-gray" >
-                              {s.servicename}
-                            </Link>   
+                            <Link className="text-gray">{s.servicename}</Link>
                           </p>
                         ))}
                       </div>
                     </div>
-
-                    {/* 
-                    <div className="col-5">
-                      <div className="mb-2">
-                        <img
-                          src={this.state.profileImage}
-                          style={{ width: 520, height: 300 }}
-                        />
-                      </div>
-                      <div className="">
-                        <Button
-                          block
-                          color="default"
-                          size="lg"
-                          type="button"
-                          onClick={this.onBooking}
-                        >
-                          Book Now
-                        </Button>
-                      </div>
-                      <div className="mt-2">
-                        <Row>
-                          <div className="col-8">
-                            <Rating
-                              name="half-rating"
-                              defaultValue={2.5}
-                              precision={0.5}
-                              size="large"
-                              readOnly
-                            />
-                          </div>
-                          <div className="col">
-                            <a href="#">Show Reviews</a>
-                          </div>
-                        </Row>
-                      </div>
-                    </div>
-                    <div className="col"></div>
-                     */}
                   </div>
                 </CardBody>
               </Card>
