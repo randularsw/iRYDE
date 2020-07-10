@@ -18,8 +18,10 @@ import Header from "components/shared/header";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays, subDays } from "date-fns";
+import { useForm } from "react-hook-form";
 
 const ServiceProviderBooking = (props) => {
+  const { register, handleSubmit, errors } = useForm();
   const { vehicles, userId, sp, services } = props;
   const [startDate, setStartDate] = useState(null);
   const [available, setAvailable] = useState(false);
@@ -39,19 +41,34 @@ const ServiceProviderBooking = (props) => {
     console.log(e.target.value);
   }
 
-  console.log(startDate);
+  
+  const onSubmit = async (data) => {
+    data.bookingDate = startDate;
+    console.log('hook',data);
+    // try {
+    //   const {data:vehicle} = await addVehicle(data);
+    //   console.log(vehicle);
+    //   props.onAddVehicle(vehicle);
+    // } catch (error){
+    //   console.log(error);
+    // }
+    // props.onToggle("formModal")
+  };
+
   return (
     <div>
       {/* Page Content */}
 
-      <Form role="form">
+    
+      <Form role="form" onSubmit={handleSubmit(onSubmit)}>
         <FormGroup className="mb-3">
           <InputGroup className="input-group-alternative">
             <CustomInput
-              name="brand"
+              name="vehicleId"
               type="select"
               onChange={onChangeVehicle}
               className="input-group-alternative"
+              innerRef={register({ required: true })}
             >
               <option className="input-group-alternative" value="">
                 Select Vehicle
@@ -64,7 +81,7 @@ const ServiceProviderBooking = (props) => {
             </CustomInput>
           </InputGroup>
         </FormGroup>
-        <FormGroup className="mb-3">
+        {/* <FormGroup className="mb-3">
           <InputGroup className="input-group-alternative">
             <CustomInput
               name="brand"
@@ -75,14 +92,14 @@ const ServiceProviderBooking = (props) => {
               <option className="input-group-alternative" value="">
                 Select Service
               </option>
-              {vehicles.map((v) => (
-                <option key={v._id} value={v._id}>
-                  {v.brand} {v.model} {v.vehicleNo}
+              {services.map((s) => (
+                <option key={s._id} value={s.servicename}>
+                  {s.servicename} 
                 </option>
               ))}
             </CustomInput>
           </InputGroup>
-        </FormGroup>
+        </FormGroup> */}
 
         <FormGroup className="mb-3">
           <DatePicker
@@ -92,18 +109,10 @@ const ServiceProviderBooking = (props) => {
             excludeDates={[subDays(new Date(), -9), subDays(new Date(), -5)]}
             showDisabledMonthNavigation
             placeholderText="Select Date"
+            className="input-group-alternative p-2"
           />
         </FormGroup>
-        <FormGroup className="mb-3"></FormGroup>
-        <div className="text-center">
-          <Button className="my-4" color="primary" type="submit">
-            Submit
-          </Button>
-        </div>
-      </Form>
-
-      <Row></Row>
-      <Row>
+        <FormGroup className="mb-3">
         {available === true ? (
           <div className="btn-group" role="group" aria-label="Basic example">
             <div>
@@ -120,6 +129,17 @@ const ServiceProviderBooking = (props) => {
         ) : (
           console.log("false")
         )}
+        </FormGroup>
+        <div className="text-center">
+          <Button className="my-4" color="primary" type="submit">
+            Submit
+          </Button>
+        </div>
+      </Form>
+
+      <Row></Row>
+      <Row>
+        
       </Row>
     </div>
   );
