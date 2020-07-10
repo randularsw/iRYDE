@@ -37,14 +37,13 @@ const ServiceProviderBooking = (props) => {
     console.log(e.target.value);
   };
 
-  const onChangeService = (e) =>{
+  const onChangeService = (e) => {
     console.log(e.target.value);
-  }
+  };
 
-  
   const onSubmit = async (data) => {
     data.bookingDate = startDate;
-    console.log('hook',data);
+    console.log("hook", data);
     // try {
     //   const {data:vehicle} = await addVehicle(data);
     //   console.log(vehicle);
@@ -59,7 +58,6 @@ const ServiceProviderBooking = (props) => {
     <div>
       {/* Page Content */}
 
-    
       <Form role="form" onSubmit={handleSubmit(onSubmit)}>
         <FormGroup className="mb-3">
           <InputGroup className="input-group-alternative">
@@ -81,27 +79,38 @@ const ServiceProviderBooking = (props) => {
             </CustomInput>
           </InputGroup>
         </FormGroup>
-        {/* <FormGroup className="mb-3">
-          <InputGroup className="input-group-alternative">
-            <CustomInput
-              name="brand"
-              type="select"
-              onChange={onChangeService}
-              className="input-group-alternative"
-            >
-              <option className="input-group-alternative" value="">
-                Select Service
-              </option>
-              {services.map((s) => (
-                <option key={s._id} value={s.servicename}>
-                  {s.servicename} 
-                </option>
-              ))}
-            </CustomInput>
-          </InputGroup>
-        </FormGroup> */}
-
         <FormGroup className="mb-3">
+          <label className="mt-4 mb-3 text-gray">Select Services</label>
+          {services.map((s) => (
+            // <Row>
+            //   <label key={s._id} style={{ fontSize: 12 }}>
+            //     <Input
+            //       type="checkbox"
+            //       value={s.servicename}
+            //       name="servicename"
+            //       className="input-group-alternative"
+            //       innerRef={register({ required: true })}
+            //     />{" "}
+            //     {s.servicename}
+            //   </label>
+            // </Row>
+
+            <div className="custom-control custom-control-alternative custom-checkbox mb-3 ml-4" key={s._id}>
+              <input
+                className="custom-control-input"
+                id={s._id}
+                type="checkbox"
+                value={s.servicename}
+              />
+              <label className="custom-control-label" htmlFor={s._id} >
+              {s.servicename}
+              </label>
+            </div>
+          ))}
+
+        </FormGroup>
+
+        <FormGroup className="mb-3 mt-5">
           <DatePicker
             selected={startDate}
             onChange={onChange}
@@ -113,22 +122,22 @@ const ServiceProviderBooking = (props) => {
           />
         </FormGroup>
         <FormGroup className="mb-3">
-        {available === true ? (
-          <div className="btn-group" role="group" aria-label="Basic example">
-            <div>
-              <Row className="m-2">
-                <p>Available Times</p>
-              </Row>
-              <Row className="m-1">
-                {times.map((t) => (
-                  <Button key={t}>{t}</Button>
-                ))}
-              </Row>
+          {available === true ? (
+            <div className="btn-group" role="group" aria-label="Basic example">
+              <div>
+                <Row className="m-2">
+                  <p>Available Times</p>
+                </Row>
+                <Row className="m-1">
+                  {times.map((t) => (
+                    <Button key={t}>{t}</Button>
+                  ))}
+                </Row>
+              </div>
             </div>
-          </div>
-        ) : (
-          console.log("false")
-        )}
+          ) : (
+            console.log("false")
+          )}
         </FormGroup>
         <div className="text-center">
           <Button className="my-4" color="primary" type="submit">
@@ -138,9 +147,7 @@ const ServiceProviderBooking = (props) => {
       </Form>
 
       <Row></Row>
-      <Row>
-        
-      </Row>
+      <Row></Row>
     </div>
   );
 };
