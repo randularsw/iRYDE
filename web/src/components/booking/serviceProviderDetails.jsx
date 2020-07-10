@@ -84,7 +84,7 @@ class serviceProviderDetails extends Component {
                             />
                           </div>
                           <div className="col m-0 p-0">
-                            <Button size="sm" color="primary">
+                            <Button size="sm" color="primary" onClick={this.onBooking}>
                               Book Now
                             </Button>
                           </div>
