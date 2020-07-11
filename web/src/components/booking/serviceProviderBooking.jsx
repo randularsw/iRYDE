@@ -29,7 +29,7 @@ const ServiceProviderBooking = (props) => {
   const [available, setAvailable] = useState(false);
   const [serviceState, setServices] = useState([]);
   const [selectedTime, setTime] = useState();
-  const selectedServices = [];
+  const bookingServices = [];
 
   useEffect(() => {
     let serviceState = services;
@@ -74,14 +74,15 @@ const ServiceProviderBooking = (props) => {
       data.vo = userId;
       data.isAccepted = false;
       data.isRated = false;
-      data.bookingDate = startDate;
-      data.bookingTime = selectedTime;
+      data.isFinished=false;
+      data.date = startDate;
+      data.time = selectedTime;
       serviceState.map((s) => {
         if (s.select == true) {
-          selectedServices.push(s);
+          bookingServices.push(s.servicename);
         }
       });
-      data.selectedServices = selectedServices;
+      data.bookingServices = bookingServices;
       onToggle("formModal");
       console.log(data);
       const res = await addBooking(data);
@@ -99,7 +100,7 @@ const ServiceProviderBooking = (props) => {
         <FormGroup className="mb-3">
           <InputGroup className="input-group-alternative">
             <CustomInput
-              name="vehicleId"
+              name="vehicle"
               type="select"
               onChange={onChangeVehicle}
               className="input-group-alternative"
@@ -115,7 +116,7 @@ const ServiceProviderBooking = (props) => {
               ))}
             </CustomInput>
           </InputGroup>
-          {errors.vehicleId?.type === "required" && (
+          {errors.vehicle?.type === "required" && (
             <div className="text-muted font-italic ml-4">
               <small className="text-danger">Vehicle Required</small>
             </div>
