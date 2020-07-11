@@ -20,10 +20,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { addDays, subDays } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
+import { addBooking } from "services/bookingService";
 
 const ServiceProviderBooking = (props) => {
   const { register, handleSubmit, errors } = useForm();
-  const { vehicles, userId, sp, services ,onToggle} = props;
+  const { vehicles, userId, sp, services, onToggle } = props;
   const [startDate, setStartDate] = useState(null);
   const [available, setAvailable] = useState(false);
   const [serviceState, setServices] = useState([]);
@@ -68,28 +69,26 @@ const ServiceProviderBooking = (props) => {
   };
 
   const onSubmit = async (data) => {
-    data.sp = sp._id;
-    data.vo = userId;
-    data.isAccepted = false;
-    data.isRated = false;
-    data.bookingDate = startDate;
-    data.bookingTime = selectedTime;
-    serviceState.map((s) => {
-      if (s.select == true) {
-        selectedServices.push(s);
-      }
-    });
-    data.selectedServices = selectedServices;
-    onToggle("formModal")
-    console.log(data);
-    // try {
-    //   const {data:vehicle} = await addVehicle(data);
-    //   console.log(vehicle);
-    //   props.onAddVehicle(vehicle);
-    // } catch (error){
-    //   console.log(error);
-    // }
-    // props.onToggle("formModal")
+    try {
+      data.sp = sp._id;
+      data.vo = userId;
+      data.isAccepted = false;
+      data.isRated = false;
+      data.bookingDate = startDate;
+      data.bookingTime = selectedTime;
+      serviceState.map((s) => {
+        if (s.select == true) {
+          selectedServices.push(s);
+        }
+      });
+      data.selectedServices = selectedServices;
+      onToggle("formModal");
+      console.log(data);
+      const res = await addBooking(data);
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -117,10 +116,10 @@ const ServiceProviderBooking = (props) => {
             </CustomInput>
           </InputGroup>
           {errors.vehicleId?.type === "required" && (
-          <div className="text-muted font-italic ml-4">
-            <small className="text-danger">Vehicle Required</small>
-          </div>
-        )}
+            <div className="text-muted font-italic ml-4">
+              <small className="text-danger">Vehicle Required</small>
+            </div>
+          )}
         </FormGroup>
         <FormGroup className="mb-3">
           <label className="mt-4 mb-3 text-gray">Select Services</label>
