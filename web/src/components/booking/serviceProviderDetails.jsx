@@ -131,7 +131,7 @@ class serviceProviderDetails extends Component {
                                     userId={this.state.userId}
                                     sp={this.state.details}
                                     services={this.state.services}
-                                    
+                                    onToggle={this.toggleModal}
                                    />
                                    
                                   </CardBody>

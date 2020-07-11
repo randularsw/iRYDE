@@ -23,7 +23,7 @@ import { useEffect } from "react";
 
 const ServiceProviderBooking = (props) => {
   const { register, handleSubmit, errors } = useForm();
-  const { vehicles, userId, sp, services } = props;
+  const { vehicles, userId, sp, services ,onToggle} = props;
   const [startDate, setStartDate] = useState(null);
   const [available, setAvailable] = useState(false);
   const [serviceState, setServices] = useState([]);
@@ -88,6 +88,7 @@ const ServiceProviderBooking = (props) => {
       }
     });
     data.selectedServices = selectedServices;
+    onToggle("formModal")
     // try {
     //   const {data:vehicle} = await addVehicle(data);
     //   console.log(vehicle);
@@ -122,6 +123,11 @@ const ServiceProviderBooking = (props) => {
               ))}
             </CustomInput>
           </InputGroup>
+          {errors.vehicleId?.type === "required" && (
+          <div className="text-muted font-italic ml-4">
+            <small className="text-danger">Vehicle Required</small>
+          </div>
+        )}
         </FormGroup>
         <FormGroup className="mb-3">
           <label className="mt-4 mb-3 text-gray">Select Services</label>
