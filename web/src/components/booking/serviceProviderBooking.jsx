@@ -19,13 +19,39 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays, subDays } from "date-fns";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 
 const ServiceProviderBooking = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const { vehicles, userId, sp, services } = props;
   const [startDate, setStartDate] = useState(null);
   const [available, setAvailable] = useState(false);
-  const times = ["8.00 AM", "10.00 AM", "2.00 PM"];
+  const [serviceState, setServices] = useState([]);
+  const [selectedTime, setTime] = useState();
+  const selectedServices = [];
+
+  useEffect(() => {
+    let serviceState = services;
+    setServices(
+      serviceState.map((s) => {
+        return {
+          select: false,
+          _id: s._id,
+          servicename: s.servicename,
+          description: s.description,
+        };
+      })
+    );
+  }, []);
+
+  const times = [
+    "8.00 AM",
+    "9.00 AM",
+    "10.00 AM",
+    "11.00 AM",
+    "12.00 PM",
+    "1.00 PM",
+  ];
 
   const onChange = (date) => {
     setStartDate(date);
@@ -37,13 +63,31 @@ const ServiceProviderBooking = (props) => {
     console.log(e.target.value);
   };
 
-  const onChangeService = (e) => {
-    console.log(e.target.value);
+  const onChangeService = (e, id) => {
+    console.log("cc", e.target.checked);
+    let checked = e.target.checked;
+    setServices(
+      serviceState.map((d) => {
+        if (id == d._id) {
+          d.select = checked;
+        }
+        return d;
+      })
+    );
+  };
+  const onChangeTime = (e) => {
+    setTime(e.target.value);
   };
 
   const onSubmit = async (data) => {
     data.bookingDate = startDate;
-    console.log("hook", data);
+    data.bookingTime = selectedTime;
+    serviceState.map((s) => {
+      if (s.select == true) {
+        selectedServices.push(s);
+      }
+    });
+    data.selectedServices = selectedServices;
     // try {
     //   const {data:vehicle} = await addVehicle(data);
     //   console.log(vehicle);
@@ -81,73 +125,82 @@ const ServiceProviderBooking = (props) => {
         </FormGroup>
         <FormGroup className="mb-3">
           <label className="mt-4 mb-3 text-gray">Select Services</label>
-          {services.map((s) => (
-            // <Row>
-            //   <label key={s._id} style={{ fontSize: 12 }}>
-            //     <Input
-            //       type="checkbox"
-            //       value={s.servicename}
-            //       name="servicename"
-            //       className="input-group-alternative"
-            //       innerRef={register({ required: true })}
-            //     />{" "}
-            //     {s.servicename}
-            //   </label>
-            // </Row>
-
-            <div className="custom-control custom-control-alternative custom-checkbox mb-3 ml-4" key={s._id}>
+          {serviceState.map((s) => (
+            <div
+              className="custom-control custom-control-alternative custom-checkbox mb-3 ml-4"
+              key={s._id}
+            >
               <input
                 className="custom-control-input"
                 id={s._id}
                 type="checkbox"
+                checked={s.select}
                 value={s.servicename}
+                onChange={(e) => {
+                  let checked = e.target.checked;
+                  setServices(
+                    serviceState.map((d) => {
+                      if (s._id == d._id) {
+                        d.select = checked;
+                      }
+                      return d;
+                    })
+                  );
+                }}
               />
-              <label className="custom-control-label" htmlFor={s._id} >
-              {s.servicename}
+              <label className="custom-control-label" htmlFor={s._id}>
+                {s.servicename}
               </label>
             </div>
           ))}
-
         </FormGroup>
 
         <FormGroup className="mb-3 mt-5">
-          <DatePicker
-            selected={startDate}
-            onChange={onChange}
-            minDate={new Date()}
-            excludeDates={[subDays(new Date(), -9), subDays(new Date(), -5)]}
-            showDisabledMonthNavigation
-            placeholderText="Select Date"
-            className="input-group-alternative p-2"
-          />
+          <Row>
+            <DatePicker
+              selected={startDate}
+              onChange={onChange}
+              minDate={new Date()}
+              excludeDates={[subDays(new Date(), -9), subDays(new Date(), -5)]}
+              showDisabledMonthNavigation
+              placeholderText="Select Date"
+              className="input-group-alternative p-2"
+              innerRef={register({ required: true })}
+            />
+          </Row>
         </FormGroup>
-        <FormGroup className="mb-3">
+        <FormGroup className="mt-4">
           {available === true ? (
-            <div className="btn-group" role="group" aria-label="Basic example">
-              <div>
-                <Row className="m-2">
-                  <p>Available Times</p>
-                </Row>
-                <Row className="m-1">
-                  {times.map((t) => (
-                    <Button key={t}>{t}</Button>
-                  ))}
-                </Row>
-              </div>
+            <div>
+              <label className="mt-4 mb-3 text-gray">Select Time</label>
+
+              <Row>
+                {times.map((t) => (
+                  <div className="col-4" key={t}>
+                    <input
+                      type="radio"
+                      name="times"
+                      ckecked={selectedTime === t}
+                      value={t}
+                      onChange={onChangeTime}
+                      innerRef={register({ required: true })}
+                    />{" "}
+                    {t}
+                  </div>
+                ))}
+              </Row>
             </div>
           ) : (
             console.log("false")
           )}
         </FormGroup>
-        <div className="text-center">
+
+        <div className="text-center mb-0">
           <Button className="my-4" color="primary" type="submit">
             Submit
           </Button>
         </div>
       </Form>
-
-      <Row></Row>
-      <Row></Row>
     </div>
   );
 };
