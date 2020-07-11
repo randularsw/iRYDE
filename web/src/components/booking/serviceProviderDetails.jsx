@@ -121,11 +121,11 @@ class serviceProviderDetails extends Component {
                               toggle={() => this.toggleModal("formModal")}
                             >
                               <div className="modal-body p-0">
-                                <Card className="bg-secondary shadow border-0">
+                                <Card className="bg-secondary shadow border-0 p-3" style={{width:600}}>
                                   <CardHeader className="bg-transparent">
                                     Online Service Booking
                                   </CardHeader>
-                                  <CardBody className="px-lg-5 py-lg-5">
+                                  <CardBody className="">
                                    <ServiceProviderBooking
                                     vehicles ={this.state.vehicles}
                                     userId={this.state.userId}
