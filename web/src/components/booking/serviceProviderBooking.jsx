@@ -63,23 +63,15 @@ const ServiceProviderBooking = (props) => {
     console.log(e.target.value);
   };
 
-  const onChangeService = (e, id) => {
-    console.log("cc", e.target.checked);
-    let checked = e.target.checked;
-    setServices(
-      serviceState.map((d) => {
-        if (id == d._id) {
-          d.select = checked;
-        }
-        return d;
-      })
-    );
-  };
   const onChangeTime = (e) => {
     setTime(e.target.value);
   };
 
   const onSubmit = async (data) => {
+    data.sp = sp._id;
+    data.vo = userId;
+    data.isAccepted = false;
+    data.isRated = false;
     data.bookingDate = startDate;
     data.bookingTime = selectedTime;
     serviceState.map((s) => {
@@ -89,6 +81,7 @@ const ServiceProviderBooking = (props) => {
     });
     data.selectedServices = selectedServices;
     onToggle("formModal")
+    console.log(data);
     // try {
     //   const {data:vehicle} = await addVehicle(data);
     //   console.log(vehicle);
