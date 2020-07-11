@@ -3,7 +3,6 @@ const Booking = require('../models/booking');
 
 //add booking details
 router.post('/', async (req,res) =>{
-    console.log('bbbbbbbbbbbbbbbbbbbbb',req.body);
     const newBooking = new Booking({
         sp:req.body.sp,
         vo:req.body.vo,

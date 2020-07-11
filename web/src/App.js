@@ -20,6 +20,7 @@ import ServicesView from "components/servicelist/servicesView";
 import ServicesAdd from "components/servicelist/servicesAdd";
 import StudentTableRow from "components/servicelist/serviceTableRow";
 import VehicleType from "components/admin/vehicleType";
+import SpBookingView from "components/booking/spBookingView";
 
 function App(props) {
   return (
@@ -33,7 +34,7 @@ function App(props) {
           imgAlt: "...",
         }}
       />
-      <div className="main-content bg-default pb-5" style={{minHeight:800}}>
+      <div className="main-content bg-default pb-5" style={{ minHeight: 800 }}>
         <NavigationBar
           {...props}
           // brandText={this.getBrandText(this.props.location.pathname)}
@@ -62,11 +63,11 @@ function App(props) {
             path="/booking/:id"
             component={ServiceProviderBooking}
           ></Route>
+          <Route exact path="/sp/appointments" component={SpBookingView}></Route>
           <Route exact path="/services" component={ServicesView}></Route>
           <Route exact path="/servicesadd" component={ServicesAdd}></Route>
           <Route path="/admin/" component={VehicleType}></Route>
           <Route path="/" component={Home}></Route>
-          
         </Switch>
       </div>
     </UserProvider>

@@ -6,6 +6,7 @@ import Profile from "components/auth/profile";
 import ServicesView from "components/servicelist/servicesView";
 import PromotionsView from "components/promotions/promotionsView";
 import VehicleType from "components/admin/vehicleType";
+import SpBookingView from "components/booking/spBookingView";
 
 var sidebarRoutes = [
   {
@@ -65,6 +66,14 @@ var sidebarRoutes = [
     icon: "ni ni-planet text-blue",
     component: VehiclesList,
     actor: "vo",
+  },
+  //routes for sp appointments 
+  {
+    path: "/sp/appointments",
+    name: "Appointments",
+    icon: "ni ni-planet text-blue",
+    component: SpBookingView,
+    actor: "sp",
   },
 ];
 export default sidebarRoutes;
