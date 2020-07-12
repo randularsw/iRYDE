@@ -18,6 +18,7 @@ class PromotionsAdd extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeStartDate = this.onChangeStartDate.bind(this);
     this.onChangeEndDate = this.onChangeEndDate.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       //items: [],
       title: "",
