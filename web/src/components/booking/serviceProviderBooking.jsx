@@ -24,10 +24,11 @@ import { addBooking } from "services/bookingService";
 
 const ServiceProviderBooking = (props) => {
   const { register, handleSubmit, errors } = useForm();
-  const { vehicles, userId, sp, services, onToggle } = props;
+  const { vehicles, user, sp, services, onToggle } = props;
   const [startDate, setStartDate] = useState(null);
   const [available, setAvailable] = useState(false);
   const [serviceState, setServices] = useState([]);
+  const [vehicle,setVehicle] = useState([]);
   const [selectedTime, setTime] = useState();
   const bookingServices = [];
 
@@ -60,8 +61,14 @@ const ServiceProviderBooking = (props) => {
     setAvailable(a);
   };
 
-  const onChangeVehicle = (e) => {
+  const onChangeVehicle = async (e) => {
     console.log(e.target.value);
+    vehicles.forEach(v => {
+      if(v._id == e.target.value ){
+        setVehicle(v);
+      }
+    });
+    
   };
 
   const onChangeTime = (e) => {
@@ -70,8 +77,11 @@ const ServiceProviderBooking = (props) => {
 
   const onSubmit = async (data) => {
     try {
+      data.vehicle = vehicle;
       data.sp = sp._id;
-      data.vo = userId;
+      data.spName = sp.name;
+      data.vo = user._id;
+      data.voName=user.name;
       data.isAccepted = false;
       data.isRated = false;
       data.isFinished=false;
@@ -98,7 +108,7 @@ const ServiceProviderBooking = (props) => {
         <FormGroup className="mb-3">
           <InputGroup className="input-group-alternative">
             <CustomInput
-              name="vehicle"
+              name="vehicleId"
               type="select"
               onChange={onChangeVehicle}
               className="input-group-alternative"
@@ -114,7 +124,7 @@ const ServiceProviderBooking = (props) => {
               ))}
             </CustomInput>
           </InputGroup>
-          {errors.vehicle?.type === "required" && (
+          {errors.vehicleId?.type === "required" && (
             <div className="text-muted font-italic ml-4">
               <small className="text-danger">Vehicle Required</small>
             </div>
