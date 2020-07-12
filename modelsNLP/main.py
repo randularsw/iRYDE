@@ -52,3 +52,37 @@ stop_words = ["i", "me", "my", "myself", "we", "our", "ours", "ourselves", "you"
               "further", "then", "once", "here", "there", "when", "where", "why", "how", "all", "any", "both", "each",
               "few", "more", "most", "other", "some", "such", "no", "nor", "not", "only", "own", "same", "so", "than",
               "too", "very", "s", "t", "can", "will", "just", "don", "should", "now"]
+
+
+
+#4 - getting word list which not in stop_words list
+final_words = []
+
+for word in tokenized_words:
+    if word not in stopwords.words('english'):
+        final_words.append(word)
+
+
+#5 - NPL Emotion Algorithm
+    #1 - check if the word in the final word list is also present in emotion.txt
+        # open the emotion file
+        # loop through each line and clear it
+        # extract the word and emotion using split
+
+    #2 - if word is present -> add the emotion to emotion_list
+    #3 - finally count each emotion in the emotion_list
+
+emotion_list = []
+
+with open('emotions.txt', 'r') as file:
+    for line in file:
+        clear_line = line.replace("\n","").replace("'", "").strip()     #strip() removes the extra spaces inside the file
+        word, emotion = clear_line.split(':')
+        #print("Word :" + word + " " + "Emotin :" + emotion)
+
+        if word in final_words:
+            emotion_list.append(emotion)
+           
+print(emotion_list)
+w = Counter(emotion_list)
+print(w)
