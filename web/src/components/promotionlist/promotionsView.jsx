@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import Header from "../shared/header";
+import PromotionTableRow from "./promotionTableRow";
+import axios from "axios";
 import {
   Row,
   Card,
+  Table,
   CardHeader,
   CardBody,
   CardImg,
@@ -13,9 +16,33 @@ import {
 } from "reactstrap";
 
 class PromotionsView extends Component {
-  state = {
-    items: [],
-  };
+  constructor(props) {
+    super(props);
+    this.state = { promotions: [] };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:4000/promotions/")
+      .then((response) => {
+        this.setState({ promotions: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  promotionsList() {
+    return this.state.promotions.map((currentpromotion) => {
+      return (
+        <PromotionTableRow
+          obj={currentpromotion}
+          //deleteService={this.deleteService}
+          key={currentpromotion._id}
+        />
+      );
+    });
+  }
 
   render() {
     // const { items } = this.state;
@@ -43,72 +70,21 @@ class PromotionsView extends Component {
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
-                    <Row>
-                      <Card
-                        style={{
-                          width: "18rem",
-                          height: 150,
-                          marginLeft: 35,
-                          marginRight: 15,
-                        }}
-                      >
-                        <CardImg
-                          alt="..."
-                          src={require("assets/images/promotions/offer 5.jpg")}
-                          top
-                        />
-                        <CardBody>
-                          <CardText>
-                            Special offer for customers to get their full
-                            vehicle service for a special price.Available at our
-                            all outlets.This offer is valid until the end of
-                            July
-                          </CardText>
-                        </CardBody>
-                      </Card>
+                    <Table className="align-items-center table-dark" responsive>
+                      <thead className="thead-dark">
+                        <tr>
+                          <th scope="col" style={{ alignItems: "center" }}>
+                            Title
+                          </th>
+                          <th scope="col">Description</th>
+                          <th scope="col">Start Date</th>
+                          <th scope="col">End Date</th>
 
-                      <Card
-                        style={{
-                          width: "18rem",
-                          height: 230,
-                          marginLeft: 35,
-                          marginRight: 15,
-                        }}
-                      >
-                        <CardImg
-                          alt="..."
-                          src={require("assets/images/promotions/src.jpg")}
-                          top
-                        />
-                        <CardBody>
-                          <CardText>
-                            Special offer for WAGON R customers to get their
-                            full vehicle service for a special price.
-                          </CardText>
-                        </CardBody>
-                      </Card>
-
-                      <Card
-                        style={{
-                          width: "18rem",
-                          height: 230,
-                          marginLeft: 35,
-                          marginRight: 15,
-                        }}
-                      >
-                        <CardImg
-                          alt="..."
-                          src={require("assets/images/promotions/offer3.jpg")}
-                          top
-                        />
-                        <CardBody>
-                          <CardText>
-                            Get the premium offer. Free Quick wax along with 25%
-                            offer on each full service
-                          </CardText>
-                        </CardBody>
-                      </Card>
-                    </Row>
+                          <th scope="col" />
+                        </tr>
+                      </thead>
+                      <tbody>{this.promotionsList()}</tbody>
+                    </Table>
                   </div>
                 </CardBody>
               </Card>
