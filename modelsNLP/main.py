@@ -86,3 +86,19 @@ with open('emotions.txt', 'r') as file:
 print(emotion_list)
 w = Counter(emotion_list)
 print(w)
+
+#sentiment analysis (positive or negative)
+def sentiment_analyse(sentiment_text):
+    score = SentimentIntensityAnalyzer().polarity_scores(sentiment_text)
+    #print(score)
+    neg = score['neg']
+    pos = score['pos']
+    if neg > pos:
+        print("Negative Sentiment")
+    elif pos > neg:
+        print("Positive Sentiment")
+    else:
+        print("No impact")
+
+
+sentiment_analyse(clean_text)
