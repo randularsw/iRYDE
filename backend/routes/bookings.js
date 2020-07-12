@@ -5,7 +5,9 @@ const Booking = require('../models/booking');
 router.post('/', async (req,res) =>{
     const newBooking = new Booking({
         sp:req.body.sp,
+        spName:req.body.spName,
         vo:req.body.vo,
+        voName:req.body.voName,
         services:req.body.bookingServices,
         vehicle: req.body.vehicle,
         date:req.body.date,
@@ -24,13 +26,13 @@ router.post('/', async (req,res) =>{
 
 //specific sp incoming appointments
 router.get('/incoming/:id', async (req,res)=>{
+    console.log(req.params.id);
     try {
-        const incoming = Booking.find({_id:req.params.id , isAccepted:false});
-        console.log(incoming);
-        res.json(incoming);
+        const received = await Booking.find({ sp : req.params.id , isAccepted : false});
+        res.json(received);
     } catch (error) {
         res.json({ message: error });
     }
-})
+});
 
 module.exports = router;
