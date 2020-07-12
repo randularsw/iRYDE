@@ -5,7 +5,15 @@ const bookingSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  spName:{
+    type: String,
+    required: true,
+  },
   vo: {
+    type: String,
+    required: true,
+  },
+  voName:{
     type: String,
     required: true,
   },
@@ -14,7 +22,7 @@ const bookingSchema = mongoose.Schema({
     required: true,
   },
   vehicle: {
-    type: String,
+    type: Array,
     required: true,
   },
   date: {
