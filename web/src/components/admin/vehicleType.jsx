@@ -153,12 +153,12 @@ class VehicleType extends Component {
                             <td>&nbsp;</td>
                             <td className="text-left">
                               <Col md="2">
-                                <button
+                                {/* <button
                                   onClick={(e) => this.clearAll()}
                                   className="btn btn-default btn-lg"
                                 >
                                   Clear All
-                                </button>
+                                </button> */}
                               </Col>
                             </td>
                           </tr>

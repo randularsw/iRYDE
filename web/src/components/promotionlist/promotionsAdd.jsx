@@ -1,27 +1,33 @@
 import React, { Component } from "react";
 import Header from "../shared/header";
-import axios from "axios";
 import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 import { FormGroup, Form, Input, Col, Button } from "reactstrap";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+//import Datetime from "react-datetime";
 
-class ServicesAdd extends Component {
+import { InputGroupAddon, InputGroupText, InputGroup } from "reactstrap";
+
+class PromotionsAdd extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeServicename = this.onChangeServicename.bind(this);
+    this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
-
+    this.onChangeStartDate = this.onChangeStartDate.bind(this);
+    this.onChangeEndDate = this.onChangeEndDate.bind(this);
     this.state = {
-      servicename: "",
-      description: "",
       //items: [],
+      title: "",
+      description: "",
+      startDate: new Date(),
+      endDate: new Date(),
     };
   }
 
-  onChangeServicename(e) {
+  onChangeTitle(e) {
     this.setState({
-      servicename: e.target.value,
+      title: e.target.value,
     });
   }
 
@@ -31,25 +37,19 @@ class ServicesAdd extends Component {
     });
   }
 
-  onSubmit(e) {
-    e.preventDefault();
-
-    const service = {
-      servicename: this.state.servicename,
-      description: this.state.description,
-    };
-    console.log(service);
-
-    axios
-      .post("http://localhost:4000/services/add", service)
-      .then((res) => console.log(res.data));
-
-    window.location = "/services";
+  onChangeStartDate(date) {
+    this.setState({
+      startDate: date,
+    });
   }
 
+  onChangeEndDate(date) {
+    this.setState({
+      endDate: date,
+    });
+  }
   render() {
     // const { items } = this.state;
-
     return (
       <>
         <Header />
@@ -59,7 +59,7 @@ class ServicesAdd extends Component {
             <div className=" col">
               <Card className=" shadow" style={{ backgroundColor: "#f4f5f7" }}>
                 <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0">Add Services</h3>
+                  <h3 className=" mb-0">Add promotions</h3>
                 </CardHeader>
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
@@ -70,15 +70,14 @@ class ServicesAdd extends Component {
                         className="justify-content-md-center"
                         style={{ marginTop: ".5rem" }}
                       >
-                        <Col md="10">
+                        <Col md="8">
                           <FormGroup>
                             <Input
                               className="form-control-alternative"
-                              placeholder="Service Category"
+                              placeholder="Title"
                               type="text"
-                              required="true"
-                              value={this.state.servicename}
-                              onChange={this.onChangeServicename}
+                              value={this.state.title}
+                              onChange={this.onChangeTitle}
                             />
                           </FormGroup>
                         </Col>
@@ -87,17 +86,53 @@ class ServicesAdd extends Component {
                         className="justify-content-md-center"
                         style={{ marginTop: "1.5rem" }}
                       >
-                        <Col md="10">
+                        <Col md="8">
                           <FormGroup>
                             <Input
                               className="form-control-alternative"
                               placeholder="Enter the description"
                               type="textarea"
                               rows="2"
-                              required="true"
                               value={this.state.description}
                               onChange={this.onChangeDescription}
                             />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+
+                      <Row
+                        className="justify-content-md-center"
+                        style={{ marginTop: "1.5rem" }}
+                      >
+                        <Col md="4">
+                          <FormGroup>
+                            <InputGroup className="input-group-alternative">
+                              <DatePicker
+                                onChange={this.onChangeStartDate}
+                                selected={this.state.startDate}
+                                placeholderText="From date"
+                                inputProps={{
+                                  placeholder: "Date Picker Here",
+                                }}
+                                timeFormat={true}
+                              />
+                            </InputGroup>
+                          </FormGroup>
+                        </Col>
+
+                        <Col md="4">
+                          <FormGroup>
+                            <InputGroup className="input-group-alternative">
+                              <DatePicker
+                                onChange={this.onChangeEndDate}
+                                selected={this.state.endDate}
+                                placeholderText="To date"
+                                inputProps={{
+                                  placeholder: "Date Picker Here",
+                                }}
+                                timeFormat={false}
+                              />
+                            </InputGroup>
                           </FormGroup>
                         </Col>
                       </Row>
@@ -130,4 +165,4 @@ class ServicesAdd extends Component {
   }
 }
 
-export default ServicesAdd;
+export default PromotionsAdd;

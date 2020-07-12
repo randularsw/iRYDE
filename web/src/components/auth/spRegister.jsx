@@ -23,7 +23,7 @@ const SpRegister = (props) => {
       // console.log(data);
       await context.register(data);
       // props.history.push("/");
-      window.location = "/";
+      window.location = "/about";
     } catch (ex) {
       console.log("exception", ex);
     }
@@ -154,12 +154,12 @@ const SpRegister = (props) => {
           </div>
         )}
       </FormGroup>
-      <div className="text-muted font-italic">
+      {/* <div className="text-muted font-italic">
         <small>
           password strength:{" "}
           <span className="text-success font-weight-700">strong</span>
         </small>
-      </div>
+      </div> */}
       <Row className="my-4">
         <Col xs="12">
           <div className="custom-control custom-control-alternative custom-checkbox">

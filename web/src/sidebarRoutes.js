@@ -4,7 +4,7 @@ import serviceProviders from "components/booking/serviceProviderList";
 import VehiclesList from "components/vehicles/vehiclesList";
 import Profile from "components/auth/profile";
 import ServicesView from "components/servicelist/servicesView";
-import PromotionsView from "components/promotions/promotionsView";
+import PromotionsView from "components/promotionlist/promotionsView";
 import VehicleType from "components/admin/vehicleType";
 import SpBookingView from "components/booking/spBookingView";
 
@@ -44,21 +44,21 @@ var sidebarRoutes = [
     component: VehicleType,
     actor: "ad",
   },
-  {
-    path: "/tags",
-    name: "Tags",
-    icon: "ni ni-planet text-blue",
-    component: Home,
-    actor: "ad",
-  },
+  // {
+  //   path: "/tags",
+  //   name: "Tags",
+  //   icon: "ni ni-planet text-blue",
+  //   component: Home,
+  //   actor: "ad",
+  // },
   //routes for service providers
-  {
-    path: "/service-providers",
-    name: "Service Providers",
-    icon: "ni ni-planet text-blue",
-    component: serviceProviders,
-    actor: "vo",
-  },
+  // {
+  //   path: "/service-providers",
+  //   name: "Service Providers",
+  //   icon: "ni ni-planet text-blue",
+  //   component: serviceProviders,
+  //   actor: "vo",
+  // },
   //routes for vehicle
   {
     path: "/vehicles",
