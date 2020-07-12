@@ -22,4 +22,15 @@ router.post('/', async (req,res) =>{
     }
 });
 
+//specific sp incoming appointments
+router.get('/incoming/:id', async (req,res)=>{
+    try {
+        const incoming = Booking.find({_id:req.params.id , isAccepted:false});
+        console.log(incoming);
+        res.json(incoming);
+    } catch (error) {
+        res.json({ message: error });
+    }
+})
+
 module.exports = router;
