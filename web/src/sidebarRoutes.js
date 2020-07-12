@@ -1,47 +1,70 @@
 import Home from "components/home";
+import About from "components/auth/about";
+import serviceProviders from "components/booking/serviceProviderList";
+import VehiclesList from "components/vehicles/vehiclesList";
+import Profile from "components/auth/profile";
+import ServicesView from "components/servicelist/servicesView";
+import PromotionsView from "components/promotionlist/promotionsView";
+import VehicleType from "components/admin/vehicleType";
 
 var sidebarRoutes = [
   {
     path: "/profile",
     name: "Profile",
     icon: "ni ni-tv-2 text-primary",
-    component: Home,
-    actor: "vehicle-owner",
+    component: Profile,
+    actor: "vo",
   },
   {
-    path: "/vehicles",
-    name: "Vehicles",
-    icon: "ni ni-planet text-blue",
-    component: Home,
-    actor: "vehicle-owner",
+    path: "/about",
+    name: "About",
+    icon: "ni ni-tv-2 text-primary",
+    component: About,
+    actor: "sp",
   },
   {
     path: "/services",
     name: "Services",
     icon: "ni ni-tv-2 text-primary",
-    component: Home,
-    actor: "service-provider",
+    component: ServicesView,
+    actor: "sp",
   },
   {
     path: "/promotions",
     name: "Promotions",
     icon: "ni ni-planet text-blue",
-    component: Home,
-    actor: "service-provider",
+    component: PromotionsView,
+    actor: "sp",
   },
   {
-    path: "/types",
+    path: "/admin/vehicleType",
     name: "Vehicle Types",
     icon: "ni ni-tv-2 text-primary",
-    component: Home,
-    actor: "admin",
+    component: VehicleType,
+    actor: "ad",
   },
+  // {
+  //   path: "/tags",
+  //   name: "Tags",
+  //   icon: "ni ni-planet text-blue",
+  //   component: Home,
+  //   actor: "ad",
+  // },
+  //routes for service providers
+  // {
+  //   path: "/service-providers",
+  //   name: "Service Providers",
+  //   icon: "ni ni-planet text-blue",
+  //   component: serviceProviders,
+  //   actor: "vo",
+  // },
+  //routes for vehicle
   {
-    path: "/tags",
-    name: "Tags",
+    path: "/vehicles",
+    name: "Vehicles",
     icon: "ni ni-planet text-blue",
-    component: Home,
-    actor: "admin",
+    component: VehiclesList,
+    actor: "vo",
   },
 ];
 export default sidebarRoutes;
