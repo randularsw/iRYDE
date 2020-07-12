@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "react-moment";
 import { InputGroupAddon, InputGroupText, InputGroup } from "reactstrap";
+import axios from "axios";
 
 const minDate = new Date(Date.now());
 
@@ -48,6 +49,24 @@ class PromotionsAdd extends Component {
     this.setState({
       endDate: date,
     });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const promotion = {
+      title: this.state.title,
+      description: this.state.description,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+    };
+    console.log(promotion);
+
+    axios
+      .post("http://localhost:4000/promotions/add", promotion)
+      .then((res) => console.log(res.data));
+
+    window.location = "/promotions";
   }
 
   render() {
