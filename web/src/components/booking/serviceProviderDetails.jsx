@@ -35,7 +35,7 @@ class serviceProviderDetails extends Component {
     services: [],
     formModal: false,
     vehicles: [],
-    userId:'dfdddd',
+    user:[],
   };
 
   toggleModal = (state) => {
@@ -50,7 +50,7 @@ class serviceProviderDetails extends Component {
       const { data: services } = await getServices();
       this.setState({ details, services });
       const userData = await this.context.currentUser();
-      this.setState({userId:userData.user?._id});
+      this.setState({user:userData.user});
       const { data: vehicles } = await getVehicles(userData.user?._id);
       this.setState({ vehicles });
     } catch (err) {
@@ -128,7 +128,7 @@ class serviceProviderDetails extends Component {
                                   <CardBody className="">
                                    <ServiceProviderBooking
                                     vehicles ={this.state.vehicles}
-                                    userId={this.state.userId}
+                                    user={this.state.user}
                                     sp={this.state.details}
                                     services={this.state.services}
                                     onToggle={this.toggleModal}
