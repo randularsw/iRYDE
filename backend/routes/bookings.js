@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
   }
 });
 //specific sp incoming appointments
-router.get("/incoming/:id", async (req, res) => {
+router.get("/sp/incoming/:id", async (req, res) => {
   try {
     const received = await Booking.find({
       sp: req.params.id,
@@ -35,7 +35,7 @@ router.get("/incoming/:id", async (req, res) => {
   }
 });
 //specific sp confirmed appointments
-router.get("/confirmed/:id", async (req, res) => {
+router.get("/sp/confirmed/:id", async (req, res) => {
   try {
     const received = await Booking.find({
       sp: req.params.id,
@@ -47,10 +47,46 @@ router.get("/confirmed/:id", async (req, res) => {
   }
 });
 //specific sp finished appointments
-router.get("/finished/:id", async (req, res) => {
+router.get("/sp/finished/:id", async (req, res) => {
   try {
     const received = await Booking.find({
       sp: req.params.id,
+      status: "finished",
+    });
+    res.json(received);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+//specific vo incoming appointments
+router.get("/vo/incoming/:id", async (req, res) => {
+  try {
+    const received = await Booking.find({
+      vo: req.params.id,
+      status: "pending",
+    });
+    res.json(received);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+//specific vo confirmed appointments
+router.get("/vo/confirmed/:id", async (req, res) => {
+  try {
+    const received = await Booking.find({
+      vo: req.params.id,
+      status: "confirmed",
+    });
+    res.json(received);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+//specific vo finished appointments
+router.get("/vo/finished/:id", async (req, res) => {
+  try {
+    const received = await Booking.find({
+      vo: req.params.id,
       status: "finished",
     });
     res.json(received);
