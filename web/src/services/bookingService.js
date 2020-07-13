@@ -21,7 +21,7 @@ export function getSpFinishedAppointments(id){
   return axios.get("http://localhost:4000/bookings/sp/finished/" + id);
 }
 //specific vo incoming appointments
-export function getVoIncomingAppointments(id){
+export function getVoPendingAppointments(id){
   console.log(id);
   return axios.get("http://localhost:4000/bookings/vo/incoming/" + id);
 }

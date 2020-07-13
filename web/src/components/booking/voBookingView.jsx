@@ -5,9 +5,39 @@ import { Card } from "@material-ui/core";
 import { UserContext } from "core/userContext";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import {
+  getVoPendingAppointments,
+  getVoConfirmedAppointments,
+} from "services/bookingService";
+import { getVoFinishedAppointments } from "services/bookingService";
+import VoPendingAppointments from "./voPendingAppointments";
 
 class VoBookingView extends Component {
-  state = {};
+  static contextType = UserContext;
+  state = {
+    pending: [],
+    confirmed: [],
+    finished: [],
+  };
+
+  async componentDidMount() {
+    try {
+      const userData = await this.context.currentUser();
+      const { data: pending } = await getVoPendingAppointments(
+        userData.user?._id
+      );
+      const { data: confirmed } = await getVoConfirmedAppointments(
+        userData.user?._id
+      );
+      const { data: finished } = await getVoFinishedAppointments(
+        userData.user?._id
+      );
+      this.setState({ pending, confirmed, finished });
+    } catch (error) {
+      console.log("err", error);
+    }
+  }
+
   render() {
     return (
       <>
@@ -32,11 +62,7 @@ class VoBookingView extends Component {
                       </TabList>
 
                       <TabPanel>
-                        {/* <SpIncomingAppointments
-                          incoming={this.state.incoming}
-                          onAccept={this.handleAcceptAppointment}
-                          onCancel={this.handleCancelAppointment}
-                        /> */}
+                        <VoPendingAppointments pending={this.state.pending} />
                       </TabPanel>
                       <TabPanel>
                         {/* <SpConfirmedAppointments
