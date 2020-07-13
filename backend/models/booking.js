@@ -33,18 +33,15 @@ const bookingSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  isAccepted: {
-    type: Boolean,
-    required: true,
+  status:{
+    type:String,
+    required:true,
   },
   isRated: {
     type: Boolean,
     required: true,
   },
-  isFinished: {
-    type: Boolean,
-    required: true,
-  },
+  
 });
 
 module.exports = mongoose.model("Booking", bookingSchema);

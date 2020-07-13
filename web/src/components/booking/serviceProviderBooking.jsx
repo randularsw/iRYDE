@@ -82,9 +82,8 @@ const ServiceProviderBooking = (props) => {
       data.spName = sp.name;
       data.vo = user._id;
       data.voName=user.name;
-      data.isAccepted = false;
+      data.status='pending';
       data.isRated = false;
-      data.isFinished=false;
       data.date = startDate;
       data.time = selectedTime;
       serviceState.map((s) => {
