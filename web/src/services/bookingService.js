@@ -10,3 +10,8 @@ export function getIncomingAppointments(id){
   console.log(id);
   return axios.get("http://localhost:4000/bookings/incoming/" + id);
 }
+//update status
+export function updateStatus(id,appointment){
+  console.log(id,appointment);
+  return axios.patch("http://localhost:4000/bookings/status/"+id,appointment);
+}

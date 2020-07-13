@@ -37,11 +37,13 @@ router.get("/incoming/:id", async (req, res) => {
   }
 });
 
-router.patch("incoming/confirm/:id", async (req,res)=>{
+router.patch("/status/:id", async (req,res)=>{
+    
 try {
+    console.log(req.body);
     const patchStatus = await Booking.updateOne(
         {_id:req.params.id},
-        {$set:{status:'confirm'}}
+        {$set:{status:req.body.status}}
     )
     res.json(patchStatus);
 } catch (error) {

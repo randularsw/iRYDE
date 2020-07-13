@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Container, Row, CardHeader, CardBody, Button, Col } from "reactstrap";
 import { Card } from "@material-ui/core";
+import { updateStatus } from "services/bookingService";
 
 const SpIncomingAppointments = (props) => {
   const { incoming } = props;
@@ -11,9 +12,12 @@ const SpIncomingAppointments = (props) => {
     return x;
   };
 
-  const isAccepted = () =>{
-    
-  }
+  const changeStatus = async (id, appointment) => {
+    console.log("ccccccccc", id);
+    appointment.status = "confirmed";
+    const res = await updateStatus(id, appointment);
+    console.log(res);
+  };
 
   return (
     <div className="">
@@ -37,7 +41,11 @@ const SpIncomingAppointments = (props) => {
                       {i?.time}
                     </small>
                     <div>
-                      <Button size="sm" color="info">
+                      <Button
+                        size="sm"
+                        color="info"
+                        onClick={() => changeStatus(i._id, i)}
+                      >
                         Accept
                       </Button>
                       <Button size="sm" color="danger">

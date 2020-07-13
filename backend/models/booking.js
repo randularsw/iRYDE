@@ -35,7 +35,7 @@ const bookingSchema = mongoose.Schema({
   },
   status:{
     type:String,
-    required:true,
+    
   },
   isRated: {
     type: Boolean,
