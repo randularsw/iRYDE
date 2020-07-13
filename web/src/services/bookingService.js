@@ -6,19 +6,34 @@ export function addBooking(data) {
   return axios.post("http://localhost:4000/bookings", data);
 }
 //specific sp incoming appointments
-export function getIncomingAppointments(id){
+export function getSpIncomingAppointments(id){
   console.log(id);
-  return axios.get("http://localhost:4000/bookings/incoming/" + id);
+  return axios.get("http://localhost:4000/bookings/sp/incoming/" + id);
 }
 //specific sp confirmed appointments
-export function getConfirmedAppointments(id){
+export function getSpConfirmedAppointments(id){
   console.log(id);
-  return axios.get("http://localhost:4000/bookings/confirmed/" + id);
+  return axios.get("http://localhost:4000/bookings/sp/confirmed/" + id);
 }
 //specific sp finished appointments
-export function getFinishedAppointments(id){
+export function getSpFinishedAppointments(id){
   console.log(id);
-  return axios.get("http://localhost:4000/bookings/finished/" + id);
+  return axios.get("http://localhost:4000/bookings/sp/finished/" + id);
+}
+//specific vo incoming appointments
+export function getVoIncomingAppointments(id){
+  console.log(id);
+  return axios.get("http://localhost:4000/bookings/vo/incoming/" + id);
+}
+//specific vo confirmed appointments
+export function getVoConfirmedAppointments(id){
+  console.log(id);
+  return axios.get("http://localhost:4000/bookings/vo/confirmed/" + id);
+}
+//specific vo finished appointments
+export function getVoFinishedAppointments(id){
+  console.log(id);
+  return axios.get("http://localhost:4000/bookings/vo/finished/" + id);
 }
 //update status
 export function updateStatus(id,appointment){
