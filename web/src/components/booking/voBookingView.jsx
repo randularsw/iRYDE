@@ -12,6 +12,7 @@ import {
 import { getVoFinishedAppointments } from "services/bookingService";
 import VoPendingAppointments from "./voPendingAppointments";
 import VoConfirmedAppointments from "./voConfirmedAppointments";
+import VoFinishedAppointments from "./voFinishedAppointments";
 
 class VoBookingView extends Component {
   static contextType = UserContext;
@@ -71,9 +72,9 @@ class VoBookingView extends Component {
                         />
                       </TabPanel>
                       <TabPanel>
-                        {/* <SpFinishedAppointments
+                        <VoFinishedAppointments
                           finished={this.state.finished}
-                        /> */}
+                        />
                       </TabPanel>
                     </Tabs>
                   </div>
