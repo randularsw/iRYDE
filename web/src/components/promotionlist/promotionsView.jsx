@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Header from "../shared/header";
 import PromotionTableRow from "./promotionTableRow";
 import axios from "axios";
+import { getPromotions } from "services/promotionService";
 import {
   Row,
   Card,
@@ -21,15 +22,13 @@ class PromotionsView extends Component {
     this.state = { promotions: [] };
   }
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:4000/promotions/")
-      .then((response) => {
-        this.setState({ promotions: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  async componentDidMount() {
+    try {
+      const { data: promotions } = await getPromotions();
+      this.setState({ promotions });
+    } catch (err) {
+      console.log("Error", err);
+    }
   }
 
   promotionsList() {
@@ -76,9 +75,15 @@ class PromotionsView extends Component {
                           <th scope="col" style={{ alignItems: "center" }}>
                             Title
                           </th>
-                          <th scope="col">Description</th>
-                          <th scope="col">Start Date</th>
-                          <th scope="col">End Date</th>
+                          <th scope="col" style={{ alignItems: "center" }}>
+                            Description
+                          </th>
+                          <th scope="col" style={{ alignItems: "center" }}>
+                            Start Date
+                          </th>
+                          <th scope="col" style={{ alignItems: "center" }}>
+                            End Date
+                          </th>
 
                           <th scope="col" />
                         </tr>
