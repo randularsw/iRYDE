@@ -5,22 +5,15 @@ import { Card } from "@material-ui/core";
 import { UserContext } from "core/userContext";
 import { getIncomingAppointments } from "services/bookingService";
 import SpIncomingAppointments from "./spIncomingAppointments";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import 'react-tabs/style/react-tabs.css';
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 class SpBookingView extends Component {
   static contextType = UserContext;
-
-  constructor(props) {
-    super(props);
-
-    this.handleChange = this.handleChange.bind(this);
-
-    this.state = {
-      incoming: [],
-      value: 0,
-    };
-  }
+  state = {
+    incoming: [],
+    value: 0,
+  };
 
   async componentDidMount() {
     try {
@@ -34,10 +27,12 @@ class SpBookingView extends Component {
     }
   }
 
-  handleChange(event, newValue) {
-    const value = newValue;
-    this.setState({ value });
-  }
+  handleIncomingAppointment = (appointment) => {
+    const { incoming } = this.state;
+    const index = incoming.indexOf(appointment);
+    incoming.splice(index, 1);
+    this.setState({ incoming });
+  };
 
   render() {
     return (
@@ -54,26 +49,28 @@ class SpBookingView extends Component {
                 <CardBody>
                   <div style={{ minHeight: 400, marginLeft: 5 }}>
                     {/* Page Content */}
-                    
+
                     <Tabs>
                       <TabList>
-                        <Tab>Incoming</Tab>
-                        <Tab>Title 2</Tab>
-                        <Tab>Title 3</Tab>
+                        <Tab>Pending Appointments</Tab>
+                        <Tab> Approved Appointments</Tab>
+                        <Tab>History</Tab>
                       </TabList>
 
                       <TabPanel>
                         <SpIncomingAppointments
-                      incoming ={this.state.incoming}
-                    />
+                          incoming={this.state.incoming}
+                          onIncoming={this.handleIncomingAppointment}
+                        />
                       </TabPanel>
                       <TabPanel>
                         <h2>Any content 2</h2>
                       </TabPanel>
                       <TabPanel>
-                      <SpIncomingAppointments
-                      incoming ={this.state.incoming}
-                    />
+                        <SpIncomingAppointments
+                          incoming={this.state.incoming}
+                          onIncoming={this.handleIncomingAppointment}
+                        />
                       </TabPanel>
                     </Tabs>
                   </div>

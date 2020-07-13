@@ -4,7 +4,7 @@ import { Card } from "@material-ui/core";
 import { updateStatus } from "services/bookingService";
 
 const SpIncomingAppointments = (props) => {
-  const { incoming } = props;
+  const { incoming,onIncomingAppointment } = props;
 
   const changeDateFormat = (f) => {
     let d = new Date(f);
@@ -13,10 +13,10 @@ const SpIncomingAppointments = (props) => {
   };
 
   const changeStatus = async (id, appointment) => {
-    console.log("ccccccccc", id);
+    props.onIncoming(appointment);
     appointment.status = "confirmed";
     const res = await updateStatus(id, appointment);
-    console.log(res);
+    console.log(res);  
   };
 
   return (
