@@ -13,8 +13,8 @@ const PromotionTableRow = (props) => {
       <td>{props.obj.title}</td>
 
       <td>{props.obj.description}</td>
-      <td>{props.obj.startDate}</td>
-      <td>{props.obj.endDate}</td>
+      <td>{props.obj.startDate.substring(0, 10)}</td>
+      <td>{props.obj.endDate.substring(0, 10)}</td>
     </tr>
   );
 };
