@@ -12,9 +12,8 @@ router.post("/", async (req, res) => {
     vehicle: req.body.vehicle,
     date: req.body.date,
     time: req.body.time,
-    status:req.body.status,
+    status: req.body.status,
     isRated: req.body.isRated,
-    
   });
   try {
     const saved = await newBooking.save();
@@ -23,32 +22,55 @@ router.post("/", async (req, res) => {
     res.json({ message: error });
   }
 });
-//status- pendind,confirm,cancel,finished
 //specific sp incoming appointments
 router.get("/incoming/:id", async (req, res) => {
   try {
     const received = await Booking.find({
       sp: req.params.id,
-      status:'pending',
+      status: "pending",
     });
     res.json(received);
   } catch (error) {
     res.json({ message: error });
   }
 });
-
-router.patch("/status/:id", async (req,res)=>{
-    
-try {
+//specific sp confirmed appointments
+router.get("/confirmed/:id", async (req, res) => {
+  try {
+    const received = await Booking.find({
+      sp: req.params.id,
+      status: "confirmed",
+    });
+    res.json(received);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+//specific sp finished appointments
+router.get("/finished/:id", async (req, res) => {
+  try {
+    const received = await Booking.find({
+      sp: req.params.id,
+      status: "finished",
+    });
+    res.json(received);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+//status- pendind,confirmed,canceled,finished
+//update status
+router.patch("/status/:id", async (req, res) => {
+  try {
     console.log(req.body);
     const patchStatus = await Booking.updateOne(
-        {_id:req.params.id},
-        {$set:{status:req.body.status}}
-    )
+      { _id: req.params.id },
+      { $set: { status: req.body.status } }
+    );
     res.json(patchStatus);
-} catch (error) {
+  } catch (error) {
     res.json({ message: error });
-}
-})
+  }
+});
 
 module.exports = router;

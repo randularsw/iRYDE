@@ -10,6 +10,16 @@ export function getIncomingAppointments(id){
   console.log(id);
   return axios.get("http://localhost:4000/bookings/incoming/" + id);
 }
+//specific sp confirmed appointments
+export function getConfirmedAppointments(id){
+  console.log(id);
+  return axios.get("http://localhost:4000/bookings/confirmed/" + id);
+}
+//specific sp finished appointments
+export function getFinishedAppointments(id){
+  console.log(id);
+  return axios.get("http://localhost:4000/bookings/finished/" + id);
+}
 //update status
 export function updateStatus(id,appointment){
   console.log(id,appointment);
