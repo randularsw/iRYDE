@@ -3,16 +3,22 @@ import Header from "components/shared/header";
 import { Container, Row, CardHeader, CardBody, Button, Col } from "reactstrap";
 import { Card } from "@material-ui/core";
 import { UserContext } from "core/userContext";
-import { getIncomingAppointments } from "services/bookingService";
+import {
+  getIncomingAppointments,
+  getConfirmedAppointments,
+  getFinishedAppointments,
+} from "services/bookingService";
 import SpIncomingAppointments from "./spIncomingAppointments";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
+import SpConfirmedAppointments from "./spConfirmedAppointments";
+import SpFinishedAppointments from "./spFinishedAppointments";
 
 class SpBookingView extends Component {
   static contextType = UserContext;
   state = {
     incoming: [],
-    value: 0,
+    confirmed: [],
   };
 
   async componentDidMount() {
@@ -21,17 +27,42 @@ class SpBookingView extends Component {
       const { data: incoming } = await getIncomingAppointments(
         userData.user?._id
       );
-      this.setState({ incoming });
+      const { data: confirmed } = await getConfirmedAppointments(
+        userData.user?._id
+      );
+      const { data: finished } = await getFinishedAppointments(
+        userData.user?._id
+      );
+      this.setState({ incoming, confirmed, finished });
     } catch (error) {
       console.log("err", error);
     }
   }
 
-  handleIncomingAppointment = (appointment) => {
+  handleAcceptAppointment = (appointment) => {
     const { incoming } = this.state;
     const index = incoming.indexOf(appointment);
     incoming.splice(index, 1);
     this.setState({ incoming });
+    const { confirmed } = this.state;
+    confirmed.push(appointment);
+    this.setState({ confirmed });
+  };
+  handleCancelAppointment = (appointment) => {
+    const { incoming } = this.state;
+    const index = incoming.indexOf(appointment);
+    incoming.splice(index, 1);
+    this.setState({ incoming });
+  };
+
+  handleConfirmedAppointment = (appointment) => {
+    const { confirmed } = this.state;
+    const index = confirmed.indexOf(appointment);
+    confirmed.splice(index, 1);
+    this.setState({ confirmed });
+    const { finished } = this.state;
+    finished.push(appointment);
+    this.setState({ finished });
   };
 
   render() {
@@ -60,16 +91,19 @@ class SpBookingView extends Component {
                       <TabPanel>
                         <SpIncomingAppointments
                           incoming={this.state.incoming}
-                          onIncoming={this.handleIncomingAppointment}
+                          onAccept={this.handleAcceptAppointment}
+                          onCancel={this.handleCancelAppointment}
                         />
                       </TabPanel>
                       <TabPanel>
-                        <h2>Any content 2</h2>
+                        <SpConfirmedAppointments
+                          confirmed={this.state.confirmed}
+                          onConfirmed={this.handleConfirmedAppointment}
+                        />
                       </TabPanel>
                       <TabPanel>
-                        <SpIncomingAppointments
-                          incoming={this.state.incoming}
-                          onIncoming={this.handleIncomingAppointment}
+                        <SpFinishedAppointments
+                          finished={this.state.finished}
                         />
                       </TabPanel>
                     </Tabs>
