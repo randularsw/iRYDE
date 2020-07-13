@@ -4,7 +4,7 @@ import { Card } from "@material-ui/core";
 import { updateStatus } from "services/bookingService";
 
 const SpIncomingAppointments = (props) => {
-  const { incoming,onIncomingAppointment } = props;
+  const { incoming, onAccept,onCancel } = props;
 
   const changeDateFormat = (f) => {
     let d = new Date(f);
@@ -12,11 +12,16 @@ const SpIncomingAppointments = (props) => {
     return x;
   };
 
-  const changeStatus = async (id, appointment) => {
-    props.onIncoming(appointment);
+  const changeAcceptStatus = async (id, appointment) => {
     appointment.status = "confirmed";
+    onAccept(appointment);
     const res = await updateStatus(id, appointment);
-    console.log(res);  
+  };
+
+  const changeCancelStatus = async (id, appointment) => {
+    onCancel(appointment);
+    appointment.status = "canceled";
+    const res = await updateStatus(id, appointment);
   };
 
   return (
@@ -44,12 +49,16 @@ const SpIncomingAppointments = (props) => {
                       <Button
                         size="sm"
                         color="info"
-                        onClick={() => changeStatus(i._id, i)}
+                        onClick={() => changeAcceptStatus(i._id, i)}
                       >
                         Accept
                       </Button>
-                      <Button size="sm" color="danger">
-                        Remove
+                      <Button
+                        size="sm"
+                        color="danger"
+                        onClick={() => changeCancelStatus(i._id, i)}
+                      >
+                        Cancel
                       </Button>
                     </div>
                   </Row>
