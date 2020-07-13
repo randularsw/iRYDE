@@ -45,7 +45,7 @@ const SpConfirmedAppointments = (props) => {
                         color="info"
                         onClick={() => changeFinishedStatus(i._id, i)}
                       >
-                        Finished
+                        Finish
                       </Button>
                     </div>
                   </Row>
