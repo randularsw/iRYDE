@@ -11,6 +11,7 @@ import {
 } from "services/bookingService";
 import { getVoFinishedAppointments } from "services/bookingService";
 import VoPendingAppointments from "./voPendingAppointments";
+import VoConfirmedAppointments from "./voConfirmedAppointments";
 
 class VoBookingView extends Component {
   static contextType = UserContext;
@@ -65,10 +66,9 @@ class VoBookingView extends Component {
                         <VoPendingAppointments pending={this.state.pending} />
                       </TabPanel>
                       <TabPanel>
-                        {/* <SpConfirmedAppointments
+                        <VoConfirmedAppointments
                           confirmed={this.state.confirmed}
-                          onConfirmed={this.handleConfirmedAppointment}
-                        /> */}
+                        />
                       </TabPanel>
                       <TabPanel>
                         {/* <SpFinishedAppointments
