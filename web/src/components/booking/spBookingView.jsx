@@ -4,9 +4,9 @@ import { Container, Row, CardHeader, CardBody, Button, Col } from "reactstrap";
 import { Card } from "@material-ui/core";
 import { UserContext } from "core/userContext";
 import {
-  getIncomingAppointments,
-  getConfirmedAppointments,
-  getFinishedAppointments,
+  getSpIncomingAppointments,
+  getSpConfirmedAppointments,
+  getSpFinishedAppointments,
 } from "services/bookingService";
 import SpIncomingAppointments from "./spIncomingAppointments";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
@@ -24,13 +24,13 @@ class SpBookingView extends Component {
   async componentDidMount() {
     try {
       const userData = await this.context.currentUser();
-      const { data: incoming } = await getIncomingAppointments(
+      const { data: incoming } = await getSpIncomingAppointments(
         userData.user?._id
       );
-      const { data: confirmed } = await getConfirmedAppointments(
+      const { data: confirmed } = await getSpConfirmedAppointments(
         userData.user?._id
       );
-      const { data: finished } = await getFinishedAppointments(
+      const { data: finished } = await getSpFinishedAppointments(
         userData.user?._id
       );
       this.setState({ incoming, confirmed, finished });
