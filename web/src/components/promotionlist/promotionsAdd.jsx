@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "react-moment";
 import { InputGroupAddon, InputGroupText, InputGroup } from "reactstrap";
+import { addPromotions } from "services/promotionService";
 import axios from "axios";
 
 const minDate = new Date(Date.now());
@@ -54,7 +55,6 @@ class PromotionsAdd extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
     const promotion = {
       title: this.state.title,
       description: this.state.description,
