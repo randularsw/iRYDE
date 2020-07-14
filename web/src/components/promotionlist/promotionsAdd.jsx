@@ -6,12 +6,14 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "react-moment";
 import { InputGroupAddon, InputGroupText, InputGroup } from "reactstrap";
+import { UserContext } from "core/userContext";
 import { addPromotions } from "services/promotionService";
 import axios from "axios";
 
 const minDate = new Date(Date.now());
 
 class PromotionsAdd extends Component {
+  static contextType = UserContext;
   constructor(props) {
     super(props);
 
@@ -24,6 +26,7 @@ class PromotionsAdd extends Component {
       //items: [],
       title: "",
       description: "",
+      // ownerId: "",
       startDate: new Date(),
       endDate: new Date(),
     };
@@ -60,6 +63,7 @@ class PromotionsAdd extends Component {
       description: this.state.description,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
+      ownerId: this.context.state.user._id,
     };
     console.log(promotion);
 
