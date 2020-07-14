@@ -28,6 +28,10 @@ export function getVoConfirmedAppointments(id){
 export function getVoFinishedAppointments(id){
   return axios.get("http://localhost:4000/bookings/vo/finished/" + id);
 }
+//specific vo canceled appointments
+export function getVoCanceledAppointments(id){
+  return axios.get("http://localhost:4000/bookings/vo/canceled/" + id);
+}
 //update status
 export function updateStatus(id,appointment){
   return axios.patch("http://localhost:4000/bookings/status/"+id,appointment);

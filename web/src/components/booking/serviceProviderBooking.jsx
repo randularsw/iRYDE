@@ -59,6 +59,8 @@ const ServiceProviderBooking = (props) => {
     setStartDate(date);
     const a = true;
     setAvailable(a);
+    
+
   };
 
   const onChangeVehicle = async (e) => {

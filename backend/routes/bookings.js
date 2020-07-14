@@ -94,6 +94,18 @@ router.get("/vo/finished/:id", async (req, res) => {
     res.json({ message: error });
   }
 });
+//specific vo canceled appointments
+router.get("/vo/canceled/:id", async (req, res) => {
+  try {
+    const received = await Booking.find({
+      vo: req.params.id,
+      status: "canceled",
+    });
+    res.json(received);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
 //status- pendind,confirmed,canceled,finished
 //update status
 router.patch("/status/:id", async (req, res) => {

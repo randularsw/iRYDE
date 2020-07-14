@@ -13,6 +13,8 @@ import { getVoFinishedAppointments } from "services/bookingService";
 import VoPendingAppointments from "./voPendingAppointments";
 import VoConfirmedAppointments from "./voConfirmedAppointments";
 import VoFinishedAppointments from "./voFinishedAppointments";
+import { getVoCanceledAppointments } from "services/bookingService";
+import VoCanceledAppointments from "./voCanceledAppointments";
 
 class VoBookingView extends Component {
   static contextType = UserContext;
@@ -20,6 +22,7 @@ class VoBookingView extends Component {
     pending: [],
     confirmed: [],
     finished: [],
+    canceled :[],
   };
 
   async componentDidMount() {
@@ -34,7 +37,11 @@ class VoBookingView extends Component {
       const { data: finished } = await getVoFinishedAppointments(
         userData.user?._id
       );
-      this.setState({ pending, confirmed, finished });
+      const { data: canceled } = await getVoCanceledAppointments(
+        userData.user?._id
+      );
+      this.setState({ pending, confirmed, finished ,canceled});
+      console.log(this.state.canceled);
     } catch (error) {
       console.log("err", error);
     }
@@ -60,6 +67,7 @@ class VoBookingView extends Component {
                       <TabList>
                         <Tab>Pending Appointments</Tab>
                         <Tab> Approved Appointments</Tab>
+                        <Tab> Canceled Appointments</Tab>
                         <Tab>History</Tab>
                       </TabList>
 
@@ -69,6 +77,11 @@ class VoBookingView extends Component {
                       <TabPanel>
                         <VoConfirmedAppointments
                           confirmed={this.state.confirmed}
+                        />
+                      </TabPanel>
+                      <TabPanel>
+                        <VoCanceledAppointments
+                          canceled={this.state.canceled}
                         />
                       </TabPanel>
                       <TabPanel>
