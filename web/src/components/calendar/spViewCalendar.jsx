@@ -19,19 +19,36 @@ class SpViewCalendar extends Component {
   static contextType = UserContext;
   state = {
     confirmed: [],
+    daysDiff: [],
+    date: new Date(),
   };
 
   async componentDidMount() {
     try {
-        const userData = await this.context.currentUser();
-        const { data: confirmed } = await getSpConfirmedAppointments(userData.user?._id);
-        this.setState({confirmed});
-        console.log(confirmed);
-
+      const userData = await this.context.currentUser();
+      const { data: confirmed } = await getSpConfirmedAppointments(
+        userData.user?._id
+      );
+      this.setState({ confirmed });
+      const daysDiff = [];
+      this.state.confirmed.map((c) => {
+        const appointmentDate = new Date(c.date);
+        const today = new Date().toISOString();
+        const diff = new Date(appointmentDate).getTime() - new Date(today).getTime(); // Gives Nan
+        const diffDates = Math.round(diff / (1000 * 3600 * 24));
+        daysDiff.push(diffDates + 1);
+      });
+      this.setState({ daysDiff });
     } catch (error) {
-        console.log("err", error);
+      console.log("err", error);
     }
   }
+
+  onChange = (date) => {
+    this.setState({ date });
+    console.log(this.state.date);
+  };
+
   render() {
     return (
       <>
@@ -47,7 +64,21 @@ class SpViewCalendar extends Component {
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
-                   
+                    <DatePicker
+                      selected={this.state.date}
+                      highlightDates={this.state.daysDiff.map((i) => {
+                        // map will return an array of dates
+                        const d = new Date();
+                        d.setDate(d.getDate() + i);
+                        return d;
+                      })}
+                      inline
+                    />
+                    <DatePicker
+                      selected={this.state.date}
+                      onChange={this.onChange}
+                      placeholderText="This highlights a week ago and a week from today"
+                    />
                   </div>
                 </CardBody>
               </Card>
