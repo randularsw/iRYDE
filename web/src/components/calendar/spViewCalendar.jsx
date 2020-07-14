@@ -34,8 +34,8 @@ class SpViewCalendar extends Component {
       this.state.confirmed.map((c) => {
         const appointmentDate = new Date(c.date);
         const today = new Date().toISOString();
-        const diff = new Date(appointmentDate).getTime() - new Date(today).getTime(); // Gives Nan
-        const diffDates = Math.round(diff / (1000 * 3600 * 24));
+        const diff = new Date(appointmentDate).getTime() - new Date(today).getTime(); // Gives difference between 2 days
+        const diffDates = Math.round(diff / (1000 * 3600 * 24)); // convert it to np of days format
         daysDiff.push(diffDates + 1);
       });
       this.setState({ daysDiff });
@@ -65,9 +65,8 @@ class SpViewCalendar extends Component {
                   <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
                     <DatePicker
-                      selected={this.state.date}
+                      selected={new Date()}
                       highlightDates={this.state.daysDiff.map((i) => {
-                        // map will return an array of dates
                         const d = new Date();
                         d.setDate(d.getDate() + i);
                         return d;
