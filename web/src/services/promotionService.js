@@ -1,9 +1,10 @@
 import axios from "axios";
 
-export function getPromotions() {
-  return axios.get("http://localhost:4000/promotions/");
+export function getPromotions(id) {
+  console.log(id);
+  return axios.get("http://localhost:4000/promotions/" + id);
 }
 
 export function addPromotions(data) {
-  return axios.get("http://localhost:4000/promotions/add", data);
+  return axios.post("http://localhost:4000/promotions/add", data);
 }
