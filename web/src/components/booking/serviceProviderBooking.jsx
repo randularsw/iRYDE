@@ -21,6 +21,7 @@ import { addDays, subDays } from "date-fns";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { addBooking } from "services/bookingService";
+import { getTimeSlots } from "services/timeSlots";
 
 const ServiceProviderBooking = (props) => {
   const { register, handleSubmit, errors } = useForm();
@@ -28,8 +29,9 @@ const ServiceProviderBooking = (props) => {
   const [startDate, setStartDate] = useState(null);
   const [available, setAvailable] = useState(false);
   const [serviceState, setServices] = useState([]);
-  const [vehicle,setVehicle] = useState([]);
+  const [vehicle, setVehicle] = useState([]);
   const [selectedTime, setTime] = useState();
+  const [timeSlot,setTimeSlot] = useState([]);
   const bookingServices = [];
 
   useEffect(() => {
@@ -46,31 +48,41 @@ const ServiceProviderBooking = (props) => {
     );
   }, []);
 
-  const times = [
-    "8.00 AM",
-    "9.00 AM",
-    "10.00 AM",
-    "11.00 AM",
-    "12.00 PM",
-    "1.00 PM",
-  ];
-
-  const onChange = (date) => {
+  const onChange = async (date) => {
     setStartDate(date);
+    let t = [];
+    const slot = 2;
+    const res = await getTimeSlots(sp._id, date);
+    console.log(res.data);
+    const arr = [];
+    if (res.data.length > 0) {
+      console.log(1);
+      res.data[0].timeSlots.forEach((s) => {
+        if(s.filledSlots != slot){
+          arr.push(s.time);
+        }
+        
+      });
+    } else {
+      console.log(2);
+      res.data.timeSlots.forEach((s) => {
+        arr.push(s.time);
+      });
+    }
+
+    console.log(arr);
+    setTimeSlot(arr);
     const a = true;
     setAvailable(a);
-    
-
   };
 
   const onChangeVehicle = async (e) => {
     console.log(e.target.value);
-    vehicles.forEach(v => {
-      if(v._id == e.target.value ){
+    vehicles.forEach((v) => {
+      if (v._id == e.target.value) {
         setVehicle(v);
       }
     });
-    
   };
 
   const onChangeTime = (e) => {
@@ -78,13 +90,14 @@ const ServiceProviderBooking = (props) => {
   };
 
   const onSubmit = async (data) => {
+    console.log(startDate);
     try {
       data.vehicle = vehicle;
       data.sp = sp._id;
       data.spName = sp.name;
       data.vo = user._id;
-      data.voName=user.name;
-      data.status='pending';
+      data.voName = user.name;
+      data.status = "pending";
       data.isRated = false;
       data.date = startDate;
       data.time = selectedTime;
@@ -96,6 +109,7 @@ const ServiceProviderBooking = (props) => {
       data.bookingServices = bookingServices;
       onToggle("formModal");
       const res = await addBooking(data);
+      console.log(555555555555, res.data.sp);
     } catch (error) {
       console.log(error);
     }
@@ -181,9 +195,8 @@ const ServiceProviderBooking = (props) => {
           {available === true ? (
             <div>
               <label className="mt-4 mb-3 text-gray">Select Time</label>
-
               <Row>
-                {times.map((t) => (
+                {timeSlot.map((t) => (
                   <div className="col-4" key={t}>
                     <input
                       type="radio"
