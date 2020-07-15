@@ -3,6 +3,7 @@ import Header from "../shared/header";
 import PromotionTableRow from "./promotionTableRow";
 import axios from "axios";
 import { getPromotions } from "services/promotionService";
+import { UserContext } from "core/userContext";
 import {
   Row,
   Card,
@@ -17,6 +18,7 @@ import {
 } from "reactstrap";
 
 class PromotionsView extends Component {
+  static contextType = UserContext;
   constructor(props) {
     super(props);
     this.state = { promotions: [] };
@@ -24,8 +26,11 @@ class PromotionsView extends Component {
 
   async componentDidMount() {
     try {
-      const { data: promotions } = await getPromotions();
-      this.setState({ promotions });
+      const userdata = await this.context.currentUser();
+      this.setState(userdata);
+      const res = await getPromotions(userdata.user?._id);
+      console.log(11111, res.data);
+      this.setState({ promotions: res.data });
     } catch (err) {
       console.log("Error", err);
     }
