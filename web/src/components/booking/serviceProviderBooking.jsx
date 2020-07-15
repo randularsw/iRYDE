@@ -31,8 +31,9 @@ const ServiceProviderBooking = (props) => {
   const [serviceState, setServices] = useState([]);
   const [vehicle, setVehicle] = useState([]);
   const [selectedTime, setTime] = useState();
-  const [timeSlot,setTimeSlot] = useState([]);
-  const bookingServices = [];
+  const [timeSlot, setTimeSlot] = useState([]);
+  const [resObject, setObject] = useState({});
+
 
   useEffect(() => {
     let serviceState = services;
@@ -55,25 +56,24 @@ const ServiceProviderBooking = (props) => {
     const res = await getTimeSlots(sp._id, date);
     console.log(res.data);
     const arr = [];
-    if (res.data.length > 0) {
-      console.log(1);
+    //res will be array or object
+    if (res.data.length > 0) { 
+      setObject(res.data[0]);// res will be array
       res.data[0].timeSlots.forEach((s) => {
-        if(s.filledSlots != slot){
+        if (s.filledSlots != slot) { 
           arr.push(s.time);
         }
-        
       });
     } else {
-      console.log(2);
+      setObject(res.data);//res will be object
       res.data.timeSlots.forEach((s) => {
         arr.push(s.time);
       });
     }
-
-    console.log(arr);
-    setTimeSlot(arr);
+    setTimeSlot(arr); // update timeSlots array in local state
     const a = true;
     setAvailable(a);
+  
   };
 
   const onChangeVehicle = async (e) => {
@@ -87,10 +87,16 @@ const ServiceProviderBooking = (props) => {
 
   const onChangeTime = (e) => {
     setTime(e.target.value);
+
   };
 
   const onSubmit = async (data) => {
-    console.log(startDate);
+   resObject.timeSlot.forEach((s)=>{
+     if(s.time == startDate){
+       s.filledSlots = s.filledSlots +1;
+     }
+   })
+
     try {
       data.vehicle = vehicle;
       data.sp = sp._id;
@@ -101,6 +107,7 @@ const ServiceProviderBooking = (props) => {
       data.isRated = false;
       data.date = startDate;
       data.time = selectedTime;
+      const bookingServices = [];
       serviceState.map((s) => {
         if (s.select == true) {
           bookingServices.push(s.servicename);
