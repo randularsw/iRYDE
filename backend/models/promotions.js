@@ -7,6 +7,7 @@ const promotionSchema = new Schema(
     description: { type: String, required: true },
     startDate: { type: Date, required: true },
     endDate: { type: Date, required: true },
+    ownerId: { type: String, required: true },
   },
   {
     timestamps: true,
