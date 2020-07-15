@@ -11,6 +11,7 @@ const usersRouter = require("./routes/users");
 const vehiclesRouter = require("./routes/vehicles");
 const servicesRouter = require("./routes/services");
 const bookingRouter = require("./routes/bookings");
+const timeSlotRouter = require("./routes/timeSlots");
 
 const port = process.env.PORT || 4000;
 console.log(port);
@@ -28,6 +29,7 @@ app.use("/api/users", usersRouter);
 app.use("/vehicles", vehiclesRouter);
 app.use("/bookings",bookingRouter);
 app.use("/services", servicesRouter);
+app.use("/timeslots", timeSlotRouter);
 
 mongoose.connect(
   process.env.DB_URL,

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const timeSlot = new mongoose.Schema({
   time:{type:String},
-  fulledSlots:{type:Number},
+  filledSlots:{type:Number},
 })
 
 const timeSlotSchema = mongoose.Schema({
