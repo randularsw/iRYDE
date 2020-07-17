@@ -22,6 +22,7 @@ import { useForm } from "react-hook-form";
 import { useEffect } from "react";
 import { addBooking } from "services/bookingService";
 import { getTimeSlots } from "services/timeSlots";
+import { updateTimeSLot } from "services/timeSlots";
 
 const ServiceProviderBooking = (props) => {
   const { register, handleSubmit, errors } = useForm();
@@ -33,7 +34,6 @@ const ServiceProviderBooking = (props) => {
   const [selectedTime, setTime] = useState();
   const [timeSlot, setTimeSlot] = useState([]);
   const [resObject, setObject] = useState({});
-
 
   useEffect(() => {
     let serviceState = services;
@@ -57,15 +57,15 @@ const ServiceProviderBooking = (props) => {
     console.log(res.data);
     const arr = [];
     //res will be array or object
-    if (res.data.length > 0) { 
-      setObject(res.data[0]);// res will be array
+    if (res.data.length > 0) {
+      setObject(res.data[0]); // res will be array
       res.data[0].timeSlots.forEach((s) => {
-        if (s.filledSlots != slot) { 
+        if (s.filledSlots != slot) {
           arr.push(s.time);
         }
       });
     } else {
-      setObject(res.data);//res will be object
+      setObject(res.data); //res will be object
       res.data.timeSlots.forEach((s) => {
         arr.push(s.time);
       });
@@ -73,7 +73,6 @@ const ServiceProviderBooking = (props) => {
     setTimeSlot(arr); // update timeSlots array in local state
     const a = true;
     setAvailable(a);
-  
   };
 
   const onChangeVehicle = async (e) => {
@@ -87,16 +86,22 @@ const ServiceProviderBooking = (props) => {
 
   const onChangeTime = (e) => {
     setTime(e.target.value);
-
+    let x = resObject;
+    x.timeSlots.map((s) => {
+      console.log(666, s.time);
+      console.log(e.target.value);
+      if (s.time === e.target.value) {
+        s.filledSlots = s.filledSlots + 1;
+        console.log(666, s);
+      }
+    });
+    setObject(x);
   };
 
   const onSubmit = async (data) => {
-   resObject.timeSlot.forEach((s)=>{
-     if(s.time == startDate){
-       s.filledSlots = s.filledSlots +1;
-     }
-   })
-
+    console.log(resObject.timeSlots);
+    const received = await updateTimeSLot(resObject._id, resObject);
+    console.log(8, received);
     try {
       data.vehicle = vehicle;
       data.sp = sp._id;
