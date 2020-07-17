@@ -42,7 +42,7 @@ class PromotionsView extends Component {
       return (
         <PromotionTableRow
           obj={currentpromotion}
-          deletePromotions={this.onDelete}
+          deletePromotion={this.onDelete}
           key={currentpromotion._id}
         />
       );

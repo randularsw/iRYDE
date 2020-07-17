@@ -29,10 +29,15 @@ const PromotionTableRow = (props) => {
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu-arrow" right>
             <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
-              Delete
-            </DropdownItem>
-            <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
               Edit
+            </DropdownItem>
+            <DropdownItem
+              href="#pablo"
+              onClick={() => {
+                props.deletePromotion(props.obj._id);
+              }}
+            >
+              Delete
             </DropdownItem>
           </DropdownMenu>
         </UncontrolledDropdown>
