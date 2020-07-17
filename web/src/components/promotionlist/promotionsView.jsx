@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Header from "../shared/header";
 import PromotionTableRow from "./promotionTableRow";
 import axios from "axios";
-import { getPromotions } from "services/promotionService";
+import { getPromotions, deletePromotions } from "services/promotionService";
 import { UserContext } from "core/userContext";
 import {
   Row,
@@ -21,6 +21,7 @@ class PromotionsView extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
+
     this.state = { promotions: [] };
   }
 
@@ -41,12 +42,24 @@ class PromotionsView extends Component {
       return (
         <PromotionTableRow
           obj={currentpromotion}
-          //deleteService={this.deleteService}
+          deletePromotions={this.onDelete}
           key={currentpromotion._id}
         />
       );
     });
   }
+
+  onDelete = async (id) => {
+    try {
+      const res = await deletePromotions(id);
+      console.log(res);
+    } catch (error) {
+      console.log("Error", error);
+    }
+    this.setState({
+      promotions: this.state.promotions.filter((el) => el._id !== id),
+    });
+  };
 
   render() {
     // const { items } = this.state;
