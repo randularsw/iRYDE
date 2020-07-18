@@ -34,6 +34,22 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           backgroundColor: Color(0xFF172b4d),
           title: Text('My App'),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(FontAwesomeIcons.solidBell),
+              onPressed: () {
+                // do something
+              },
+            ),
+            IconButton(
+              icon: Image.network(
+                'https://cdn2.vectorstock.com/i/1000x1000/94/51/young-woman-avatar-icon-flat-style-vector-12459451.jpg',
+              ),
+              onPressed: () {
+                // do something
+              },
+            ),
+          ],
         ),
         body: tabs[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(
@@ -48,7 +64,7 @@ class _MyAppState extends State<MyApp> {
           // selectedFontSize: 10,
           items: [
             BottomNavigationBarItem(
-              icon: Icon(Icons.home),
+              icon: Icon(FontAwesomeIcons.home),
               title: Text('Home'),
             ),
             BottomNavigationBarItem(
