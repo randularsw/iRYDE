@@ -22,7 +22,7 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error:" + err));
 });
 
-router.route("/:id").get((req, res) => {
+router.route("/sp/:id").get((req, res) => {
   console.log(req.params.id);
   Promotion.find({ ownerId: req.params.id })
     .then((promotions) => res.json(promotions))
