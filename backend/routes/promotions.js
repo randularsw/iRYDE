@@ -29,6 +29,13 @@ router.route("/sp/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error:" + err));
 });
 
+router.route("/:id").get((req, res) => {
+  console.log(req.params.id);
+  Promotion.findById(req.params.id)
+    .then((promotions) => res.json(promotions))
+    .catch((err) => res.status(400).json("Error:" + err));
+});
+
 router.route("/update/:id").post((req, res) => {
   Promotion.findById(req.params.id)
     .then((promotion) => {
