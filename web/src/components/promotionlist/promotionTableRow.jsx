@@ -28,7 +28,11 @@ const PromotionTableRow = (props) => {
             <i className="fas fa-ellipsis-v" />
           </DropdownToggle>
           <DropdownMenu className="dropdown-menu-arrow" right>
-            <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+            <DropdownItem
+              tag="a"
+              href="/edit/:id"
+              //onClick={(e) => e.preventDefault()}
+            >
               Edit
             </DropdownItem>
             <DropdownItem
