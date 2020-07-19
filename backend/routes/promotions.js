@@ -29,6 +29,22 @@ router.route("/:id").get((req, res) => {
     .catch((err) => res.status(400).json("Error:" + err));
 });
 
+router.route("/update/:id").post((req, res) => {
+  Promotion.findById(req.params.id)
+    .then((promotion) => {
+      promotion.title = req.body.title;
+      promotion.description = req.body.description;
+      promotion.startDate = Date.parse(req.body.startDate);
+      promotion.endDate = Date.parse(req.body.endDate);
+
+      promotion
+        .save()
+        .then(() => res.json("Promotion updated"))
+        .catch((err) => res.status(400).json("Error:" + err));
+    })
+    .catch((err) => res.status(400).json("Error:" + err));
+});
+
 router.route("/:id").delete((req, res) => {
   Promotion.findByIdAndDelete(req.params.id)
     .then(() => res.json("Promotion deleted"))
