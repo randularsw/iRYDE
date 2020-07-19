@@ -32,6 +32,22 @@ class PromotionsEdit extends Component {
     };
   }
 
+  componentDidMount() {
+    axios
+      .get("http://localhost:4000/promotions/" + this.props.match.params.id)
+      .then((res) => {
+        this.setState({
+          title: res.data.title,
+          description: res.data.description,
+          startDate: new Date(res.data.startDate),
+          endDate: new Date(res.data.endDate),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   onChangeTitle(e) {
     this.setState({
       title: e.target.value,
@@ -68,7 +84,10 @@ class PromotionsEdit extends Component {
     console.log(promotion);
 
     axios
-      .post("http://localhost:4000/promotions/add", promotion)
+      .post(
+        "http://localhost:4000/promotions/update/" + this.props.match.params.id,
+        promotion
+      )
       .then((res) => console.log(res.data));
 
     window.location = "/promotions";
