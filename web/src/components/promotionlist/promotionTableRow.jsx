@@ -30,7 +30,7 @@ const PromotionTableRow = (props) => {
           <DropdownMenu className="dropdown-menu-arrow" right>
             <DropdownItem
               tag="a"
-              href="/edit/:id"
+              href={"/edit/" + props.obj._id}
               //onClick={(e) => e.preventDefault()}
             >
               Edit
