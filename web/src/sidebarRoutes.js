@@ -6,6 +6,7 @@ import Profile from "components/auth/profile";
 import ServicesView from "components/servicelist/servicesView";
 import PromotionsView from "components/promotions/promotionsView";
 import VehicleType from "components/admin/vehicleType";
+import RemoveUser from "components/admin/removeUser";
 
 var sidebarRoutes = [
   {
@@ -41,6 +42,13 @@ var sidebarRoutes = [
     name: "Vehicle Types",
     icon: "ni ni-tv-2 text-primary",
     component: VehicleType,
+    actor: "ad",
+  },
+  {
+    path: "/admin/removeUser",
+    name: "Remove Users",
+    icon: "ni ni-tv-2 text-primary",
+    component: RemoveUser,
     actor: "ad",
   },
   {
