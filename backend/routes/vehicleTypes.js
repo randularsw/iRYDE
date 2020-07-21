@@ -1,44 +1,33 @@
 const router = require('express').Router();
-const Vtype = require('../models/vehicleType');
+let VehicleType=require('../models/vehicleType');
+const vehicleType = require('../models/vehicleType');
 
+router.route('/').get((req,res)=>{
+    VehicleType.find()
+    .then(vehicleTypes=> res.json(vehicleTypes))
+    .catch(err => res.status(400).json('Error:'+err));
 
-router.post((req, res) => {
-    const itemName = req.body.itemName;
-
-    const newVtype = new Vtype({
-      itemName,
-    });
-    console.log();
-    newVtype
-      .save()
-      .then(() => res.json("vehicle brand added"))
-      .catch((err) => res.status(400).json("Error:" + err));
-  });
-
-
-
-router.get('/:id',async (req,res)=>{
-    console.log('vehicle type',req.params.id);
-    try {
-        const vehicleType = await Vtype.findById({ _id: req.params.id });
-        console.log(vehicleType);
-        res.json(vehicleType)
-    } catch (error) {
-        res.json({ message: error });
-    }
 });
 
+router.route('/add').post((req,res)=>{
+    const vehicleType = req.body.vehicleType;
+    const newVehicleType = new VehicleType({vehicleType});
 
-router.delete('/:id',async (req,res)=>{
-    console.log('vehicle type',req.params.id);
-    try {
-        const vehicleType = await Vtype.findByIdAndDelete({ _id: req.params.id });
-        console.log(vehicleType);
-        res.send('vehicle brand deleted');
-    } catch (error) {
-        res.json({ message: error });
-    }
+    newVehicleType.save()
+    .then(()=>res.json('Vehicle type added!'))
+    .catch(err=> res.status(400).json('Error:'+err));
 });
 
+router.route('/:id').get((req,res)=>{
+    VehicleType.findById(req.params.id)
+    .then(vehicleType=> res.json(vehicleType))
+    .catch(err =>res.status(400).json('Error:'+err));
+});
+
+router.route('/:id').delete((req,res)=>{
+    VehicleType.findByIdAndDelete(req.params.id)
+    .then(()=> res.json('Vehicle Type Deleted'))
+    .catch(err =>res.status(400).json('Error:'+err));
+});
 
 module.exports = router;
