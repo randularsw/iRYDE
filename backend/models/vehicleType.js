@@ -1,10 +1,14 @@
 const mongoose = require("mongoose");
+const Schema= mongoose.Schema;
 
-const vTypeSchema = mongoose.Schema({
-  itemName: {
-    type: String,
-    required: true,
-  },
+const vehicleTypeSchema = new Schema({
+  vehicleType:{
+    type:String,
+    // required:true
+
+  }
 });
 
-module.exports = mongoose.model("VehicleTypes", vTypeSchema);
+const vehicleType=mongoose.model('VehicleTypes',vehicleTypeSchema);
+
+module.exports =vehicleType;
