@@ -4,6 +4,8 @@ import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 import { Media, Table } from "reactstrap";
 import { Button } from "reactstrap";
 import { FormGroup, Form, Input, Col } from "reactstrap";
+import { addvehicle } from "./vehicleBrand";
+import axios from 'axios';
 
 class VehicleType extends Component {
   constructor(props) {
@@ -14,6 +16,7 @@ class VehicleType extends Component {
         text: "",
         key: "",
       },
+      ///////
 
       // reset(){
       //   this.setState=this.state;
@@ -23,35 +26,43 @@ class VehicleType extends Component {
     this.addItem = this.addItem.bind(this);
   }
 
+
   addItem(e) {
     e.preventDefault();
     // console.log(this.newItem.value);
     console.log(this.itemInputValue.value);
     // console.log(values);
     const { listItems } = this.state;
-    const newItem = this.itemInputValue.value;
-
+    const vehicleType = this.itemInputValue.value;
+//////////////
+    axios.post('http://localhost:4000/vehicleTypes/add', vehicleType)
+    .then(res => console.log(res.data));
     // listItems.push(this.newItem.value);
     // this.setState({
     //   listItems: [...this.state.listItems, newItem]
     // })
 
-    const isOnTheList = listItems.push(newItem);
+    const isOnTheList = listItems.push(vehicleType);
 
     if (isOnTheList) {
       this.setState({
         // message: "This item is already on the list",
       });
     } else {
-      newItem !== "" &&
+      vehicleType !== "" &&
         this.setState({
-          listItems: [...this.state.listItems, newItem],
+          listItems: [...this.state.listItems, vehicleType],
           message: "",
         });
     }
   }
 
   removeItem(item) {
+    // axios.delete('http://localhost:4000/vehicleTypes/'+id)
+    // .then(res => console.log(res.data));
+    // this.setState({
+    //   listItems:this.state.listItems.filter(el=> el._id !==id)
+    // })
     const newListItems = this.state.listItems.filter((listItem) => {
       return listItem !== item;
     });
@@ -101,7 +112,7 @@ class VehicleType extends Component {
                               name="itemName"
                               className="is-valid"
                               type="text"
-                              id="newItem"
+                              id="vehicleType"
                             />
                           </FormGroup>
                         </Col>
@@ -149,19 +160,7 @@ class VehicleType extends Component {
                             );
                           })}
 
-                          <tr>
-                            <td>&nbsp;</td>
-                            <td className="text-left">
-                              <Col md="2">
-                                <button
-                                  onClick={(e) => this.clearAll()}
-                                  className="btn btn-default btn-lg"
-                                >
-                                  Clear All
-                                </button>
-                              </Col>
-                            </td>
-                          </tr>
+                         
                         </tbody>
                       </Table>
                     )}
