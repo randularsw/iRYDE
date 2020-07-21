@@ -65,8 +65,8 @@ function App(props) {
           ></Route>
           <Route exact path="/services" component={ServicesView}></Route>
           <Route exact path="/servicesadd" component={ServicesAdd}></Route>
-          <Route path="/admin/vehicleType" component={VehicleType}></Route>
-          <Route path="/admin/removeUser" component={RemoveUser}></Route>
+          <Route exact path="/admin/vehicleType" component={VehicleType}></Route>
+          <Route exact path="/admin/removeUser" component={RemoveUser}></Route>
           <Route path="/" component={Home}></Route>
           
         </Switch>
