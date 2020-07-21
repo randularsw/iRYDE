@@ -10,7 +10,8 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const vehiclesRouter = require("./routes/vehicles");
 const servicesRouter = require("./routes/services");
-const vTypesRouter = require("./routes/vehicleTypes");
+const vehicleTypesRouter = require("./routes/vehicleTypes");
+const removeUsersRouter = require("./routes/removeUsers");
 
 
 const port = process.env.PORT || 4000;
@@ -29,8 +30,8 @@ app.use("/api/users", usersRouter);
 app.use("/vehicles", vehiclesRouter);
 
 app.use("/services", servicesRouter);
-
-app.use("/vehicleTypes", vTypesRouter);
+app.use("/vehicleTypes", vehicleTypesRouter);
+app.use("/removeUsers", removeUsersRouter);
 
 mongoose.connect(
   process.env.DB_URL,
