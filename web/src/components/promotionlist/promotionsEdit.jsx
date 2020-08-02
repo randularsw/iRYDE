@@ -79,7 +79,6 @@ class PromotionsEdit extends Component {
       description: this.state.description,
       startDate: this.state.startDate,
       endDate: this.state.endDate,
-
       ownerId: this.context.state.user._id,
     };
     console.log(promotion);

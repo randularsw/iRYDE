@@ -20,6 +20,7 @@ import ServicesView from "components/servicelist/servicesView";
 import ServicesAdd from "components/servicelist/servicesAdd";
 import PromotionsView from "components/promotionlist/promotionsView";
 import PromotionsAdd from "components/promotionlist/promotionsAdd";
+import PromotionsEdit from "components/promotionlist/promotionsEdit";
 import StudentTableRow from "components/servicelist/serviceTableRow";
 import VehicleType from "components/admin/vehicleType";
 
@@ -35,7 +36,7 @@ function App(props) {
           imgAlt: "...",
         }}
       />
-      <div className="main-content bg-default pb-5" style={{minHeight:800}}>
+      <div className="main-content bg-default pb-5" style={{ minHeight: 800 }}>
         <NavigationBar
           {...props}
           // brandText={this.getBrandText(this.props.location.pathname)}
@@ -46,6 +47,7 @@ function App(props) {
           <Route path="/servicesadd" component={ServicesAdd}></Route>
           <Route path="/promotions" component={PromotionsView}></Route>
           <Route path="/promotionsadd" component={PromotionsAdd}></Route>
+          <Route path="/edit/:id" component={PromotionsEdit}></Route>
           <Route exact path="/profile" component={Profile}></Route>
           <Route exact path="/about" component={About}></Route>
           <Route exact path="/auth/login" component={Login}></Route>
