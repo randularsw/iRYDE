@@ -5,6 +5,7 @@ const serviceSchema = new Schema(
   {
     servicename: { type: String, required: true },
     description: { type: String, required: true },
+    ownerId: { type: String, required: true },
   },
   {
     timestamps: true,
