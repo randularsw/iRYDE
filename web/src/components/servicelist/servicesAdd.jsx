@@ -3,8 +3,10 @@ import Header from "../shared/header";
 import axios from "axios";
 import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 import { FormGroup, Form, Input, Col, Button } from "reactstrap";
+import { UserContext } from "core/userContext";
 
 class ServicesAdd extends Component {
+  static contextType = UserContext;
   constructor(props) {
     super(props);
 
@@ -37,6 +39,7 @@ class ServicesAdd extends Component {
     const service = {
       servicename: this.state.servicename,
       description: this.state.description,
+      ownerId: this.context.state.user._id,
     };
     console.log(service);
 

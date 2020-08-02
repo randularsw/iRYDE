@@ -2,27 +2,30 @@ import React, { Component } from "react";
 import Header from "../shared/header";
 import ServiceTableRow from "./serviceTableRow";
 import axios from "axios";
+import { UserContext } from "core/userContext";
+import { getServices, deleteServices } from "services/serviceService";
 
 import { Button, Table } from "reactstrap";
 
 import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 
 class ServicesView extends Component {
+  static contextType = UserContext;
   constructor(props) {
     super(props);
     this.deleteService = this.deleteService.bind(this);
     this.state = { services: [] };
   }
 
-  componentDidMount() {
-    axios
-      .get("http://localhost:4000/services/")
-      .then((response) => {
-        this.setState({ services: response.data });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  async componentDidMount() {
+    try {
+      const userdata = await this.context.currentUser();
+      this.setState(userdata);
+      const res = await getServices(userdata.user?._id);
+      this.setState({ services: res.data });
+    } catch (err) {
+      console.log("Error", err);
+    }
   }
 
   serviceList() {
