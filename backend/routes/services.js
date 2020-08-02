@@ -2,12 +2,14 @@ const router = require("express").Router();
 let Service = require("../models/services");
 
 router.route("/add").post((req, res) => {
+  const ownerId = req.body.ownerId;
   const servicename = req.body.servicename;
   const description = req.body.description;
 
   const newService = new Service({
     servicename,
     description,
+    ownerId,
   });
   console.log();
   newService
@@ -18,6 +20,13 @@ router.route("/add").post((req, res) => {
 
 router.route("/").get((req, res) => {
   Service.find()
+    .then((services) => res.json(services))
+    .catch((err) => res.status(400).json("Error:" + err));
+});
+
+router.route("/sp/:id").get((req, res) => {
+  console.log(req.params.id);
+  Service.find({ ownerId: req.params.id })
     .then((services) => res.json(services))
     .catch((err) => res.status(400).json("Error:" + err));
 });
