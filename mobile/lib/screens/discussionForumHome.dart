@@ -31,22 +31,27 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
               Tab(text: 'Discussion'),
             ],
           ),
-          title: Center(child: Text('Social Hub')),
-          actions: <Widget>[
-          IconButton(
-            //alignment: Alignment.centerLeft,
-            //padding: EdgeInsets.only(right: 10.0),
-            splashColor: Colors.white12,
-            icon: Icon(
-              FontAwesomeIcons.bell,
-              size: 20.0,
-            ),
-            onPressed: () {
-              // Navigate to notifications
-              Navigator.pushNamed(context, NotificationPage.id);
-            },
-          ),
-        ]
+          title: Center(
+              child: Container(
+            child: Text('Social Hub'),
+            margin: EdgeInsets.only(right: 58.0),
+          )),
+
+          //   actions: <Widget>[
+          //   IconButton(
+          //     //alignment: Alignment.centerLeft,
+          //     //padding: EdgeInsets.only(right: 10.0),
+          //     splashColor: Colors.white12,
+          //     icon: Icon(
+          //       FontAwesomeIcons.bell,
+          //       size: 20.0,
+          //     ),
+          //     onPressed: () {
+          //       // Navigate to notifications
+          //       Navigator.pushNamed(context, NotificationPage.id);
+          //     },
+          //   ),
+          // ]
         ),
         body: TabBarView(children: [
           Icon(FontAwesomeIcons.heartbeat),

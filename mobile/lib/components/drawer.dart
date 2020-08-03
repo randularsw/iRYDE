@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iryde/screens/profilePage.dart';
 import 'package:iryde/screens/aboutUs.dart';
+import 'package:iryde/screens/vehiclesPage.dart';
 
 class DrawerOption extends StatelessWidget {
   const DrawerOption({
@@ -19,8 +20,8 @@ class DrawerOption extends StatelessWidget {
             onDetailsPressed: () {
               Navigator.pushNamed(context, ProfilePage.id);
             },
-            accountName: Text('yashanmick'),
-            accountEmail: Text('yashanmick@gmail.com'),
+            accountName: Text('sisiranga'),
+            accountEmail: Text('sisirox@gmail.com'),
             currentAccountPicture: CircleAvatar(
               backgroundColor: Colors.purpleAccent,
               child: Text('Hi'),
@@ -32,16 +33,16 @@ class DrawerOption extends StatelessWidget {
               },
               title: Text('Profile'),
               leading: Icon(
-                FontAwesomeIcons.userCircle,
+                FontAwesomeIcons.solidUser,
               )),
 
           ListTile(
               onTap: () {
-                Navigator.pushNamed(context, SettingsGeneral.id);
+                Navigator.pushNamed(context, VehiclesHome.id);
               },
-              title: Text('Settings'),
+              title: Text('Vehicles'),
               leading: Icon(
-                FontAwesomeIcons.circle,
+                FontAwesomeIcons.car,
               )),
           // Divider(
           //   color: Colors.black,
@@ -52,20 +53,13 @@ class DrawerOption extends StatelessWidget {
               },
               title: Text('About Us'),
               leading: Icon(
-                FontAwesomeIcons.exclamationCircle,
+                FontAwesomeIcons.infoCircle,
               )),
 
           ListTile(
               title: Text('Sign Out'),
               leading: Icon(
                 FontAwesomeIcons.signOutAlt,
-              )),
-
-          ListTile(
-              onTap: () => Navigator.of(context).pop(),
-              title: Text('Close'),
-              leading: Icon(
-                FontAwesomeIcons.windowClose,
               )),
         ],
       ),

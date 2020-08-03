@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iryde/screens/homePage.dart';
 import 'package:iryde/screens/discussionForumHome.dart';
 import 'package:iryde/screens/emergencyHome.dart';
-import 'package:iryde/screens/vehiclesPage.dart';
+import 'package:iryde/screens/notificationPage.dart';
 import 'package:iryde/screens/bookingHomePage.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
@@ -17,7 +17,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     HomePage(),
     DiscussionForumHome(),
     EmergencyHome(),
-    VehiclesHome(),
+    NotificationPage(),
     BookingHome(),
   ];
 
@@ -39,24 +39,39 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
         selectedItemColor: Colors.purpleAccent[400],
         items: [
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.home),
-            title: Text('Home'),
+            icon: Icon(FontAwesomeIcons.warehouse),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text('  Home',style: TextStyle(fontSize: 11.0),),
+            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.solidComment),
-            title: Text('Forum'),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text('Forum',style: TextStyle(fontSize: 11.0),),
+            ),
           ),
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.solidDotCircle),
-            title: Text('Emergency'),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text('Emergency',style: TextStyle(fontSize: 11.0),),
+            ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.car),
-            title: Text('Vehicles'),
+            icon: Icon(FontAwesomeIcons.solidBell),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text('Notifications',style: TextStyle(fontSize: 11.0),),
+            ),
           ),
           BottomNavigationBarItem(
-            icon: Icon(FontAwesomeIcons.calendarMinus),
-            title: Text('Bookings'),
+            icon: Icon(FontAwesomeIcons.solidCalendarCheck,),
+            title: Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text('Bookings',style: TextStyle(fontSize: 11.0),),
+            ),
           ),
         ],
       ),
