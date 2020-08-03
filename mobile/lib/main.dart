@@ -16,8 +16,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.purple,
-      scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(
+          primaryColor: Color(0XFF172b4d),
+          scaffoldBackgroundColor: Colors.white),
       //initialRoute: HomePage.id,
       routes: {
         HomePage.id: (context) => HomePage(),
@@ -34,4 +35,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
