@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter/rendering.dart';
+import 'package:iRYDE/screens/forum/addQuestion.dart';
+import 'package:iRYDE/screens/forum/addPost.dart';
 
 class MyFancyFab extends StatefulWidget {
   @override
@@ -63,17 +65,22 @@ class _MyFancyFabState extends State<MyFancyFab> {
         shape: CircleBorder(),
         children: [
           SpeedDialChild(
-              child: Icon(Icons.question_answer),
-              backgroundColor: Colors.blueGrey[300],
-              label: 'Add Questions',
-              labelStyle: TextStyle(fontSize: 12.0),
-              onTap: () => print('adding question!')),
+            child: Icon(Icons.question_answer),
+            backgroundColor: Colors.blueGrey[300],
+            label: 'Add Questions',
+            labelStyle: TextStyle(fontSize: 12.0),
+            onTap: () {
+              Navigator.pushNamed(context, AddQuestion.id);
+            },
+          ),
           SpeedDialChild(
             child: Icon(Icons.add_comment),
             backgroundColor: Colors.blueGrey[300],
             label: 'Add Post',
             labelStyle: TextStyle(fontSize: 12.0),
-            onTap: () => print('adding post!'),
+            onTap: () {
+              Navigator.pushNamed(context, AddPost.id);
+            },
           ),
         ],
       ),

@@ -9,6 +9,8 @@ import 'screens/drawer/profilePage.dart';
 import 'screens/notifications/notificationPage.dart';
 import 'screens/drawer/settingsBasic.dart';
 import 'screens/drawer/aboutUs.dart';
+import 'screens/forum/addQuestion.dart';
+import 'screens/forum/addPost.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,6 +32,8 @@ class MyApp extends StatelessWidget {
         NotificationPage.id: (context) => NotificationPage(),
         SettingsGeneral.id: (context) => SettingsGeneral(),
         AboutUsPage.id: (context) => AboutUsPage(),
+        AddQuestion.id: (context) => AddQuestion(),
+        AddPost.id: (context) => AddPost(),
       },
       home: MyBottomNavigationBar(),
     );
