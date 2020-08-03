@@ -10,8 +10,25 @@ class AddPost extends StatefulWidget {
 
 class _AddPostState extends State<AddPost> {
   String _postText;
+  String _postTitle;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Widget _buildPostTitle() {
+    return Container(
+      child: TextFormField(
+        decoration: InputDecoration(labelText: 'Type your post title here..'),
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Post title is empty!';
+          }
+        },
+        onSaved: (String value) {
+          _postTitle = value;
+        },
+      ),
+    );
+  }
 
   Widget _buildPostText() {
     return Container(
@@ -48,6 +65,7 @@ class _AddPostState extends State<AddPost> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  _buildPostTitle(),
                   _buildPostText(),
                   SizedBox(
                     height: 20.0,
