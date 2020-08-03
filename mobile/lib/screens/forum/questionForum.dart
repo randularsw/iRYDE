@@ -26,8 +26,8 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
         appBar: AppBar(
           bottom: TabBar(
             tabs: [
-              Tab(text: 'Posts'),
               Tab(text: 'Discussion'),
+              Tab(text: 'Posts'),
             ],
           ),
           title: Center(
@@ -53,8 +53,42 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
           // ]
         ),
         body: TabBarView(children: [
-          Icon(FontAwesomeIcons.heartbeat),
-          Icon(FontAwesomeIcons.questionCircle),
+          Container(
+            child: ListView(
+              children: <Widget>[
+                ListTile(
+                  title: Text('Buh hah haa'),
+                ),
+                ListTile(
+                  title: Text('Buh hah haa'),
+                ),
+                ListTile(
+                  title: Text('Buh hah haa'),
+                ),
+                ListTile(
+                  title: Text('Buh hah haa'),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            child: ListView(
+              children: <Widget>[
+                ListTile(
+                  title: Text('Buh hah haa'),
+                ),
+                ListTile(
+                  title: Text('Buh hah haa'),
+                ),
+                ListTile(
+                  title: Text('Buh hah haa'),
+                ),
+                ListTile(
+                  title: Text('Buh hah haa'),
+                ),
+              ],
+            ),
+          ),
         ]),
         // floatingActionButton: FloatingActionButton(
         //   onPressed: () {},
@@ -62,7 +96,13 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
         //     FontAwesomeIcons.penAlt,
         //   ),
         // ),
-
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            // Add your onPressed code here!
+          },
+          child: Icon(FontAwesomeIcons.ghost),
+          backgroundColor: Color(0XFF172b4d),
+        ),
         drawer: DrawerOption(),
 
         //bottomNavigationBar: MyBottomNavigationBar(),

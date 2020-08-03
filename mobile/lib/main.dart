@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/bookings/bookingHomePage.dart';
-import 'screens/forum/discussionForumHome.dart';
+import 'screens/forum/questionForum.dart';
 import 'screens/emergency/emergencyHome.dart';
 import 'screens/homePage.dart';
 import 'screens/drawer/vehiclesPage.dart';
