@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iryde/components/drawer.dart';
-import 'package:iryde/screens/notificationPage.dart';
+import 'package:iRYDE/components/drawer.dart';
+import 'package:iRYDE/screens/notificationPage.dart';
 
 class BookingHome extends StatefulWidget {
   static const String id = 'booking_home_page';
@@ -25,7 +25,11 @@ class _BookingHomeState extends State<BookingHome> {
               Tab(text: 'Past'),
             ],
           ),
-          title: Center(child: Container(child: Text('Bookings'), margin: EdgeInsets.only(right: 58.0),)),
+          title: Center(
+              child: Container(
+            child: Text('Bookings'),
+            margin: EdgeInsets.only(right: 58.0),
+          )),
           // actions: <Widget>[
           //   IconButton(
           //     //alignment: Alignment.centerLeft,

@@ -1,4 +1,4 @@
-# iryde
+# iRYDE
 
 A new Flutter project.
 

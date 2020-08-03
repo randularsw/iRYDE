@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iryde/components/drawer.dart';
-import 'package:iryde/screens/notificationPage.dart';
+import 'package:iRYDE/components/drawer.dart';
+import 'package:iRYDE/screens/notificationPage.dart';
 
 enum SelectedPage {
   pageOne,

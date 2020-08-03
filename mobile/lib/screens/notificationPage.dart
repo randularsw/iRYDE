@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iryde/components/drawer.dart';
+import 'package:iRYDE/components/drawer.dart';
 
 class NotificationPage extends StatefulWidget {
   static const String id = 'notification_page';
@@ -14,7 +14,11 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Center(child: Container(child: Text('Notifications'), margin: EdgeInsets.only(right: 58.0),)),
+          title: Center(
+              child: Container(
+            child: Text('Notifications'),
+            margin: EdgeInsets.only(right: 58.0),
+          )),
 
           // actions: <Widget>[
           //   IconButton(
@@ -39,7 +43,6 @@ class _NotificationPageState extends State<NotificationPage> {
             // useMagnifier: true,
             magnification: 1.5,
             diameterRatio: 10.0,
-            
 
             children: <Widget>[
               NotificationTile(),

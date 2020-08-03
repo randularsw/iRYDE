@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iryde/components/drawer.dart';
+import 'package:iRYDE/components/drawer.dart';
 
 class SettingsGeneral extends StatefulWidget {
   static const String id = 'settings_general';
@@ -14,7 +14,11 @@ class _SettingsGeneralState extends State<SettingsGeneral> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Center(child: Container(child: Text('Settings'), margin: EdgeInsets.only(right: 58.0),)),
+        title: Center(
+            child: Container(
+          child: Text('Settings'),
+          margin: EdgeInsets.only(right: 58.0),
+        )),
         // actions: <Widget>[
         //   IconButton(
         //     //alignment: Alignment.centerLeft,
