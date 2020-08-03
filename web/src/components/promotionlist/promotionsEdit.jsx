@@ -12,7 +12,7 @@ import axios from "axios";
 
 const minDate = new Date(Date.now());
 
-class PromotionsAdd extends Component {
+class PromotionsEdit extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
@@ -30,6 +30,22 @@ class PromotionsAdd extends Component {
       startDate: new Date(),
       endDate: new Date(),
     };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:4000/promotions/" + this.props.match.params.id)
+      .then((res) => {
+        this.setState({
+          title: res.data.title,
+          description: res.data.description,
+          startDate: new Date(res.data.startDate),
+          endDate: new Date(res.data.endDate),
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   onChangeTitle(e) {
@@ -68,7 +84,10 @@ class PromotionsAdd extends Component {
     console.log(promotion);
 
     axios
-      .post("http://localhost:4000/promotions/add", promotion)
+      .post(
+        "http://localhost:4000/promotions/update/" + this.props.match.params.id,
+        promotion
+      )
       .then((res) => console.log(res.data));
 
     window.location = "/promotions";
@@ -88,7 +107,7 @@ class PromotionsAdd extends Component {
               style={({ backgroundColor: "#f4f5f7" }, { marginLeft: "9.8rem" })}
             >
               <CardHeader className=" bg-transparent">
-                <h3 className=" mb-0">Add promotions</h3>
+                <h3 className=" mb-0">Edit promotions</h3>
               </CardHeader>
               <CardBody>
                 <div style={{ minHeight: 400 }}>
@@ -197,4 +216,4 @@ class PromotionsAdd extends Component {
   }
 }
 
-export default PromotionsAdd;
+export default PromotionsEdit;
