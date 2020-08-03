@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/components/drawer.dart';
-import 'package:iRYDE/screens/notificationPage.dart';
+import 'package:iRYDE/components/snackMessage.dart';
 
-class VehiclesHome extends StatefulWidget {
-  static const String id = 'vehicles_home_page';
+class EmergencyHome extends StatefulWidget {
+  static const String id = 'emergency_home_page';
 
   @override
-  _VehiclesHomeState createState() => _VehiclesHomeState();
+  _EmergencyHomeState createState() => _EmergencyHomeState();
 }
 
-class _VehiclesHomeState extends State<VehiclesHome> {
+class _EmergencyHomeState extends State<EmergencyHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
             child: Container(
-          child: Text('Vehicles'),
+          child: Text('Emergency'),
           margin: EdgeInsets.only(right: 58.0),
         )),
+
         // actions: <Widget>[
         //   IconButton(
         //     //alignment: Alignment.centerLeft,
         //     //padding: EdgeInsets.only(right: 10.0),
         //     splashColor: Colors.white12,
         //     icon: Icon(
-        //       FontAwesomeIcons.chevronLeft,
+        //       FontAwesomeIcons.bell,
         //       size: 20.0,
         //     ),
         //     onPressed: () {
         //       // Navigate to notifications
-        //       Navigator.pop(context);
+        //       Navigator.pushNamed(context, NotificationPage.id);
         //     },
         //   ),
         // ],
       ),
-      //drawer: DrawerOption(),
-      body: Center(
-        child: Text('This is Vehicles page'),
+      drawer: DrawerOption(),
+      body: SnackMessage(
+        text: 'We are here for you !',
       ),
     );
   }

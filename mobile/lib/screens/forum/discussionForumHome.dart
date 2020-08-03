@@ -1,36 +1,42 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/components/drawer.dart';
-import 'package:iRYDE/screens/notificationPage.dart';
 
-class BookingHome extends StatefulWidget {
-  static const String id = 'booking_home_page';
-
-  @override
-  _BookingHomeState createState() => _BookingHomeState();
+enum SelectedPage {
+  pageOne,
+  pageTwo,
 }
 
-class _BookingHomeState extends State<BookingHome> {
+class DiscussionForumHome extends StatefulWidget {
+  static const String id = 'discussion_forum_home';
+
+  @override
+  _DiscussionForumHomeState createState() => _DiscussionForumHomeState();
+}
+
+class _DiscussionForumHomeState extends State<DiscussionForumHome> {
+  SelectedPage selectedPage;
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 3,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
-            // isScrollable: true,
             tabs: [
-              Tab(text: 'Ongoing'),
-              Tab(text: 'Pending'),
-              Tab(text: 'Past'),
+              Tab(text: 'Posts'),
+              Tab(text: 'Discussion'),
             ],
           ),
           title: Center(
               child: Container(
-            child: Text('Bookings'),
+            child: Text('Social Hub'),
             margin: EdgeInsets.only(right: 58.0),
           )),
-          // actions: <Widget>[
+
+          //   actions: <Widget>[
           //   IconButton(
           //     //alignment: Alignment.centerLeft,
           //     //padding: EdgeInsets.only(right: 10.0),
@@ -44,14 +50,22 @@ class _BookingHomeState extends State<BookingHome> {
           //       Navigator.pushNamed(context, NotificationPage.id);
           //     },
           //   ),
-          // ],
+          // ]
         ),
         body: TabBarView(children: [
           Icon(FontAwesomeIcons.heartbeat),
           Icon(FontAwesomeIcons.questionCircle),
-          Icon(FontAwesomeIcons.questionCircle),
         ]),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () {},
+        //   child: Icon(
+        //     FontAwesomeIcons.penAlt,
+        //   ),
+        // ),
+
         drawer: DrawerOption(),
+
+        //bottomNavigationBar: MyBottomNavigationBar(),
       ),
     );
   }

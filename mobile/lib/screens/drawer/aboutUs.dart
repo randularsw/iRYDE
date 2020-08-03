@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iRYDE/components/drawer.dart';
 
 class AboutUsPage extends StatefulWidget {
   static const String id = 'about_us_page';

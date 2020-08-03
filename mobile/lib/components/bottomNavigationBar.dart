@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/screens/homePage.dart';
-import 'package:iRYDE/screens/discussionForumHome.dart';
-import 'package:iRYDE/screens/emergencyHome.dart';
-import 'package:iRYDE/screens/notificationPage.dart';
-import 'package:iRYDE/screens/bookingHomePage.dart';
+import 'package:iRYDE/screens/forum/discussionForumHome.dart';
+import 'package:iRYDE/screens/emergency/emergencyHome.dart';
+import 'package:iRYDE/screens/notifications/notificationPage.dart';
+import 'package:iRYDE/screens/bookings/bookingHomePage.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   @override

@@ -1,10 +1,10 @@
-import 'package:iRYDE/screens/settingsBasic.dart';
+import 'package:iRYDE/screens/drawer/settingsBasic.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iRYDE/screens/profilePage.dart';
-import 'package:iRYDE/screens/aboutUs.dart';
-import 'package:iRYDE/screens/vehiclesPage.dart';
+import 'package:iRYDE/screens/drawer/profilePage.dart';
+import 'package:iRYDE/screens/drawer/aboutUs.dart';
+import 'package:iRYDE/screens/drawer/vehiclesPage.dart';
 
 class DrawerOption extends StatelessWidget {
   const DrawerOption({

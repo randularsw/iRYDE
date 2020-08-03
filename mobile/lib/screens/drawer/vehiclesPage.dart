@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:iRYDE/components/drawer.dart';
 
-class SettingsGeneral extends StatefulWidget {
-  static const String id = 'settings_general';
+class VehiclesHome extends StatefulWidget {
+  static const String id = 'vehicles_home_page';
 
   @override
-  _SettingsGeneralState createState() => _SettingsGeneralState();
+  _VehiclesHomeState createState() => _VehiclesHomeState();
 }
 
-class _SettingsGeneralState extends State<SettingsGeneral> {
+class _VehiclesHomeState extends State<VehiclesHome> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Center(
             child: Container(
-          child: Text('Settings'),
+          child: Text('Vehicles'),
           margin: EdgeInsets.only(right: 58.0),
         )),
         // actions: <Widget>[
@@ -25,7 +23,7 @@ class _SettingsGeneralState extends State<SettingsGeneral> {
         //     //padding: EdgeInsets.only(right: 10.0),
         //     splashColor: Colors.white12,
         //     icon: Icon(
-        //       FontAwesomeIcons.backspace,
+        //       FontAwesomeIcons.chevronLeft,
         //       size: 20.0,
         //     ),
         //     onPressed: () {
@@ -37,7 +35,7 @@ class _SettingsGeneralState extends State<SettingsGeneral> {
       ),
       //drawer: DrawerOption(),
       body: Center(
-        child: Text('General Settings'),
+        child: Text('This is Vehicles page'),
       ),
     );
   }

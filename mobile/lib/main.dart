@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'screens/bookingHomePage.dart';
-import 'screens/discussionForumHome.dart';
-import 'screens/emergencyHome.dart';
+import 'screens/bookings/bookingHomePage.dart';
+import 'screens/forum/discussionForumHome.dart';
+import 'screens/emergency/emergencyHome.dart';
 import 'screens/homePage.dart';
-import 'screens/vehiclesPage.dart';
+import 'screens/drawer/vehiclesPage.dart';
 import 'components/bottomNavigationBar.dart';
-import 'screens/profilePage.dart';
-import 'screens/notificationPage.dart';
-import 'screens/settingsBasic.dart';
-import 'screens/aboutUs.dart';
+import 'screens/drawer/profilePage.dart';
+import 'screens/notifications/notificationPage.dart';
+import 'screens/drawer/settingsBasic.dart';
+import 'screens/drawer/aboutUs.dart';
 
 void main() => runApp(MyApp());
 

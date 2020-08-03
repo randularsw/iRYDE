@@ -1,4 +1,3 @@
-import 'package:iRYDE/screens/notificationPage.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/components/drawer.dart';
