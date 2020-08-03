@@ -1,4 +1,3 @@
-import 'package:iRYDE/screens/drawer/settingsBasic.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,10 +19,11 @@ class DrawerOption extends StatelessWidget {
             onDetailsPressed: () {
               Navigator.pushNamed(context, ProfilePage.id);
             },
+            arrowColor: Color(0XFF172b4d),
             accountName: Text('sisiranga'),
             accountEmail: Text('sisirox@gmail.com'),
             currentAccountPicture: CircleAvatar(
-              backgroundColor: Colors.purpleAccent,
+              backgroundColor: Colors.blueGrey[100],
               child: Text('Hi'),
             ),
           ),
