@@ -10,12 +10,31 @@ class AddQuestion extends StatefulWidget {
 
 class _AddQuestionState extends State<AddQuestion> {
   String _questionText;
+  String _questionTitle;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  Widget _buildQuestionTitle() {
+    return Container(
+      child: TextFormField(
+        decoration:
+            InputDecoration(labelText: 'Type your question title here..'),
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Question title is empty!';
+          }
+        },
+        onSaved: (String value) {
+          _questionTitle = value;
+        },
+      ),
+    );
+  }
 
   Widget _buildQuestionText() {
     return Container(
       child: TextFormField(
+        // maxLines: 10,
         decoration: InputDecoration(labelText: 'Type your question here..'),
         validator: (String value) {
           if (value.isEmpty) {
@@ -48,6 +67,7 @@ class _AddQuestionState extends State<AddQuestion> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
+                  _buildQuestionTitle(),
                   _buildQuestionText(),
                   SizedBox(
                     height: 20.0,
