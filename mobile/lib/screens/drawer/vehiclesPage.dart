@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class VehiclesHome extends StatefulWidget {
   static const String id = 'vehicles_home_page';
@@ -36,6 +37,14 @@ class _VehiclesHomeState extends State<VehiclesHome> {
       //drawer: DrawerOption(),
       body: Center(
         child: Text('This is Vehicles page'),
+      ),
+
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Add your onPressed code here!
+        },
+        child: Icon(FontAwesomeIcons.ghost),
+        backgroundColor: Color(0XFF172b4d),
       ),
     );
   }
