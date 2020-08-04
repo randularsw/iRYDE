@@ -12,11 +12,14 @@ class ServicesAdd extends Component {
 
     this.onChangeServicename = this.onChangeServicename.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.uploadImage = this.uploadImage.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
       servicename: "",
       description: "",
+      upload: "",
+
       //items: [],
     };
   }
@@ -39,6 +42,7 @@ class ServicesAdd extends Component {
     const service = {
       servicename: this.state.servicename,
       description: this.state.description,
+      imageUrl: this.state.upload,
       ownerId: this.context.state.user._id,
     };
     console.log(service);
@@ -49,6 +53,27 @@ class ServicesAdd extends Component {
 
     window.location = "/services";
   }
+
+  uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "servicesgallery");
+    this.setState({ loading: true });
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dzwimulaq/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    console.log(file);
+    this.setState({
+      upload: file.secure_url,
+      loading: false,
+    });
+  };
 
   render() {
     // const { items } = this.state;
@@ -100,6 +125,22 @@ class ServicesAdd extends Component {
                               required="true"
                               value={this.state.description}
                               onChange={this.onChangeDescription}
+                            />
+                          </FormGroup>
+                        </Col>
+                      </Row>
+                      <Row
+                        className="justify-content-md-center"
+                        style={{ marginTop: "1.5rem" }}
+                      >
+                        <Col md="10">
+                          <FormGroup>
+                            <Input
+                              className="form-control-alternative"
+                              placeholder="Upload the image"
+                              type="file"
+                              name="file"
+                              onChange={this.uploadImage}
                             />
                           </FormGroup>
                         </Col>
