@@ -5,10 +5,12 @@ router.route("/add").post((req, res) => {
   const ownerId = req.body.ownerId;
   const servicename = req.body.servicename;
   const description = req.body.description;
+  const imageUrl = req.body.imageUrl;
 
   const newService = new Service({
     servicename,
     description,
+    imageUrl,
     ownerId,
   });
   console.log();
