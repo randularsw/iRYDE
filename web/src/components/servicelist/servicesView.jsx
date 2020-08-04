@@ -13,7 +13,7 @@ class ServicesView extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
-    this.deleteService = this.deleteService.bind(this);
+    // this.deleteService = this.deleteService.bind(this);
     this.state = { services: [] };
   }
 
@@ -33,26 +33,24 @@ class ServicesView extends Component {
       return (
         <ServiceTableRow
           obj={currentservice}
-          deleteService={this.deleteService}
+          deleteService={this.onDelete}
           key={currentservice._id}
         />
       );
     });
   }
 
-  deleteService(id) {
-    axios
-      .delete("http://localhost:4000/services/" + id)
-      .then((res) => {
-        console.log("Service deleted successfully");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  onDelete = async (id) => {
+    try {
+      const res = await deleteServices(id);
+      console.log(res);
+    } catch (error) {
+      console.log("Error", error);
+    }
     this.setState({
       services: this.state.services.filter((el) => el._id !== id),
     });
-  }
+  };
 
   render() {
     // const { items } = this.state;
