@@ -19,8 +19,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+          tabBarTheme: TabBarTheme(
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.grey[500],
+          ),
           primaryColor: Color(0XFF172b4d),
           scaffoldBackgroundColor: Colors.white),
+
       //initialRoute: HomePage.id,
       routes: {
         HomePage.id: (context) => HomePage(),
