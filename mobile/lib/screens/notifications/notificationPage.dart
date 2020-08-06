@@ -37,202 +37,61 @@ class _NotificationPageState extends State<NotificationPage> {
         ),
         drawer: DrawerOption(),
         body: Container(
-          child: ListWheelScrollView(
-            itemExtent: 100.0,
-            // useMagnifier: true,
-            magnification: 1.5,
-            diameterRatio: 10.0,
-
+          child: ListView(
             children: <Widget>[
-              NotificationTile(),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                  bottom: 20.0,
-                ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 100.0,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Notification 2',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
+              ListTile(
+                title: Text('Notifications.'),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                  bottom: 20.0,
-                ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 100.0,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Notification 3',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
+              ListTile(
+                title: Text('Notifications.'),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                  bottom: 20.0,
-                ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 100.0,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Notification 4',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
+              ListTile(
+                title: Text('Notifications.'),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                  bottom: 20.0,
-                ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 100.0,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Notification 5',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
+              ListTile(
+                title: Text('Notifications.'),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                  bottom: 20.0,
-                ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 100.0,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Notification 6',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
+              ListTile(
+                title: Text('Notifications.'),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                  bottom: 20.0,
-                ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 100.0,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Notification 7',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
+              ListTile(
+                title: Text('Notifications.'),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20.0,
-                  right: 20.0,
-                  bottom: 20.0,
-                ),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 100.0,
-                  color: Colors.blue,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Text(
-                      'Notification 8',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 20.0,
-                      ),
-                    ),
-                  ),
-                ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
+              ),
+              ListTile(
+                title: Text('Notifications.'),
               ),
             ],
           ),
         ));
-  }
-}
-
-class NotificationTile extends StatelessWidget {
-  const NotificationTile({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 20.0,
-        right: 20.0,
-        bottom: 20.0,
-      ),
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 20.0,
-        color: Colors.blue,
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Text(
-            'Notification 1',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20.0,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
