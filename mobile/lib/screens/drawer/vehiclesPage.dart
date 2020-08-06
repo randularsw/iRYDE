@@ -38,7 +38,7 @@ class _VehiclesHomeState extends State<VehiclesHome> {
       body: Center(
         child: Text('This is Vehicles page'),
       ),
-
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           // Add your onPressed code here!

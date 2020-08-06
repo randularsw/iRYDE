@@ -97,6 +97,7 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
         //   ),
         // ),
         floatingActionButton: MyFancyFab(),
+        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         drawer: DrawerOption(),
 
         //bottomNavigationBar: MyBottomNavigationBar(),
