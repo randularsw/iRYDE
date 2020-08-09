@@ -22,6 +22,8 @@ class ServicesView extends Component {
   static contextType = UserContext;
   constructor(props) {
     super(props);
+    this.onDelete = this.onDelete.bind(this);
+
     // this.deleteService = this.deleteService.bind(this);
     this.state = { services: [] };
   }
@@ -85,25 +87,37 @@ class ServicesView extends Component {
                 </CardHeader>
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
-                    {
-                      /* Page Content */
-                      this.state.services.map((v) => (
-                        <Card style={{ width: "18rem" }}>
+                    <div className=" row m-4 p-1">
+                      {this.state.services.map((v) => (
+                        <Card
+                          style={
+                            ({ width: "18rem" },
+                            { marginRight: "15rem" },
+                            { marginTop: "10px" },
+                            { padding: "10px" })
+                          }
+                        >
                           <CardImg alt="..." src={v.imageUrl} top />
                           <CardBody>
-                            <CardTitle>{v.servicename}</CardTitle>
-                            <CardText>{v.description}</CardText>
+                            <CardTitle style={{ fontWeight: "bold" }}>
+                              {v.servicename}
+                            </CardTitle>
+                            <CardText style={{ maxWidth: "18rem" }}>
+                              {v.description}
+                            </CardText>
+
                             <Button
                               color="primary"
-                              href="#pablo"
-                              onClick={(e) => e.preventDefault()}
+                              type="button"
+                              style={{ float: "right" }}
+                              onClick={() => this.onDelete(v._id)}
                             >
-                              Go somewhere
+                              <i class="far fa-trash-alt"></i>
                             </Button>
                           </CardBody>
                         </Card>
-                      ))
-                    }
+                      ))}
+                    </div>
                   </div>
                 </CardBody>
               </Card>
