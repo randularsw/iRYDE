@@ -7,7 +7,16 @@ import { getServices, deleteServices } from "services/serviceService";
 
 import { Button, Table } from "reactstrap";
 
-import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
+import {
+  Row,
+  Card,
+  CardHeader,
+  CardBody,
+  Container,
+  CardImg,
+  CardTitle,
+  CardText,
+} from "reactstrap";
 
 class ServicesView extends Component {
   static contextType = UserContext;
@@ -28,17 +37,17 @@ class ServicesView extends Component {
     }
   }
 
-  serviceList() {
-    return this.state.services.map((currentservice) => {
-      return (
-        <ServiceTableRow
-          obj={currentservice}
-          deleteService={this.onDelete}
-          key={currentservice._id}
-        />
-      );
-    });
-  }
+  // serviceList() {
+  //   return this.state.services.map((currentservice) => {
+  //     return (
+  //       <ServiceTableRow
+  //         obj={currentservice}
+  //         deleteService={this.onDelete}
+  //         key={currentservice._id}
+  //       />
+  //     );
+  //   });
+  // }
 
   onDelete = async (id) => {
     try {
@@ -76,21 +85,25 @@ class ServicesView extends Component {
                 </CardHeader>
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
-                    {/* Page Content */}
-
-                    <Table className="align-items-center table-dark" responsive>
-                      <thead className="thead-dark">
-                        <tr>
-                          <th scope="col" style={{ alignItems: "center" }}>
-                            Services
-                          </th>
-                          <th scope="col">Description</th>
-
-                          <th scope="col" />
-                        </tr>
-                      </thead>
-                      <tbody>{this.serviceList()}</tbody>
-                    </Table>
+                    {
+                      /* Page Content */
+                      this.state.services.map((v) => (
+                        <Card style={{ width: "18rem" }}>
+                          <CardImg alt="..." src={v.imageUrl} top />
+                          <CardBody>
+                            <CardTitle>{v.servicename}</CardTitle>
+                            <CardText>{v.description}</CardText>
+                            <Button
+                              color="primary"
+                              href="#pablo"
+                              onClick={(e) => e.preventDefault()}
+                            >
+                              Go somewhere
+                            </Button>
+                          </CardBody>
+                        </Card>
+                      ))
+                    }
                   </div>
                 </CardBody>
               </Card>
