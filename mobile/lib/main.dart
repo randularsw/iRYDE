@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iRYDE/screens/auth/loginPage.dart';
 import 'screens/bookings/bookingHomePage.dart';
 import 'screens/forum/discussionForumHome.dart';
 import 'screens/emergency/emergencyHome.dart';
@@ -9,6 +10,8 @@ import 'screens/drawer/profilePage.dart';
 import 'screens/notifications/notificationPage.dart';
 import 'screens/drawer/settingsBasic.dart';
 import 'screens/drawer/aboutUs.dart';
+import 'screens/auth/loginPage.dart';
+import 'screens/auth/registerPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -19,8 +22,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Color(0XFF172b4d),
           scaffoldBackgroundColor: Colors.white),
-      //initialRoute: HomePage.id,
+      initialRoute: LoginPage.id,
       routes: {
+        LoginPage.id: (context) => LoginPage(),
+        RegisterPage.id: (context) => RegisterPage(),
+        MyBottomNavigationBar.id: (context) => MyBottomNavigationBar(),
         HomePage.id: (context) => HomePage(),
         BookingHome.id: (context) => BookingHome(),
         EmergencyHome.id: (context) => EmergencyHome(),
@@ -31,7 +37,7 @@ class MyApp extends StatelessWidget {
         SettingsGeneral.id: (context) => SettingsGeneral(),
         AboutUsPage.id: (context) => AboutUsPage(),
       },
-      home: MyBottomNavigationBar(),
+      // home: MyBottomNavigationBar(),
     );
   }
 }
