@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/components/bottomNavigationBar.dart';
 import 'package:iRYDE/screens/auth/registerPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   static const String id = 'login_page';
@@ -17,6 +18,20 @@ class _LoginPageState extends State<LoginPage> {
   bool visiblePassword = false;
 
   final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+    checkUser();
+  }
+
+  void checkUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final tk = prefs.getString('token');
+    if (tk != null) {
+      Navigator.pushReplacementNamed(context, MyBottomNavigationBar.id);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

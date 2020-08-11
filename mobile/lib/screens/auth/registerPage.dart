@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:http/http.dart';
 import 'package:iRYDE/components/bottomNavigationBar.dart';
 import 'package:iRYDE/screens/auth/loginPage.dart';
 import 'package:iRYDE/services/userService.dart';
@@ -39,8 +38,7 @@ class _RegisterPageState extends State<RegisterPage> {
         };
         Map data = await userService.register(user);
         print(data);
-        // Navigator.pushReplacementNamed(
-        //     context, MyBottomNavigationBar.id);
+        Navigator.pushReplacementNamed(context, MyBottomNavigationBar.id);
       }
     } catch (err) {
       print(err);
