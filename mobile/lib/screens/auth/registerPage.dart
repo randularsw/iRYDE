@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:http/http.dart';
 import 'package:iRYDE/components/bottomNavigationBar.dart';
 import 'package:iRYDE/screens/auth/loginPage.dart';
 import 'package:iRYDE/services/userService.dart';
@@ -15,6 +16,7 @@ class _RegisterPageState extends State<RegisterPage> {
   String name;
   String email;
   String phone;
+  String city;
   String password;
 
   bool visiblePassword = false;
@@ -22,20 +24,26 @@ class _RegisterPageState extends State<RegisterPage> {
   final userService = UserService();
   final _formKey = GlobalKey<FormState>();
 
-  void registerUser() {
-    if (_formKey.currentState.validate()) {
-      _formKey.currentState.save();
+  void registerUser() async {
+    try {
+      if (_formKey.currentState.validate()) {
+        _formKey.currentState.save();
 
-      Map user = {
-        "name": name,
-        "email": email,
-        "phone": phone,
-        "password": password,
-        "type": "vo"
-      };
-      userService.register(user);
-      // Navigator.pushReplacementNamed(
-      //     context, MyBottomNavigationBar.id);
+        Map user = {
+          "name": name,
+          "email": email,
+          "phone": phone,
+          "password": password,
+          "city": city,
+          "type": "vo"
+        };
+        Map data = await userService.register(user);
+        print(data);
+        // Navigator.pushReplacementNamed(
+        //     context, MyBottomNavigationBar.id);
+      }
+    } catch (err) {
+      print(err);
     }
   }
 
@@ -132,6 +140,28 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                           onSaved: (value) {
                             phone = value;
+                          },
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.symmetric(horizontal: 50),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: 'City',
+                            icon: const Padding(
+                              padding: const EdgeInsets.only(top: 15.0),
+                              child: const Icon(FontAwesomeIcons.mapMarker),
+                            ),
+                          ),
+                          keyboardType: TextInputType.text,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              return 'Please enter your city';
+                            }
+                            return null;
+                          },
+                          onSaved: (value) {
+                            city = value;
                           },
                         ),
                       ),
