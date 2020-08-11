@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/components/bottomNavigationBar.dart';
 import 'package:iRYDE/screens/auth/loginPage.dart';
+import 'package:iRYDE/services/userService.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String id = 'register_page';
@@ -18,7 +19,25 @@ class _RegisterPageState extends State<RegisterPage> {
 
   bool visiblePassword = false;
 
+  final userService = UserService();
   final _formKey = GlobalKey<FormState>();
+
+  void registerUser() {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+
+      Map user = {
+        "name": name,
+        "email": email,
+        "phone": phone,
+        "password": password,
+        "type": "vo"
+      };
+      userService.register(user);
+      // Navigator.pushReplacementNamed(
+      //     context, MyBottomNavigationBar.id);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -149,15 +168,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         color: Color(0XFF172b4d),
                         textColor: Colors.white,
                         onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            _formKey.currentState.save();
-
-                            print(email);
-                            print(password);
-
-                            // Navigator.pushReplacementNamed(
-                            //     context, MyBottomNavigationBar.id);
-                          }
+                          registerUser();
                         },
                         child: Text('Register'),
                       ),
