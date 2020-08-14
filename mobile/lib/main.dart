@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iRYDE/screens/home/serviceProviderDetails/serviceProviderDetails.dart';
 import 'screens/bookings/bookingHomePage.dart';
 import 'screens/forum/discussionForumHome.dart';
 import 'screens/emergency/emergencyHome.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         NotificationPage.id: (context) => NotificationPage(),
         SettingsGeneral.id: (context) => SettingsGeneral(),
         AboutUsPage.id: (context) => AboutUsPage(),
+        ServiceProviderDetails.id: (context) => ServiceProviderDetails(),
       },
       home: MyBottomNavigationBar(),
     );
