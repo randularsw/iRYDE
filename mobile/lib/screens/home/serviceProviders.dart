@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iRYDE/screens/home/serviceProviderDetails/serviceProviderDetails.dart';
 import 'package:iRYDE/services/userService.dart';
 
 class ServiceProviders extends StatefulWidget {
@@ -18,7 +19,6 @@ class _ServiceProvidersState extends State<ServiceProviders> {
   void getServiceProviders() async {
     try {
       var data = await userService.getServiceProviders();
-      print(serviceProviders);
       setState(() {
         serviceProviders = data;
       });
@@ -43,7 +43,9 @@ class _ServiceProvidersState extends State<ServiceProviders> {
                       child: Material(
                         child: InkWell(
                           onTap: () {
-                            print('object');
+                            Navigator.pushNamed(
+                                context, ServiceProviderDetails.id,
+                                arguments: serviceProviders[index]);
                           },
                           child: GridTile(
                               footer: GestureDetector(
@@ -87,12 +89,3 @@ class _ServiceProvidersState extends State<ServiceProviders> {
         : Container();
   }
 }
-
-// return Container(child: FutureBuilder(builder: (context, snapshot) {
-//       print(snapshot.data.length);
-//       return snapshot.hasData
-//           ?
-//           : Center(
-//               child: CircularProgressIndicator(),
-//             );
-//     }));
