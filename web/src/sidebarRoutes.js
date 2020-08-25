@@ -5,6 +5,7 @@ import VehiclesList from "components/vehicles/vehiclesList";
 import Profile from "components/auth/profile";
 import ServicesView from "components/servicelist/servicesView";
 import PromotionsView from "components/promotionlist/promotionsView";
+import Payment from "components/payment";
 import VehicleType from "components/admin/vehicleType";
 
 var sidebarRoutes = [
@@ -36,6 +37,14 @@ var sidebarRoutes = [
     component: PromotionsView,
     actor: "sp",
   },
+  {
+    path: "/payment",
+    name: "Payment",
+    icon: "ni ni-planet text-blue",
+    component: Payment,
+    actor: "sp",
+  },
+
   {
     path: "/admin/vehicleType",
     name: "Vehicle Types",

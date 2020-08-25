@@ -21,6 +21,7 @@ import ServicesAdd from "components/servicelist/servicesAdd";
 import PromotionsView from "components/promotionlist/promotionsView";
 import PromotionsAdd from "components/promotionlist/promotionsAdd";
 import PromotionsEdit from "components/promotionlist/promotionsEdit";
+import Payment from "components/payment";
 import StudentTableRow from "components/servicelist/serviceTableRow";
 import VehicleType from "components/admin/vehicleType";
 
@@ -47,6 +48,7 @@ function App(props) {
           <Route path="/servicesadd" component={ServicesAdd}></Route>
           <Route path="/promotions" component={PromotionsView}></Route>
           <Route path="/promotionsadd" component={PromotionsAdd}></Route>
+          <Route path="/payment" component={Payment}></Route>
           <Route path="/edit/:id" component={PromotionsEdit}></Route>
           <Route exact path="/profile" component={Profile}></Route>
           <Route exact path="/about" component={About}></Route>
