@@ -6,6 +6,8 @@ import Profile from "components/auth/profile";
 import ServicesView from "components/servicelist/servicesView";
 import PromotionsView from "components/promotionlist/promotionsView";
 import VehicleType from "components/admin/vehicleType";
+import SpBookingView from "components/booking/spBookingView";
+import VoBookingView from "components/booking/voBookingView";
 
 var sidebarRoutes = [
   {
@@ -64,6 +66,22 @@ var sidebarRoutes = [
     name: "Vehicles",
     icon: "ni ni-planet text-blue",
     component: VehiclesList,
+    actor: "vo",
+  },
+  //routes for sp appointments 
+  {
+    path: "/sp/appointments",
+    name: "Appointments",
+    icon: "ni ni-planet text-blue",
+    component: SpBookingView,
+    actor: "sp",
+  },
+  //routes for vo appointments
+  {
+    path: "/vo/appointments",
+    name: "Appointments",
+    icon: "ni ni-planet text-blue",
+    component: VoBookingView,
     actor: "vo",
   },
 ];

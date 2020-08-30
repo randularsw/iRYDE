@@ -23,6 +23,9 @@ import PromotionsAdd from "components/promotionlist/promotionsAdd";
 import PromotionsEdit from "components/promotionlist/promotionsEdit";
 import StudentTableRow from "components/servicelist/serviceTableRow";
 import VehicleType from "components/admin/vehicleType";
+import SpBookingView from "components/booking/spBookingView";
+import VoBookingView from "components/booking/voBookingView";
+import SpViewCalendar from "components/calendar/spViewCalendar";
 
 function App(props) {
   return (
@@ -55,23 +58,15 @@ function App(props) {
           <Route exact path="/auth/logout" component={Logout}></Route>
           <Route exact path="/vehicles" component={VehiclesList}></Route>
           <Route exact path="/vehicle/:id" component={VehicleDetails}></Route>
+          <Route exact path="/service-providers" component={serviceProviderList}></Route>
+          <Route exact path="/service-provider/:id" component={serviceProviderDetails}></Route>
+          <Route exact path="/booking/:id" component={ServiceProviderBooking}></Route>
+          <Route exact path="/sp/appointments" component={SpBookingView}></Route>
+          <Route exact path="/vo/appointments" component={VoBookingView}></Route>
+          <Route exact path="/services" component={ServicesView}></Route>
+          <Route exact path="/servicesadd" component={ServicesAdd}></Route>
           <Route path="/admin/" component={VehicleType}></Route>
-
-          <Route
-            exact
-            path="/service-providers"
-            component={serviceProviderList}
-          ></Route>
-          <Route
-            exact
-            path="/service-provider/:id"
-            component={serviceProviderDetails}
-          ></Route>
-          <Route
-            exact
-            path="/booking/:id"
-            component={ServiceProviderBooking}
-          ></Route>
+          <Route exact path="/sp/calendar" component={SpViewCalendar}></Route>
           <Route path="/" component={Home}></Route>
         </Switch>
       </div>
