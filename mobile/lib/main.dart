@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iRYDE/core/userModel.dart';
 import 'package:iRYDE/screens/auth/loginPage.dart';
+import 'package:provider/provider.dart';
 import 'screens/bookings/bookingHomePage.dart';
 import 'screens/forum/discussionForumHome.dart';
 import 'screens/emergency/emergencyHome.dart';
@@ -13,7 +15,12 @@ import 'screens/drawer/aboutUs.dart';
 import 'screens/auth/loginPage.dart';
 import 'screens/auth/registerPage.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+      ChangeNotifierProvider(
+        create: (context) => UserModel(),
+        child: MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   @override

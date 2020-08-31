@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/components/bottomNavigationBar.dart';
+import 'package:iRYDE/core/userModel.dart';
 import 'package:iRYDE/screens/auth/loginPage.dart';
 import 'package:iRYDE/services/userService.dart';
+import 'package:provider/provider.dart';
 
 class RegisterPage extends StatefulWidget {
   static const String id = 'register_page';
@@ -24,6 +26,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   void registerUser() async {
+    // var itemInfo = Provider.of<UserModel>(context, listen: false);
+    // print(itemInfo.register());
     try {
       if (_formKey.currentState.validate()) {
         _formKey.currentState.save();
