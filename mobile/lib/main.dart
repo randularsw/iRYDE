@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iRYDE/screens/drawer/vehicles/vehicleAdd.dart';
 import 'package:iRYDE/screens/home/serviceProviderDetails/serviceProviderDetails.dart';
+import 'package:iRYDE/screens/home/serviceProviderDetails/servicesBooking.dart';
 import 'screens/bookings/bookingHomePage.dart';
 import 'screens/forum/discussionForumHome.dart';
 import 'screens/emergency/emergencyHome.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
         AboutUsPage.id: (context) => AboutUsPage(),
         ServiceProviderDetails.id: (context) => ServiceProviderDetails(),
         VehicleAdd.id : (context) => VehicleAdd(),
+        ServiceBooking.id :(context) => ServiceBooking(),
       },
       home: MyBottomNavigationBar(),
     );
