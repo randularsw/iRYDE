@@ -17,7 +17,21 @@ class UserModel extends ChangeNotifier {
     try {
       Map u = await userService.register(data);
       if (u['_id'] != null) {
-        print('u');
+        user = u;
+        print(user);
+        isAuthenticated = true;
+        notifyListeners();
+        return user;
+      }
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  loginUser(data) async {
+    try {
+      Map u = await authService.login(data);
+      if (u['_id'] != null) {
         user = u;
         print(user);
         isAuthenticated = true;

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/components/bottomNavigationBar.dart';
+import 'package:iRYDE/core/userModel.dart';
 import 'package:iRYDE/screens/auth/registerPage.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,6 +32,23 @@ class _LoginPageState extends State<LoginPage> {
     final tk = prefs.getString('token');
     if (tk != null) {
       Navigator.pushReplacementNamed(context, MyBottomNavigationBar.id);
+    }
+  }
+
+  void loginUser() async {
+    try {
+      if (_formKey.currentState.validate()) {
+        _formKey.currentState.save();
+
+        Map user = {"email": email, "password": password};
+        var itemInfo = Provider.of<UserModel>(context, listen: false);
+        Map d = await itemInfo.loginUser(user);
+        if (d != null) {
+          Navigator.pushReplacementNamed(context, MyBottomNavigationBar.id);
+        }
+      }
+    } catch (err) {
+      print(err);
     }
   }
 
@@ -105,15 +124,7 @@ class _LoginPageState extends State<LoginPage> {
                         color: Color(0XFF172b4d),
                         textColor: Colors.white,
                         onPressed: () {
-                          if (_formKey.currentState.validate()) {
-                            _formKey.currentState.save();
-
-                            print(email);
-                            print(password);
-
-                            Navigator.pushReplacementNamed(
-                                context, MyBottomNavigationBar.id);
-                          }
+                          loginUser();
                         },
                         child: Text('Login'),
                       ),
