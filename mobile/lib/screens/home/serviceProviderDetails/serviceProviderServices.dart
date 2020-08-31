@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:iRYDE/screens/home/serviceProviderDetails/servicesBooking.dart';
 
 class ServiceProviderServices extends StatefulWidget {
   @override
@@ -8,9 +9,16 @@ class ServiceProviderServices extends StatefulWidget {
 }
 
 class _ServiceProviderServicesState extends State<ServiceProviderServices> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context).settings.arguments;
+    print(args);
 
     print(args['name']);
     return Column(
@@ -62,7 +70,9 @@ class _ServiceProviderServicesState extends State<ServiceProviderServices> {
                       direction: Axis.horizontal,
                     ),
                     RaisedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, ServiceBooking.id);
+                      },
                       textColor: Colors.white,
                       color: Color(0xff5e72e4),
                       child: Text('Book'),
