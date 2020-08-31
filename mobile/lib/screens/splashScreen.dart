@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:iRYDE/components/bottomNavigationBar.dart';
+import 'package:iRYDE/core/userModel.dart';
 import 'package:iRYDE/screens/auth/loginPage.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
 
@@ -22,9 +24,10 @@ class _SplashScreenState extends State<SplashScreen> {
 
   void checkUser() async {
     try {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      final tk = prefs.getString('token');
-      if (tk != null) {
+      var userInfo = Provider.of<UserModel>(context, listen: false);
+      Map user = await userInfo.updateCurrentUser();
+      // print(user);
+      if (user != null) {
         Navigator.pushReplacementNamed(context, MyBottomNavigationBar.id);
       } else {
         Navigator.pushReplacementNamed(context, LoginPage.id);

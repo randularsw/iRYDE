@@ -8,9 +8,15 @@ class UserModel extends ChangeNotifier {
   final userService = UserService();
   final authService = AuthService();
 
-  getUser() {
-    // print(user);
-    // return user['name'];
+  updateCurrentUser() async {
+    Map u = await authService.currentUser();
+    if (u != null) {
+      user = u;
+      // print(user);
+      isAuthenticated = true;
+      notifyListeners();
+      return user;
+    }
   }
 
   registerUser(data) async {
@@ -18,7 +24,7 @@ class UserModel extends ChangeNotifier {
       Map u = await userService.register(data);
       if (u['_id'] != null) {
         user = u;
-        print(user);
+        // print(user);
         isAuthenticated = true;
         notifyListeners();
         return user;
@@ -33,7 +39,7 @@ class UserModel extends ChangeNotifier {
       Map u = await authService.login(data);
       if (u['_id'] != null) {
         user = u;
-        print(user);
+        // print(user);
         isAuthenticated = true;
         notifyListeners();
         return user;
