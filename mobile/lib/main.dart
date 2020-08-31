@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iRYDE/core/userModel.dart';
 import 'package:iRYDE/screens/auth/loginPage.dart';
+import 'package:iRYDE/screens/splashScreen.dart';
 import 'package:provider/provider.dart';
 import 'screens/bookings/bookingHomePage.dart';
 import 'screens/forum/discussionForumHome.dart';
@@ -29,8 +30,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Color(0XFF172b4d),
           scaffoldBackgroundColor: Colors.white),
-      initialRoute: LoginPage.id,
+      initialRoute: SplashScreen.id,
       routes: {
+        SplashScreen.id: (context) => SplashScreen(),
         LoginPage.id: (context) => LoginPage(),
         RegisterPage.id: (context) => RegisterPage(),
         MyBottomNavigationBar.id: (context) => MyBottomNavigationBar(),
