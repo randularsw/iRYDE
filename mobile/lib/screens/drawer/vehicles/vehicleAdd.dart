@@ -34,7 +34,6 @@ class _VehicleAddState extends State<VehicleAdd> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Container(
         child: Column(
           children: <Widget>[
             Expanded(
@@ -63,8 +62,7 @@ class _VehicleAddState extends State<VehicleAdd> {
               ),
             )
           ],
-        ),
-      )),
+        )),
     );
   }
 }
