@@ -26,8 +26,6 @@ class _RegisterPageState extends State<RegisterPage> {
   final _formKey = GlobalKey<FormState>();
 
   void registerUser() async {
-    // var itemInfo = Provider.of<UserModel>(context, listen: false);
-    // print(itemInfo.register());
     try {
       if (_formKey.currentState.validate()) {
         _formKey.currentState.save();
@@ -40,9 +38,11 @@ class _RegisterPageState extends State<RegisterPage> {
           "city": city,
           "type": "vo"
         };
-        Map data = await userService.register(user);
-        print(data);
-        Navigator.pushReplacementNamed(context, MyBottomNavigationBar.id);
+        var itemInfo = Provider.of<UserModel>(context, listen: false);
+        Map d = await itemInfo.registerUser(user);
+        if (d != null) {
+          Navigator.pushReplacementNamed(context, MyBottomNavigationBar.id);
+        }
       }
     } catch (err) {
       print(err);
