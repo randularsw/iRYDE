@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:iRYDE/screens/home/serviceProviderDetails/servicesBooking.dart';
+import 'package:iRYDE/services/servicesService.dart';
 
 class ServiceProviderServices extends StatefulWidget {
   @override
@@ -9,18 +10,35 @@ class ServiceProviderServices extends StatefulWidget {
 }
 
 class _ServiceProviderServicesState extends State<ServiceProviderServices> {
+  String id;
+  List services;
+  final servicesService = ServicesService();
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
   }
+
+  void getServices(sp) async {
+    //print('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+    try {
+      var data = await servicesService.getServices(sp);
+      setState(() {
+        services = data;
+      });
+      //print(services);
+    } catch (err) {
+      print(err);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final Map args = ModalRoute.of(context).settings.arguments;
-    print(args);
-
-    print(args['name']);
+    //print(args);
+    //getServices(args['_id']);
+    //print(args['name']);
     return Column(
       children: <Widget>[
         Container(
@@ -71,7 +89,8 @@ class _ServiceProviderServicesState extends State<ServiceProviderServices> {
                     ),
                     RaisedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, ServiceBooking.id);
+                        Navigator.pushNamed(context, ServiceBooking.id,
+                            );
                       },
                       textColor: Colors.white,
                       color: Color(0xff5e72e4),
@@ -83,6 +102,18 @@ class _ServiceProviderServicesState extends State<ServiceProviderServices> {
             ],
           ),
         ),
+        // Expanded(
+        //   child: ListView.builder(
+        //       padding: const EdgeInsets.all(8),
+        //       itemCount: services?.length,
+        //       itemBuilder: (BuildContext context, int index) {
+        //         return Container(
+        //           height: 50,
+        //           //color: Colors.amber[colorCodes[index]],
+        //           child: Center(child: Text(services[index]['servicename'])),
+        //         );
+        //       }),
+        // )
       ],
     );
   }
