@@ -10,15 +10,36 @@ class ServiceBooking extends StatefulWidget {
 
 class _ServiceBookingState extends State<ServiceBooking> {
   String id = "5f4a404c7e0d58425c2dcb1f";
-  List vehicles;
+  List vehicles = [];
   String vehicle;
-  List selectedVehicle;
+  Map selectedVehicle;
   final vehicleService = VehicleService();
+  String h;
+  List stateService;
+ 
+  bool isTrue = false;
+  final servicesService = ServicesService();
+  List services;
 
   @override
   void initState() {
     getVehicles();
+    getServices();
     super.initState();
+  }
+
+  void getServices() async {
+    //print('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+    try {
+      var data = await servicesService.getServices('5f2f96be82e61e5274037800');
+      setState(() {
+        services = data;
+      });
+      stateServices(services);
+      //print(services);
+    } catch (err) {
+      //print(err);
+    }
   }
 
   void getVehicles() async {
@@ -27,23 +48,34 @@ class _ServiceBookingState extends State<ServiceBooking> {
       setState(() {
         vehicles = data;
       });
-      print(vehicles);
+      //print(vehicles);
     } catch (err) {
-      print(err);
+      //print(err);
     }
   }
 
   void setvehicle(String id) {
     print(id);
     vehicles.map((e) {
-      if (e['_id'] == id) {
-        selectedVehicle = e;
-      }
+          if (e['_id'] == id) {
+            selectedVehicle = e;
+          }
+        }).toList() ??
+        [];
+  }
+
+  void stateServices(List services) {
+    services.map((e) {
+      e['state'] = false;
     }).toList();
+
+    stateService = services;
   }
 
   @override
   Widget build(BuildContext context) {
+    //final List args = ModalRoute.of(context).settings.arguments;
+    //stateServices(args);
     return Scaffold(
       body: Container(
           child: Column(
@@ -62,7 +94,7 @@ class _ServiceBookingState extends State<ServiceBooking> {
                     setvehicle(newVal);
                   },
                   hint: Text('Select Vehicle'),
-                  items: vehicles?.map<DropdownMenuItem<String>>((item) {
+                  items: vehicles.map<DropdownMenuItem<String>>((item) {
                         return DropdownMenuItem(
                           child: Text(item['brand'] +
                               ' ' +
@@ -77,7 +109,21 @@ class _ServiceBookingState extends State<ServiceBooking> {
               ),
             ),
           ),
-          // Expanded(child: null)
+          Expanded(
+            child: ListView(
+              children: stateService.map((item) {
+                return new CheckboxListTile(
+                  title: new Text(item['servicename']),
+                  value: item['state'],
+                  onChanged: (bool value) {
+                    setState(() {
+                      item['state'] = value;
+                    });
+                  },
+                );
+              }).toList(),
+            ),
+          )
         ],
       )),
     );
