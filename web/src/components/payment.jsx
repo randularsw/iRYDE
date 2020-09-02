@@ -14,36 +14,37 @@ export default function Payment() {
       <Header />
       <Container className=" mt--9" fluid>
         {/* Table */}
-        <Row>
-          <div className=" col">
-            <Card className=" shadow" style={{ backgroundColor: "#f4f5f7" }}>
-              <CardHeader className=" bg-transparent">
-                <h3 className=" mb-0">Add Services</h3>
-              </CardHeader>
-              <CardBody>
-                <div style={{ minHeight: 400 }}>
-                  {checkout === true ? (
-                    <div className="payment-div">
-                      <ReactPayPal />
-                    </div>
-                  ) : (
-                    <div>
-                      <h1>React-PayPal</h1>
-                      <button
-                        onClick={() => {
-                          setCheckout(true);
-                        }}
-                        className="checkout-button"
-                      >
-                        Pay Subscription
-                      </button>
-                    </div>
-                  )}
-                </div>
-              </CardBody>
-            </Card>
-          </div>
-        </Row>
+        <Col lg="10">
+          <Card
+            className="bg-secondary shadow border-0 mb-7"
+            style={({ backgroundColor: "#f4f5f7" }, { marginLeft: "9.8rem" })}
+          >
+            <CardHeader className=" bg-transparent">
+              <h3 className=" mb-0">Add promotions</h3>
+            </CardHeader>
+            <CardBody>
+              <div style={{ minHeight: 400 }}>
+                {checkout === true ? (
+                  <div className="payment-div">
+                    <ReactPayPal />
+                  </div>
+                ) : (
+                  <div>
+                    <h1>React-PayPal</h1>
+                    <button
+                      onClick={() => {
+                        setCheckout(true);
+                      }}
+                      className="checkout-button"
+                    >
+                      Pay Subscription
+                    </button>
+                  </div>
+                )}
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
       </Container>
     </>
 
