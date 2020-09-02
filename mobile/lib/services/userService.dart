@@ -7,7 +7,6 @@ class UserService {
     try {
       final res = await http.post('http://192.168.1.2:4000/api/users',
           headers: null, body: user);
-      // print(res.headers['token']);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (res.headers['token'] != null) {
         prefs.setString('token', res.headers['token']);

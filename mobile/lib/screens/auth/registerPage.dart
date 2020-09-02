@@ -20,6 +20,8 @@ class _RegisterPageState extends State<RegisterPage> {
   String city;
   String password;
 
+  String emailError;
+
   bool visiblePassword = false;
 
   final userService = UserService();
@@ -40,8 +42,12 @@ class _RegisterPageState extends State<RegisterPage> {
         };
         var itemInfo = Provider.of<UserModel>(context, listen: false);
         Map d = await itemInfo.registerUser(user);
-        if (d != null) {
+        if (d['_id'] != null) {
           Navigator.pushReplacementNamed(context, MyBottomNavigationBar.id);
+        } else {
+          setState(() {
+            emailError = d['data'];
+          });
         }
       }
     } catch (err) {
@@ -110,6 +116,11 @@ class _RegisterPageState extends State<RegisterPage> {
                                     r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
                                 .hasMatch(value)) {
                               return 'Please enter a valid email address';
+                            }
+                            if (emailError != null) {
+                              String err = emailError;
+                              emailError = null;
+                              return err;
                             }
                             return null;
                           },

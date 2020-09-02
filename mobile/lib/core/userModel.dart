@@ -22,7 +22,7 @@ class UserModel extends ChangeNotifier {
   registerUser(data) async {
     try {
       Map u = await userService.register(data);
-      if (u['_id'] != null) {
+      if (true) {
         user = u;
         // print(user);
         isAuthenticated = true;
@@ -37,7 +37,7 @@ class UserModel extends ChangeNotifier {
   loginUser(data) async {
     try {
       Map u = await authService.login(data);
-      if (u['_id'] != null) {
+      if (true) {
         user = u;
         // print(user);
         isAuthenticated = true;

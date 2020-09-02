@@ -17,6 +17,9 @@ class _LoginPageState extends State<LoginPage> {
   String email;
   String password;
 
+  String emailError;
+  String passwordError;
+
   bool visiblePassword = false;
 
   final _formKey = GlobalKey<FormState>();
@@ -29,8 +32,16 @@ class _LoginPageState extends State<LoginPage> {
         Map user = {"email": email, "password": password};
         var itemInfo = Provider.of<UserModel>(context, listen: false);
         Map d = await itemInfo.loginUser(user);
-        if (d != null) {
+        if (d['_id'] != null) {
           Navigator.pushReplacementNamed(context, MyBottomNavigationBar.id);
+        } else {
+          setState(() {
+            if (d['data'] == "Email doesn't exist") {
+              emailError = d['data'];
+            } else if (d['data'] == "Invalid password") {
+              passwordError = d['data'];
+            }
+          });
         }
       }
     } catch (err) {
@@ -73,6 +84,11 @@ class _LoginPageState extends State<LoginPage> {
                             if (value.isEmpty) {
                               return 'Please enter your email';
                             }
+                            if (emailError == "Email doesn't exist") {
+                              String err = emailError;
+                              emailError = null;
+                              return err;
+                            }
                             return null;
                           },
                           onSaved: (value) {
@@ -95,6 +111,11 @@ class _LoginPageState extends State<LoginPage> {
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter your password';
+                            }
+                            if (passwordError == "Invalid password") {
+                              String err = passwordError;
+                              passwordError = null;
+                              return err;
                             }
                             return null;
                           },
