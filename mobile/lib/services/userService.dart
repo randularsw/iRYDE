@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserService {
   Future<Map> register(Map user) async {
     try {
-      final res = await http.post('http://192.168.1.2:4000/api/users',
+      final res = await http.post('http://10.22.165.141:4000/api/users',
           headers: null, body: user);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (res.headers['token'] != null) {
