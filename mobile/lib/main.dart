@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:iRYDE/screens/drawer/vehicles/vehicleAdd.dart';
 import 'package:iRYDE/screens/home/serviceProviderDetails/serviceProviderDetails.dart';
 import 'package:iRYDE/screens/home/serviceProviderDetails/servicesBooking.dart';
+import 'package:iRYDE/core/userModel.dart';
+import 'package:iRYDE/screens/auth/loginPage.dart';
+import 'package:iRYDE/screens/splashScreen.dart';
+import 'package:provider/provider.dart';
 import 'screens/bookings/bookingHomePage.dart';
 import 'screens/forum/discussionForumHome.dart';
 import 'screens/emergency/emergencyHome.dart';
@@ -12,8 +16,15 @@ import 'screens/drawer/profilePage.dart';
 import 'screens/notifications/notificationPage.dart';
 import 'screens/drawer/settingsBasic.dart';
 import 'screens/drawer/aboutUs.dart';
+import 'screens/auth/loginPage.dart';
+import 'screens/auth/registerPage.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(
+      ChangeNotifierProvider(
+        create: (context) => UserModel(),
+        child: MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   @override
@@ -22,8 +33,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
           primaryColor: Color(0XFF172b4d),
           scaffoldBackgroundColor: Colors.white),
-      //initialRoute: HomePage.id,
+      initialRoute: SplashScreen.id,
       routes: {
+        SplashScreen.id: (context) => SplashScreen(),
+        LoginPage.id: (context) => LoginPage(),
+        RegisterPage.id: (context) => RegisterPage(),
+        MyBottomNavigationBar.id: (context) => MyBottomNavigationBar(),
         HomePage.id: (context) => HomePage(),
         BookingHome.id: (context) => BookingHome(),
         EmergencyHome.id: (context) => EmergencyHome(),
@@ -37,7 +52,7 @@ class MyApp extends StatelessWidget {
         VehicleAdd.id : (context) => VehicleAdd(),
         ServiceBooking.id :(context) => ServiceBooking(),
       },
-      home: MyBottomNavigationBar(),
+      // home: MyBottomNavigationBar(),
     );
   }
 }

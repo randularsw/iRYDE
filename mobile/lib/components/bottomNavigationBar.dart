@@ -7,6 +7,7 @@ import 'package:iRYDE/screens/notifications/notificationPage.dart';
 import 'package:iRYDE/screens/bookings/bookingHomePage.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
+  static const String id = 'my_bottom_navigation_bar';
   @override
   _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
 }
