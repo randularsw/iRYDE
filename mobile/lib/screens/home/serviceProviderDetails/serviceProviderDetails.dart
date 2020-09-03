@@ -3,21 +3,34 @@ import 'package:iRYDE/screens/home/serviceProviderDetails/serviceProviderService
 
 class ServiceProviderDetails extends StatefulWidget {
   static const String id = 'service_provider_details';
+
   @override
   _ServiceProviderDetailsState createState() => _ServiceProviderDetailsState();
 }
 
 class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
+  Map sp = {};
+  @override
+  void initState() {
+    super.initState();
+    // Future.delayed(Duration.zero, () {
+    //   setState(() {
+    //     sp = ModalRoute.of(context).settings.arguments;
+    //   });
+    //   print(sp);
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final Map args = ModalRoute.of(context).settings.arguments;
+    sp = ModalRoute.of(context).settings.arguments;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: Center(
             child: Container(
-              child: Text(args['name']),
+              child: Text(sp.containsKey('name') ? sp['name'] : ''),
               margin: EdgeInsets.only(right: 58.0),
             ),
           ),
@@ -29,7 +42,7 @@ class _ServiceProviderDetailsState extends State<ServiceProviderDetails> {
           ),
         ),
         body: TabBarView(children: [
-          ServiceProviderServices(),
+          ServiceProviderServices(sp:sp),
           Container(
             margin: EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 50),
             height: 50.0,
