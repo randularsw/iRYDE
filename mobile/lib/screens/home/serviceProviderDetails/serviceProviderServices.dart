@@ -4,6 +4,10 @@ import 'package:iRYDE/screens/home/serviceProviderDetails/servicesBooking.dart';
 import 'package:iRYDE/services/servicesService.dart';
 
 class ServiceProviderServices extends StatefulWidget {
+  // ServiceProviderServices({lable});
+  Map sp;
+  ServiceProviderServices({Key key, @required this.sp}) : super(key: key);
+
   @override
   _ServiceProviderServicesState createState() =>
       _ServiceProviderServicesState();
@@ -11,23 +15,22 @@ class ServiceProviderServices extends StatefulWidget {
 
 class _ServiceProviderServicesState extends State<ServiceProviderServices> {
   String id;
-  List services;
+  List services = [];
   final servicesService = ServicesService();
 
   @override
   void initState() {
-    // TODO: implement initState
+    getServices(widget.sp['_id']);
     super.initState();
   }
 
-  void getServices(sp) async {
-    //print('iiiiiiiiiiiiiiiiiiiiiiiiiiiiiii');
+  void getServices(spId) async {
     try {
-      var data = await servicesService.getServices(sp);
+      var data = await servicesService.getServices(spId);
       setState(() {
         services = data;
       });
-      //print(services);
+      
     } catch (err) {
       print(err);
     }
@@ -35,10 +38,6 @@ class _ServiceProviderServicesState extends State<ServiceProviderServices> {
 
   @override
   Widget build(BuildContext context) {
-    final Map args = ModalRoute.of(context).settings.arguments;
-    //print(args);
-    //getServices(args['_id']);
-    //print(args['name']);
     return Column(
       children: <Widget>[
         Container(
@@ -64,14 +63,14 @@ class _ServiceProviderServicesState extends State<ServiceProviderServices> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      args['name'],
+                      widget.sp['name'],
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
                     ),
                     Text(
-                      args['city'],
+                      widget.sp['city'],
                       style: TextStyle(
                         fontSize: 13,
                         color: Color(0xFFD3D3D3),
@@ -89,8 +88,10 @@ class _ServiceProviderServicesState extends State<ServiceProviderServices> {
                     ),
                     RaisedButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, ServiceBooking.id,
-                            );
+                        Navigator.pushNamed(
+                          context,
+                          ServiceBooking.id,
+                        );
                       },
                       textColor: Colors.white,
                       color: Color(0xff5e72e4),
@@ -102,18 +103,18 @@ class _ServiceProviderServicesState extends State<ServiceProviderServices> {
             ],
           ),
         ),
-        // Expanded(
-        //   child: ListView.builder(
-        //       padding: const EdgeInsets.all(8),
-        //       itemCount: services?.length,
-        //       itemBuilder: (BuildContext context, int index) {
-        //         return Container(
-        //           height: 50,
-        //           //color: Colors.amber[colorCodes[index]],
-        //           child: Center(child: Text(services[index]['servicename'])),
-        //         );
-        //       }),
-        // )
+        Expanded(
+          child: ListView.builder(
+              padding: const EdgeInsets.all(8),
+              itemCount: services?.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 50,
+                  //color: Colors.amber[colorCodes[index]],
+                  child: Center(child: Text(services[index]['servicename'])),
+                );
+              }),
+        )
       ],
     );
   }
