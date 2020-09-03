@@ -1,4 +1,5 @@
 import React from "react";
+import { Row, Col, Container } from "reactstrap";
 
 export default function ReactPayPal() {
   const [paid, setPaid] = React.useState(false);
@@ -38,7 +39,44 @@ export default function ReactPayPal() {
 
   // If the payment has been made
   if (paid) {
-    return <div>Payment successful.!</div>;
+    return (
+      <Container>
+        <Row>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              marginLeft: "90px",
+            }}
+          >
+            <img src={require("assets/images/check.jpg")} alt="alignment" />
+          </div>
+          <p
+            style={{
+              fontWeight: "bold",
+              textAlign: "center",
+            }}
+          >
+            Payment Successful!..
+          </p>
+
+          <p style={{ fontWeight: "normal" }}>
+            Thank you for your payment. We will be in contact with more details
+            shortly.
+          </p>
+
+          {/* <Col>
+            <p style={{ fontWeight: "bold" }}>Payment Successful!..</p>
+
+            <p style={{ fontWeight: "normal" }}>
+              Thank you for your payment. We will be in contact with more
+              details shortly.
+            </p>
+          </Col> */}
+        </Row>
+      </Container>
+    );
   }
 
   // If any error occurs
@@ -49,7 +87,7 @@ export default function ReactPayPal() {
   // Default Render
   return (
     <div>
-      <h4>Total Subscription amount to be paid is:USD 50 /-</h4>
+      <h4>Total Subscription amount to be paid is: USD 50 /-</h4>
       <div ref={paypalRef} />
     </div>
   );
