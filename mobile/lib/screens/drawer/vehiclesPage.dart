@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iRYDE/screens/drawer/vehicles/vehicleAdd.dart';
 
 class VehiclesHome extends StatefulWidget {
   static const String id = 'vehicles_home_page';
@@ -8,6 +9,7 @@ class VehiclesHome extends StatefulWidget {
 }
 
 class _VehiclesHomeState extends State<VehiclesHome> {
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +37,24 @@ class _VehiclesHomeState extends State<VehiclesHome> {
       ),
       //drawer: DrawerOption(),
       body: Center(
-        child: Text('This is Vehicles page'),
+          //child: Text('This is Vehicles page'),
+          child: new Form(
+        
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            
+          ],
+        ),
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, VehicleAdd.id);
+          // Add your onPressed code here!
+        
+        },
+        child: Icon(Icons.add),
+        backgroundColor: Color(0XFF172b4d),
       ),
     );
   }

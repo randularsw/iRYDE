@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/components/drawer.dart';
+import 'package:iRYDE/screens/home/serviceProviders.dart';
 
 class HomePage extends StatefulWidget {
   static const String id = 'home_page';
@@ -14,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
-      initialIndex: 1,
+      initialIndex: 0,
       child: Scaffold(
         appBar: AppBar(
           bottom: TabBar(
@@ -46,7 +47,7 @@ class _HomePageState extends State<HomePage> {
           // ]),
         ),
         body: TabBarView(children: [
-          Icon(FontAwesomeIcons.home),
+          ServiceProviders(),
           Icon(FontAwesomeIcons.businessTime),
         ]),
 
