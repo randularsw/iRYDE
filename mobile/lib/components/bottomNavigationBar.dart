@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+<<<<<<< HEAD
 import 'package:iRYDE/screens/homePage.dart';
 import 'package:iRYDE/screens/forum/questionForum.dart';
+=======
+import 'package:iRYDE/screens/home/homePage.dart';
+import 'package:iRYDE/screens/forum/discussionForumHome.dart';
+>>>>>>> develop
 import 'package:iRYDE/screens/emergency/emergencyHome.dart';
 import 'package:iRYDE/screens/notifications/notificationPage.dart';
 import 'package:iRYDE/screens/bookings/bookingHomePage.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
+  static const String id = 'my_bottom_navigation_bar';
   @override
   _MyBottomNavigationBarState createState() => _MyBottomNavigationBarState();
 }

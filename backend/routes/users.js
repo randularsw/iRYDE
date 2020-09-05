@@ -6,6 +6,7 @@ const User = require("../models/User");
 
 router.post("/", async (req, res) => {
   try {
+    console.log(req.body);
     const emailExist = await User.findOne({ email: req.body.email });
     if (emailExist) return res.send({ data: "Email already exists" });
 
@@ -57,7 +58,7 @@ router.post("/login", async (req, res) => {
 router.get("/sp", async (req, res) => {
   try {
     const sps = await User.find({ type: "sp" });
-    console.log(sps);
+    // delete passwords
     res.send(sps);
   } catch (error) {
     res.send({ data: error });
