@@ -11,6 +11,7 @@ const usersRouter = require("./routes/users");
 const vehiclesRouter = require("./routes/vehicles");
 const servicesRouter = require("./routes/services");
 const promotionsRouter = require("./routes/promotions");
+const questionRouter = require("./routes/questions");
 
 const port = process.env.PORT || 4000;
 console.log(port);
@@ -29,6 +30,8 @@ app.use("/vehicles", vehiclesRouter);
 
 app.use("/services", servicesRouter);
 app.use("/promotions", promotionsRouter);
+
+app.use("/api/questions", questionRouter);
 
 mongoose.connect(
   process.env.DB_URL,
