@@ -21,7 +21,7 @@ const VoConfirmedAppointments = (props) => {
               <Row>
                 <div className="col-8 text-secondary">
                   <i className="fas fa-user pr-2 pl-2 text-secondary"></i>
-                  {i.voName}
+                  {i.spName}
                 </div>
                 <div className="col text-secondary">
                   <Row>

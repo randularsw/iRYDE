@@ -73,11 +73,11 @@ class SpViewCalendar extends Component {
                       })}
                       inline
                     />
-                    <DatePicker
+                    {/* <DatePicker
                       selected={this.state.date}
                       onChange={this.onChange}
                       placeholderText="This highlights a week ago and a week from today"
-                    />
+                    /> */}
                   </div>
                 </CardBody>
               </Card>

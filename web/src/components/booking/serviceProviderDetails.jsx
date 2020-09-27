@@ -47,7 +47,7 @@ class serviceProviderDetails extends Component {
   async componentDidMount() {
     try {
       const { data: details } = await getUser(this.props.match.params.id);
-      const { data: services } = await getServices();
+      const { data: services } = await getServices(this.props.match.params.id);
       this.setState({ details, services });
       const userData = await this.context.currentUser();
       this.setState({user:userData.user});
