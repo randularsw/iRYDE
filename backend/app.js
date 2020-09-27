@@ -10,6 +10,7 @@ const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
 const vehiclesRouter = require("./routes/vehicles");
 const servicesRouter = require("./routes/services");
+const promotionsRouter = require("./routes/promotions");
 const bookingRouter = require("./routes/bookings");
 const timeSlotRouter = require("./routes/timeSlots");
 
@@ -29,6 +30,7 @@ app.use("/api/users", usersRouter);
 app.use("/vehicles", vehiclesRouter);
 app.use("/bookings",bookingRouter);
 app.use("/services", servicesRouter);
+app.use("/promotions", promotionsRouter);
 app.use("/timeslots", timeSlotRouter);
 
 mongoose.connect(

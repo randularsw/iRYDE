@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import Header from "../shared/header";
+import PromotionTableRow from "./promotionTableRow";
+import axios from "axios";
+import { getPromotions, deletePromotions } from "services/promotionService";
+import { UserContext } from "core/userContext";
 import {
   Row,
   Card,
+  Table,
   CardHeader,
   CardBody,
   CardImg,
@@ -13,8 +18,47 @@ import {
 } from "reactstrap";
 
 class PromotionsView extends Component {
-  state = {
-    items: [],
+  static contextType = UserContext;
+  constructor(props) {
+    super(props);
+
+    this.state = { promotions: [] };
+  }
+
+  async componentDidMount() {
+    try {
+      const userdata = await this.context.currentUser();
+      this.setState(userdata);
+      const res = await getPromotions(userdata.user?._id);
+      console.log(11111, res.data);
+      this.setState({ promotions: res.data });
+    } catch (err) {
+      console.log("Error", err);
+    }
+  }
+
+  promotionsList() {
+    return this.state.promotions.map((currentpromotion) => {
+      return (
+        <PromotionTableRow
+          obj={currentpromotion}
+          deletePromotion={this.onDelete}
+          key={currentpromotion._id}
+        />
+      );
+    });
+  }
+
+  onDelete = async (id) => {
+    try {
+      const res = await deletePromotions(id);
+      console.log(res);
+    } catch (error) {
+      console.log("Error", error);
+    }
+    this.setState({
+      promotions: this.state.promotions.filter((el) => el._id !== id),
+    });
   };
 
   render() {
@@ -22,7 +66,7 @@ class PromotionsView extends Component {
     return (
       <>
         <Header />
-        <Container className=" mt--9" fluid >
+        <Container className=" mt--9" fluid>
           {/* Table */}
           <Row>
             <div className=" col">
@@ -37,79 +81,33 @@ class PromotionsView extends Component {
                       (window.location.href = "/promotionsadd")
                     }
                   >
-                    New Promotion
+                    Add Promotions
                   </Button>
                 </CardHeader>
                 <CardBody>
-                  <div>
+                  <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
-                    <Row>
-                      <Card
-                        style={{
-                          width: "18rem",
-                          height: 230,
-                          marginLeft: 35,
-                          marginRight: 15,
-                        }}
-                      >
-                        {/* <CardImg
-                          alt="..."
-                          src={require("assets/images/promotions/offer1.jpg")}
-                          top
-                        /> */}
-                        <CardBody>
-                          <CardText>
-                            Special offer for WAGONR customers to get their full
-                            vehicle service for a special price.Available at our
-                            all outlets.This offer is valid until the end of
-                            July
-                          </CardText>
-                        </CardBody>
-                      </Card>
+                    <Table className="align-items-center table-dark" responsive>
+                      <thead className="thead-dark">
+                        <tr>
+                          <th scope="col" style={{ alignItems: "center" }}>
+                            Title
+                          </th>
+                          <th scope="col" style={{ alignItems: "center" }}>
+                            Description
+                          </th>
+                          <th scope="col" style={{ alignItems: "center" }}>
+                            Start Date
+                          </th>
+                          <th scope="col" style={{ alignItems: "center" }}>
+                            End Date
+                          </th>
 
-                      <Card
-                        style={{
-                          width: "18rem",
-                          height: 230,
-                          // marginLeft: 35,
-                          marginRight: 15,
-                        }}
-                      >
-                        {/* <CardImg
-                          alt="..."
-                          src={require("assets/images/promotions/offer2.jpg")}
-                          top
-                        /> */}
-                        <CardBody>
-                          <CardText>
-                            Special offer for Suzuki ALTO 800 customers to get
-                            their full vehicle service for a special price.This
-                            offer is valid until the end of July
-                          </CardText>
-                        </CardBody>
-                      </Card>
-
-                      <Card
-                        style={{
-                          width: "18rem",
-                          height: 230,
-                          // marginLeft: 35,
-                          marginRight: 15,
-                        }}
-                      >
-                        {/* <CardImg
-                          alt="..."
-                          src={require("assets/images/promotions/offer3.jpg")}
-                          top
-                        /> */}
-                        <CardBody>
-                          <CardText>
-                            Get the premium offer. Free Quick wax along with 25%
-                            offer on each full service
-                          </CardText>
-                        </CardBody>
-                      </Card>
-                    </Row>
+                          <th scope="col" />
+                        </tr>
+                      </thead>
+                      <tbody>{this.promotionsList()}</tbody>
+                    </Table>
                   </div>
                 </CardBody>
               </Card>
