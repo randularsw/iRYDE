@@ -20,23 +20,21 @@ class SessionService {
     final res = await http
         .put('$baseUrl/api/sessions/$id', body: {"providerId": providerId});
     Map data = jsonDecode(res.body);
-    print(data);
+    // print(data);
     return data;
   }
 
   Future<Map> getSession(id) async {
-    print(id);
     final res = await http.get('$baseUrl/api/sessions/$id');
     Map data = jsonDecode(res.body);
-    print(data);
+    // print(data);
     return data;
   }
 
   Future<Map> deleteSession(id) async {
-    print(id);
     final res = await http.delete('$baseUrl/api/sessions/$id');
     Map data = jsonDecode(res.body);
-    print(data);
+    // print(data);
     return data;
   }
 }

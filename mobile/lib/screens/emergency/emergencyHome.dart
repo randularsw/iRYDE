@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:iRYDE/components/drawer.dart';
@@ -19,6 +20,7 @@ class EmergencyHome extends StatefulWidget {
 
 class _EmergencyHomeState extends State<EmergencyHome> {
   bool isRequested = false;
+  int limit = 30;
   final sessionService = SessionService();
 
   @override
@@ -28,30 +30,47 @@ class _EmergencyHomeState extends State<EmergencyHome> {
   }
 
   void checkSession() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String sessionId = prefs.get('session');
-    if (sessionId != null) {
-      setState(() {
-        isRequested = true;
-      });
-      // loop
-      getSession(sessionId);
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String sessionId = prefs.get('session');
+      if (sessionId != null) {
+        setState(() {
+          isRequested = true;
+        });
+        // loop to check if a provider accepted
+        int i = 1;
+        Timer.periodic(const Duration(seconds: 2), (timer) {
+          getSession(sessionId);
+          if (i == limit || !isRequested) {
+            timer.cancel();
+            onCancel();
+          }
+          i++;
+        });
+      }
+    } catch (err) {
+      print(err);
     }
   }
 
   void getSession(sessionId) async {
-    var session = await sessionService.getSession(sessionId);
-    print(session);
-    if (session['providerId'] != null) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => CallPage(
-            channelName: sessionId,
-            role: ClientRole.Broadcaster,
+    try {
+      print("checking for provider");
+      var session = await sessionService.getSession(sessionId);
+      // print(session);
+      if (session['providerId'] != null) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CallPage(
+              channelName: sessionId,
+              role: ClientRole.Broadcaster,
+            ),
           ),
-        ),
-      );
+        );
+      }
+    } catch (err) {
+      print(err);
     }
   }
 
@@ -67,7 +86,15 @@ class _EmergencyHomeState extends State<EmergencyHome> {
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('session', res['_id']);
-      // print(res);
+      int i = 1;
+      Timer.periodic(const Duration(seconds: 2), (timer) {
+        getSession(res['_id']);
+        if (i == limit || !isRequested) {
+          timer.cancel();
+          onCancel();
+        }
+        i++;
+      });
     } catch (err) {
       print(err);
     }
@@ -85,6 +112,14 @@ class _EmergencyHomeState extends State<EmergencyHome> {
     } catch (err) {
       print(err);
     }
+  }
+
+  @override
+  void dispose() {
+    setState(() {
+      isRequested = false;
+    });
+    super.dispose();
   }
 
   @override
