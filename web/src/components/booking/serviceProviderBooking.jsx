@@ -26,7 +26,7 @@ import { updateTimeSLot } from "services/timeSlots";
 
 const ServiceProviderBooking = (props) => {
   const { register, handleSubmit, errors } = useForm();
-  const { vehicles, user, sp, services, onToggle } = props;
+  const { vehicles, user, sp, services, onToggle,unavailableDates } = props;
   const [startDate, setStartDate] = useState(null);
   const [available, setAvailable] = useState(false);
   const [serviceState, setServices] = useState([]);
@@ -34,6 +34,7 @@ const ServiceProviderBooking = (props) => {
   const [selectedTime, setTime] = useState();
   const [timeSlot, setTimeSlot] = useState([]);
   const [resObject, setObject] = useState({});
+  console.log(unavailableDates);
 
   useEffect(() => {
     let serviceState = services;
@@ -195,7 +196,11 @@ const ServiceProviderBooking = (props) => {
               selected={startDate}
               onChange={onChange}
               minDate={new Date()}
-              excludeDates={[subDays(new Date(), -9), subDays(new Date(), -5)]}
+              excludeDates={unavailableDates.map((i) => {
+                const d = new Date();
+                d.setDate(d.getDate() + i);
+                return d;
+              })}
               showDisabledMonthNavigation
               placeholderText="Select Date"
               className="input-group-alternative p-2"
@@ -217,8 +222,7 @@ const ServiceProviderBooking = (props) => {
                       value={t}
                       onChange={onChangeTime}
                       innerRef={register({ required: true })}
-                    />{" "}
-                    {t}
+                    />
                   </div>
                 ))}
               </Row>
