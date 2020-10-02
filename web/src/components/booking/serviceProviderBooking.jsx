@@ -34,7 +34,6 @@ const ServiceProviderBooking = (props) => {
   const [selectedTime, setTime] = useState();
   const [timeSlot, setTimeSlot] = useState([]);
   const [resObject, setObject] = useState({});
-  console.log(unavailableDates);
 
   useEffect(() => {
     let serviceState = services;
@@ -199,6 +198,7 @@ const ServiceProviderBooking = (props) => {
               excludeDates={unavailableDates.map((i) => {
                 const d = new Date();
                 d.setDate(d.getDate() + i);
+                console.log(89,unavailableDates);
                 return d;
               })}
               showDisabledMonthNavigation
@@ -222,7 +222,8 @@ const ServiceProviderBooking = (props) => {
                       value={t}
                       onChange={onChangeTime}
                       innerRef={register({ required: true })}
-                    />
+                    />{" "}
+                    {t}
                   </div>
                 ))}
               </Row>
