@@ -26,6 +26,7 @@ import ServiceProviderBooking from "./serviceProviderBooking";
 import { UserContext } from "core/userContext";
 import { getVehicle } from "services/vehicleService";
 import { getVehicles } from "services/vehicleService";
+import { getUnavailableDates } from "services/unavailableDatesService";
 
 class serviceProviderDetails extends Component {
   static contextType = UserContext;
@@ -35,7 +36,9 @@ class serviceProviderDetails extends Component {
     services: [],
     formModal: false,
     vehicles: [],
-    user:[],
+    user: [],
+    unavailableDates: [],
+    daysDiff: [],
   };
 
   toggleModal = (state) => {
@@ -50,13 +53,31 @@ class serviceProviderDetails extends Component {
       const { data: services } = await getServices(this.props.match.params.id);
       this.setState({ details, services });
       const userData = await this.context.currentUser();
-      this.setState({user:userData.user});
+      this.setState({ user: userData.user });
       const { data: vehicles } = await getVehicles(userData.user?._id);
       this.setState({ vehicles });
+      const { data: unavailableDates } = await getUnavailableDates(
+        this.state.details._id
+      );
+      //get unavailable dates
+      this.setState({ unavailableDates:unavailableDates[0].dates });
+      //console.log(this.state.unavailableDates);
+      this.state.unavailableDates.map(d=>{
+        const unavailable = new Date(d.date);
+        //console.log(unavailable);
+        const today = new Date().toISOString();
+        const diff = new Date(unavailable).getTime() - new Date(today).getTime(); // Gives difference between 2 days
+        const diffDates = Math.round(diff / (1000 * 3600 * 24)); // convert it to np of days format
+        this.state.daysDiff.push(diffDates + 1);
+      });
+      //console.log(this.state.daysDiff);
+
     } catch (err) {
       console.log("Error", err);
     }
   }
+
+
 
   onBooking = () => {
     this.props.history.push(`/booking/${this.state._id}`);
@@ -121,19 +142,24 @@ class serviceProviderDetails extends Component {
                               toggle={() => this.toggleModal("formModal")}
                             >
                               <div className="modal-body p-0">
-                                <Card className="bg-secondary shadow border-0 p-3" style={{width:600}}>
+                                <Card
+                                  className="bg-secondary shadow border-0 p-3"
+                                  style={{ width: 600 }}
+                                >
                                   <CardHeader className="bg-transparent">
                                     Online Service Booking
                                   </CardHeader>
                                   <CardBody className="">
-                                   <ServiceProviderBooking
-                                    vehicles ={this.state.vehicles}
-                                    user={this.state.user}
-                                    sp={this.state.details}
-                                    services={this.state.services}
-                                    onToggle={this.toggleModal}
-                                   />
-                                   
+                                    <ServiceProviderBooking
+                                      vehicles={this.state.vehicles}
+                                      user={this.state.user}
+                                      sp={this.state.details}
+                                      services={this.state.services}
+                                      unavailableDates={
+                                        this.state.daysDiff
+                                      }
+                                      onToggle={this.toggleModal}
+                                    />
                                   </CardBody>
                                 </Card>
                               </div>
@@ -142,7 +168,7 @@ class serviceProviderDetails extends Component {
                         </div>
                       </div>
                     </Row>
-                    
+
                     <div className="mt-5 ml-3">
                       <h2>Our Services</h2>
                       <div className="ml-4">
