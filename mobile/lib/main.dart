@@ -49,8 +49,8 @@ class MyApp extends StatelessWidget {
         SettingsGeneral.id: (context) => SettingsGeneral(),
         AboutUsPage.id: (context) => AboutUsPage(),
         ServiceProviderDetails.id: (context) => ServiceProviderDetails(),
-        VehicleAdd.id : (context) => VehicleAdd(),
-        ServiceBooking.id :(context) => ServiceBooking(),
+        VehicleAdd.id: (context) => VehicleAdd(),
+        ServiceBooking.id: (context) => ServiceBooking(),
       },
       // home: MyBottomNavigationBar(),
     );
