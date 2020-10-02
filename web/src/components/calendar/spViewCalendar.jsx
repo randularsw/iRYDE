@@ -14,6 +14,7 @@ import {
 } from "reactstrap";
 import { getSpConfirmedAppointments } from "services/bookingService";
 import { UserContext } from "core/userContext";
+import UnavailableDates from "./unavailableDates";
 
 class SpViewCalendar extends Component {
   static contextType = UserContext;
@@ -44,11 +45,6 @@ class SpViewCalendar extends Component {
     }
   }
 
-  onChange = (date) => {
-    this.setState({ date });
-    console.log(this.state.date);
-  };
-
   render() {
     return (
       <>
@@ -73,11 +69,8 @@ class SpViewCalendar extends Component {
                       })}
                       inline
                     />
-                    {/* <DatePicker
-                      selected={this.state.date}
-                      onChange={this.onChange}
-                      placeholderText="This highlights a week ago and a week from today"
-                    /> */}
+                    
+                    <UnavailableDates/>
                   </div>
                 </CardBody>
               </Card>
