@@ -81,11 +81,11 @@ class PromotionsView extends Component {
                       (window.location.href = "/promotionsadd")
                     }
                   >
-                    New Promotion
+                    Add Promotions
                   </Button>
                 </CardHeader>
                 <CardBody>
-                  <div>
+                  <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
                     <Table className="align-items-center table-dark" responsive>
                       <thead className="thead-dark">
