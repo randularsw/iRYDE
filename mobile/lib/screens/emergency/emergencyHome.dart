@@ -40,12 +40,13 @@ class _EmergencyHomeState extends State<EmergencyHome> {
         // loop to check if a provider accepted
         int i = 1;
         Timer.periodic(const Duration(seconds: 2), (timer) {
-          getSession(sessionId);
-          if (i == limit || !isRequested) {
+          if (i == limit || isRequested == false) {
             timer.cancel();
             onCancel();
+            return;
           }
           i++;
+          getSession(sessionId);
         });
       }
     } catch (err) {
@@ -58,16 +59,21 @@ class _EmergencyHomeState extends State<EmergencyHome> {
       print("checking for provider");
       var session = await sessionService.getSession(sessionId);
       // print(session);
-      if (session['providerId'] != null) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => CallPage(
-              channelName: sessionId,
-              role: ClientRole.Broadcaster,
+      if (session['providerId'] != null && isRequested == true) {
+        setState(() {
+          isRequested = false;
+        });
+        if (isRequested == false) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => CallPage(
+                channelName: sessionId,
+                role: ClientRole.Broadcaster,
+              ),
             ),
-          ),
-        );
+          );
+        }
       }
     } catch (err) {
       print(err);
@@ -88,12 +94,13 @@ class _EmergencyHomeState extends State<EmergencyHome> {
       prefs.setString('session', res['_id']);
       int i = 1;
       Timer.periodic(const Duration(seconds: 2), (timer) {
-        getSession(res['_id']);
-        if (i == limit || !isRequested) {
+        if (i == limit || isRequested == false) {
           timer.cancel();
           onCancel();
+          return;
         }
         i++;
+        getSession(res['_id']);
       });
     } catch (err) {
       print(err);
