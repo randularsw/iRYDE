@@ -30,14 +30,18 @@ class SpViewCalendar extends Component {
       const { data: confirmed } = await getSpConfirmedAppointments(
         userData.user?._id
       );
+      
       this.setState({ confirmed });
       const daysDiff = [];
+      console.log(confirmed);
       this.state.confirmed.map((c) => {
         const appointmentDate = new Date(c.date);
+        console.log(appointmentDate);
         const today = new Date().toISOString();
         const diff = new Date(appointmentDate).getTime() - new Date(today).getTime(); // Gives difference between 2 days
         const diffDates = Math.round(diff / (1000 * 3600 * 24)); // convert it to np of days format
-        daysDiff.push(diffDates + 1);
+        daysDiff.push(diffDates);
+        console.log(1111111,daysDiff);
       });
       this.setState({ daysDiff });
     } catch (error) {
@@ -68,6 +72,8 @@ class SpViewCalendar extends Component {
                         return d;
                       })}
                       inline
+                      showDisabledMonthNavigation
+                      className="input-group-alternative p-2"
                     />
                     
                     <UnavailableDates/>
