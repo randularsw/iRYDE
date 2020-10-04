@@ -1,13 +1,24 @@
-// import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-// import 'package:http/http.dart' as http;
+class QuestionService {
+  Future<Map> addQuestion(Map question) async {
+    print(question);
+    try {
+      final res = await http.post('http://192.168.1.5:4000/api/questions',
+          headers: null, body: question);
 
-// class QuestionService {
-//   Future<http.Response> createQuestion() async {
-//     return await http.post('http://localhost:4000/api/questions',
-//         body: jsonEncode(<String, String>{
-//           'title': title,
-//           'text': text,
-//         }));
-//   }
-// }
+      Map data = jsonDecode(res.body);
+      print(data);
+      return data;
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  Future<List> getAllQuestions() async {
+    final res = await http.get('http://192.168.1.5:4000/api/questions');
+    List data = jsonDecode(res.body);
+    return data;
+  }
+}
