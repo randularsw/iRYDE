@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-=======
 // import 'package:iRYDE/screens/drawer/settingsBasic.dart';
->>>>>>> develop
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -28,7 +25,6 @@ class DrawerOption extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: <Widget>[
-<<<<<<< HEAD
           UserAccountsDrawerHeader(
             onDetailsPressed: () {
               Navigator.pushNamed(context, ProfilePage.id);
@@ -41,7 +37,6 @@ class DrawerOption extends StatelessWidget {
               child: Text('Hi'),
             ),
           ),
-=======
           Consumer<UserModel>(builder: (context, data, child) {
             return UserAccountsDrawerHeader(
               onDetailsPressed: () {
@@ -56,7 +51,6 @@ class DrawerOption extends StatelessWidget {
             );
           }),
 
->>>>>>> develop
           ListTile(
               onTap: () {
                 Navigator.pushNamed(context, ProfilePage.id);

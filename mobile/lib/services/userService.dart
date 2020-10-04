@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserService {
   Future<Map> register(Map user) async {
     try {
-      final res = await http.post('http://192.168.137.64:4000/api/users',
+      final res = await http.post('http://192.168.1.102:4000/api/users',
           headers: null, body: user);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (res.headers['token'] != null) {
@@ -20,7 +20,7 @@ class UserService {
   }
 
   Future<List> getServiceProviders() async {
-    final res = await http.get('http://192.168.137.64:4000/api/users/sp');
+    final res = await http.get('http://192.168.1.102:4000/api/users/sp');
     List data = jsonDecode(res.body);
     return data;
   }
