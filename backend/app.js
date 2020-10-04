@@ -11,12 +11,9 @@ const usersRouter = require("./routes/users");
 const vehiclesRouter = require("./routes/vehicles");
 const servicesRouter = require("./routes/services");
 const promotionsRouter = require("./routes/promotions");
-<<<<<<< HEAD
 const questionRouter = require("./routes/questions");
-=======
 const bookingRouter = require("./routes/bookings");
 const timeSlotRouter = require("./routes/timeSlots");
->>>>>>> develop
 
 const port = process.env.PORT || 4000;
 console.log(port);
@@ -32,12 +29,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
 app.use("/vehicles", vehiclesRouter);
-app.use("/bookings",bookingRouter);
+app.use("/bookings", bookingRouter);
 app.use("/services", servicesRouter);
 app.use("/promotions", promotionsRouter);
 app.use("/timeslots", timeSlotRouter);
-
 app.use("/api/questions", questionRouter);
+app.use("/api/questions/:id", questionRouter);
+
 
 mongoose.connect(
   process.env.DB_URL,
