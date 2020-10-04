@@ -8,7 +8,7 @@ router.post('/', async (req, res) => {
         title: req.body.title,
         text: req.body.text,
         // ownerId: req.body.ownerId,
-    })
+    });
     try {
         const saved = await newQuestion.save();
         res.json(saved);
@@ -16,40 +16,31 @@ router.post('/', async (req, res) => {
         res.json({ message: error });
     }
 });
-//gegt specific vehicle owner's vehicle
-router.get('/vo/:id', async (req, res) => {
-    console.log(req.params.id);
-    try {
-        const vehicles = await Vehicle.find({ ownerId: req.params.id });
-        console.log(vehicles);
-        res.json(vehicles)
-    } catch (error) {
-        res.json({ message: error });
-    }
-});
 
-//get specific vehicle details
+//get specific question details
 router.get('/:id', async (req, res) => {
     console.log('vvvvvvvvvvvvvvvvv', req.params.id);
     try {
-        const vehicle = await Vehicle.findById({ _id: req.params.id });
-        console.log(vehicle);
-        res.json(vehicle)
+        const question = await Question.findById({ _id: req.params.id });
+        console.log(question);
+        res.json(question)
     } catch (error) {
         res.json({ message: error });
     }
 });
 
-//delete specific vehicle
-router.delete('/:id', async (req, res) => {
-    console.log('vvvvvvvvvvvvvvvvv', req.params.id);
+//get specific question details
+router.get('/', async (req, res) => {
+    // console.log('vvvvvvvvvvvvvvvvv',req.body);
     try {
-        const vehicle = await Vehicle.findByIdAndDelete({ _id: req.params.id });
-        res.send('deleted');
+        const question = await Question.find();
+        console.log(question);
+        res.json(question)
     } catch (error) {
         res.json({ message: error });
     }
 });
+
 
 
 module.exports = router;
