@@ -16,13 +16,10 @@ import 'screens/drawer/profilePage.dart';
 import 'screens/notifications/notificationPage.dart';
 import 'screens/drawer/settingsBasic.dart';
 import 'screens/drawer/aboutUs.dart';
-<<<<<<< HEAD
 import 'screens/forum/addQuestion.dart';
 import 'screens/forum/addPost.dart';
-=======
 import 'screens/auth/loginPage.dart';
 import 'screens/auth/registerPage.dart';
->>>>>>> develop
 
 void main() => runApp(
       ChangeNotifierProvider(
@@ -42,12 +39,9 @@ class MyApp extends StatelessWidget {
           ),
           primaryColor: Color(0XFF172b4d),
           scaffoldBackgroundColor: Colors.white),
-<<<<<<< HEAD
 
-      //initialRoute: HomePage.id,
-=======
-      initialRoute: SplashScreen.id,
->>>>>>> develop
+      initialRoute: MyBottomNavigationBar.id,
+      // initialRoute: SplashScreen.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
         LoginPage.id: (context) => LoginPage(),
@@ -62,16 +56,12 @@ class MyApp extends StatelessWidget {
         NotificationPage.id: (context) => NotificationPage(),
         SettingsGeneral.id: (context) => SettingsGeneral(),
         AboutUsPage.id: (context) => AboutUsPage(),
-<<<<<<< HEAD
         AddQuestion.id: (context) => AddQuestion(),
         AddPost.id: (context) => AddPost(),
-=======
         ServiceProviderDetails.id: (context) => ServiceProviderDetails(),
-        VehicleAdd.id : (context) => VehicleAdd(),
-        ServiceBooking.id :(context) => ServiceBooking(),
->>>>>>> develop
+        VehicleAdd.id: (context) => VehicleAdd(),
+        ServiceBooking.id: (context) => ServiceBooking(),
       },
-      // home: MyBottomNavigationBar(),
     );
   }
 }
