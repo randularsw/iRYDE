@@ -1,12 +1,13 @@
 import 'package:http/http.dart' as http;
+import 'package:iRYDE/core/globals.dart';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserService {
   Future<Map> register(Map user) async {
     try {
-      final res = await http.post('http://192.168.1.102:4000/api/users',
-          headers: null, body: user);
+      final res =
+          await http.post('$baseUrl/api/users', headers: null, body: user);
       SharedPreferences prefs = await SharedPreferences.getInstance();
       if (res.headers['token'] != null) {
         prefs.setString('token', res.headers['token']);
@@ -20,7 +21,7 @@ class UserService {
   }
 
   Future<List> getServiceProviders() async {
-    final res = await http.get('http://192.168.1.102:4000/api/users/sp');
+    final res = await http.get('$baseUrl/api/users/sp');
     List data = jsonDecode(res.body);
     return data;
   }

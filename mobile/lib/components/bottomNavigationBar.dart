@@ -7,6 +7,8 @@ import 'package:iRYDE/screens/home/homePage.dart';
 import 'package:iRYDE/screens/emergency/emergencyHome.dart';
 import 'package:iRYDE/screens/notifications/notificationPage.dart';
 import 'package:iRYDE/screens/bookings/bookingHomePage.dart';
+import 'package:iRYDE/services/sessionService.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyBottomNavigationBar extends StatefulWidget {
   static const String id = 'my_bottom_navigation_bar';
@@ -24,10 +26,29 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar> {
     BookingHome(),
   ];
 
+  final sessionService = SessionService();
+
   void onTappedBar(int index) {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  @override
+  void dispose() {
+    endSession();
+    super.dispose();
+  }
+
+  void endSession() async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String sessionId = prefs.get('session');
+      await sessionService.deleteSession(sessionId);
+      prefs.remove('session');
+    } catch (err) {
+      print(err);
+    }
   }
 
   @override
