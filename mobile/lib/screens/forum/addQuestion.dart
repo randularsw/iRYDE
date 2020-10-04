@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iRYDE/components/myRaisedButton.dart';
+import 'package:iRYDE/services/questionService.dart';
 
 class AddQuestion extends StatefulWidget {
   static const String id = 'add_question';
@@ -12,17 +13,19 @@ class _AddQuestionState extends State<AddQuestion> {
   String _questionText;
   String _questionTitle;
 
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final questionService = QuestionService();
+  final _formKey = GlobalKey<FormState>();
 
   Widget _buildQuestionTitle() {
     return Container(
       child: TextFormField(
         decoration:
             InputDecoration(labelText: 'Type your question title here..'),
-        validator: (String value) {
+        validator: (value) {
           if (value.isEmpty) {
             return 'Question title is empty!';
           }
+          return null;
         },
         onSaved: (String value) {
           _questionTitle = value;
@@ -36,10 +39,11 @@ class _AddQuestionState extends State<AddQuestion> {
       child: TextFormField(
         // maxLines: 10,
         decoration: InputDecoration(labelText: 'Type your question here..'),
-        validator: (String value) {
+        validator: (value) {
           if (value.isEmpty) {
             return 'Question text is empty!';
           }
+          return null;
         },
         onSaved: (String value) {
           _questionText = value;
@@ -47,6 +51,22 @@ class _AddQuestionState extends State<AddQuestion> {
       ),
     );
   }
+
+  void addQuestion() async {
+    try {
+      if (_formKey.currentState.validate()) {
+        _formKey.currentState.save();
+
+        Map question = {"title": _questionTitle, "text": _questionText};
+        print(question);
+        Map d = await questionService.addQuestion(question);
+      }
+    } catch (err) {
+      print(err);
+    }
+  }
+
+  // final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -95,11 +115,7 @@ class _AddQuestionState extends State<AddQuestion> {
                         questionText: _questionText,
                         buttonText: 'Post',
                         onPressed: () {
-                          if (!_formKey.currentState.validate()) {
-                            return;
-                          }
-                          _formKey.currentState.save();
-                          print(_questionText);
+                          addQuestion();
                         },
                       ),
                     ],
