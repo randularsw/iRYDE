@@ -40,8 +40,8 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0XFF172b4d),
           scaffoldBackgroundColor: Colors.white),
 
-      initialRoute: MyBottomNavigationBar.id,
-      // initialRoute: SplashScreen.id,
+      // initialRoute: MyBottomNavigationBar.id,
+      initialRoute: SplashScreen.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
         LoginPage.id: (context) => LoginPage(),
