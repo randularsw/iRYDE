@@ -146,7 +146,7 @@ class ServicesAdd extends Component {
                         </Col>
                         <Col md="1">
                           {this.state.upload && (
-                            <i className="fas fa-check-circle"></i>
+                            <i className="fas fa-check-circle fa-2x"></i>
                           )}
                         </Col>
                       </Row>
