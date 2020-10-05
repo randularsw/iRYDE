@@ -4,7 +4,7 @@ import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 import { Media, Table } from "reactstrap";
 import { Button } from "reactstrap";
 import { FormGroup, Form, Input, Col } from "reactstrap";
-import { addvehicle } from "./vehicleBrand";
+// import { addvehicle } from "./vehicleBrand";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { ModelsList } from "./modelList";
@@ -29,8 +29,6 @@ class VehicleType extends Component {
       //   text:"",
       //   key:"",
       // }
-
-
     };
 
     this.addItem = this.addItem.bind(this);
@@ -52,12 +50,12 @@ class VehicleType extends Component {
   addItem(e) {
     try {
       e.preventDefault();
-      
+
       console.log(this.itemInputValue.value);
-      
+
       const { listItems } = this.state;
       const vehicleType = this.itemInputValue.value;
-      
+
       if (listItems.includes(vehicleType)) {
         alert("The vehicle brand is already included ");
       } else {
@@ -90,7 +88,6 @@ class VehicleType extends Component {
     }
   }
   removeItem = async (id) => {
-
     try {
       const res = await deleteVehicleBrand(id);
       this.getVehicleTypes();
@@ -106,12 +103,12 @@ class VehicleType extends Component {
   // addModel(e) {
   //   try {
   //     e.preventDefault();
-      
+
   //     console.log(this.modelInputValue.value);
-      
+
   //     const { listModels } = this.state;
   //     const vehicleModel = this.modelInputValue.value;
-      
+
   //     if (listModels.includes(vehicleModel)) {
   //       alert("The vehicle model is already included ");
   //     } else {
@@ -144,7 +141,6 @@ class VehicleType extends Component {
   //   }
   // }
 
-
   // removeModel = async (id) => {
 
   //   try {
@@ -157,10 +153,10 @@ class VehicleType extends Component {
   // };
 
   render() {
-    const { listItems,listModels, item, message } = this.state;
+    const { listItems, listModels, item, message } = this.state;
     return (
       <>
-        <Header /> 
+        <Header />
         <Container className=" mt--9" fluid>
           {/* Table */}
           <Row>
@@ -227,14 +223,11 @@ class VehicleType extends Component {
                                     Add Model
                                   </Link>
                                 </td>
-                                <td>
-                                
-                                </td>
+                                <td></td>
 
                                 <td>
                                   <Button
                                     onClick={(e) => this.removeItem(item._id)}
-                                    
                                     color="danger"
                                     outline
                                     type="button"
