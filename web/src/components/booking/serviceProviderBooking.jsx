@@ -26,7 +26,7 @@ import { updateTimeSLot } from "services/timeSlots";
 
 const ServiceProviderBooking = (props) => {
   const { register, handleSubmit, errors } = useForm();
-  const { vehicles, user, sp, services, onToggle } = props;
+  const { vehicles, user, sp, services, onToggle,unavailableDates } = props;
   const [startDate, setStartDate] = useState(null);
   const [available, setAvailable] = useState(false);
   const [serviceState, setServices] = useState([]);
@@ -195,7 +195,12 @@ const ServiceProviderBooking = (props) => {
               selected={startDate}
               onChange={onChange}
               minDate={new Date()}
-              excludeDates={[subDays(new Date(), -9), subDays(new Date(), -5)]}
+              excludeDates={unavailableDates.map((i) => {
+                const d = new Date();
+                d.setDate(d.getDate() + i);
+                console.log(89,unavailableDates);
+                return d;
+              })}
               showDisabledMonthNavigation
               placeholderText="Select Date"
               className="input-group-alternative p-2"

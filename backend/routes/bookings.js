@@ -121,4 +121,18 @@ router.patch("/status/:id", async (req, res) => {
   }
 });
 
+//checking isRated
+router.get("/isRated/:id",async(req,res)=>{
+  try {
+    const result = await Booking.find({
+      vo:req.params.id,
+      status:"finished",
+      isRated:false
+    });
+    res.json(result);
+  } catch (error) {
+    res.json({ message: error });
+  }
+})
+
 module.exports = router;

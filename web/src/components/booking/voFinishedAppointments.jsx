@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Container, Row, CardHeader, CardBody, Button, Col } from "reactstrap";
 import { Card } from "@material-ui/core";
 
-
 const VoFinishedAppointments = (props) => {
-  const { finished} = props;
+  const { finished } = props;
 
   const changeDateFormat = (f) => {
     let d = new Date(f);
@@ -21,7 +20,7 @@ const VoFinishedAppointments = (props) => {
               <Row>
                 <div className="col-9 text-secondary">
                   <i className="fas fa-user pr-2 pl-2 text-secondary"></i>
-                  {i.voName}
+                  {i.spName}
                 </div>
                 <div className="col text-secondary">
                   <Row>
@@ -33,7 +32,6 @@ const VoFinishedAppointments = (props) => {
                       <b> Time:</b>
                       {i?.time}
                     </small>
-                    
                   </Row>
                 </div>
               </Row>

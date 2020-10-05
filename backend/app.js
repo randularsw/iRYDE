@@ -15,6 +15,8 @@ const servicesRouter = require("./routes/services");
 const promotionsRouter = require("./routes/promotions");
 const bookingRouter = require("./routes/bookings");
 const timeSlotRouter = require("./routes/timeSlots");
+const unavailableDateRouter = require("./routes/unavailableDates");
+const ratingRouter = require('./routes/rates');
 
 const port = process.env.PORT || 4000;
 console.log(port);
@@ -36,6 +38,8 @@ app.use("/bookings", bookingRouter);
 app.use("/services", servicesRouter);
 app.use("/promotions", promotionsRouter);
 app.use("/timeslots", timeSlotRouter);
+app.use("/sp/unavailabledates",unavailableDateRouter);
+app.use("/rating",ratingRouter);
 
 mongoose.connect(
   process.env.DB_URL,
