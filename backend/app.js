@@ -16,6 +16,7 @@ const vehicleTypesRouter = require("./routes/vehicleTypes");
 const removeUsersRouter = require("./routes/removeUsers");
 
 const promotionsRouter = require("./routes/promotions");
+const questionRouter = require("./routes/questions");
 const bookingRouter = require("./routes/bookings");
 const timeSlotRouter = require("./routes/timeSlots");
 const unavailableDateRouter = require("./routes/unavailableDates");
@@ -43,8 +44,11 @@ app.use("/vehicleTypes", vehicleTypesRouter);
 app.use("/removeUsers", removeUsersRouter);
 app.use("/promotions", promotionsRouter);
 app.use("/timeslots", timeSlotRouter);
-app.use("/sp/unavailabledates",unavailableDateRouter);
-app.use("/rating",ratingRouter);
+app.use("/api/questions", questionRouter);
+app.use("/api/questions/:id", questionRouter);
+
+app.use("/sp/unavailabledates", unavailableDateRouter);
+app.use("/rating", ratingRouter);
 
 mongoose.connect(
   process.env.DB_URL,
