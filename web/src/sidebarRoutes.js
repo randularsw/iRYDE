@@ -27,8 +27,8 @@ var sidebarRoutes = [
     actor: "sp",
   },
   {
-    path: "/about",
-    name: "About",
+    path: "/profile",
+    name: "Profile",
     icon: "ni ni-tv-2 text-primary",
     component: About,
     actor: "sp",

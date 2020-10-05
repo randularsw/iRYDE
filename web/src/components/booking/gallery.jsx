@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import ReactImageGallery from "react-image-gallery";
 import ImageGallery from "react-image-gallery";
-import Gallery from "react-photo-gallery";
-import ResponsiveGallery from "react-responsive-gallery";
 
 function Galleryy() {
   const imagess = [

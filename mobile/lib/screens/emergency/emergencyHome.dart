@@ -147,7 +147,8 @@ class _EmergencyHomeState extends State<EmergencyHome> {
         children: <Widget>[
           Expanded(
             child: Center(
-              child: Text("Map"),
+              // child: Maps(),
+              child: Text('Map'),
             ),
           ),
           Expanded(

@@ -37,7 +37,7 @@ class Home extends Component {
   async componentDidMount() {
     const userData = await this.context.currentUser();
     if (userData?.user?.type === "sp") {
-      this.props.history.push("/about");
+      this.props.history.push("/profile");
       // window.location = "/";
     } else if (userData?.user?.type === "ad") {
       this.props.history.push("/admin/vehicleType");
@@ -99,7 +99,7 @@ class Home extends Component {
                   // width={200}
                   src={require("assets/images/w4.jpg")}
                 /> */}
-              {!isAuthenticated && <HomeCarousel />}
+              {/* {!isAuthenticated && <HomeCarousel />} */}
             </div>
           </Row>
           <ServiceProviderList />
