@@ -36,3 +36,7 @@ export function getVoCanceledAppointments(id){
 export function updateStatus(id,appointment){
   return axios.patch("http://localhost:4000/bookings/status/"+id,appointment);
 }
+//get isRated==false && status==finished
+export function getRateModal(id){
+  return axios.get("http://localhost:4000/bookings/isRated/"+id);
+}

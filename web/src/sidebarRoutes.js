@@ -9,6 +9,7 @@ import Payment from "components/payment";
 import VehicleType from "components/admin/vehicleType";
 import SpBookingView from "components/booking/spBookingView";
 import VoBookingView from "components/booking/voBookingView";
+import Dashboard from "components/spdashboard";
 
 var sidebarRoutes = [
   {
@@ -17,6 +18,13 @@ var sidebarRoutes = [
     icon: "ni ni-tv-2 text-primary",
     component: Profile,
     actor: "vo",
+  },
+  {
+    path: "/dashboard",
+    name: "Dashboard",
+    icon: "ni ni-tv-2 text-primary",
+    component: Dashboard,
+    actor: "sp",
   },
   {
     path: "/about",
@@ -77,7 +85,7 @@ var sidebarRoutes = [
     component: VehiclesList,
     actor: "vo",
   },
-  //routes for sp appointments 
+  //routes for sp appointments
   {
     path: "/sp/appointments",
     name: "Appointments",
