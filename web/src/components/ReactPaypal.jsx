@@ -1,7 +1,9 @@
-import React from "react";
+import { UserContext } from "core/userContext";
+import React, { useContext } from "react";
 import { Row, Col, Container } from "reactstrap";
 
-export default function ReactPayPal() {
+export default function ReactPayPal(props) {
+  const context = useContext(UserContext);
   const [paid, setPaid] = React.useState(false);
   const [error, setError] = React.useState(null);
   const paypalRef = React.useRef();
@@ -27,6 +29,7 @@ export default function ReactPayPal() {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           setPaid(true);
+          pay();
           console.log(order);
         },
         onError: (err) => {
@@ -36,6 +39,16 @@ export default function ReactPayPal() {
       })
       .render(paypalRef.current);
   }, []);
+
+  const pay = async () => {
+    try {
+      const d = { _id: context.state.user._id };
+      await context.doPayment(d);
+      props.onSuccess();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // If the payment has been made
   if (paid) {
@@ -47,7 +60,7 @@ export default function ReactPayPal() {
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
-              marginLeft: "90px",
+              // marginLeft: "90px",
             }}
           >
             <img src={require("assets/images/check.jpg")} alt="alignment" />

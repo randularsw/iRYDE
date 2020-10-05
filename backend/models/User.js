@@ -22,11 +22,12 @@ const User = mongoose.Schema({
   },
   rp: {
     type: Number,
-    required: true,
   },
   level: {
     type: String,
-    required: true,
+  },
+  paid: {
+    type: Boolean,
   },
   type: {
     type: String,

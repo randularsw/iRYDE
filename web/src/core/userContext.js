@@ -46,6 +46,18 @@ class UserProvider extends Component {
     }
   };
 
+  doPayment = async (data) => {
+    try {
+      // console.log(data);
+      const user = await userService.addPayment(data);
+      if (user._id) {
+        this.setState({ user });
+      }
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
+
   currentUser = async () => {
     try {
       if (!this.state.isAuthenticated) {
@@ -96,6 +108,7 @@ class UserProvider extends Component {
           getUserOnPageLoad: this.getUserOnPageLoad,
           updateUser: this.updateUser,
           uploadPhoto: this.uploadPhoto,
+          doPayment: this.doPayment,
         }}
       >
         {this.props.children}
