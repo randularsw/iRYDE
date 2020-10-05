@@ -18,7 +18,7 @@ router.post('/', async (req,res) =>{
         res.json({ message: error });
     }
 });
-//gegt specific vehicle owner's vehicle
+//get specific vehicle owner's vehicles
 router.get('/vo/:id',async (req,res)=>{
     console.log(req.params.id);
     try {
