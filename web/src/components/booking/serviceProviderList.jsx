@@ -21,7 +21,7 @@ class serviceProviderList extends Component {
   async componentDidMount() {
     try {
       const res = await getServiceProviders();
-      console.log('wwwwwwwwwwwwwwwwwwwwwww',res.data);
+      //console.log('wwwwwwwwwwwwwwwwwwwwwww',res.data);
       this.setState({
         serviceProviders:res.data
       });  
