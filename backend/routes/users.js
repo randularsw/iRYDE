@@ -19,8 +19,8 @@ router.post("/", async (req, res) => {
       phone: req.body.phone,
       city: req.body.city,
       type: req.body.type,
-      // rp: 0,
-      // level: "Beginner",
+      rp: 0,
+      level: "Beginner",
       password: hash,
     });
     console.log(user);

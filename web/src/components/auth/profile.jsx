@@ -14,12 +14,15 @@ import {
 } from "reactstrap";
 import Header from "components/shared/header";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { getVehicles } from "services/vehicleService";
 
 const Profile = (props) => {
   const context = useContext(UserContext);
   const { register, handleSubmit, errors } = useForm();
 
   const [edit, setEdit] = useState(false);
+  const [vehicleCount, setVehicleCount] = useState(0);
 
   const onSubmit = async (data) => {
     try {
@@ -51,6 +54,20 @@ const Profile = (props) => {
     console.log(file.secure_url);
     const d = { _id: context.state.user._id, photo: file.secure_url };
     await context.uploadPhoto(d);
+  };
+
+  useEffect(() => {
+    getVehicleCount();
+  });
+
+  const getVehicleCount = async () => {
+    try {
+      const vehicles = await getVehicles(user._id);
+      const vehicleCount = vehicles.data.length;
+      setVehicleCount(vehicleCount);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const { user } = context.state;
@@ -106,7 +123,7 @@ const Profile = (props) => {
                     onClick={(e) => e.preventDefault()}
                     size="sm"
                   >
-                    +72 Rep
+                    +{user?.rp} Rep
                   </Button>
                   <Button
                     className="float-right"
@@ -115,7 +132,7 @@ const Profile = (props) => {
                     onClick={(e) => e.preventDefault()}
                     size="sm"
                   >
-                    Beginner
+                    {user?.level}
                   </Button>
                 </div>
               </CardHeader>
@@ -154,13 +171,13 @@ const Profile = (props) => {
                 </div>
                 <Row>
                   <div className="col">
-                    <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                      <div>
+                    <div className="card-profile-stats d-flex justify-content-center ">
+                      {/* <div>
                         <span className="heading">22</span>
                         <span className="description">Bookings</span>
-                      </div>
+                      </div> */}
                       <div>
-                        <span className="heading">2</span>
+                        <span className="heading">{vehicleCount}</span>
                         <span className="description">Vehicles</span>
                       </div>
                       {/* <div>

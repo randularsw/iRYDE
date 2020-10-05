@@ -15,20 +15,19 @@ const User = mongoose.Schema({
   },
   photo: {
     type: String,
-    required: true,
   },
   city: {
     type: String,
     required: true,
   },
-  // rp: {
-  //   type: Number,
-  //   required: true,
-  // },
-  // level: {
-  //   type: String,
-  //   required: true,
-  // },
+  rp: {
+    type: Number,
+    required: true,
+  },
+  level: {
+    type: String,
+    required: true,
+  },
   type: {
     type: String,
     required: true,

@@ -10,7 +10,6 @@ import 'package:iRYDE/services/sessionService.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:agora_rtc_engine/rtc_engine.dart';
-import 'package:iRYDE/screens/emergency/maps.dart';
 
 class EmergencyHome extends StatefulWidget {
   static const String id = 'emergency_home_page';
