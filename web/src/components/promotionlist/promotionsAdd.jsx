@@ -4,11 +4,16 @@ import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 import { FormGroup, Form, Input, Col, Button } from "reactstrap";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-//import Datetime from "react-datetime";
-
+import moment from "react-moment";
 import { InputGroupAddon, InputGroupText, InputGroup } from "reactstrap";
+import { UserContext } from "core/userContext";
+import { addPromotions } from "services/promotionService";
+import axios from "axios";
+
+const minDate = new Date(Date.now());
 
 class PromotionsAdd extends Component {
+  static contextType = UserContext;
   constructor(props) {
     super(props);
 
@@ -16,10 +21,12 @@ class PromotionsAdd extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeStartDate = this.onChangeStartDate.bind(this);
     this.onChangeEndDate = this.onChangeEndDate.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       //items: [],
       title: "",
       description: "",
+      // ownerId: "",
       startDate: new Date(),
       endDate: new Date(),
     };
@@ -48,6 +55,25 @@ class PromotionsAdd extends Component {
       endDate: date,
     });
   }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const promotion = {
+      title: this.state.title,
+      description: this.state.description,
+      startDate: this.state.startDate,
+      endDate: this.state.endDate,
+      ownerId: this.context.state.user._id,
+    };
+    console.log(promotion);
+
+    axios
+      .post("http://localhost:4000/promotions/add", promotion)
+      .then((res) => console.log(res.data));
+
+    window.location = "/promotions";
+  }
+
   render() {
     // const { items } = this.state;
     return (
@@ -55,110 +81,116 @@ class PromotionsAdd extends Component {
         <Header />
         <Container className=" mt--9" fluid>
           {/* Table */}
-          <Row>
-            <div className=" col">
-              <Card className=" shadow" style={{ backgroundColor: "#f4f5f7" }}>
-                <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0">Add promotions</h3>
-                </CardHeader>
-                <CardBody>
-                  <div style={{ minHeight: 400 }}>
-                    {/* Page Content */}
 
-                    <Form onSubmit={this.onSubmit}>
-                      <Row
-                        className="justify-content-md-center"
-                        style={{ marginTop: ".5rem" }}
-                      >
-                        <Col md="8">
-                          <FormGroup>
-                            <Input
-                              className="form-control-alternative"
-                              placeholder="Title"
-                              type="text"
-                              value={this.state.title}
-                              onChange={this.onChangeTitle}
+          <Col lg="10">
+            <Card
+              className="bg-secondary shadow border-0 mb-7"
+              style={({ backgroundColor: "#f4f5f7" }, { marginLeft: "9.8rem" })}
+            >
+              <CardHeader className=" bg-transparent">
+                <h3 className=" mb-0">Add promotions</h3>
+              </CardHeader>
+              <CardBody>
+                <div style={{ minHeight: 400 }}>
+                  {/* Page Content */}
+
+                  <Form onSubmit={this.onSubmit}>
+                    <Row
+                      className="justify-content-md-center"
+                      style={{ marginTop: ".5rem" }}
+                    >
+                      <Col md="8">
+                        <FormGroup>
+                          <Input
+                            className="form-control-alternative"
+                            placeholder="Title"
+                            type="text"
+                            required={true}
+                            value={this.state.title}
+                            onChange={this.onChangeTitle}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row
+                      className="justify-content-md-center"
+                      style={{ marginTop: "1.5rem" }}
+                    >
+                      <Col md="8">
+                        <FormGroup>
+                          <Input
+                            className="form-control-alternative"
+                            placeholder="Enter the description"
+                            type="textarea"
+                            rows="3"
+                            required={true}
+                            value={this.state.description}
+                            onChange={this.onChangeDescription}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row
+                      className="justify-content-md-center"
+                      style={{ marginTop: "1.5rem" }}
+                    >
+                      <Col md="4">
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative">
+                            <DatePicker
+                              onChange={this.onChangeStartDate}
+                              selected={this.state.startDate}
+                              minDate={minDate}
+                              placeholderText="From date"
+                              inputProps={{
+                                placeholder: "Date Picker Here",
+                              }}
+                              timeFormat={true}
                             />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row
-                        className="justify-content-md-center"
-                        style={{ marginTop: "1.5rem" }}
-                      >
-                        <Col md="8">
-                          <FormGroup>
-                            <Input
-                              className="form-control-alternative"
-                              placeholder="Enter the description"
-                              type="textarea"
-                              rows="2"
-                              value={this.state.description}
-                              onChange={this.onChangeDescription}
+                          </InputGroup>
+                        </FormGroup>
+                      </Col>
+
+                      <Col md="4">
+                        <FormGroup>
+                          <InputGroup className="input-group-alternative">
+                            <DatePicker
+                              onChange={this.onChangeEndDate}
+                              selected={this.state.endDate}
+                              minDate={this.state.startDate}
+                              placeholderText="To date"
+                              inputProps={{
+                                placeholder: "Date Picker Here",
+                              }}
+                              timeFormat={false}
                             />
-                          </FormGroup>
-                        </Col>
-                      </Row>
+                          </InputGroup>
+                        </FormGroup>
+                      </Col>
+                    </Row>
 
-                      <Row
-                        className="justify-content-md-center"
-                        style={{ marginTop: "1.5rem" }}
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Button
+                        color="primary"
+                        type="submit"
+                        size="lg"
+                        style={{ marginTop: "2.5rem", width: "150px" }}
                       >
-                        <Col md="4">
-                          <FormGroup>
-                            <InputGroup className="input-group-alternative">
-                              <DatePicker
-                                onChange={this.onChangeStartDate}
-                                selected={this.state.startDate}
-                                placeholderText="From date"
-                                inputProps={{
-                                  placeholder: "Date Picker Here",
-                                }}
-                                timeFormat={true}
-                              />
-                            </InputGroup>
-                          </FormGroup>
-                        </Col>
-
-                        <Col md="4">
-                          <FormGroup>
-                            <InputGroup className="input-group-alternative">
-                              <DatePicker
-                                onChange={this.onChangeEndDate}
-                                selected={this.state.endDate}
-                                placeholderText="To date"
-                                inputProps={{
-                                  placeholder: "Date Picker Here",
-                                }}
-                                timeFormat={false}
-                              />
-                            </InputGroup>
-                          </FormGroup>
-                        </Col>
-                      </Row>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                      >
-                        <Button
-                          color="primary"
-                          type="submit"
-                          size="lg"
-                          style={{ marginTop: "2.5rem", width: "150px" }}
-                        >
-                          Add
-                        </Button>
-                      </div>
-                    </Form>
-                  </div>
-                </CardBody>
-              </Card>
-            </div>
-          </Row>
+                        Save Promotion
+                      </Button>
+                    </div>
+                  </Form>
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
         </Container>
       </>
     );

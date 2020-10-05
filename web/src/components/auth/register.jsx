@@ -71,7 +71,7 @@ class Register extends Component {
               </CardHeader>
               <CardBody className="px-lg-5">
                 <div className="text-center text-muted mb-4">
-                  <small>Register with credentials</small>
+                  {/* <small>Register with credentials</small> */}
                 </div>
                 <TabContent activeTab={"tabs" + this.state.tabs}>
                   <TabPane tabId="tabs1">

@@ -34,11 +34,13 @@ class VehiclesList extends Component {
       console.log("err", error);
     }
   }
+  
   handleAddVehicle = (vehicle) => {
     const { vehicles } = this.state;
     vehicles.push(vehicle);
-    this.setState({ vehicle });
+    this.setState({ vehicles });
   };
+
   getType(t) {
     let type = "fas fa-";
     if (t === "Bike") {

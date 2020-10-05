@@ -22,6 +22,30 @@ class UserProvider extends Component {
     }
   };
 
+  updateUser = async (data) => {
+    try {
+      // console.log(data);
+      const user = await userService.editUser(data);
+      if (user._id) {
+        this.setState({ user });
+      }
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
+
+  uploadPhoto = async (data) => {
+    try {
+      // console.log(data);
+      const user = await userService.addPhoto(data);
+      if (user._id) {
+        this.setState({ user });
+      }
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
+
   currentUser = async () => {
     try {
       if (!this.state.isAuthenticated) {
@@ -70,6 +94,8 @@ class UserProvider extends Component {
           register: this.registerUser,
           currentUser: this.currentUser,
           getUserOnPageLoad: this.getUserOnPageLoad,
+          updateUser: this.updateUser,
+          uploadPhoto: this.uploadPhoto,
         }}
       >
         {this.props.children}
