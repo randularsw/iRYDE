@@ -133,7 +133,7 @@ class ServicesAdd extends Component {
                         className="justify-content-md-center"
                         style={{ marginTop: "1.5rem" }}
                       >
-                        <Col md="10">
+                        <Col md="9">
                           <FormGroup>
                             <Input
                               className="form-control-alternative"
@@ -143,6 +143,11 @@ class ServicesAdd extends Component {
                               onChange={this.uploadImage}
                             />
                           </FormGroup>
+                        </Col>
+                        <Col md="1">
+                          {this.state.upload && (
+                            <i className="fas fa-check-circle fa-2x"></i>
+                          )}
                         </Col>
                       </Row>
 
