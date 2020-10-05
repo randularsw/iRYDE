@@ -21,6 +21,11 @@ import ServicesAdd from "components/servicelist/servicesAdd";
 import StudentTableRow from "components/servicelist/serviceTableRow";
 import VehicleType from "components/admin/vehicleType";
 import RemoveUser from "components/admin/removeUser";
+import Statistics from "components/admin/statistics/statistics";
+import ModelsView from "components/admin/vModelView";
+import ModelsAdd from "components/admin/vModelAdd";
+import RemoveContent from "components/admin/removeContent";
+
 
 function App(props) {
   return (
@@ -67,6 +72,11 @@ function App(props) {
           <Route exact path="/servicesadd" component={ServicesAdd}></Route>
           <Route exact path="/admin/vehicleType" component={VehicleType}></Route>
           <Route exact path="/admin/removeUser" component={RemoveUser}></Route>
+          <Route exact path="/admin/statistics/statistics" component={Statistics}></Route>
+          <Route exact path="/admin/modelsView" component={ModelsView}></Route>
+          <Route exact path="/admin/modelsAdd/:id" component={ModelsAdd}></Route>
+
+          <Route exact path="/admin/removeContent" component={RemoveContent}></Route>
           <Route path="/" component={Home}></Route>
           
         </Switch>
