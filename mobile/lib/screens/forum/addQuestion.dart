@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iRYDE/components/myRaisedButton.dart';
 import 'package:iRYDE/services/questionService.dart';
+import 'package:iRYDE/screens/forum/questionForum.dart';
+import 'package:provider/provider.dart';
+import 'package:iRYDE/core/userModel.dart';
 
 class AddQuestion extends StatefulWidget {
   static const String id = 'add_question';
@@ -54,10 +57,18 @@ class _AddQuestionState extends State<AddQuestion> {
 
   void addQuestion() async {
     try {
+      // set provider in session
+      var userInfo = Provider.of<UserModel>(context, listen: false);
+      Map user = userInfo.user;
+
       if (_formKey.currentState.validate()) {
         _formKey.currentState.save();
 
-        Map question = {"title": _questionTitle, "text": _questionText};
+        Map question = {
+          "title": _questionTitle,
+          "text": _questionText,
+          "userHandle": user['_id']
+        };
         print(question);
         Map d = await questionService.addQuestion(question);
       }
@@ -101,7 +112,6 @@ class _AddQuestionState extends State<AddQuestion> {
                             return;
                           }
                           _formKey.currentState.save();
-                          print(_questionText);
                         },
                         buttonText: 'Preview',
                         formKey: _formKey,
@@ -116,6 +126,12 @@ class _AddQuestionState extends State<AddQuestion> {
                         buttonText: 'Post',
                         onPressed: () {
                           addQuestion();
+                          Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) =>
+                                    new DiscussionForumHome()),
+                          );
                         },
                       ),
                     ],
