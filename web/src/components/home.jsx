@@ -23,7 +23,7 @@ class Home extends Component {
     if (userData?.user?.type === "sp") {
       this.props.history.push("/about");
       // window.location = "/";
-    }else if (userData?.user?.type === "ad") {
+    } else if (userData?.user?.type === "ad") {
       this.props.history.push("/admin/vehicleType");
       // window.location = "/";
     }
@@ -43,7 +43,7 @@ class Home extends Component {
                   // width={200}
                   src={require("assets/images/w4.jpg")}
                 /> */}
-              {!isAuthenticated && <HomeCarousel />}
+              {/* {!isAuthenticated && <HomeCarousel />} */}
             </div>
           </Row>
           <ServiceProviderList />

@@ -43,7 +43,7 @@ function App(props) {
       <div className="main-content bg-default pb-5" style={{ minHeight: 800 }}>
         <NavigationBar
           {...props}
-          // brandText={this.getBrandText(this.props.location.pathname)}
+        // brandText={this.getBrandText(this.props.location.pathname)}
         />
         <Switch>
           {/* Routes */}
