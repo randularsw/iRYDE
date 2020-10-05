@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext, useState } from "react";
 import { UserContext } from "core/userContext";
 import {
   Button,
@@ -13,84 +13,145 @@ import {
   Col,
 } from "reactstrap";
 import Header from "components/shared/header";
+import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { getVehicles } from "services/vehicleService";
 
-class Profile extends Component {
-  static contextType = UserContext;
+const Profile = (props) => {
+  const context = useContext(UserContext);
+  const { register, handleSubmit, errors } = useForm();
 
-  render() {
-    const { user, isAuthenticated } = this.context.state;
-    return (
-      <>
-        <Header />
-        <Container className=" mt--9" fluid>
-          {/* Table */}
-          <Row>
-            <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
-              <Card className="card-profile shadow">
-                <Row className="justify-content-center">
-                  <Col className="order-lg-2 mt-7" lg="3">
-                    <div className="card-profile-image">
-                      <a href="#pablo" onClick={(e) => e.preventDefault()}>
-                        <img
-                          alt="..."
-                          className="rounded-circle"
-                          src={require("assets/images/voPhoto.png")}
-                        />
-                      </a>
-                    </div>
-                  </Col>
-                </Row>
-                <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-                  <div className="d-flex justify-content-between">
-                    <Button
-                      className="mr-4"
-                      color="info"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      +72 Rep
-                    </Button>
-                    <Button
-                      className="float-right"
-                      color="default"
-                      href="#pablo"
-                      onClick={(e) => e.preventDefault()}
-                      size="sm"
-                    >
-                      Beginner
-                    </Button>
+  const [edit, setEdit] = useState(false);
+  const [vehicleCount, setVehicleCount] = useState(0);
+
+  const onSubmit = async (data) => {
+    try {
+      data._id = context.state.user._id;
+      if (edit) {
+        // save user
+        console.log(data);
+        await context.updateUser(data);
+      }
+      setEdit(!edit);
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
+
+  const uploadImage = async (e) => {
+    const files = e.target.files;
+    const data = new FormData();
+    data.append("file", files[0]);
+    data.append("upload_preset", "servicesgallery");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dzwimulaq/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    console.log(file.secure_url);
+    const d = { _id: context.state.user._id, photo: file.secure_url };
+    await context.uploadPhoto(d);
+  };
+
+  useEffect(() => {
+    getVehicleCount();
+  });
+
+  const getVehicleCount = async () => {
+    try {
+      const vehicles = await getVehicles(user._id);
+      const vehicleCount = vehicles.data.length;
+      setVehicleCount(vehicleCount);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const { user } = context.state;
+  return (
+    <>
+      <Header />
+      <Container className=" mt--9" fluid>
+        {/* Table */}
+        <Row>
+          <Col className="order-xl-2 mb-5 mb-xl-0" xl="4">
+            <Card className="card-profile shadow">
+              <Row className="justify-content-center">
+                <Input
+                  style={{ display: "none" }}
+                  className="form-control-alternative"
+                  placeholder="Upload the image"
+                  type="file"
+                  name="file"
+                  id="upload"
+                  onChange={uploadImage}
+                />
+                <Col className="order-lg-2 mt-7" lg="3">
+                  <div className="card-profile-image">
+                    <label htmlFor="upload">
+                      <img
+                        alt="..."
+                        className="rounded-circle"
+                        src={
+                          !user?.photo
+                            ? require("assets/images/voPhoto.png")
+                            : user?.photo
+                        }
+                        style={{ cursor: "pointer" }}
+                      />
+                    </label>
                   </div>
-                </CardHeader>
-                <CardBody className="pt-0 pt-md-4">
-                  <Row>
-                    <div className="col">
-                      <div className="card-profile-stats d-flex justify-content-center mt-md-5">
-                        <div>
-                          <span className="heading">22</span>
-                          <span className="description">Bookings</span>
-                        </div>
-                        <div>
-                          <span className="heading">2</span>
-                          <span className="description">Vehicles</span>
-                        </div>
-                        {/* <div>
-                          <span className="heading">89</span>
-                          <span className="description">Comments</span>
-                        </div> */}
-                      </div>
-                    </div>
-                  </Row>
-                  <div className="text-center">
-                    <h3>
-                      <span className="mr-3">{user?.name}</span>
-                      <span className="h5 font-weight-300 text-muted">
-                        <i className="fas fa-map-marker-alt"></i> {user?.city}
-                        Colombo
-                      </span>
-                    </h3>
+                  {/* <Button
+                    className="mr-4"
+                    color="default"
+                    style={{ position: "primary", left: 100, top: -30 }}
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                    size="sm"
+                  >k</Button> */}
+                </Col>
+              </Row>
+              <CardHeader className="text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                <div className="d-flex justify-content-between">
+                  <Button
+                    className="mr-4"
+                    color="info"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                    size="sm"
+                  >
+                    +{user?.rp} Rep
+                  </Button>
+                  <Button
+                    className="float-right"
+                    color="default"
+                    href="#pablo"
+                    onClick={(e) => e.preventDefault()}
+                    size="sm"
+                  >
+                    {user?.level}
+                  </Button>
+                </div>
+              </CardHeader>
+              <CardBody className="pt-0 pt-md-5">
+                <label
+                  className="card-profile-stats d-flex justify-content-center mt-md--3"
+                  htmlFor="upload"
+                >
+                  <small style={{ cursor: "pointer" }}>Upload</small>
+                </label>
+                <div className="text-center">
+                  <h3>
+                    <span>{user?.name}</span>
+                  </h3>
+                  <div className="h5 font-weight-300 text-muted">
+                    <i className="fas fa-map-marker-alt"></i> {user?.city}
+                  </div>
 
-                    {/* <div className="h5 mt-4">
+                  {/* <div className="h5 mt-4">
                       <i className="ni business_briefcase-24 mr-2" />
                       Solution Manager - Creative Tim Officer
                     </div>
@@ -107,12 +168,31 @@ class Profile extends Component {
                     <a href="#pablo" onClick={(e) => e.preventDefault()}>
                       Show more
                     </a> */}
+                </div>
+                <Row>
+                  <div className="col">
+                    <div className="card-profile-stats d-flex justify-content-center ">
+                      {/* <div>
+                        <span className="heading">22</span>
+                        <span className="description">Bookings</span>
+                      </div> */}
+                      <div>
+                        <span className="heading">{vehicleCount}</span>
+                        <span className="description">Vehicles</span>
+                      </div>
+                      {/* <div>
+                          <span className="heading">89</span>
+                          <span className="description">Comments</span>
+                        </div> */}
+                    </div>
                   </div>
-                </CardBody>
-              </Card>
-            </Col>
-            <Col className="order-xl-1" xl="8">
-              <Card className="bg-secondary shadow mb-5">
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col className="order-xl-1" xl="8">
+            <Card className="bg-secondary shadow mb-5">
+              <Form role="form" onSubmit={handleSubmit(onSubmit)}>
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
@@ -121,140 +201,122 @@ class Profile extends Component {
                     <Col className="text-right" xs="4">
                       <Button
                         color="primary"
-                        href="#pablo"
-                        onClick={(e) => e.preventDefault()}
                         size="sm"
+                        // onClick={() => toggleEdit(user)}
+                        type="submit"
                       >
-                        Edit Profile
+                        <i class="fas fa-pen"></i> {edit ? "Save" : "Edit"}
                       </Button>
                     </Col>
                   </Row>
                 </CardHeader>
                 <CardBody>
-                  <Form>
-                    <h6 className="heading-small text-muted mb-4">
-                      User information
-                    </h6>
-                    <div className="pl-lg-4">
-                      <Row>
-                        <Col lg="12">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-name"
-                            >
-                              Full Name
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              // defaultValue="Lucky"
-                              id="input-name"
-                              placeholder="Full Name"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-email"
-                            >
-                              Email Address
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-email"
-                              placeholder="Email Address"
-                              type="email"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-phone"
-                            >
-                              Phone
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              // defaultValue="0771234567"
-                              id="input-phone"
-                              placeholder="Phone"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </div>
-                    {/* <hr className="my-4" /> */}
-                    {/* Address */}
-                    {/* <h6 className="heading-small text-muted mb-4">
+                  <h6 className="heading-small text-muted mb-4">
+                    User information
+                  </h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col lg="12">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-name"
+                          >
+                            Full Name
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            defaultValue={user?.name}
+                            id="input-name"
+                            name="name"
+                            placeholder="Full Name"
+                            type="text"
+                            disabled={edit ? "" : "true"}
+                            innerRef={register({
+                              required: true,
+                            })}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col lg="6">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-email"
+                          >
+                            Email Address
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            defaultValue={user?.email}
+                            id="input-email"
+                            name="email"
+                            placeholder="Email Address"
+                            type="email"
+                            disabled
+                          />
+                        </FormGroup>
+                      </Col>
+                      <Col lg="6">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-phone"
+                          >
+                            Phone
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            defaultValue={user?.phone}
+                            id="input-phone"
+                            name="phone"
+                            placeholder="Phone"
+                            type="text"
+                            disabled={edit ? "" : "true"}
+                            innerRef={register({
+                              required: true,
+                            })}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </div>
+                  {/* <hr className="my-4" /> */}
+                  {/* Address */}
+                  {/* <h6 className="heading-small text-muted mb-4">
                       Contact information
                     </h6> */}
-                    <div className="pl-lg-4">
-                      <Row>
-                        <Col md="12">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-address"
-                            >
-                              Address
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              // defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
-                              id="input-address"
-                              placeholder="Home Address"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                      <Row>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-city"
-                            >
-                              City
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              // defaultValue="New York"
-                              id="input-city"
-                              placeholder="City"
-                              type="text"
-                            />
-                          </FormGroup>
-                        </Col>
-                        <Col lg="6">
-                          <FormGroup>
-                            <label
-                              className="form-control-label"
-                              htmlFor="input-country"
-                            >
-                              Postal code
-                            </label>
-                            <Input
-                              className="form-control-alternative"
-                              id="input-postal-code"
-                              placeholder="Postal code"
-                              type="number"
-                            />
-                          </FormGroup>
-                        </Col>
-                      </Row>
-                    </div>
-                    {/* <hr className="my-4" /> */}
-                    {/* Description */}
-                    {/* <h6 className="heading-small text-muted mb-4">About me</h6>
+                  <div className="pl-lg-4">
+                    <Row>
+                      <Col lg="12">
+                        <FormGroup>
+                          <label
+                            className="form-control-label"
+                            htmlFor="input-city"
+                          >
+                            City
+                          </label>
+                          <Input
+                            className="form-control-alternative"
+                            defaultValue={user?.city}
+                            id="input-city"
+                            name="city"
+                            placeholder="City"
+                            type="text"
+                            disabled={edit ? "" : "true"}
+                            innerRef={register({
+                              required: true,
+                            })}
+                          />
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </div>
+                  {/* <hr className="my-4" /> */}
+                  {/* Description */}
+                  {/* <h6 className="heading-small text-muted mb-4">About me</h6>
                     <div className="pl-lg-4">
                       <FormGroup>
                         <label>About Me</label>
@@ -268,15 +330,14 @@ class Profile extends Component {
                         />
                       </FormGroup>
                     </div> */}
-                  </Form>
                 </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </Container>
-      </>
-    );
-  }
-}
+              </Form>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
 
 export default Profile;

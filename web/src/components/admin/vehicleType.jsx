@@ -242,6 +242,20 @@ class VehicleType extends Component {
                               </tr>
                             );
                           })}
+
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td className="text-left">
+                              <Col md="2">
+                                {/* <button
+                                  onClick={(e) => this.clearAll()}
+                                  className="btn btn-default btn-lg"
+                                >
+                                  Clear All
+                                </button> */}
+                              </Col>
+                            </td>
+                          </tr>
                         </tbody>
                       </Table>
                     )}

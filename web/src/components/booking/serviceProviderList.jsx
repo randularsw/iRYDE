@@ -11,7 +11,7 @@ import {
 } from "reactstrap";
 import { Link } from "react-router-dom";
 import { Rating } from "@material-ui/lab";
-import { sp } from "../../services/userService";
+import { getServiceProviders } from "../../services/userService";
 
 class serviceProviderList extends Component {
   state = {
@@ -20,11 +20,11 @@ class serviceProviderList extends Component {
 
   async componentDidMount() {
     try {
-      // const serviceProviders = await getServiceProviders();
-      const serviceProviders = await sp();
+      const res = await getServiceProviders();
+      //console.log('wwwwwwwwwwwwwwwwwwwwwww',res.data);
       this.setState({
-        serviceProviders,
-      });
+        serviceProviders:res.data
+      });  
     } catch (err) {
       console.log("Error", err);
     }
@@ -34,56 +34,67 @@ class serviceProviderList extends Component {
     // const { items } = this.state;
     return (
       <>
-        <Header />
+        {/* <Header />
         <Container className=" mt--9" fluid>
           {/* Table */}
           <Row>
             <div className=" col">
               <Card className=" shadow">
                 <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0" style={{ fontSize: 40 }}>
-                    Service Providers
-                  </h3>
+                  <h3 className=" mb-0">Service Providers</h3>
                 </CardHeader>
                 <CardBody>
                   <div style={{ minHeight: 300 }}>
                     {/* Page Content */}
-                    <b style={{ fontSize: 30, marginBottom: 0 }}>
-                      Service Centers
-                    </b>
-                    <div className="m-5 mt-0">
+                    {/* <b>Service Centers</b> */}
+                    <div className="mx-5 mt-0">
                       <Row>
-                        {this.state.serviceProviders.map((serviceProvider) => (
+                        {this.state.serviceProviders?.map((serviceProvider) => (
                           <Card
-                            key={serviceProvider._id}
+                            key={serviceProvider?._id}
                             style={{
-                              width: "18rem",
-                              height: 230,
-                              marginLeft: 9,
+                              width: "16rem",
+                              height: 240,
+                              marginLeft: 5,
                               marginRight: 5,
                             }}
                           >
-                            <CardImg
-                              alt="..."
-                              style={{ height: 150 }}
-                              src={serviceProvider.profileImage}
-                              top
-                            />
-                            <CardBody>
+                            <Link
+                              to={`/service-provider/${serviceProvider?._id}`}
+                            >
+                              <CardImg
+                                alt="..."
+                                style={{ height: 180 }}
+                                src={require("assets/images/spPhoto.png")}
+                                top
+                              />
+                            </Link>
+
+                            <CardBody className="p-2">
                               <CardTitle>
                                 <Link
-                                  to={`/service-provider/${serviceProvider._id}`}
+                                  to={`/service-provider/${serviceProvider?._id}`}
+                                  className="text-default"
                                 >
-                                  {serviceProvider.name}
+                                  {serviceProvider?.name}
                                 </Link>
+
                                 <br />
-                                <Rating
-                                  name="half-rating"
-                                  defaultValue={2.5}
-                                  precision={0.5}
-                                  size="small"
-                                  readOnly
-                                />
+                                <Row className="pl-3">
+                                  <div className="col-7 m-0 p-0">
+                                    <small className="text-gray">
+                                      <i class="fas fa-map-marker-alt pr-2"></i>
+                                      {serviceProvider?.city}
+                                    </small>
+                                  </div>
+                                  <div className="col m-0 p-0">
+                                    <Rating
+                                      name="size-small"
+                                      defaultValue={2}
+                                      size="small"
+                                    />
+                                  </div>
+                                </Row>
                               </CardTitle>
                             </CardBody>
                           </Card>
@@ -95,7 +106,7 @@ class serviceProviderList extends Component {
               </Card>
             </div>
           </Row>
-        </Container>
+        {/* </Container> */}
       </>
     );
   }

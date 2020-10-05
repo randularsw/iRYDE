@@ -8,32 +8,39 @@ import {
   Container,
   Button,
   Modal,
-  
 } from "reactstrap";
 import VehicleAdd from "./vehicleAdd";
 import { getVehicles } from "services/vehicleService";
 import { Link } from "react-router-dom";
+import { UserContext } from "core/userContext";
 
 class VehiclesList extends Component {
+  static contextType = UserContext;
   state = {
     formModal: false,
-    id: "hsjhwjsjksis",
     vehicles: [],
   };
   toggleModal = (state) => {
-    console.log(55555);
     this.setState({
       [state]: !this.state[state],
     });
   };
   async componentDidMount() {
     try {
-      const { data: vehicles } = await getVehicles(this.state.id);
+      const userData = await this.context.currentUser();
+      const { data: vehicles } = await getVehicles(userData.user?._id);
       this.setState({ vehicles });
     } catch (error) {
       console.log("err", error);
     }
   }
+  
+  handleAddVehicle = (vehicle) => {
+    const { vehicles } = this.state;
+    vehicles.push(vehicle);
+    this.setState({ vehicles });
+  };
+
   getType(t) {
     let type = "fas fa-";
     if (t === "Bike") {
@@ -55,14 +62,14 @@ class VehiclesList extends Component {
           {/* Table */}
           <Row>
             <div className=" col">
-              <Card className=" shadow ">
+              <Card className=" shadow m-0 ">
                 <CardHeader className=" bg-transparent">
                   <h3 className=" mb-0">My Vehicles</h3>
                 </CardHeader>
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
-                    <div className="row">
+                    <div className="row m-0 mb-2">
                       <div className="col-10"></div>
                       <div className="col">
                         <Button
@@ -86,9 +93,10 @@ class VehiclesList extends Component {
                                 </div>
                               </CardHeader>
                               <CardBody className="px-lg-5 py-lg-5">
-                                <VehicleAdd 
-                                onToggle={this.toggleModal}
-                                onSubmit={this.componentDidMount}
+                                <VehicleAdd
+                                  onToggle={this.toggleModal}
+                                  onSubmit={this.componentDidMount}
+                                  onAddVehicle={this.handleAddVehicle}
                                 />
                               </CardBody>
                             </Card>
@@ -96,57 +104,52 @@ class VehiclesList extends Component {
                         </Modal>
                       </div>
                     </div>
-                    <div className=" row m-5">
+                    <div className=" row m-0 p-0">
                       {this.state.vehicles.map((v) => (
-                        
-                          <Card
-                            className="card-stats  bg-secondary col-5  m-1 "
-                            key={v._id} 
-                          >
-                            <CardBody>
-                              <Row>
-                                <div className="col-3">
-                                  <small className=" text-muted ">
-                                    Vehicle Brand
-                                  </small>
-                                  <br />
-                                  <span className="h3 font-weight-bold mb-0 m-0">
-                                    {v.brand}
-                                  </span>
-                                </div>
-                                <div className="col-3">
-                                  <small className=" text-muted mb-0">
-                                    Vehicle Model
-                                  </small>
-                                  <br />
-                                  <span className="h3 font-weight-bold  m-0">
-                                    {v.model}
-                                  </span>
-                                </div>
-                                <div className="col-3">
-                                  <small className=" text-muted m-0">
-                                    Vehicle No
-                                  </small>
-                                  <br />
-                                  <span className="h3 font-weight-bold  m-0">
-                                    {v.vehicleNo}
-                                  </span>
-                                </div>
-                                <div className="col-1">
-                                 
-                                    <Link to={`/vehicle/${v._id}`}>
-                                    <div className="icon icon-shape bg-default text-white rounded-circle shadow">
-                                      <i className={this.getType(v.type)} />
-                                      </div>
-                                      </Link>
-                                  
-                                </div>
-                              </Row>
-                            </CardBody>
-                          </Card>
-                      
+                        <Card
+                          className="card-stats  bg-secondary col-5 m-1 p-0 "
+                          key={v._id}
+                        >
+                          <CardBody>
+                            <Row>
+                              <div className="col-3">
+                                <small className=" text-muted ">
+                                  Vehicle Brand
+                                </small>
+                                <br />
+                                <span className="h3 font-weight-bold mb-0 m-0">
+                                  {v.brand}
+                                </span>
+                              </div>
+                              <div className="col-3">
+                                <small className=" text-muted mb-0">
+                                  Vehicle Model
+                                </small>
+                                <br />
+                                <span className="h3 font-weight-bold  m-0">
+                                  {v.model}
+                                </span>
+                              </div>
+                              <div className="col-3">
+                                <small className=" text-muted m-0">
+                                  Vehicle No
+                                </small>
+                                <br />
+                                <span className="h3 font-weight-bold  m-0">
+                                  {v.vehicleNo}
+                                </span>
+                              </div>
+                              <div className="col-1">
+                                <Link to={`/vehicle/${v._id}`}>
+                                  <div className="icon icon-shape bg-default text-white rounded-circle shadow">
+                                    <i className={this.getType(v.type)} />
+                                  </div>
+                                </Link>
+                              </div>
+                            </Row>
+                          </CardBody>
+                        </Card>
                       ))}
-                     
                     </div>
                   </div>
                 </CardBody>

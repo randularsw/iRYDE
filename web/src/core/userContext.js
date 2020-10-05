@@ -22,7 +22,44 @@ class UserProvider extends Component {
     }
   };
 
+  updateUser = async (data) => {
+    try {
+      // console.log(data);
+      const user = await userService.editUser(data);
+      if (user._id) {
+        this.setState({ user });
+      }
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
+
+  uploadPhoto = async (data) => {
+    try {
+      // console.log(data);
+      const user = await userService.addPhoto(data);
+      if (user._id) {
+        this.setState({ user });
+      }
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
+
   currentUser = async () => {
+    try {
+      if (!this.state.isAuthenticated) {
+        const { data: user } = await authService.getCurrentUser();
+        const isAuthenticated = true;
+        this.setState({ isAuthenticated, user });
+      }
+      return this.state;
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
+
+  getUserOnPageLoad = async () => {
     try {
       const { data: user } = await authService.getCurrentUser();
       const isAuthenticated = true;
@@ -33,7 +70,6 @@ class UserProvider extends Component {
   };
 
   logoutUser = () => {
-    console.log(555);
     authService.logout();
     const isAuthenticated = false;
     const user = null;
@@ -57,6 +93,9 @@ class UserProvider extends Component {
           logout: this.logoutUser,
           register: this.registerUser,
           currentUser: this.currentUser,
+          getUserOnPageLoad: this.getUserOnPageLoad,
+          updateUser: this.updateUser,
+          uploadPhoto: this.uploadPhoto,
         }}
       >
         {this.props.children}

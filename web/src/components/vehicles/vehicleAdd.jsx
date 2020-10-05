@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import {
   Form,
   InputGroup,
@@ -11,11 +11,11 @@ import {
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { addVehicle } from "services/vehicleService";
+import { UserContext } from "core/userContext";
 
 const VehicleAdd = (props) => {
-  
+  const context = useContext(UserContext);
   const { register, handleSubmit, errors } = useForm();
-  const id = "hsjhwjsjksis";
   const [brands, setBrands] = useState([
     {
       _id: "dgurhildrdfhshsd87sdr",
@@ -38,18 +38,19 @@ const VehicleAdd = (props) => {
       ],
     },
   ]);
-  const [brand, setBrand] = useState("x");
+  const [brand, setBrand] = useState("");
   const [models, setModels] = useState([]);
   const [type, setType] = useState("");
-  const [model,setModel] = useState('y');
+  const [model,setModel] = useState("");
 
   
   const onSubmit = async (data) => {
     data.type = type;
-    data.ownerId =id;
+    data.ownerId = context.state.user._id;
     try {
-      const res = await addVehicle(data);
-      console.log(res);
+      const {data:vehicle} = await addVehicle(data);
+      console.log(vehicle);
+      props.onAddVehicle(vehicle);
     } catch (error){
       console.log(error);
     }
@@ -82,7 +83,7 @@ const VehicleAdd = (props) => {
           <CustomInput
             name="brand"
             type="select"
-            value= {brand}
+            value={brand}
             className="input-group-alternative"
             onChange={onChangeBrand}
             innerRef={register({ required: true })}
@@ -108,8 +109,8 @@ const VehicleAdd = (props) => {
         <InputGroup className="input-group-alternative">
           <CustomInput
             name="model"
-            value={model}
             type="select"
+            value={model}
             className="input-group-alternative"
             onChange={onChangeModel}
             disabled={brand === "" ? "disabled" : ""}

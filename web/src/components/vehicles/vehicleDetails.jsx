@@ -36,11 +36,25 @@ class VehicleDetails extends Component {
     try {
       const res = await deleteVehicle(id);
       console.log(res);
-      this.props.history.push('/vehicles');
+      this.props.history.push("/vehicles");
     } catch (error) {
       console.log("Error", error);
     }
   };
+
+  getType(t) {
+    let type = "fas fa-";
+    if (t === "Bike") {
+      type += "biking";
+    } else if (t === "Car") {
+      type += "car";
+    } else if (t === "Lorry") {
+      type += "forklift";
+    } else if (t === "Van") {
+      type += "shuttle-van";
+    }
+    return type;
+  }
 
   render() {
     return (
@@ -58,8 +72,9 @@ class VehicleDetails extends Component {
                   <div className="ml-5 mr-5" style={{ minHeight: 400 }}>
                     {/* Page Content */}
                     <Row>
-                      <Col md="10 " className="m-0 ml-5 p-0 pl-5">
-                        <i className="fas fa-car" style={{ fontSize: 60 }} />
+                      <Col md="8 " className="m-0 ml-5 p-0 pl-5">
+                      <i className={this.getType(this.state.vehicle?.type)} style={{ fontSize: 60 }}/>  
+                        
                       </Col>
                       <Col>
                         <Button color="info" type="button">
@@ -68,7 +83,7 @@ class VehicleDetails extends Component {
                         <Button
                           color="danger"
                           type="button"
-                          onClick={()=>this.onDelete(this.state.vehicle?._id)}
+                          onClick={() => this.onDelete(this.state.vehicle?._id)}
                         >
                           <i class="far fa-trash-alt"></i>
                         </Button>
@@ -78,22 +93,40 @@ class VehicleDetails extends Component {
                     <Row>
                       <div className="col-6 m-3">
                         <Row>
-                          <b>Vehicle Brand :</b>
-                          <p className="pl-2"> {this.state.vehicle?.brand}</p>
+                          <small>
+                            <b>Vehicle Brand :</b>
+                          </small>
+                          <small className="pl-2">
+                            {" "}
+                            {this.state.vehicle?.brand}
+                          </small>
                         </Row>
                         <Row>
-                          <b>Vehicle Model :</b>
-                          <p className="pl-2">{this.state.vehicle?.model}</p>
+                        <small>
+                            <b>Vehicle Model :</b>
+                          </small>
+                          <small className="pl-2">
+                            {" "}
+                            {this.state.vehicle?.model}
+                          </small>
                         </Row>
                         <Row>
-                          <b>Vehicle Class :</b>
-                          <p className="pl-2">{this.state.vehicle?.type}</p>
+                        <small>
+                            <b>Vehicle Class :</b>
+                          </small>
+                          <small className="pl-2">
+                            {" "}
+                            {this.state.vehicle?.type}
+                          </small>
                         </Row>
                         <Row>
-                          <b>Vehicle Registration No :</b>
-                          <p className="pl-2">
+                        <small>
+                            <b>Vehicle Registration No :</b>
+                          </small>
+                          <small className="pl-2">
+                            {" "}
                             {this.state.vehicle?.vehicleNo}
-                          </p>
+                          </small>
                         </Row>
                         {/* <Row><b>Fuel Type :</b><p className="pl-2">Petrol</p></Row> */}
                       </div>

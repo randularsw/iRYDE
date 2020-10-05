@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { DropdownMenu, DropdownItem } from "reactstrap";
 import { Link } from "react-router-dom";
+import { UserContext } from "core/userContext";
 
 class UserDropdown extends Component {
+  static contextType = UserContext;
   render() {
+    const { user, isAuthenticated } = this.context.state;
     return (
       <>
         <DropdownMenu className="dropdown-menu-arrow" right>
@@ -12,7 +15,9 @@ class UserDropdown extends Component {
           </DropdownItem>
           <DropdownItem to="/admin/user-profile" tag={Link}>
             <i className="ni ni-single-02" />
-            <span>My Profile</span>
+            <span>
+              {user?.type=="vo" ? "Profile" : user?.type==="sp"? "About" :""}
+            </span>
           </DropdownItem>
           <DropdownItem to="/admin/user-profile" tag={Link}>
             <i className="ni ni-settings-gear-65" />

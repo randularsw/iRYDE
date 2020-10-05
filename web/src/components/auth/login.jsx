@@ -24,7 +24,7 @@ const Login = (props) => {
 
   const onSubmit = async (data) => {
     try {
-      console.log(data);
+      // console.log(data);
       await context.login(data);
       props.history.push("/");
       // window.location = "/";

@@ -22,17 +22,14 @@ import { UserContext } from "core/userContext";
 class NavigationBar extends React.Component {
   static contextType = UserContext;
 
-  componentDidMount() {
-    this.currentUser();
-  }
-
-  currentUser = async () => {
+  async componentDidMount() {
     try {
-      this.context.currentUser();
+      this.context.getUserOnPageLoad();
     } catch (ex) {
       console.log("exception", ex);
     }
-  };
+  }
+
   render() {
     const { user, isAuthenticated } = this.context.state;
     return (
@@ -43,8 +40,11 @@ class NavigationBar extends React.Component {
               className="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
               to="/"
             >
-              {/* <img alt="..."
-              width="180" src={require("assets/images/logo.png")} /> */}
+              {!isAuthenticated && (
+                <img alt="..."
+                width="200" src={require("assets/images/logo.png")} />
+              )}
+
               {/* {this.props.brandText} */}
             </Link>
             <Form className="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
@@ -65,17 +65,17 @@ class NavigationBar extends React.Component {
                   <DropdownToggle className="pr-0" nav>
                     <Media className="align-items-center">
                       <span className="avatar avatar-sm rounded-circle">
-                        {user?.type==="vo" && (
+                        {user?.type === "vo" && (
                           <img
-                          alt="..."
-                          src={require("assets/images/voPhoto.png")}
-                        />
+                            alt="..."
+                            src={require("assets/images/voPhoto.png")}
+                          />
                         )}
-                        {user?.type==="sp" && (
+                        {user?.type === "sp" && (
                           <img
-                          alt="..."
-                          src={require("assets/images/spPhoto.png")}
-                        />
+                            alt="..."
+                            src={require("assets/images/spPhoto.png")}
+                          />
                         )}
                       </span>
                       <Media className="ml-2 d-none d-lg-block">

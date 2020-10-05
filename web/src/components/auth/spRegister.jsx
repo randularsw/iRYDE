@@ -20,10 +20,10 @@ const SpRegister = (props) => {
   const onSubmit = async (data) => {
     try {
       data.type = "sp";
-      console.log(data);
+      // console.log(data);
       await context.register(data);
-      props.history.push("/");
-      // window.location = "/";
+      // props.history.push("/");
+      window.location = "/about";
     } catch (ex) {
       console.log("exception", ex);
     }
@@ -105,6 +105,28 @@ const SpRegister = (props) => {
           </div>
         )}
       </FormGroup>
+      <FormGroup className="mb-3">
+        <InputGroup className="input-group-alternative">
+          <InputGroupAddon addonType="prepend">
+            <InputGroupText>
+              <i className="fas fa-map-marker-alt"></i>
+            </InputGroupText>
+          </InputGroupAddon>
+          <Input
+            placeholder="City"
+            type="text"
+            name="city"
+            innerRef={register({
+              required: true,
+            })}
+          />
+        </InputGroup>
+        {errors.city?.type === "required" && (
+          <div className="text-muted font-italic ml-4">
+            <small className="text-danger">City Required</small>
+          </div>
+        )}
+      </FormGroup>
       <FormGroup>
         <InputGroup className="input-group-alternative">
           <InputGroupAddon addonType="prepend">
@@ -132,12 +154,12 @@ const SpRegister = (props) => {
           </div>
         )}
       </FormGroup>
-      <div className="text-muted font-italic">
+      {/* <div className="text-muted font-italic">
         <small>
           password strength:{" "}
           <span className="text-success font-weight-700">strong</span>
         </small>
-      </div>
+      </div> */}
       <Row className="my-4">
         <Col xs="12">
           <div className="custom-control custom-control-alternative custom-checkbox">
