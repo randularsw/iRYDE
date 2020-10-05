@@ -21,7 +21,7 @@ class Home extends Component {
   async componentDidMount() {
     const userData = await this.context.currentUser();
     if (userData?.user?.type === "sp") {
-      this.props.history.push("/about");
+      this.props.history.push("/profile");
       // window.location = "/";
     } else if (userData?.user?.type === "ad") {
       this.props.history.push("/admin/vehicleType");

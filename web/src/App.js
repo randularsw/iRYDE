@@ -9,7 +9,7 @@ import Login from "components/auth/login";
 import Register from "components/auth/register";
 import UserProvider from "core/userContext";
 import Logout from "components/auth/logout";
-import About from "components/auth/about";
+// import About from "components/auth/about";
 import Profile from "components/auth/profile";
 import serviceProviderList from "components/booking/serviceProviderList";
 import serviceProviderDetails from "components/booking/serviceProviderDetails";
@@ -44,7 +44,7 @@ function App(props) {
       <div className="main-content bg-default pb-5" style={{ minHeight: 800 }}>
         <NavigationBar
           {...props}
-        // brandText={this.getBrandText(this.props.location.pathname)}
+          // brandText={this.getBrandText(this.props.location.pathname)}
         />
         <Switch>
           {/* Routes */}
@@ -56,7 +56,7 @@ function App(props) {
           <Route path="/payment" component={Payment}></Route>
           <Route path="/edit/:id" component={PromotionsEdit}></Route>
           <Route exact path="/profile" component={Profile}></Route>
-          <Route exact path="/about" component={About}></Route>
+          {/* <Route exact path="/about" component={About}></Route> */}
           <Route exact path="/auth/login" component={Login}></Route>
           <Route exact path="/auth/register" component={Register}></Route>
           <Route exact path="/auth/logout" component={Logout}></Route>
