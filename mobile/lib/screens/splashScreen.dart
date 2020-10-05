@@ -6,6 +6,7 @@ import 'package:iRYDE/screens/auth/loginPage.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:async';
+import 'package:permission_handler/permission_handler.dart';
 
 class SplashScreen extends StatefulWidget {
   static const String id = 'splash_screen';
@@ -16,10 +17,17 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    proceed();
     super.initState();
-    new Timer(new Duration(seconds: 2), () {
-      checkUser();
-    });
+  }
+
+  Future<void> proceed() async {
+    await PermissionHandler().requestPermissions(
+      [PermissionGroup.camera, PermissionGroup.microphone],
+    );
+    // new Timer(new Duration(seconds: 2), () {
+    checkUser();
+    // });
   }
 
   void checkUser() async {

@@ -110,7 +110,11 @@ class ServicesView extends Component {
                               color="primary"
                               type="button"
                               style={{ float: "right" }}
-                              onClick={() => this.onDelete(v._id)}
+                              onClick={(e) =>
+                                window.confirm(
+                                  "Are you sure you wish to delete this item?"
+                                ) && this.onDelete(v._id)
+                              }
                             >
                               <i class="far fa-trash-alt"></i>
                             </Button>

@@ -66,14 +66,7 @@ export default function ReactPayPal() {
             shortly.
           </p>
 
-          {/* <Col>
-            <p style={{ fontWeight: "bold" }}>Payment Successful!..</p>
-
-            <p style={{ fontWeight: "normal" }}>
-              Thank you for your payment. We will be in contact with more
-              details shortly.
-            </p>
-          </Col> */}
+          {}
         </Row>
       </Container>
     );
