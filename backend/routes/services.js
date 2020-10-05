@@ -27,7 +27,7 @@ router.route("/").get((req, res) => {
 });
 
 router.route("/sp/:id").get((req, res) => {
-  console.log(req.params.id);
+  //console.log(req.params.id);
   Service.find({ ownerId: req.params.id })
     .then((services) => res.json(services))
     .catch((err) => res.status(400).json("Error:" + err));

@@ -8,6 +8,8 @@ require("dotenv").config();
 
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
+const sessionsRouter = require("./routes/sessions");
+const notificationsRouter = require("./routes/notifications");
 const vehiclesRouter = require("./routes/vehicles");
 const servicesRouter = require("./routes/services");
 const promotionsRouter = require("./routes/promotions");
@@ -27,8 +29,10 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/sessions", sessionsRouter);
+app.use("/api/notifications", notificationsRouter);
 app.use("/vehicles", vehiclesRouter);
-app.use("/bookings",bookingRouter);
+app.use("/bookings", bookingRouter);
 app.use("/services", servicesRouter);
 app.use("/promotions", promotionsRouter);
 app.use("/timeslots", timeSlotRouter);

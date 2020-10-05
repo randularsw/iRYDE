@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:iRYDE/screens/drawer/vehicles/vehicleAdd.dart';
+import 'package:iRYDE/screens/home/serviceProviderDetails/serviceProviderDetails.dart';
+import 'package:iRYDE/screens/home/serviceProviderDetails/servicesBooking.dart';
 import 'package:iRYDE/core/userModel.dart';
 import 'package:iRYDE/screens/auth/loginPage.dart';
 import 'package:iRYDE/screens/splashScreen.dart';
@@ -6,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'screens/bookings/bookingHomePage.dart';
 import 'screens/forum/discussionForumHome.dart';
 import 'screens/emergency/emergencyHome.dart';
-import 'screens/homePage.dart';
+import 'screens/home/homePage.dart';
 import 'screens/drawer/vehiclesPage.dart';
 import 'components/bottomNavigationBar.dart';
 import 'screens/drawer/profilePage.dart';
@@ -45,6 +48,9 @@ class MyApp extends StatelessWidget {
         NotificationPage.id: (context) => NotificationPage(),
         SettingsGeneral.id: (context) => SettingsGeneral(),
         AboutUsPage.id: (context) => AboutUsPage(),
+        ServiceProviderDetails.id: (context) => ServiceProviderDetails(),
+        VehicleAdd.id: (context) => VehicleAdd(),
+        ServiceBooking.id: (context) => ServiceBooking(),
       },
       // home: MyBottomNavigationBar(),
     );
