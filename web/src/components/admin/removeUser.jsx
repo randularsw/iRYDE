@@ -64,6 +64,14 @@ class RemoveUser extends Component {
                     )}
                     {listUsers.length > 0 && (
                       <Table className="align-items-center" responsive>
+                      <thead className="thead-light">
+                      <tr>
+                        <th scope="col">User Name</th>
+                        <th scope="col">email</th>
+                        <th scope="col">Description</th>
+                        <th scope="col" />
+                      </tr>
+                    </thead>
                         <tbody>
                           {listUsers.map((user) => {
                             return (
@@ -77,11 +85,29 @@ class RemoveUser extends Component {
                                     </Media>
                                   </Media>
                                 </th>
+                                <td th scope="row" col-md-2>
+                                <Media className="align-items-center">
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                        {user}@gmail.com
+                                      </span>
+                                    </Media>
+                                  </Media>
+                                </td>
+                                <td>
+                                <Media className="align-items-center">
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                        {}//description
+                                      </span>
+                                    </Media>
+                                  </Media>
+                                </td>
 
                                 <td>
                                   <Button
                                     onClick={(e) => this.removeUser(user)}
-                                    color="danger"
+                                    color="warning"
                                     outline
                                     type="button"
                                   >
@@ -89,7 +115,7 @@ class RemoveUser extends Component {
                                       class="fa fa-trash"
                                       aria-hidden="true"
                                     ></i>
-                                    Remove user
+                                    Send Warning
                                   </Button>
                                 </td>
                               </tr>
