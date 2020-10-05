@@ -10,6 +10,7 @@ from nltk.corpus import stopwords   #this has all stopwords in many language
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import matplotlib.pyplot as plt
 
+
 #read text
 text = open('read.txt', encoding='utf=8').read()
 #print(text)
