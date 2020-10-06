@@ -26,14 +26,18 @@ import {
   Row,
   Col,
   Button,
+  Alert,
 } from "reactstrap";
 import AuthButtons from "./authButtons";
 import { UserContext } from "core/userContext";
+import { getServices } from "services/serviceService";
+import { getCurrentUser } from "services/authService";
 
 class Sidebar extends React.Component {
   static contextType = UserContext;
   state = {
     collapseOpen: false,
+    serviceCount: 1,
   };
   constructor(props) {
     super(props);
@@ -44,6 +48,19 @@ class Sidebar extends React.Component {
   //   this.setState(userData);
   //   console.log("userData",userData);
   // }
+
+  async componentDidMount() {
+    try {
+      const userData = await this.context.currentUser();
+      console.log(userData);
+      const services = await getServices(userData.user?._id);
+      const serviceCount = services.data.length;
+      console.log(serviceCount);
+      this.setState({ serviceCount });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {
@@ -223,6 +240,25 @@ class Sidebar extends React.Component {
                     </h6>
                     <hr className="my-3" />
                     <Nav navbar>{this.createLinks(routes, user.type)}</Nav>
+                    {user?.type === "sp" &&
+                      (!user?.photo ||
+                        !user?.paid ||
+                        this.state.serviceCount == 0) && (
+                        <Alert color="warning" className="mt-3">
+                          <strong>Complete your profile</strong>
+                          <ul>
+                            <>
+                              {!user?.photo && <li>Upload profile picture</li>}
+                              {!user?.paid && (
+                                <li>Proceed with your payment</li>
+                              )}
+                              {this.state.serviceCount == 0 && (
+                                <li>Add your services</li>
+                              )}
+                            </>
+                          </ul>
+                        </Alert>
+                      )}
                   </>
                 )}
               </Collapse>
