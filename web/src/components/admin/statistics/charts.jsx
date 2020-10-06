@@ -267,7 +267,7 @@ class Charts extends Component {
                       </CardBody>
                     </Card>
 
-                    <Label><h1>users created at bla bla</h1></Label>
+                    <Label><h1>users created at </h1></Label>
                     <Card>
                       <CardBody>
                         <div className="chart">
