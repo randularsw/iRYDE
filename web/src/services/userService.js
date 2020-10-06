@@ -29,6 +29,19 @@ export async function addPhoto(data) {
   }
 }
 
+export async function addPayment(data) {
+  try {
+    console.log(data);
+    const user = await axios.put(
+      `http://localhost:4000/api/users/payment`,
+      data
+    );
+    return user.data;
+  } catch (ex) {
+    console.log("exception", ex);
+  }
+}
+
 //get all service providers
 export function getServiceProviders() {
   return axios.get("http://localhost:4000/api/users/sp");
@@ -42,4 +55,5 @@ export default {
   getServiceProviders,
   editUser,
   addPhoto,
+  addPayment,
 };

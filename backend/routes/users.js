@@ -19,10 +19,17 @@ router.post("/", async (req, res) => {
       phone: req.body.phone,
       city: req.body.city,
       type: req.body.type,
-      rp: 0,
-      level: "Beginner",
       password: hash,
+      createdAt: Date.now(),
     });
+
+    if (req.body.type === "sp") {
+      user.paid = false;
+    }
+    if (req.body.type === "vo") {
+      user.rp = 0;
+      user.level = "Beginner";
+    }
     console.log(user);
 
     const saved = await user.save();
@@ -93,6 +100,23 @@ router.put("/photo", async (req, res) => {
     const user = await User.findById(req.body._id);
     console.log(user);
     user.photo = req.body.photo;
+
+    const saved = await user.save();
+    console.log(saved);
+
+    res.send(saved);
+  } catch (error) {
+    res.send({ data: error });
+  }
+});
+
+// Payment
+router.put("/payment", async (req, res) => {
+  try {
+    console.log(req.body);
+    const user = await User.findById(req.body._id);
+    console.log(user);
+    user.paid = true;
 
     const saved = await user.save();
     console.log(saved);

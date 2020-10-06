@@ -49,6 +49,7 @@ router.get("/sp/confirmed/:id", async (req, res) => {
 //specific sp finished appointments
 router.get("/sp/finished/:id", async (req, res) => {
   try {
+    console.log(88888888888888888888, req.params);
     const received = await Booking.find({
       sp: req.params.id,
       status: "finished",
@@ -122,17 +123,17 @@ router.patch("/status/:id", async (req, res) => {
 });
 
 //checking isRated
-router.get("/isRated/:id",async(req,res)=>{
+router.get("/isRated/:id", async (req, res) => {
   try {
     const result = await Booking.find({
-      vo:req.params.id,
-      status:"finished",
-      isRated:false
+      vo: req.params.id,
+      status: "finished",
+      isRated: false,
     });
     res.json(result);
   } catch (error) {
     res.json({ message: error });
   }
-})
+});
 
 module.exports = router;

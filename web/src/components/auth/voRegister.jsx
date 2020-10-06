@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Form,
@@ -16,17 +16,27 @@ import { UserContext } from "core/userContext";
 const VoRegister = (props) => {
   const context = useContext(UserContext);
   const { register, handleSubmit, errors } = useForm();
+  const [emailError, setEmailError] = useState("");
 
   const onSubmit = async (data) => {
     try {
       data.type = "vo";
-      // console.log(data);
-      await context.register(data);
-      // props.history.push("/");
-      window.location = "/";
+      const d = await context.register(data);
+      console.log(d);
+      if (d._id) {
+        // props.history.push("/");
+        window.location = "/";
+      }
+      if (d.data == "Email already exists") {
+        setEmailError(d.data);
+      }
     } catch (ex) {
       console.log("exception", ex);
     }
+  };
+
+  const resetEmailError = () => {
+    setEmailError("");
   };
 
   return (
@@ -64,6 +74,7 @@ const VoRegister = (props) => {
             placeholder="Email"
             type="text"
             name="email"
+            onChange={resetEmailError}
             innerRef={register({
               required: true,
               pattern: {
@@ -82,6 +93,11 @@ const VoRegister = (props) => {
             <small className="text-danger">Invalid Email Address</small>
           </div>
         )}
+        {emailError && (
+          <div className="text-muted font-italic ml-4">
+            <small className="text-danger">{emailError}</small>
+          </div>
+        )}
       </FormGroup>
       <FormGroup className="mb-3">
         <InputGroup className="input-group-alternative">
@@ -96,12 +112,20 @@ const VoRegister = (props) => {
             name="phone"
             innerRef={register({
               required: true,
+              pattern: {
+                value: /^(\+\d{1,2}\s?)?1?\-?\.?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/,
+              },
             })}
           />
         </InputGroup>
         {errors.phone?.type === "required" && (
           <div className="text-muted font-italic ml-4">
             <small className="text-danger">Phone Number Required</small>
+          </div>
+        )}
+        {errors.phone?.type === "pattern" && (
+          <div className="text-muted font-italic ml-4">
+            <small className="text-danger">Invalid Phone Number</small>
           </div>
         )}
       </FormGroup>
