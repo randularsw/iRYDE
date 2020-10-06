@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Container, Row, CardHeader, CardBody, Button, Col } from "reactstrap";
 import { Card } from "@material-ui/core";
 
-
 const SpFinishedAppointments = (props) => {
-  const { finished} = props;
+  const { finished } = props;
 
   const changeDateFormat = (f) => {
     let d = new Date(f);
@@ -14,7 +13,7 @@ const SpFinishedAppointments = (props) => {
 
   return (
     <div className="">
-      <div className="ml-8 mt-4">
+      <div className=" mt-4">
         {finished.map((i) => (
           <Card className="ml-30 mr-30 mb-3" style={{ width: 900 }} key={i._id}>
             <CardHeader className="m-0 p-1  pt-2 bg-default">
@@ -33,7 +32,6 @@ const SpFinishedAppointments = (props) => {
                       <b> Time:</b>
                       {i?.time}
                     </small>
-                    
                   </Row>
                 </div>
               </Row>

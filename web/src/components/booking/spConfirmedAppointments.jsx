@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Container, Row, CardHeader, CardBody, Button, Col } from "reactstrap";
 import { Card } from "@material-ui/core";
 import { updateStatus } from "services/bookingService";
 
 const SpConfirmedAppointments = (props) => {
-  const { confirmed,onConfirmed} = props;
+  const { confirmed, onConfirmed } = props;
 
   const changeDateFormat = (f) => {
     let d = new Date(f);
@@ -20,7 +20,7 @@ const SpConfirmedAppointments = (props) => {
 
   return (
     <div className="">
-      <div className="ml-8 mt-4">
+      <div className=" mt-4">
         {confirmed.map((i) => (
           <Card className="ml-30 mr-30 mb-3" style={{ width: 900 }} key={i._id}>
             <CardHeader className="m-0 p-1  pt-2 bg-default">

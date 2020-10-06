@@ -22,6 +22,8 @@ import SpViewCalendar from "./calendar/spViewCalendar";
 import { addImage } from "services/galleryService";
 import { getImages } from "services/galleryService";
 import { getSpFinishedAppointments } from "services/bookingService";
+import { getRates } from "services/rateService";
+import { Rating } from "@material-ui/lab";
 
 class Dashboard extends Component {
   static contextType = UserContext;
@@ -29,11 +31,20 @@ class Dashboard extends Component {
     user: {},
     images: [],
     bookingCount: null,
+    upload: "",
+    ratings: [],
   };
 
   componentDidMount() {
     this.getImages();
     this.getBookingCount();
+    this.getRates();
+  }
+
+  async getRates() {
+    const userdata = await this.context.currentUser();
+    const { data: ratings } = await getRates(userdata.user._id);
+    this.setState({ ratings });
   }
 
   async getBookingCount() {
@@ -78,6 +89,9 @@ class Dashboard extends Component {
     const file = await res.json();
     console.log("kk ", file.secure_url);
     const image = { url: file.secure_url };
+    this.setState({
+      upload: file.secure_url,
+    });
     await addImage(this.context.state.user._id, image);
     this.getImages();
   };
@@ -184,21 +198,53 @@ class Dashboard extends Component {
                               <label htmlFor="upload" className="p-1 mb-0">
                                 + Add Photo
                               </label>
+                              {this.state.upload && (
+                                <i className="fas fa-check-circle fa-2x"></i>
+                              )}
                             </Button>
                           </Col>
                         </Row>
                         <Gallery images={this.state.images} />
+                        <Row>
+                          {this.state.ratings.map((r) => (
+                            <div className="mt-5 ml-2" key={r._id}>
+                              <h2>Reviews</h2>
+                              <div className="border p-2">
+                                <Row>
+                                  {/* <div className="col-1 ">
+                                    <img
+                                      class="avatar border-gray"
+                                      src="https://www.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
+                                      alt="..."
+                                      class="rounded-circle  border"
+                                      style={{ width: 30, height: 30 }}
+                                    />
+                                  </div> */}
+                                  <div className="col-10">{r.voName}</div>
+                                  <div className="col mt-2">
+                                    <Rating
+                                      name="size-small"
+                                      defaultValue={r.rate}
+                                      size="small"
+                                      readOnly
+                                    />
+                                  </div>
+                                </Row>
+                                <Row>
+                                  <small className="ml-3 mr-2 ">
+                                    {r.review}
+                                  </small>
+                                </Row>
+                              </div>
+                            </div>
+                          ))}
+                        </Row>
                       </Col>
                       <Col>
                         <div>
                           <h3 className="ml-5">Calendar</h3>
                           <SpViewCalendar />
                         </div>
-                        {/* <div>
-                          {" "}
-                          <h3 className="ml-5">Block Booking Dates</h3>
-                          <UnavailableDates />
-                        </div> */}
                       </Col>
                     </Row>
                   </div>

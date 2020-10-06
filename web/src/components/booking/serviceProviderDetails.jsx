@@ -50,6 +50,7 @@ class serviceProviderDetails extends Component {
     ratings: [],
     avgRate: 0,
     images: [],
+    upload: "",
   };
 
   async componentDidMount() {
@@ -84,7 +85,7 @@ class serviceProviderDetails extends Component {
         const diff =
           new Date(unavailable).getTime() - new Date(today).getTime(); // Gives difference between 2 days
         const diffDates = Math.round(diff / (1000 * 3600 * 24)); // convert it to np of days format
-        this.state.daysDiff.push(diffDates);
+        this.state.daysDiff.push(diffDates + 1);
       });
 
       //get ratings
@@ -310,7 +311,7 @@ class serviceProviderDetails extends Component {
                             <h2>Reviews</h2>
                             <div className="border p-2">
                               <Row>
-                                <div className="col-1 ">
+                                {/* <div className="col-1 ">
                                   <img
                                     class="avatar border-gray"
                                     src="https://www.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
@@ -318,7 +319,7 @@ class serviceProviderDetails extends Component {
                                     class="rounded-circle  border"
                                     style={{ width: 30, height: 30 }}
                                   />
-                                </div>
+                                </div> */}
                                 <div className="col-7">{r.voName}</div>
                                 <div className="col mt-2">
                                   <Rating

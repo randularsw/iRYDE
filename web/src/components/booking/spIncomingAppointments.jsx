@@ -4,7 +4,7 @@ import { Card } from "@material-ui/core";
 import { updateStatus } from "services/bookingService";
 
 const SpIncomingAppointments = (props) => {
-  const { incoming, onAccept,onCancel } = props;
+  const { incoming, onAccept, onCancel } = props;
 
   const changeDateFormat = (f) => {
     let d = new Date(f);
@@ -26,7 +26,7 @@ const SpIncomingAppointments = (props) => {
 
   return (
     <div className="">
-      <div className="ml-8 mt-4">
+      <div className=" mt-4">
         {incoming.map((i) => (
           <Card className="ml-30 mr-30 mb-3" style={{ width: 900 }} key={i._id}>
             <CardHeader className="m-0 p-1  pt-2 bg-default">
