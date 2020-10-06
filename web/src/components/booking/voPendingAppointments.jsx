@@ -4,7 +4,7 @@ import { Card } from "@material-ui/core";
 import { updateStatus } from "services/bookingService";
 
 const VoPendingAppointments = (props) => {
-  const { pending} = props;
+  const { pending } = props;
 
   const changeDateFormat = (f) => {
     let d = new Date(f);
@@ -12,12 +12,11 @@ const VoPendingAppointments = (props) => {
     return x;
   };
 
-
   return (
     <div className="">
-      <div className="ml-8 mt-4">
+      <div className=" mt-4">
         {pending.map((i) => (
-          <Card className="ml-30 mr-30 mb-3" style={{ width: 900 }} key={i._id}>
+          <Card className=" mb-3" style={{ width: 900 }} key={i._id}>
             <CardHeader className="m-0 p-1  pt-2 bg-default">
               <Row>
                 <div className="col-8 text-secondary">
@@ -35,14 +34,9 @@ const VoPendingAppointments = (props) => {
                       {i?.time}
                     </small>
                     <div>
-                      <Button
-                        size="sm"
-                        color="warning"
-                        disabled
-                      >
+                      <Button size="sm" color="warning" disabled>
                         Pending
                       </Button>
-                      
                     </div>
                   </Row>
                 </div>

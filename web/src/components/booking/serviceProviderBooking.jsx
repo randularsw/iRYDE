@@ -121,7 +121,7 @@ const ServiceProviderBooking = (props) => {
       data.bookingServices = bookingServices;
       onToggle("formModal");
       const res = await addBooking(data);
-      console.log(555555555555, res.data.sp);
+      //console.log(555555555555, res.data.sp);
     } catch (error) {
       console.log(error);
     }

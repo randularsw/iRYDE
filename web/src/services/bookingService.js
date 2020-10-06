@@ -44,3 +44,7 @@ export function updateStatus(id, appointment) {
 export function getRateModal(id) {
   return axios.get("http://localhost:4000/bookings/isRated/" + id);
 }
+//update isRated ==  true
+export function updateisRated(id) {
+  return axios.patch("http://localhost:4000/bookings/update/isRated/" + id);
+}

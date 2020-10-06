@@ -13,7 +13,7 @@ const VoFinishedAppointments = (props) => {
 
   return (
     <div className="">
-      <div className="ml-8 mt-4">
+      <div className=" mt-4">
         {finished.map((i) => (
           <Card className="ml-30 mr-30 mb-3" style={{ width: 900 }} key={i._id}>
             <CardHeader className="m-0 p-1  pt-2 bg-default">

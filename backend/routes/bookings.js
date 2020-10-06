@@ -156,4 +156,17 @@ router.get("/sp/finished/bookings", async (req, res) => {
   }
 });
 
+//update isRated == true
+router.patch("/update/isRated/:id", async (req, res) => {
+  try {
+    const patchStatus = await Booking.updateOne(
+      { _id: req.params.id },
+      { $set: { isRated: true } }
+    );
+    res.json(patchStatus);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
 module.exports = router;

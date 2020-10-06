@@ -22,6 +22,7 @@ import { UserContext } from "core/userContext";
 import { Rating } from "@material-ui/lab";
 import { getRateModal } from "services/bookingService";
 import { addRate } from "services/rateService";
+import { updateisRated } from "services/bookingService";
 
 class Home extends Component {
   static contextType = UserContext;
@@ -80,9 +81,9 @@ class Home extends Component {
       voId: this.state.user._id,
       voName: this.state.user.name,
     };
-    console.log(rates);
     const res = await addRate(rates);
     this.toggleModal("formModal");
+    const result = await updateisRated(this.state.booking[0]._id);
   }
 
   render() {

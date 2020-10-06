@@ -1,7 +1,7 @@
 const router = require("express").Router();
-
 const Rating = require("../models/rate");
 
+//add rate to db
 router.post("/", async(req,res)=>{
     try {
         const newRate = new Rating({
@@ -19,5 +19,15 @@ router.post("/", async(req,res)=>{
         res.json({ message: error });
     }
 });
+//get specific sp rates
+router.get("/:id", async(req,res)=>{
+    try {
+        const received = await Rating.find({spId:req.params.id});
+        console.log(received);
+        res.json(received);
+    } catch (error) {
+        res.json({ message: error });
+    }
+})
 
 module.exports = router;
