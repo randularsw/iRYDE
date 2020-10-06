@@ -8,7 +8,7 @@ import { FormGroup, Form, Input, Col } from "reactstrap";
 // import { addvehicle } from "./";
 import axios from "axios";
 import { Link } from "react-router-dom";
-// import { ModelsList } from "./modelList";
+import { ModelsList } from "./modelList";
 
 import { addVehicleBrand } from "services/vehicleTypeService";
 import { getVehicleBrands } from "services/vehicleTypeService";
@@ -28,7 +28,7 @@ class ModelsAdd extends Component {
       //   key:"",
       // },
       brandId:null,
-      listModels:["vitz","swift","corolla"],
+      // listModels:["vitz","swift","corolla"],
       type:"",
       model:"",
       model:["a","b","c"],
@@ -66,7 +66,9 @@ class ModelsAdd extends Component {
     };
     console.log(vehicle);
     addVehicleModel(this.props.match.params.id,vehicle);
-
+    axios
+    .post("http://localhost:4000/vehicleTypes/add/", vehicle)
+    .then((res) => console.log(res.data));
   }
 
   //add vehicle model
@@ -187,67 +189,7 @@ class ModelsAdd extends Component {
                       </Row>
                     </Form>
                    
-                    {(message !== "" || listModels.length == 0) && (
-                      <p className="message test-danger">{message}</p>
-                    )}
-
-                    {listModels.length > 0 && (
-
-                    <Table className="align-items-center" responsive>
-                        <thead className="thead-light">
-                          <tr>
-                            <th scope="col">Vehicle Model</th>
-                            <th scope="col">Vehicle Type</th>
-
-                            <th scope="col" />
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {listModels.map((item) => {
-                            return (
-                              <tr key={item._id}>
-                                <th scope="row" col-md-2>
-                                  <Media className="align-items-center">
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                      
-                                      {item}
-                                      </span>
-                                    </Media>
-                                  </Media>
-                                </th>
-                                
-                                <th scope="row" col-md-2>
-                                  <Media className="align-items-center">
-                                    <Media>
-                                      <span className="mb-0 text-sm">
-                                      {this.type}
-                                      </span>
-                                    </Media>
-                                  </Media>
-                                </th>
-
-                                <td>
-                                  <Button
-                                    // onClick={(e) => this.removeItem(item._id)}
-                                    
-                                    color="danger"
-                                    outline
-                                    type="button"
-                                  >
-                                    <i
-                                      class="fa fa-trash"
-                                      aria-hidden="true"
-                                    ></i>
-                                    Delete
-                                  </Button>
-                                </td>
-                              </tr>
-                            );
-                          })}
-                        </tbody>
-                      </Table>
-                    )}
+                   
                   </div>
                 </CardBody>
               </Card>
