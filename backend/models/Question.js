@@ -6,6 +6,10 @@ const QuestionSchema = mongoose.Schema(
       type: String,
       // required: true,
     },
+    userName: {
+      type: String,
+      // required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -17,7 +21,6 @@ const QuestionSchema = mongoose.Schema(
     likeCount: {
       type: Number,
     },
-
     answersCount: {
       type: Number,
     },
@@ -37,6 +40,7 @@ const QuestionSchema = mongoose.Schema(
       type: [
         {
           userHandle: String,
+          userName: String,
           text: String,
           createdAt: Date,
         },

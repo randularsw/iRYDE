@@ -75,7 +75,14 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
         var userInfo = Provider.of<UserModel>(context, listen: false);
         Map user = userInfo.user;
         print(user);
-        Map data = await questionService.addAnswer(id, user['_id'], answerText);
+        Map data = await questionService.addAnswer(
+            id, user['_id'], user['name'], answerText);
+        if (data != null) {
+          setState(() {
+            answerText = "";
+          });
+          getAllQuestions();
+        }
       }
     } catch (err) {
       print(err);
@@ -168,12 +175,24 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
                                         ],
                                       ),
                                     ),
-                                    Text(
-                                      questions[index]["createdAt"],
-                                      textAlign: TextAlign.end,
-                                      style: TextStyle(
-                                        fontSize: 10.0,
-                                      ),
+                                    Row(
+                                      
+                                      children: <Widget>[
+                                        Text(
+                                          questions[index]["userName"],
+                                          textAlign: TextAlign.end,
+                                          style: TextStyle(
+                                            fontSize: 10.0,
+                                          ),
+                                        ),
+                                        // Text(
+                                        //   questions[index]["createdAt"],
+                                        //   textAlign: TextAlign.end,
+                                        //   style: TextStyle(
+                                        //     fontSize: 10.0,
+                                        //   ),
+                                        // ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -185,6 +204,7 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
                                     fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 SizedBox(
@@ -209,30 +229,58 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
                                     ),
                                   ),
                                   children: <Widget>[
-                                    // Container(
-                                    //     child: ListView.builder(
-                                    //   padding: const EdgeInsets.all(10),
-                                    //   itemCount:
-                                    //       questions[index]["answers"]?.length,
-                                    //   itemBuilder:
-                                    //       (BuildContext context, int idx) {
-                                    //     return Container(
-                                    //         child: Column(
-                                    //       children: <Widget>[
-                                    //         Text(
-                                    //           questions[index]["answers"][idx]
-                                    //               ["text"],
-                                    //           textAlign: TextAlign.end,
-                                    //           style: TextStyle(
-                                    //             fontSize: 10.0,
-                                    //           ),
-                                    //         ),
-                                    //       ],
-                                    //       crossAxisAlignment:
-                                    //           CrossAxisAlignment.stretch,
-                                    //     ));
-                                    //   },
-                                    // )),
+                                    Container(
+                                        child: ListView.builder(
+                                      shrinkWrap: true,
+                                      padding: const EdgeInsets.all(10),
+                                      itemCount:
+                                          questions[index]["answers"]?.length,
+                                      itemBuilder:
+                                          (BuildContext context, int idx) {
+                                        return Container(
+                                          child: Column(
+                                            children: <Widget>[
+                                              Text(
+                                                questions[index]["answers"][idx]
+                                                    ["text"],
+                                                // textAlign: TextAlign.start,
+                                                style: TextStyle(
+                                                  fontSize: 12.0,
+                                                ),
+                                              ),
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                children: <Widget>[
+                                                  Text(
+                                                    questions[index]["answers"]
+                                                        [idx]["userName"],
+                                                    style:
+                                                        TextStyle(fontSize: 10),
+                                                    // textAlign: TextAlign.end,
+                                                  ),
+                                                  // Text(
+                                                  //   questions[index]["answers"]
+                                                  //       [idx]["createdAt"],
+                                                  //   style:
+                                                  //       TextStyle(fontSize: 10),
+                                                  // ),
+                                                ],
+                                              ),
+                                              const Divider(
+                                                color: Colors.grey,
+                                                height: 20,
+                                                thickness: 1,
+                                                // indent: 20,
+                                                endIndent: 0,
+                                              ),
+                                            ],
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                          ),
+                                        );
+                                      },
+                                    )),
                                     Form(
                                       key: _formKey,
                                       child: Container(
@@ -264,7 +312,7 @@ class _DiscussionForumHomeState extends State<DiscussionForumHome> {
                                         addAnswer(questions[index]["_id"]);
                                       },
                                       child: Text("Post"),
-                                    )
+                                    ),
                                   ],
                                 )
                               ],

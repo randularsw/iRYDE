@@ -73,15 +73,15 @@ class _MyFancyFabState extends State<MyFancyFab> {
               Navigator.pushNamed(context, AddQuestion.id);
             },
           ),
-          SpeedDialChild(
-            child: Icon(Icons.add_comment),
-            backgroundColor: Colors.blueGrey[300],
-            label: 'Add Post',
-            labelStyle: TextStyle(fontSize: 12.0),
-            onTap: () {
-              Navigator.pushNamed(context, AddPost.id);
-            },
-          ),
+          // SpeedDialChild(
+          //   child: Icon(Icons.add_comment),
+          //   backgroundColor: Colors.blueGrey[300],
+          //   label: 'Add Post',
+          //   labelStyle: TextStyle(fontSize: 12.0),
+          //   onTap: () {
+          //     Navigator.pushNamed(context, AddPost.id);
+          //   },
+          // ),
         ],
       ),
     );

@@ -18,20 +18,6 @@ class QuestionService {
     }
   }
 
-  Future<Map> addComment(id, Map question) async {
-    print(question);
-    try {
-      final res = await http.put('$baseUrl/api/questions/$id/comment',
-          headers: null, body: question);
-
-      Map data = jsonDecode(res.body);
-      print(data);
-      return data;
-    } catch (err) {
-      print(err);
-    }
-  }
-
   //Get all questions
   Future<List> getAllQuestions() async {
     final res = await http.get('$baseUrl/api/questions');
@@ -74,14 +60,14 @@ class QuestionService {
   }
 
 //add answer
-  Future<Map> addAnswer(id, userId, text) async {
+  Future<Map> addAnswer(id, userId, userName, text) async {
     print('7777777777777777777777777777777777777777777777777777777777');
     print(id);
     print(userId);
     print(text);
     //print(id);
     final res = await http.put('$baseUrl/api/questions/$id/answer',
-        body: {"userHandle": userId, "text": text});
+        body: {"userHandle": userId,"userName":userName, "text": text});
     print('1111111111111111111111111111111111111111111111111111');
     print(res);
     Map data = jsonDecode(res.body);

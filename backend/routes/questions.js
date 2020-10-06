@@ -8,6 +8,7 @@ router.post("/", async (req, res) => {
     title: req.body.title,
     text: req.body.text,
     userHandle: req.body.userHandle,
+    userName: req.body.userName,
     createdAt: Date.now(),
     likeCount: 0,
     answersCount: 0,
@@ -96,23 +97,23 @@ router.put("/:id/like", async (req, res) => {
 
 //add answer
 router.put("/:id/answer", async (req, res) => {
-  console.log(1, req.body.userHandle);
-  console.log(2, req.body.text);
+    console.log(1, req.body);
+  //   console.log(2, req.body.text);
   try {
     const question = await Question.findById(req.params.id);
     console.log(3, question);
     if (question) {
       question.answersCount++;
-      console.log(5555555555555);
       question.answers.push({
         userHandle: req.body.userHandle,
+        userName: req.body.userName,
         text: req.body.text,
         createdAt: Date.now(),
       });
-      console.log(4, createdAt);
+      console.log(4, question);
       const saved = await question.save();
       console.log(12, saved);
-      res.json(500);
+      res.json(saved);
     } else {
       res.status(500).json({ error: "Message not found!" });
     }
