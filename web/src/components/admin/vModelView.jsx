@@ -18,7 +18,7 @@ class ModelsView extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:4000/services/")
+      .get("http://localhost:4000/vehicleTypes/model")
       .then((response) => {
         this.setState({ models: response.data });
       })
@@ -41,7 +41,7 @@ class ModelsView extends Component {
 
   deleteModel(id) {
     axios
-      .delete("http://localhost:4000/services/" + id)
+      .delete("http://localhost:4000/vehicleTypes/model/${id}" + id)
       .then((res) => {
         console.log("Model deleted successfully");
       })
