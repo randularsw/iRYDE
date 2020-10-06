@@ -15,43 +15,37 @@ const QuestionSchema = mongoose.Schema(
       required: true,
     },
     likeCount: {
-      type: Number
+      type: Number,
     },
 
-    commentCount: {
-      type: Number
+    answersCount: {
+      type: Number,
     },
     likes: {
-      type: [{
-        userHandle: String,
-      }]
+      type: [
+        {
+          userHandle: String,
+        },
+      ],
     },
-    // ownerId: {
-    //   type: String,
-    //   required: true,
-    // },
-
-  },
-  // {
-  //   comments: [
-  //     {
-  //       userHandle: 'user',
-  //       questionId: 'kdjsfgdksuufhgkdsufky',
-  //       body: 'nice one mate!',
-  //       createdAt: '2019-03-15T10:59:52.798Z',
-  //       userImage: 'image/dsfsdkfghskdfgs/dgfdhfgdh'
-  //     }
-  //   ],
-  // },
-  // {
-  //   timestamps: true,
-  // },
-  {
     createdAt: {
       type: Date,
       required: true,
     },
+
+    answers: {
+      type: [
+        {
+          userHandle: String,
+          text: String,
+          createdAt: Date,
+        },
+      ],
+    },
   }
+  // {
+  //   timestamps: true,
+  //
 );
 
 const Questions = mongoose.model("Questions", QuestionSchema);

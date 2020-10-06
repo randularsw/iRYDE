@@ -18,6 +18,20 @@ class QuestionService {
     }
   }
 
+  Future<Map> addComment(id, Map question) async {
+    print(question);
+    try {
+      final res = await http.put('$baseUrl/api/questions/$id/comment',
+          headers: null, body: question);
+
+      Map data = jsonDecode(res.body);
+      print(data);
+      return data;
+    } catch (err) {
+      print(err);
+    }
+  }
+
   //Get all questions
   Future<List> getAllQuestions() async {
     final res = await http.get('$baseUrl/api/questions');
@@ -35,15 +49,42 @@ class QuestionService {
   //Update question
   Future<List> updateQuestion() async {
     final res = await http.patch('$baseUrl/api/questions/:id');
+    print(res);
     List data = jsonDecode(res.body);
     return data;
   }
 
   //delete an question
-  Future<Map> deleteQuestion(id) async {
-    final res = await http.delete('$baseUrl/api/questions/:id');
-    Map data = jsonDecode(res.body);
+  Future<List> deleteQuestion(id) async {
+    final res = await http.delete('$baseUrl/api/questions/$id');
+    List data = jsonDecode(res.body);
     // print(data);
+    return data;
+  }
+
+// Like a question
+  Future<Map> likeQuestion(id, userId) async {
+    //print(id);
+    final res = await http
+        .put('$baseUrl/api/questions/$id/like', body: {"userHandle": userId});
+    print('1111111111111111111111111111111111111111111111111111');
+    print(res);
+    Map data = jsonDecode(res.body);
+    return data;
+  }
+
+//add answer
+  Future<Map> addAnswer(id, userId, text) async {
+    print('7777777777777777777777777777777777777777777777777777777777');
+    print(id);
+    print(userId);
+    print(text);
+    //print(id);
+    final res = await http.put('$baseUrl/api/questions/$id/answer',
+        body: {"userHandle": userId, "text": text});
+    print('1111111111111111111111111111111111111111111111111111');
+    print(res);
+    Map data = jsonDecode(res.body);
     return data;
   }
 }
