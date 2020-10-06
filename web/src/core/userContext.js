@@ -17,6 +17,7 @@ class UserProvider extends Component {
         const isAuthenticated = true;
         this.setState({ isAuthenticated, user });
       }
+      return user;
     } catch (ex) {
       console.log("exception", ex);
     }
@@ -94,6 +95,7 @@ class UserProvider extends Component {
       const isAuthenticated = true;
       this.setState({ isAuthenticated, user });
     }
+    return user;
   };
 
   render() {
