@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
-import { Row, Card, CardHeader, CardBody, Container , Label} from "reactstrap";
-
+import { Row, Card, CardHeader, CardBody, Container, Label } from "reactstrap";
 
 import {
   Badge,
@@ -36,86 +35,89 @@ class Charts extends Component {
     super(props);
     this.state = {
       pie: {
-        labels: ['SB', 'VO'],
+        labels: ["SB", "VO"],
         datasets: [
           {
-            label: 'User Types',
+            label: "User Types",
             fill: false,
             lineTension: 0.5,
-            backgroundColor: [
-              '#B21F00',
-              '#C9DE00',
-            ],
-            hoverBackgroundColor: [
-            '#501800',
-            '#4B5000',
-            ],
+            backgroundColor: ["#B21F00", "#C9DE00"],
+            hoverBackgroundColor: ["#501800", "#4B5000"],
             borderWidth: 2,
-            data: [1, 1]
-          }
-        ]
+            data: [1, 1],
+          },
+        ],
       },
       bar: {
-        labels: ['January', 'February', 'March',
-                 'April', 'May'],
+        labels: ["January", "February", "March", "April", "May"],
         datasets: [
           {
-            label: 'Rainfall',
-            backgroundColor: 'rgba(75,192,192,1)',
-            borderColor: 'rgba(0,0,0,1)',
+            label: "Rainfall",
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
             borderWidth: 2,
-            data: [1, 1, 1, 1, 1]
-          }
-        ]
+            data: [1, 1, 1, 1, 1],
+          },
+        ],
       },
       line: {
-        labels: ['January', 'February', 'March',
-                 'April', 'May'],
+        labels: ["January", "February", "March", "April", "May"],
         datasets: [
           {
-            label: 'Rainfall',
-            backgroundColor: 'rgba(75,192,192,1)',
-            borderColor: 'rgba(0,0,0,1)',
+            label: "Rainfall",
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
             borderWidth: 2,
-            data: [1, 1, 1, 1, 1]
-          }
-        ]
-      }  
-    }
-    
+            data: [1, 1, 1, 1, 1],
+          },
+        ],
+      },
+    };
   }
-  componentDidMount(){
+  componentDidMount() {
     // alert("hi")
-    this.bookingdeatils()
-    this.userTypes()
-    this.userMonths()
+    this.bookingdeatils();
+    this.userTypes();
+    this.userMonths();
   }
 
   async bookingdeatils() {
     try {
-      var data = [0,0,0,0,0,0,0,0,0,0,0,0];
+      var data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       const model = await getAllBookings();
       console.log(model.data);
       model.data.map((item) => {
-        var d = new Date(item.date)
+        var d = new Date(item.date);
         // alert(d.getMonth())
-        data[d.getMonth()] +=1
-      })
-      var bar= {
-        labels: ['January', 'February', 'March',
-                 'April', 'May','June','July','August','September', 'October','November', 'December'],
+        data[d.getMonth()] += 1;
+      });
+      var bar = {
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ],
         datasets: [
           {
-            label: 'Bookings',
+            label: "Bookings",
             fill: false,
             lineTension: 0.5,
-            backgroundColor: 'rgba(75,192,192,1)',
-            borderColor: 'rgba(0,0,0,1)',
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
             borderWidth: 2,
-            data:data
-          }
-        ]
-      }
+            data: data,
+          },
+        ],
+      };
       this.setState({
         bar: bar,
         // type:type.data,
@@ -127,37 +129,49 @@ class Charts extends Component {
 
   async userMonths() {
     try {
-      var data = [0,0,0,0,0,0,0,0,0,0,0,0];
+      var data = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
       const sb = await getSB();
       console.log(sb.data);
       sb.data.map((item) => {
-        var d = new Date(item.createdAt)
+        var d = new Date(item.createdAt);
         // alert(d.getMonth())
-        data[d.getMonth()] +=1
-      })
+        data[d.getMonth()] += 1;
+      });
 
       const vo = await getVO();
       console.log(vo.data);
       vo.data.map((item) => {
-        var d = new Date(item.createdAt)
+        var d = new Date(item.createdAt);
         // alert(d.getMonth())
-        data[d.getMonth()] +=1
-      })
-      var line= {
-        labels: ['January', 'February', 'March',
-                 'April', 'May','June','July','August','September', 'October','November', 'December'],
+        data[d.getMonth()] += 1;
+      });
+      var line = {
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ],
         datasets: [
           {
-            label: 'Users',
+            label: "Users",
             fill: false,
             lineTension: 0.5,
-            backgroundColor: 'rgba(75,192,192,1)',
-            borderColor: 'rgba(0,0,0,1)',
+            backgroundColor: "rgba(75,192,192,1)",
+            borderColor: "rgba(0,0,0,1)",
             borderWidth: 2,
-            data:data
-          }
-        ]
-      }
+            data: data,
+          },
+        ],
+      };
       this.setState({
         line: line,
         // type:type.data,
@@ -167,37 +181,30 @@ class Charts extends Component {
     }
   }
 
-
   async userTypes() {
     try {
-      var data = [0,0];
+      var data = [0, 0];
       const model1 = await getSB();
       console.log(model1.data.length);
-      data[0]=model1.data.length
+      data[0] = model1.data.length;
 
       const model2 = await getVO();
       console.log(model2.data.length);
-      data[1]=model2.data.length
-      var pie= {
-        labels: ['SP', 'VO'],
+      data[1] = model2.data.length;
+      var pie = {
+        labels: ["SP", "VO"],
         datasets: [
           {
-            label: 'User Types',
+            label: "User Types",
             fill: false,
             lineTension: 0.5,
-            backgroundColor: [
-              '#B21F00',
-              '#C9DE00',
-            ],
-            hoverBackgroundColor: [
-            '#501800',
-            '#4B5000',
-            ],
+            backgroundColor: ["#B21F00", "#C9DE00"],
+            hoverBackgroundColor: ["#501800", "#4B5000"],
             borderWidth: 2,
-            data: data
-          }
-        ]
-      }
+            data: data,
+          },
+        ],
+      };
       this.setState({
         pie: pie,
         // type:type.data,
@@ -213,36 +220,33 @@ class Charts extends Component {
     }
   }
 
-  
-  getChartData = canvas =>{
-    const data =this.state.data;
+  getChartData = (canvas) => {
+    const data = this.state.data;
 
     return data;
-  }
+  };
 
-
-
-//   state = {
-//     items: [],
-//   };
+  //   state = {
+  //     items: [],
+  //   };
 
   render() {
     // const { items } = this.state;
     return (
       <>
-        
         <Container className=" mt--6" fluid>
-        
           {/* Table */}
           <Row>
             <div className=" col">
               <Card className=" shadow">
-                
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
-                    
-                    <Label> <h1>Users of the system</h1></Label>
+
+                    <Label>
+                      {" "}
+                      <h1>Users of the system</h1>
+                    </Label>
 
                     <Card className="bg-default">
                       <CardBody>
@@ -251,15 +255,15 @@ class Charts extends Component {
                           <Pie
                             data={this.state.pie}
                             options={{
-                              title:{
-                                display:true,
-                                text:'Users per month',
-                                fontSize:20
+                              title: {
+                                display: true,
+                                text: "Users per month",
+                                fontSize: 20,
                               },
-                              legend:{
-                                display:true,
-                                position:'right'
-                              }
+                              legend: {
+                                display: true,
+                                position: "right",
+                              },
                             }}
                             getDatasetAtEvent={(e) => console.log(e)}
                           />
@@ -267,7 +271,9 @@ class Charts extends Component {
                       </CardBody>
                     </Card>
 
-                    <Label><h1>users created at </h1></Label>
+                    <Label>
+                      <h1>users created at </h1>
+                    </Label>
                     <Card>
                       <CardBody>
                         <div className="chart">
@@ -275,22 +281,24 @@ class Charts extends Component {
                           <Line
                             data={this.state.line}
                             options={{
-                              title:{
-                                display:true,
-                                text:'Bookings per month',
-                                fontSize:20
+                              title: {
+                                display: true,
+                                text: "Bookings per month",
+                                fontSize: 20,
                               },
-                              legend:{
-                                display:true,
-                                position:'right'
-                              }
-                            }}  
+                              legend: {
+                                display: true,
+                                position: "right",
+                              },
+                            }}
                           />
                         </div>
                       </CardBody>
                     </Card>
 
-                    <Label><h1>Bookings of the Year</h1></Label>
+                    <Label>
+                      <h1>Bookings of the Year</h1>
+                    </Label>
                     <Card>
                       <CardBody>
                         <div className="chart">
@@ -298,22 +306,20 @@ class Charts extends Component {
                           <Bar
                             data={this.state.bar}
                             options={{
-                              title:{
-                                display:true,
-                                text:'Bookings per month',
-                                fontSize:20
+                              title: {
+                                display: true,
+                                text: "Bookings per month",
+                                fontSize: 20,
                               },
-                              legend:{
-                                display:true,
-                                position:'right'
-                              }
-                            }}  
+                              legend: {
+                                display: true,
+                                position: "right",
+                              },
+                            }}
                           />
                         </div>
                       </CardBody>
                     </Card>
-                    
-
                   </div>
                 </CardBody>
               </Card>

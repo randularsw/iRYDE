@@ -137,13 +137,23 @@ router.get("/isRated/:id", async (req, res) => {
 });
 
 //get all bookings
-router.get("/all-bookings",async(req,res)=>{
+router.get("/all-bookings", async (req, res) => {
   try {
     const result = await Booking.find();
     res.json(result);
   } catch (error) {
     res.json({ message: error });
   }
-})
+});
+
+//get all finished appointments
+router.get("/sp/finished/bookings", async (req, res) => {
+  try {
+    const finished = await Booking.find({ status: "finished" });
+    res.json(finished);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
 
 module.exports = router;

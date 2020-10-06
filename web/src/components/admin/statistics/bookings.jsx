@@ -1,40 +1,46 @@
 import React, { Component } from "react";
 import Header from "../../shared/header";
-import { Row, Card, CardHeader, CardBody, Container, Table,Media } from "reactstrap";
-import {getCountBookings} from '../../../services/statisticsService';
+import {
+  Row,
+  Card,
+  CardHeader,
+  CardBody,
+  Container,
+  Table,
+  Media,
+} from "reactstrap";
+import { getCountBookings } from "../../../services/statisticsService";
 class Bookings extends Component {
-//   state = {
-//     items: [],
-//   };
-state = {
+  //   state = {
+  //     items: [],
+  //   };
+  state = {
     items: [],
-    spname:"",
-    bookings:null,
+    spname: "",
+    bookings: null,
+    finishedBookings: [],
   };
   async componentDidMount() {
     try {
       const result = await getCountBookings();
       console.log(result.data.spCount);
-      this.setState({spname:result.data.spname});
-      this.setState({bookings:result.data.bCount});
-      
+      this.setState({ spname: result.data.spname });
+      this.setState({ bookings: result.data.bCount });
+      //const {data:finishedBookings} = await getFinishedBookings
     } catch (err) {
       console.log("Error", err);
     }
-}
+  }
 
   render() {
     // const { items } = this.state;
     return (
       <>
-     
-     
-        <Container className=" mt--9" fluid>
+        <Container className=" " fluid>
           {/* Table */}
           <Row>
-            <div className=" col">
+            <div className=" col ">
               <Card className=" shadow">
-                
                 <CardBody>
                   <div style={{ minHeight: 200 }}>
                     {/* Page Content */}
@@ -51,12 +57,15 @@ state = {
                         </tr>
                       </thead>
                       <tbody>
+                        {/* {this.state.finishedBookings.map(b=>(
+
+                        ))} */}
                         <tr>
                           <th scope="row">
                             <Media className="align-items-center">
                               <Media>
                                 <span className="mb-0 text-sm">
-                                {this.state.spname}
+                                  {this.state.spname}
                                 </span>
                               </Media>
                             </Media>

@@ -137,6 +137,19 @@ router.put("/payment", async (req, res) => {
   }
 });
 
+router.get("/counts", async (req, res) => {
+  try {
+    const sp = await User.find({ type: "sp" });
+    const vo = await User.find({ type: "vo" });
+    console.log(sp);
+    const received = { spCount: sp.length, voCount: vo.length };
+    console.log(received);
+    res.json(received);
+  } catch (error) {
+    res.send({ data: error });
+  }
+});
+
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
