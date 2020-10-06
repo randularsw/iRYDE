@@ -9,7 +9,7 @@ import Login from "components/auth/login";
 import Register from "components/auth/register";
 import UserProvider from "core/userContext";
 import Logout from "components/auth/logout";
-import About from "components/auth/about";
+// import About from "components/auth/about";
 import Profile from "components/auth/profile";
 import serviceProviderList from "components/booking/serviceProviderList";
 import serviceProviderDetails from "components/booking/serviceProviderDetails";
@@ -24,6 +24,12 @@ import PromotionsEdit from "components/promotionlist/promotionsEdit";
 import Payment from "components/payment";
 import StudentTableRow from "components/servicelist/serviceTableRow";
 import VehicleType from "components/admin/vehicleType";
+import RemoveUser from "components/admin/removeUser";
+import Statistics from "components/admin/statistics/statistics";
+import ModelsView from "components/admin/vModelView";
+import ModelsAdd from "components/admin/vModelAdd";
+import RemoveContent from "components/admin/removeContent";
+
 import SpBookingView from "components/booking/spBookingView";
 import VoBookingView from "components/booking/voBookingView";
 import SpViewCalendar from "components/calendar/spViewCalendar";
@@ -56,7 +62,7 @@ function App(props) {
           <Route path="/payment" component={Payment}></Route>
           <Route path="/edit/:id" component={PromotionsEdit}></Route>
           <Route exact path="/profile" component={Profile}></Route>
-          <Route exact path="/about" component={About}></Route>
+          {/* <Route exact path="/about" component={About}></Route> */}
           <Route exact path="/auth/login" component={Login}></Route>
           <Route exact path="/auth/register" component={Register}></Route>
           <Route exact path="/auth/logout" component={Logout}></Route>
@@ -89,6 +95,13 @@ function App(props) {
           ></Route>
           <Route exact path="/services" component={ServicesView}></Route>
           <Route exact path="/servicesadd" component={ServicesAdd}></Route>
+          <Route exact path="/admin/vehicleType" component={VehicleType}></Route>
+          <Route exact path="/admin/removeUser" component={RemoveUser}></Route>
+          <Route exact path="/admin/statistics/statistics" component={Statistics}></Route>
+          <Route exact path="/admin/modelsView" component={ModelsView}></Route>
+          <Route exact path="/admin/modelsAdd/:id" component={ModelsAdd}></Route>
+
+          <Route exact path="/admin/removeContent" component={RemoveContent}></Route>
           <Route path="/admin/" component={VehicleType}></Route>
           <Route exact path="/sp/calendar" component={SpViewCalendar}></Route>
           <Route path="/" component={Home}></Route>

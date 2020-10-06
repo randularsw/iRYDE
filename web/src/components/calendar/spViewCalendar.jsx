@@ -30,7 +30,7 @@ class SpViewCalendar extends Component {
       const { data: confirmed } = await getSpConfirmedAppointments(
         userData.user?._id
       );
-      
+
       this.setState({ confirmed });
       const daysDiff = [];
       console.log(confirmed);
@@ -38,10 +38,11 @@ class SpViewCalendar extends Component {
         const appointmentDate = new Date(c.date);
         console.log(appointmentDate);
         const today = new Date().toISOString();
-        const diff = new Date(appointmentDate).getTime() - new Date(today).getTime(); // Gives difference between 2 days
+        const diff =
+          new Date(appointmentDate).getTime() - new Date(today).getTime(); // Gives difference between 2 days
         const diffDates = Math.round(diff / (1000 * 3600 * 24)); // convert it to np of days format
         daysDiff.push(diffDates);
-        console.log(1111111,daysDiff);
+        console.log(1111111, daysDiff);
       });
       this.setState({ daysDiff });
     } catch (error) {
@@ -52,34 +53,26 @@ class SpViewCalendar extends Component {
   render() {
     return (
       <>
-        <Header />
-        <Container className=" mt--9" fluid>
+        <Container fluid>
           {/* Table */}
           <Row>
             <div className=" col">
-              <Card className=" shadow m-0 ">
-                <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0">My Calendar</h3>
-                </CardHeader>
-                <CardBody>
-                  <div style={{ minHeight: 400 }}>
-                    {/* Page Content */}
-                    <DatePicker
-                      selected={new Date()}
-                      highlightDates={this.state.daysDiff.map((i) => {
-                        const d = new Date();
-                        d.setDate(d.getDate() + i);
-                        return d;
-                      })}
-                      inline
-                      showDisabledMonthNavigation
-                      className="input-group-alternative p-2"
-                    />
-                    
-                    <UnavailableDates/>
-                  </div>
-                </CardBody>
-              </Card>
+              <div style={{ minHeight: 400 }}>
+                {/* Page Content */}
+                <DatePicker
+                  selected={new Date()}
+                  highlightDates={this.state.daysDiff.map((i) => {
+                    const d = new Date();
+                    d.setDate(d.getDate() + i);
+                    return d;
+                  })}
+                  inline
+                  showDisabledMonthNavigation
+                  className="input-group-alternative p-2"
+                />
+                <h3 className="mt-3">Block Booking Dates</h3>
+                <UnavailableDates />
+              </div>
             </div>
           </Row>
         </Container>

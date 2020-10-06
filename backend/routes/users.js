@@ -6,7 +6,7 @@ const User = require("../models/User");
 
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const emailExist = await User.findOne({ email: req.body.email });
     if (emailExist) return res.send({ data: "Email already exists" });
 
@@ -20,9 +20,20 @@ router.post("/", async (req, res) => {
       city: req.body.city,
       type: req.body.type,
       password: hash,
+      createdAt: Date.now(),
     });
 
+    if (req.body.type === "sp") {
+      user.paid = false;
+    }
+    if (req.body.type === "vo") {
+      user.rp = 0;
+      user.level = "Beginner";
+    }
+    console.log(user);
+
     const saved = await user.save();
+    console.log(saved);
     const tokenSecret = "gj56ubrtb2yesyv63jhn6rt3j";
     const token = jwt.sign({ _id: user._id }, tokenSecret);
 
@@ -60,6 +71,57 @@ router.get("/sp", async (req, res) => {
     const sps = await User.find({ type: "sp" });
     // delete passwords
     res.send(sps);
+  } catch (error) {
+    res.send({ data: error });
+  }
+});
+
+router.put("/", async (req, res) => {
+  try {
+    // console.log(req.body);
+    const user = await User.findById(req.body._id);
+
+    user.name = req.body.name;
+    user.phone = req.body.phone;
+    user.city = req.body.city;
+
+    const saved = await user.save();
+
+    res.send(saved);
+  } catch (error) {
+    res.send({ data: error });
+  }
+});
+
+// upload profile photo
+router.put("/photo", async (req, res) => {
+  try {
+    console.log(req.body);
+    const user = await User.findById(req.body._id);
+    console.log(user);
+    user.photo = req.body.photo;
+
+    const saved = await user.save();
+    console.log(saved);
+
+    res.send(saved);
+  } catch (error) {
+    res.send({ data: error });
+  }
+});
+
+// Payment
+router.put("/payment", async (req, res) => {
+  try {
+    console.log(req.body);
+    const user = await User.findById(req.body._id);
+    console.log(user);
+    user.paid = true;
+
+    const saved = await user.save();
+    console.log(saved);
+
+    res.send(saved);
   } catch (error) {
     res.send({ data: error });
   }

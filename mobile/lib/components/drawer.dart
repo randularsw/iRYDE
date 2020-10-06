@@ -25,6 +25,18 @@ class DrawerOption extends StatelessWidget {
     return Drawer(
       child: ListView(
         children: <Widget>[
+          UserAccountsDrawerHeader(
+            onDetailsPressed: () {
+              Navigator.pushNamed(context, ProfilePage.id);
+            },
+            arrowColor: Color(0XFF172b4d),
+            accountName: Text('sisiranga'),
+            accountEmail: Text('sisirox@gmail.com'),
+            currentAccountPicture: CircleAvatar(
+              backgroundColor: Colors.blueGrey[100],
+              child: Text('Hi'),
+            ),
+          ),
           Consumer<UserModel>(builder: (context, data, child) {
             return UserAccountsDrawerHeader(
               onDetailsPressed: () {

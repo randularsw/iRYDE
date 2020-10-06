@@ -5,6 +5,6 @@ export function addRate(data) {
   return axios.post("http://localhost:4000/rating/", data);
 }
 //get specific sp rates
-export function getRates(id){
-  return axios.get("http://localhost:4000/rating/"+id);
+export function getRates(id) {
+  return axios.get("http://localhost:4000/rating/" + id);
 }

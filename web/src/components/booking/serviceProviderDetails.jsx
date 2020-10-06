@@ -33,6 +33,7 @@ import Gallery from "./gallery";
 import ServiceSummary from "./serviceSummary";
 import { getPromotions } from "services/promotionService";
 import { getRates } from "services/rateService";
+import { getImages } from "services/galleryService";
 
 class serviceProviderDetails extends Component {
   static contextType = UserContext;
@@ -48,6 +49,7 @@ class serviceProviderDetails extends Component {
     promotions: [],
     ratings: [],
     avgRate: 0,
+    images: [],
   };
 
   async componentDidMount() {
@@ -67,7 +69,13 @@ class serviceProviderDetails extends Component {
         this.props.match.params.id
       );
       this.setState({ promotions });
-
+      //console.log("protions", this.state.promotions);
+      //get gallery
+      const { data: received } = await getImages(this.state.details?._id);
+      console.log(received);
+      if (received) {
+        this.setState({ images: received.images });
+      }
       //get unavailable dates
       this.setState({ unavailableDates: unavailableDates[0].dates });
       this.state.unavailableDates.map((d) => {
@@ -105,7 +113,7 @@ class serviceProviderDetails extends Component {
         total = total + r.rate;
       });
       let avgRate = total / this.state.ratings.length;
-      
+
       this.setState({ avgRate });
     }
   }
@@ -133,7 +141,23 @@ class serviceProviderDetails extends Component {
                       className="container bg-default"
                       style={{ height: 200, margin: 1 }}
                     >
-                      <div className="col-8"></div>
+                      <div className="col-8 m-2">
+                        {/* <div className="card-profile-image"> */}
+                        {/* <label htmlFor="upload"> */}
+                        <img
+                          alt="..."
+                          className="rounded-circle"
+                          height="180"
+                          src={
+                            !this.state.details?.photo
+                              ? require("assets/images/voPhoto.png")
+                              : this.state.details?.photo
+                          }
+                          style={{ cursor: "pointer" }}
+                        />
+                        {/* </label> */}
+                        {/* </div> */}
+                      </div>
                       <div className="col ">
                         <h1 className="text-white pt-5">
                           {this.state.details.name}
@@ -145,7 +169,6 @@ class serviceProviderDetails extends Component {
                           <div className="col-7 m-0 p-0">
                             {console.log(this.state.avgRate)}
                             <Rating
-                             
                               value={this.state.avgRate}
                               size="large"
                               readOnly
@@ -155,13 +178,15 @@ class serviceProviderDetails extends Component {
                             {/* <Button size="sm" color="primary" onClick={this.onBooking}>
                               Book Now
                             </Button> */}
-                            <Button
-                              size="sm"
-                              color="primary"
-                              onClick={() => this.toggleModal("formModal")}
-                            >
-                              Book Now
-                            </Button>
+                            {this.context.state.user?.type == "vo" && (
+                              <Button
+                                size="sm"
+                                color="primary"
+                                onClick={() => this.toggleModal("formModal")}
+                              >
+                                Book Now
+                              </Button>
+                            )}
                             <Modal
                               className="modal-dialog-centered"
                               size="sm"
@@ -195,7 +220,7 @@ class serviceProviderDetails extends Component {
                     </Row>
 
                     <Row className="ml-3">
-                      <div className=" col-7">
+                      <div className=" col-6">
                         <div className="mt-5 ">
                           <h2>Our Services</h2>
                           <div className="ml-4">
@@ -204,14 +229,20 @@ class serviceProviderDetails extends Component {
                             ))}
                           </div>
                         </div>
-                        <div style={{}} className="mt-5 ml-3">
+                        <div style={{}} className="mt-5">
                           <h2>Photos</h2>
-                          <Gallery />
+                          {this.state.images.length == 0 && (
+                            <p>There are no photos available yet.</p>
+                          )}
+                          <Gallery images={this.state.images} />
                         </div>
                       </div>
                       <Col>
                         <div className="mt-5 ml-2 ">
                           <h2>Promotions</h2>
+                          {this.state.promotions.length == 0 && (
+                            <p>There are no promotions available yet.</p>
+                          )}
                           {this.state.promotions.map((p) => (
                             <div
                               className="border p-2"
@@ -290,7 +321,6 @@ class serviceProviderDetails extends Component {
                                 </div>
                                 <div className="col-7">{r.voName}</div>
                                 <div className="col mt-2">
-                                  
                                   <Rating
                                     name="size-small"
                                     defaultValue={r.rate}

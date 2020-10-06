@@ -12,11 +12,16 @@ const sessionsRouter = require("./routes/sessions");
 const notificationsRouter = require("./routes/notifications");
 const vehiclesRouter = require("./routes/vehicles");
 const servicesRouter = require("./routes/services");
+const vehicleTypesRouter = require("./routes/vehicleTypes");
+const removeUsersRouter = require("./routes/removeUsers");
+
 const promotionsRouter = require("./routes/promotions");
+const questionRouter = require("./routes/questions");
 const bookingRouter = require("./routes/bookings");
 const timeSlotRouter = require("./routes/timeSlots");
 const unavailableDateRouter = require("./routes/unavailableDates");
-const ratingRouter = require('./routes/rates');
+const ratingRouter = require("./routes/rates");
+const galleryRouter = require("./routes/gallery");
 
 const port = process.env.PORT || 4000;
 console.log(port);
@@ -36,10 +41,16 @@ app.use("/api/notifications", notificationsRouter);
 app.use("/vehicles", vehiclesRouter);
 app.use("/bookings", bookingRouter);
 app.use("/services", servicesRouter);
+app.use("/vehicleTypes", vehicleTypesRouter);
+app.use("/removeUsers", removeUsersRouter);
 app.use("/promotions", promotionsRouter);
 app.use("/timeslots", timeSlotRouter);
-app.use("/sp/unavailabledates",unavailableDateRouter);
-app.use("/rating",ratingRouter);
+app.use("/api/questions", questionRouter);
+app.use("/api/questions/:id", questionRouter);
+
+app.use("/sp/unavailabledates", unavailableDateRouter);
+app.use("/rating", ratingRouter);
+app.use("/gallery", galleryRouter);
 
 mongoose.connect(
   process.env.DB_URL,

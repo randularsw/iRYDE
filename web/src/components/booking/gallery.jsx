@@ -1,10 +1,8 @@
 import React, { useState } from "react";
-import ReactImageGallery from "react-image-gallery";
 import ImageGallery from "react-image-gallery";
-import Gallery from "react-photo-gallery";
-import ResponsiveGallery from "react-responsive-gallery";
 
-function Galleryy() {
+function Galleryy(props) {
+  console.log(props.images);
   const imagess = [
     {
       original:
@@ -150,7 +148,7 @@ function Galleryy() {
 
   return (
     <div>
-      <ImageGallery items={imagess} />
+      {props.images.length > 0 && <ImageGallery items={props.images} />}
       {/* <ResponsiveGallery images={images} /> */}
     </div>
   );

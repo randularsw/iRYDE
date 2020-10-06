@@ -7,7 +7,7 @@ import 'package:iRYDE/screens/auth/loginPage.dart';
 import 'package:iRYDE/screens/splashScreen.dart';
 import 'package:provider/provider.dart';
 import 'screens/bookings/bookingHomePage.dart';
-import 'screens/forum/discussionForumHome.dart';
+import 'screens/forum/questionForum.dart';
 import 'screens/emergency/emergencyHome.dart';
 import 'screens/home/homePage.dart';
 import 'screens/drawer/vehiclesPage.dart';
@@ -16,6 +16,8 @@ import 'screens/drawer/profilePage.dart';
 import 'screens/notifications/notificationPage.dart';
 import 'screens/drawer/settingsBasic.dart';
 import 'screens/drawer/aboutUs.dart';
+import 'screens/forum/addQuestion.dart';
+import 'screens/forum/addPost.dart';
 import 'screens/auth/loginPage.dart';
 import 'screens/auth/registerPage.dart';
 
@@ -31,8 +33,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
+          tabBarTheme: TabBarTheme(
+            labelColor: Colors.white,
+            unselectedLabelColor: Colors.grey[500],
+          ),
           primaryColor: Color(0XFF172b4d),
           scaffoldBackgroundColor: Colors.white),
+
+      // initialRoute: MyBottomNavigationBar.id,
       initialRoute: SplashScreen.id,
       routes: {
         SplashScreen.id: (context) => SplashScreen(),
@@ -48,11 +56,12 @@ class MyApp extends StatelessWidget {
         NotificationPage.id: (context) => NotificationPage(),
         SettingsGeneral.id: (context) => SettingsGeneral(),
         AboutUsPage.id: (context) => AboutUsPage(),
+        AddQuestion.id: (context) => AddQuestion(),
+        AddPost.id: (context) => AddPost(),
         ServiceProviderDetails.id: (context) => ServiceProviderDetails(),
         VehicleAdd.id: (context) => VehicleAdd(),
         ServiceBooking.id: (context) => ServiceBooking(),
       },
-      // home: MyBottomNavigationBar(),
     );
   }
 }

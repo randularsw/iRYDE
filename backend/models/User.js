@@ -13,12 +13,28 @@ const User = mongoose.Schema({
     type: Number,
     required: true,
   },
-  city:{
+  photo: {
+    type: String,
+  },
+  city: {
     type: String,
     required: true,
   },
-  type:{
+  rp: {
+    type: Number,
+  },
+  level: {
     type: String,
+  },
+  paid: {
+    type: Boolean,
+  },
+  type: {
+    type: String,
+    required: true,
+  },
+  createdAt: {
+    type: Date,
     required: true,
   },
   password: {
@@ -26,7 +42,6 @@ const User = mongoose.Schema({
     required: true,
     min: 6,
   },
-  
 });
 
 module.exports = mongoose.model("Users", User);
