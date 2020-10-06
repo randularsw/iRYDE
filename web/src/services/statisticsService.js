@@ -9,6 +9,10 @@ export function getCountVo(){
     return axios.get('http://localhost:4000/api/users/counts');
 }
 
+export function getCountBookings(){
+    return axios.get('http://localhost:4000/count/');
+}
+
 // export function getCountBookings(){
 //     return axios.get('http://localhost:4000/counts/bookings');
 // }
