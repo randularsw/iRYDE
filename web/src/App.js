@@ -9,7 +9,7 @@ import Login from "components/auth/login";
 import Register from "components/auth/register";
 import UserProvider from "core/userContext";
 import Logout from "components/auth/logout";
-import About from "components/auth/about";
+// import About from "components/auth/about";
 import Profile from "components/auth/profile";
 import serviceProviderList from "components/booking/serviceProviderList";
 import serviceProviderDetails from "components/booking/serviceProviderDetails";
@@ -45,7 +45,7 @@ function App(props) {
         <Switch>
           {/* Routes */}
           <Route exact path="/profile" component={Profile}></Route>
-          <Route exact path="/about" component={About}></Route>
+          {/* <Route exact path="/about" component={About}></Route> */}
           <Route exact path="/auth/login" component={Login}></Route>
           <Route exact path="/auth/register" component={Register}></Route>
           <Route exact path="/auth/logout" component={Logout}></Route>
