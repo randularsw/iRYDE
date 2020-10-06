@@ -32,6 +32,7 @@ import { getUnavailableDates } from "services/unavailableDatesService";
 import Gallery from "./gallery";
 import ServiceSummary from "./serviceSummary";
 import { getPromotions } from "services/promotionService";
+import { getImages } from "services/galleryService";
 
 class serviceProviderDetails extends Component {
   static contextType = UserContext;
@@ -45,6 +46,7 @@ class serviceProviderDetails extends Component {
     unavailableDates: [],
     daysDiff: [],
     promotions: [],
+    images: [],
   };
 
   async componentDidMount() {
@@ -65,6 +67,12 @@ class serviceProviderDetails extends Component {
       );
       this.setState({ promotions });
       console.log("protions", this.state.promotions);
+      //get gallery
+      const { data: received } = await getImages(this.context.state.user?._id);
+      console.log(received);
+      if (received) {
+        this.setState({ images: received.images });
+      }
       //get unavailable dates
       this.setState({ unavailableDates: unavailableDates[0].dates });
       //console.log(this.state.unavailableDates);
@@ -189,7 +197,7 @@ class serviceProviderDetails extends Component {
                         </div>
                         <div style={{}} className="mt-5 ml-3">
                           <h2>Photos</h2>
-                          <Gallery />
+                          <Gallery images={this.state.images} />
                         </div>
                       </div>
                       <Col>
