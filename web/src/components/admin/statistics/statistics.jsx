@@ -3,6 +3,8 @@ import Header from "../../shared/header";
 import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 import Counts from './counts';
 import Charts from './charts';
+import Bookings from './bookings';
+
 class Statistics extends Component {
   state = {
     items: [],
@@ -24,8 +26,19 @@ class Statistics extends Component {
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
-                <Counts />
+                <Counts/ >
+                
+                
+
+                <Bookings/>
+
                 <Charts/>
+               
+               
+                
+                
+
+               
                   </div>
                 </CardBody>
               </Card>
