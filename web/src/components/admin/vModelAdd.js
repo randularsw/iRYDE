@@ -30,8 +30,8 @@ class ModelsAdd extends Component {
       brandId:null,
       // listModels:["vitz","swift","corolla"],
       type:"",
-      model:"",
-      model:["a","b","c"],
+      // model:"",
+      model:[],
       vehicles:[],
 
 
