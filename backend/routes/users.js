@@ -20,6 +20,7 @@ router.post("/", async (req, res) => {
       city: req.body.city,
       type: req.body.type,
       password: hash,
+      createdAt: Date.now(),
     });
 
     if (req.body.type === "sp") {

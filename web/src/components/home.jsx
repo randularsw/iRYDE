@@ -31,16 +31,16 @@ class Home extends Component {
     stars: 0,
     review: null,
     booking: [],
-    user:{},
+    user: {},
   };
 
   async componentDidMount() {
     const userData = await this.context.currentUser();
     if (userData?.user?.type === "sp") {
-      this.props.history.push("/profile");
+      // this.props.history.push("/profile");
       // window.location = "/";
     } else if (userData?.user?.type === "ad") {
-      this.props.history.push("/admin/vehicleType");
+      // this.props.history.push("/admin/vehicleType");
       // window.location = "/";
     } else {
       //console.log(7777777777777777,userData?.user?._id);
@@ -49,7 +49,7 @@ class Home extends Component {
       if (result.data.length > 0) {
         console.log(1);
         this.setState({ booking: result.data });
-        this.setState({user:userData?.user});
+        this.setState({ user: userData?.user });
         this.toggleModal("formModal");
       } else {
         console.log(0);
@@ -76,13 +76,13 @@ class Home extends Component {
     const rates = {
       rate: this.state.stars,
       review: this.state.review,
-      spId:this.state.booking[0].sp,
-      voId:this.state.user._id,
-      voName:this.state.user.name,
+      spId: this.state.booking[0].sp,
+      voId: this.state.user._id,
+      voName: this.state.user.name,
     };
     console.log(rates);
     const res = await addRate(rates);
-    this.toggleModal("formModal")
+    this.toggleModal("formModal");
   }
 
   render() {

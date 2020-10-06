@@ -33,6 +33,10 @@ const User = mongoose.Schema({
     type: String,
     required: true,
   },
+  createdAt: {
+    type: Date,
+    required: true,
+  },
   password: {
     type: String,
     required: true,

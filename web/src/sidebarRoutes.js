@@ -1,5 +1,5 @@
 import Home from "components/home";
-import About from "components/auth/about";
+// import About from "components/auth/about";
 import serviceProviders from "components/booking/serviceProviderList";
 import VehiclesList from "components/vehicles/vehiclesList";
 import Profile from "components/auth/profile";
@@ -31,7 +31,7 @@ var sidebarRoutes = [
     path: "/profile",
     name: "Profile",
     icon: "ni ni-tv-2 text-primary",
-    component: About,
+    component: Profile,
     actor: "sp",
   },
   {

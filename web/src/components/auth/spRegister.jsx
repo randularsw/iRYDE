@@ -25,7 +25,7 @@ const SpRegister = (props) => {
       const d = await context.register(data);
       if (d._id) {
         // props.history.push("/");
-        window.location = "/";
+        window.location = "/dashboard";
       }
       if (d.data == "Email already exists") {
         setEmailError(d.data);

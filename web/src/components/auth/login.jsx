@@ -29,7 +29,9 @@ const Login = (props) => {
       const d = await context.login(data);
       if (d._id) {
         // props.history.push("/");
-        props.history.push("/");
+        if (d.type == "vo") props.history.push("/");
+        if (d.type == "sp") props.history.push("/dashboard");
+        if (d.type == "ad") props.history.push("/admin/vehicleType");
       }
       if (d.data == "Email doesn't exist") {
         setEmailError(d.data);
