@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Header from "../../shared/header";
+
 import { Row, Card, CardHeader, CardBody, Container, CardTitle, Col } from "reactstrap";
 import {getCountSp} from '../../../services/statisticsService';
 import {getCountVo} from '../../../services/statisticsService';
@@ -27,21 +27,20 @@ class Counts extends Component {
     // const { items } = this.state;
     return (
       <>
-        <Header />
-        <Container className=" mt--9" fluid>
+      
+      <Container className=" mt--6" fluid>
+        
           {/* Table */}
           <Row>
-            <div className=" col">
-              <Card className=" shadow">
-                <CardHeader className=" bg-transparent">
-                  <h3 className=" mb-0"></h3>
-                </CardHeader>
+            
+              
+                
                 <CardBody>
-                  <div style={{ minHeight: 200 }}>
+                  <div style={{ minHeight: 200 }} >
                     {/* Page Content */}
                     <Row>
                       <div style={{ width: "30rem" }}>
-                        <Card className="card-stats mb-4 mb-lg-0">
+                        <Card className="card-stats mb-1 mb-lg-0">
                           <CardBody>
                             <Row>
                               <div className="col-md-6">
@@ -90,8 +89,8 @@ class Counts extends Component {
                     
                   </div>
                 </CardBody>
-              </Card>
-            </div>
+             
+            
           </Row>
         </Container>
       </>
