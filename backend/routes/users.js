@@ -69,6 +69,16 @@ router.get("/sp", async (req, res) => {
   }
 });
 
+router.get("/vo", async (req, res) => {
+  try {
+    const sps = await User.find({ type: "vo" });
+    // delete passwords
+    res.send(sps);
+  } catch (error) {
+    res.send({ data: error });
+  }
+});
+
 router.put("/", async (req, res) => {
   try {
     // console.log(req.body);
@@ -106,6 +116,16 @@ router.put("/photo", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
+    // delete user.password;
+    res.send(user);
+  } catch (error) {
+    res.send({ data: error });
+  }
+});
+
+router.get("/all-users", async (req, res) => {
+  try {
+    const user = await User.find({});
     // delete user.password;
     res.send(user);
   } catch (error) {
