@@ -4,7 +4,7 @@ import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
 import { Media, Table } from "reactstrap";
 import { Button } from "reactstrap";
 import { FormGroup, Form, Input, Col } from "reactstrap";
-import { addvehicle } from "./vehicleBrand";
+// import { addvehicle } from "./vehicleBrand";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { ModelsList } from "./modelList";
@@ -20,6 +20,7 @@ class VehicleType extends Component {
     super(props);
     this.state = {
       listItems: [],
+      count:0
       // currentItem: {
       //   text: "",
       //   key: "",
@@ -29,8 +30,6 @@ class VehicleType extends Component {
       //   text:"",
       //   key:"",
       // }
-
-
     };
 
     this.addItem = this.addItem.bind(this);
@@ -52,12 +51,12 @@ class VehicleType extends Component {
   addItem(e) {
     try {
       e.preventDefault();
-      
+
       console.log(this.itemInputValue.value);
-      
+
       const { listItems } = this.state;
       const vehicleType = this.itemInputValue.value;
-      
+
       if (listItems.includes(vehicleType)) {
         alert("The vehicle brand is already included ");
       } else {
@@ -89,8 +88,8 @@ class VehicleType extends Component {
       console.log("Error", err);
     }
   }
+  
   removeItem = async (id) => {
-
     try {
       const res = await deleteVehicleBrand(id);
       this.getVehicleTypes();
@@ -106,12 +105,12 @@ class VehicleType extends Component {
   // addModel(e) {
   //   try {
   //     e.preventDefault();
-      
+
   //     console.log(this.modelInputValue.value);
-      
+
   //     const { listModels } = this.state;
   //     const vehicleModel = this.modelInputValue.value;
-      
+
   //     if (listModels.includes(vehicleModel)) {
   //       alert("The vehicle model is already included ");
   //     } else {
@@ -144,7 +143,6 @@ class VehicleType extends Component {
   //   }
   // }
 
-
   // removeModel = async (id) => {
 
   //   try {
@@ -157,10 +155,11 @@ class VehicleType extends Component {
   // };
 
   render() {
-    const { listItems,listModels, item, message } = this.state;
+    const { listItems, listModels, item, message } = this.state;
+    var count = this.state.count;
     return (
       <>
-        <Header /> 
+        <Header />
         <Container className=" mt--9" fluid>
           {/* Table */}
           <Row>
@@ -222,19 +221,18 @@ class VehicleType extends Component {
                                 <td>
                                   <Link
                                     classname="btn btn-primary"
-                                    to={`/admin/modelsAdd/${item._id}`}
+                                    to={{pathname:`/admin/modelsAdd/${item._id}`, arrayIndex: count}}
+                                    
                                   >
                                     Add Model
                                   </Link>
                                 </td>
-                                <td>
-                                
-                                </td>
-
+                                <td></td>
+                                <input type="hidden" value={count += 1}/>
+                              
                                 <td>
                                   <Button
                                     onClick={(e) => this.removeItem(item._id)}
-                                    
                                     color="danger"
                                     outline
                                     type="button"
@@ -248,7 +246,22 @@ class VehicleType extends Component {
                                 </td>
                               </tr>
                             );
+                            
                           })}
+
+                          <tr>
+                            <td>&nbsp;</td>
+                            <td className="text-left">
+                              <Col md="2">
+                                {/* <button
+                                  onClick={(e) => this.clearAll()}
+                                  className="btn btn-default btn-lg"
+                                >
+                                  Clear All
+                                </button> */}
+                              </Col>
+                            </td>
+                          </tr>
                         </tbody>
                       </Table>
                     )}

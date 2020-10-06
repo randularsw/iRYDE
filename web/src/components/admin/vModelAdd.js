@@ -8,7 +8,7 @@ import { FormGroup, Form, Input, Col } from "reactstrap";
 // import { addvehicle } from "./";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { ModelsList } from "./modelList";
+// import { ModelsList } from "./modelList";
 
 import { addVehicleBrand } from "services/vehicleTypeService";
 import { getVehicleBrands } from "services/vehicleTypeService";
@@ -28,13 +28,12 @@ class ModelsAdd extends Component {
       //   key:"",
       // },
       brandId:null,
-      // listModels:["vitz","swift","corolla"],
+      listModels:[],
       type:"",
-      // model:"",
-      model:[],
+      model:"",
+      model:["a","b","c"],
       vehicles:[],
-
-
+      arrayIndex:0
     };
 
     // this.addModel = this.addModel.bind(this);
@@ -57,6 +56,10 @@ class ModelsAdd extends Component {
 
   }
 
+  sleep(time){
+    return new Promise((resolve)=>setTimeout(resolve,time)
+  )
+}
   onSubmit(e){
     e.preventDefault();
 
@@ -66,9 +69,10 @@ class ModelsAdd extends Component {
     };
     console.log(vehicle);
     addVehicleModel(this.props.match.params.id,vehicle);
-    axios
-    .post("http://localhost:4000/vehicleTypes/add/", vehicle)
-    .then((res) => console.log(res.data));
+    this.sleep(500).then(() => {
+      this.getVehicleModelsNew(this.state.arrayIndex)
+    })   
+    
   }
 
   //add vehicle model
@@ -99,12 +103,18 @@ class ModelsAdd extends Component {
   // }
 
   componentDidMount() {
+    var arrayIndex = this.props.location.arrayIndex
+    this.setState({
+      arrayIndex:arrayIndex
+    })
     this.getVehicleModels();
+    this.getVehicleModelsNew(arrayIndex)
+    
   }
 
   async getVehicleModels() {
     try {
-      const model = await this.getVehicleModels();
+      const model = await getVehicleModels();
       console.log(model);
       this.setState({
         vehicles: model.data,
@@ -113,6 +123,21 @@ class ModelsAdd extends Component {
     } catch (err) {
       console.log("Error", err);
     }
+  }
+
+
+  async getVehicleModelsNew(arrayIndex) {
+    try {
+      var model = await getVehicleBrands();
+      // console.log(model.data[0].models);
+      this.setState({
+        listModels: model.data[arrayIndex].models,
+        // type:type.data,
+      });
+    } catch (err) {
+      console.log("Error", err);
+    }
+    console.log(this.state.listModels)
   }
 
 
@@ -189,7 +214,66 @@ class ModelsAdd extends Component {
                       </Row>
                     </Form>
                    
-                   
+                    {(message !== "" || listModels.length == 0) && (
+                      <p className="message test-danger">{message}</p>
+                    )}
+
+                    {listModels.length > 0 && (
+                    <Table className="align-items-center" responsive>
+                        <thead className="thead-light">
+                          <tr>
+                            <th scope="col">Vehicle Model</th>
+                            <th scope="col">Vehicle Type</th>
+
+                            <th scope="col" />
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {listModels.map((item) => {
+                            return (
+                              <tr key={item._id}>
+                                <td scope="row" col-md-2>
+                                  <Media className="align-items-center">
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                      
+                                      {item.model}
+                                      </span>
+                                    </Media>                                    
+                                  </Media>
+                                </td>
+                                
+                                <td scope="row" col-md-2>
+                                  <Media className="align-items-center">
+                                    <Media>
+                                      <span className="mb-0 text-sm">
+                                      {item.type}
+                                      </span>
+                                    </Media>
+                                  </Media>
+                                </td>
+
+                                <td>
+                                  <Button
+                                    // onClick={(e) => this.removeItem(item._id)}
+                                    
+                                    color="danger"
+                                    outline
+                                    type="button"
+                                  >
+                                    <i
+                                      class="fa fa-trash"
+                                      aria-hidden="true"
+                                    ></i>
+                                    Delete
+                                  </Button>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </Table>
+                    )}
                   </div>
                 </CardBody>
               </Card>
