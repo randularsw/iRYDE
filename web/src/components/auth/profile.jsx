@@ -203,7 +203,12 @@ const Profile = (props) => {
                 <CardHeader className="bg-white border-0">
                   <Row className="align-items-center">
                     <Col xs="8">
-                      <h3 className="mb-0">My Profile</h3>
+                      {user?.type == "vo" && (
+                        <h3 className="mb-0">My Profile</h3>
+                      )}
+                      {user?.type == "sp" && (
+                        <h3 className="mb-0">Business Profile</h3>
+                      )}
                     </Col>
                     <Col className="text-right" xs="4">
                       <Button
@@ -219,7 +224,8 @@ const Profile = (props) => {
                 </CardHeader>
                 <CardBody>
                   <h6 className="heading-small text-muted mb-4">
-                    User information
+                    {user?.type == "vo" && <p>User information</p>}
+                    {user?.type == "sp" && <p>Business information</p>}
                   </h6>
                   <div className="pl-lg-4">
                     <Row>
@@ -229,7 +235,8 @@ const Profile = (props) => {
                             className="form-control-label"
                             htmlFor="input-name"
                           >
-                            Full Name
+                            {user?.type == "vo" && <span>Full Name</span>}
+                            {user?.type == "sp" && <span>Business Name</span>}
                           </label>
                           <Input
                             className="form-control-alternative"
