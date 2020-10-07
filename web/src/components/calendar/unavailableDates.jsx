@@ -32,7 +32,7 @@ class UnavailableDates extends Component {
         const diff =
           new Date(unavailable).getTime() - new Date(today).getTime(); // Gives difference between 2 days
         const diffDates = Math.round(diff / (1000 * 3600 * 24)); // convert it to np of days format
-        this.state.daysDiff.push(diffDates + 1);
+        this.state.daysDiff.push(diffDates);
       });
     } catch (err) {
       console.log("Error", err);

@@ -24,6 +24,9 @@ import { getImages } from "services/galleryService";
 import { getSpFinishedAppointments } from "services/bookingService";
 import { getRates } from "services/rateService";
 import { Rating } from "@material-ui/lab";
+import Sentiment from "sentiment";
+
+var sentiment = new Sentiment();
 
 class Dashboard extends Component {
   static contextType = UserContext;
@@ -33,6 +36,7 @@ class Dashboard extends Component {
     bookingCount: null,
     upload: "",
     ratings: [],
+    score: null,
   };
 
   componentDidMount() {
@@ -45,7 +49,17 @@ class Dashboard extends Component {
     const userdata = await this.context.currentUser();
     const { data: ratings } = await getRates(userdata.user._id);
     this.setState({ ratings });
+    this.satisfactionAnalysis(ratings);
   }
+
+  satisfactionAnalysis = (ratings) => {
+    let score = 0;
+    ratings.forEach(function (r) {
+      const ss = sentiment.analyze(r.review);
+      score += ss.score;
+    });
+    this.setState({ score });
+  };
 
   async getBookingCount() {
     try {
@@ -121,7 +135,23 @@ class Dashboard extends Component {
                                   Customer Satisfaction
                                 </CardTitle>
                                 <span className="h2 font-weight-bold mb-0 text-white">
-                                  350,897
+                                  {this.state.score > 0 && (
+                                    <span>
+                                      Excelent <i className="far fa-smile"></i>
+                                    </span>
+                                  )}
+                                  {this.state.score == 0 && (
+                                    <span>
+                                      Satisfactory{" "}
+                                      <i className="far fa-meh"></i>
+                                    </span>
+                                  )}
+                                  {this.state.score < 0 && (
+                                    <span>
+                                      You have to improve{" "}
+                                      <i className="far fa-frown"></i>
+                                    </span>
+                                  )}
                                 </span>
                               </div>
                               <Col className="col-auto">
@@ -205,13 +235,14 @@ class Dashboard extends Component {
                           </Col>
                         </Row>
                         <Gallery images={this.state.images} />
-                        <Row>
-                          {this.state.ratings.map((r) => (
-                            <div className="mt-5 ml-2" key={r._id}>
-                              <h2>Reviews</h2>
-                              <div className="border p-2">
-                                <Row>
-                                  {/* <div className="col-1 ">
+                        <Col className="ml-0 pl-0">
+                          <div className="mt-3">
+                            <h2>Reviews</h2>
+                            {this.state.ratings.map((r) => (
+                              <div className="" key={r._id}>
+                                <div className="border p-2">
+                                  <Row>
+                                    {/* <div className="col-1 ">
                                     <img
                                       class="avatar border-gray"
                                       src="https://www.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
@@ -220,25 +251,31 @@ class Dashboard extends Component {
                                       style={{ width: 30, height: 30 }}
                                     />
                                   </div> */}
-                                  <div className="col-10">{r.voName}</div>
-                                  <div className="col mt-2">
-                                    <Rating
-                                      name="size-small"
-                                      defaultValue={r.rate}
-                                      size="small"
-                                      readOnly
-                                    />
-                                  </div>
-                                </Row>
-                                <Row>
-                                  <small className="ml-3 mr-2 ">
-                                    {r.review}
-                                  </small>
-                                </Row>
+                                    <div
+                                      className="col-7"
+                                      style={{ fontWeight: "bold" }}
+                                    >
+                                      {r.voName}
+                                    </div>
+                                    <div className="col mt-2">
+                                      <Rating
+                                        name="size-small"
+                                        defaultValue={r.rate}
+                                        size="small"
+                                        readOnly
+                                      />
+                                    </div>
+                                  </Row>
+                                  <Row>
+                                    <small className="ml-3 mr-2 ">
+                                      {r.review}
+                                    </small>
+                                  </Row>
+                                </div>
                               </div>
-                            </div>
-                          ))}
-                        </Row>
+                            ))}
+                          </div>
+                        </Col>
                       </Col>
                       <Col>
                         <div>

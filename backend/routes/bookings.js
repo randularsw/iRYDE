@@ -124,12 +124,14 @@ router.patch("/status/:id", async (req, res) => {
 
 //checking isRated
 router.get("/isRated/:id", async (req, res) => {
+  console.log(7, req.params.id);
   try {
     const result = await Booking.find({
       vo: req.params.id,
       status: "finished",
       isRated: false,
     });
+    console.log(3333333333333333, result);
     res.json(result);
   } catch (error) {
     res.json({ message: error });

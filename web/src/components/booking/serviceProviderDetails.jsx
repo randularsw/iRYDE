@@ -85,7 +85,7 @@ class serviceProviderDetails extends Component {
         const diff =
           new Date(unavailable).getTime() - new Date(today).getTime(); // Gives difference between 2 days
         const diffDates = Math.round(diff / (1000 * 3600 * 24)); // convert it to np of days format
-        this.state.daysDiff.push(diffDates + 1);
+        this.state.daysDiff.push(diffDates);
       });
 
       //get ratings
@@ -173,6 +173,7 @@ class serviceProviderDetails extends Component {
                               value={this.state.avgRate}
                               size="large"
                               readOnly
+                              precision={0.5}
                             />
                           </div>
                           <div className="col m-0 p-0">
@@ -306,12 +307,13 @@ class serviceProviderDetails extends Component {
                             </div>
                           </div>
                         </div>
-                        {this.state.ratings.map((r) => (
-                          <div className="mt-5 ml-2" key={r._id}>
-                            <h2>Reviews</h2>
-                            <div className="border p-2">
-                              <Row>
-                                {/* <div className="col-1 ">
+                        <div className="mt-5 ml-2">
+                          <h2>Reviews</h2>
+                          {this.state.ratings.map((r) => (
+                            <div className="ml-2" key={r._id}>
+                              <div className="border p-2">
+                                <Row>
+                                  {/* <div className="col-1 ">
                                   <img
                                     class="avatar border-gray"
                                     src="https://www.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
@@ -320,22 +322,30 @@ class serviceProviderDetails extends Component {
                                     style={{ width: 30, height: 30 }}
                                   />
                                 </div> */}
-                                <div className="col-7">{r.voName}</div>
-                                <div className="col mt-2">
-                                  <Rating
-                                    name="size-small"
-                                    defaultValue={r.rate}
-                                    size="small"
-                                    readOnly
-                                  />
-                                </div>
-                              </Row>
-                              <Row>
-                                <small className="ml-3 mr-2 ">{r.review}</small>
-                              </Row>
+                                  <div
+                                    className="col-7"
+                                    style={{ fontWeight: "bold" }}
+                                  >
+                                    {r.voName}
+                                  </div>
+                                  <div className="col mt-2">
+                                    <Rating
+                                      name="size-small"
+                                      defaultValue={r.rate}
+                                      size="small"
+                                      readOnly
+                                    />
+                                  </div>
+                                </Row>
+                                <Row>
+                                  <small className="ml-3 mr-2 ">
+                                    {r.review}
+                                  </small>
+                                </Row>
+                              </div>
                             </div>
-                          </div>
-                        ))}
+                          ))}
+                        </div>
                       </Col>
                     </Row>
                   </div>

@@ -46,7 +46,7 @@ class Home extends Component {
     } else {
       //console.log(7777777777777777,userData?.user?._id);
       const result = await getRateModal(userData?.user?._id);
-      //console.log(result.data);
+      console.log(result.data);
       if (result.data.length > 0) {
         console.log(1);
         this.setState({ booking: result.data });

@@ -26,7 +26,12 @@ class AvgRating extends Component {
   render() {
     return (
       <div>
-        <Rating value={this.state.avgRate} size="small" readOnly />
+        <Rating
+          value={this.state.avgRate}
+          size="small"
+          readOnly
+          precision={0.5}
+        />
       </div>
     );
   }
