@@ -43,10 +43,10 @@ class _NotificationPageState extends State<NotificationPage> {
     var userInfo = Provider.of<UserModel>(context, listen: false);
     Map user = userInfo.user;
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    if (prefs.get('session') != null) {
-      print('Already in a session');
-      return;
-    }
+    // if (prefs.get('session') != null) {
+    //   print('Already in a session');
+    //   return;
+    // }
     var s = await sessionService.setSessionProvider(
         notification['forId'], user['_id']);
     prefs.setString('session', notification['forId']);
