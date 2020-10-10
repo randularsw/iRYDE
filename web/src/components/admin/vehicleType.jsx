@@ -20,6 +20,7 @@ class VehicleType extends Component {
     super(props);
     this.state = {
       listItems: [],
+      count:0
       // currentItem: {
       //   text: "",
       //   key: "",
@@ -87,6 +88,7 @@ class VehicleType extends Component {
       console.log("Error", err);
     }
   }
+  
   removeItem = async (id) => {
     try {
       const res = await deleteVehicleBrand(id);
@@ -154,6 +156,7 @@ class VehicleType extends Component {
 
   render() {
     const { listItems, listModels, item, message } = this.state;
+    var count = this.state.count;
     return (
       <>
         <Header />
@@ -218,13 +221,15 @@ class VehicleType extends Component {
                                 <td>
                                   <Link
                                     classname="btn btn-primary"
-                                    to={`/admin/modelsAdd/${item._id}`}
+                                    to={{pathname:`/admin/modelsAdd/${item._id}`, arrayIndex: count}}
+                                    
                                   >
                                     Add Model
                                   </Link>
                                 </td>
                                 <td></td>
-
+                                <input type="hidden" value={count += 1}/>
+                              
                                 <td>
                                   <Button
                                     onClick={(e) => this.removeItem(item._id)}
@@ -241,6 +246,7 @@ class VehicleType extends Component {
                                 </td>
                               </tr>
                             );
+                            
                           })}
 
                           <tr>

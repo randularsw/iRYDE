@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import Header from "../../shared/header";
 import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
-import Counts from './counts';
-import Charts from './charts';
+import Counts from "./counts";
+import Charts from "./charts";
+import Bookings from "./bookings";
+
 class Statistics extends Component {
   state = {
     items: [],
@@ -24,8 +26,16 @@ class Statistics extends Component {
                 <CardBody>
                   <div style={{ minHeight: 400 }}>
                     {/* Page Content */}
-                <Counts />
-                <Charts/>
+                    <div>
+                      <Counts />
+                    </div>
+                    <div>
+                      <Bookings />
+                    </div>
+
+                    <div>
+                      <Charts />
+                    </div>
                   </div>
                 </CardBody>
               </Card>
