@@ -30,7 +30,6 @@ class _ServiceProviderServicesState extends State<ServiceProviderServices> {
       setState(() {
         services = data;
       });
-      
     } catch (err) {
       print(err);
     }

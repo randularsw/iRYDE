@@ -60,20 +60,20 @@ class _ServiceProvidersState extends State<ServiceProviders> {
                                   ),
                                   subtitle:
                                       Text(serviceProviders[index]['city']),
-                                  trailing: Row(
-                                    children: <Widget>[
-                                      Container(
-                                        child: Icon(
-                                          Icons.star,
-                                          color: Color(0xFFD4AF37),
-                                        ),
-                                      ),
-                                      Text(
-                                        '5.1',
-                                        style: TextStyle(color: Colors.white),
-                                      )
-                                    ],
-                                  ),
+                                  // trailing: Row(
+                                  //   children: <Widget>[
+                                  //     Container(
+                                  //       child: Icon(
+                                  //         Icons.star,
+                                  //         color: Color(0xFFD4AF37),
+                                  //       ),
+                                  //     ),
+                                  //     Text(
+                                  //       '5.1',
+                                  //       style: TextStyle(color: Colors.white),
+                                  //     )
+                                  //   ],
+                                  // ),
                                 ),
                               ),
                               child: Image.asset(

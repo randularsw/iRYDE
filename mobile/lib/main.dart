@@ -21,6 +21,7 @@ import 'screens/forum/addPost.dart';
 import 'screens/auth/loginPage.dart';
 import 'screens/auth/registerPage.dart';
 
+
 void main() => runApp(
       ChangeNotifierProvider(
         create: (context) => UserModel(),
@@ -61,6 +62,7 @@ class MyApp extends StatelessWidget {
         ServiceProviderDetails.id: (context) => ServiceProviderDetails(),
         VehicleAdd.id: (context) => VehicleAdd(),
         ServiceBooking.id: (context) => ServiceBooking(),
+        
       },
     );
   }
