@@ -4,7 +4,7 @@ import JwtDecode from "jwt-decode";
 export async function login(data) {
   try {
     const user = await axios.post(
-      "http://localhost:4000/api/users/login",
+      "https://i-ryde-backend.herokuapp.com/api/users/login",
       data
     );
     localStorage.setItem("token", user.headers.token);
@@ -23,7 +23,7 @@ export async function getCurrentUser() {
   try {
     const userId = JwtDecode(localStorage.getItem("token"))._id;
     const currentUser = await axios.get(
-      `http://localhost:4000/api/users/${userId}`
+      `https://i-ryde-backend.herokuapp.com/api/users/${userId}`
     );
     return currentUser;
   } catch (ex) {

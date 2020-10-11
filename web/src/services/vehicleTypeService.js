@@ -1,26 +1,26 @@
 import axios from 'axios';
 
 export function addVehicleBrand(data){
-    return axios.post('http://localhost:4000/vehicleTypes',data);
+    return axios.post('https://i-ryde-backend.herokuapp.com/vehicleTypes',data);
 }
 
 export function addVehicleModel(id,data){
     //console.log(id,data);
-    return axios.put('http://localhost:4000/vehicleTypes/add/'+id,data);
+    return axios.put('https://i-ryde-backend.herokuapp.com/vehicleTypes/add/'+id,data);
 }
 
 export function getVehicleBrands(){
-    return axios.get('http://localhost:4000/vehicleTypes');
+    return axios.get('https://i-ryde-backend.herokuapp.com/vehicleTypes');
 }
 
 export function getVehicleModels(){
-    return axios.get('http://localhost:4000/vehicleTypes/model');
+    return axios.get('https://i-ryde-backend.herokuapp.com/vehicleTypes/model');
 }
 
 export function deleteVehicleBrand(id){
-    return axios.delete(`http://localhost:4000/vehicleTypes/brand/${id}`);
+    return axios.delete(`https://i-ryde-backend.herokuapp.com/vehicleTypes/brand/${id}`);
 }
 
 export function deleteVehicleModel(id){
-    return axios.delete('http://localhost:4000/vehicleTypes/model/${id}');
+    return axios.delete('https://i-ryde-backend.herokuapp.com/vehicleTypes/model/${id}');
 }
