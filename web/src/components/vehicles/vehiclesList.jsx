@@ -34,7 +34,7 @@ class VehiclesList extends Component {
       console.log("err", error);
     }
   }
-  
+
   handleAddVehicle = (vehicle) => {
     const { vehicles } = this.state;
     vehicles.push(vehicle);
@@ -107,7 +107,7 @@ class VehiclesList extends Component {
                     <div className=" row m-0 p-0">
                       {this.state.vehicles.map((v) => (
                         <Card
-                          className="card-stats  bg-secondary col-5 m-1 p-0 "
+                          className="card-stats  bg-secondary col-6 p-0 "
                           key={v._id}
                         >
                           <CardBody>

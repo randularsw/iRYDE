@@ -12,7 +12,7 @@ class ServiceSummary extends Component {
     console.log(s);
     return (
       <div className="mb-1" key={s._id}>
-        <Card >
+        <Card>
           <CardBody>
             <a
               color="primary"
@@ -20,22 +20,18 @@ class ServiceSummary extends Component {
               style={{
                 marginBottom: "1rem",
                 cursor: "pointer",
-                fontWeight:'bold'
+                fontWeight: "bold",
               }}
             >
-              {s.servicename}
+              {s.servicename} <i className="fas fa-caret-down"></i>
             </a>
             <Collapse isOpen={this.state.isOpen}>
               <div className="row">
-                <div className="col-5">
-                  <img src={s.imageUrl} alt="" style={{ width: 200 }} />
+                <div className="col-6">
+                  <img src={s.imageUrl} alt="" style={{ width: 180 }} />
                 </div>
                 <div className="col">
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Laudantium, maxime porro velit odit reprehenderit rerum at
-                    quia quos.
-                  </p>
+                  <small>{s.description}</small>
                 </div>
               </div>
             </Collapse>

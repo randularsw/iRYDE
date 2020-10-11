@@ -1,5 +1,5 @@
 import Home from "components/home";
-import About from "components/auth/about";
+// import About from "components/auth/about";
 import serviceProviders from "components/booking/serviceProviderList";
 import VehiclesList from "components/vehicles/vehiclesList";
 import Profile from "components/auth/profile";
@@ -7,10 +7,12 @@ import ServicesView from "components/servicelist/servicesView";
 import PromotionsView from "components/promotionlist/promotionsView";
 import Payment from "components/payment";
 import VehicleType from "components/admin/vehicleType";
-import RemoveUser from "components/admin/removeUser";
+// import RemoveUser from "components/admin/removeUser";
+import Statistics from "components/admin/statistics/statistics";
 import SpBookingView from "components/booking/spBookingView";
 import VoBookingView from "components/booking/voBookingView";
 import Dashboard from "components/spdashboard";
+
 
 var sidebarRoutes = [
   {
@@ -31,7 +33,7 @@ var sidebarRoutes = [
     path: "/profile",
     name: "Profile",
     icon: "ni ni-tv-2 text-primary",
-    component: About,
+    component: Profile,
     actor: "sp",
   },
   {
@@ -57,6 +59,14 @@ var sidebarRoutes = [
   },
 
   {
+    path: "/admin/statistics/statistics",
+    name: "Statistics",
+    icon: "ni ni-planet text-blue",
+    component: Statistics,
+    actor: "ad",
+  },
+
+  {
     path: "/admin/vehicleType",
     name: "Vehicle Types",
     icon: "ni ni-tv-2 text-primary",
@@ -79,13 +89,13 @@ var sidebarRoutes = [
   //   actor: "vo",
   // },
   //routes for vehicle
-  {
-    path: "/admin/removeUser",
-    name: "Remove Users",
-    icon: "ni ni-tv-2 text-primary",
-    component: RemoveUser,
-    actor: "ad",
-  },
+  // {
+  //   path: "/admin/removeUser",
+  //   name: "Remove Users",
+  //   icon: "ni ni-tv-2 text-primary",
+  //   component: RemoveUser,
+  //   actor: "ad",
+  // },
   {
     path: "/vehicles",
     name: "Vehicles",

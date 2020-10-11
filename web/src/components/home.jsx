@@ -22,6 +22,7 @@ import { UserContext } from "core/userContext";
 import { Rating } from "@material-ui/lab";
 import { getRateModal } from "services/bookingService";
 import { addRate } from "services/rateService";
+import { updateisRated } from "services/bookingService";
 
 class Home extends Component {
   static contextType = UserContext;
@@ -31,25 +32,25 @@ class Home extends Component {
     stars: 0,
     review: null,
     booking: [],
-    user:{},
+    user: {},
   };
 
   async componentDidMount() {
     const userData = await this.context.currentUser();
     if (userData?.user?.type === "sp") {
-      this.props.history.push("/profile");
+      // this.props.history.push("/profile");
       // window.location = "/";
     } else if (userData?.user?.type === "ad") {
-      this.props.history.push("/admin/vehicleType");
+      // this.props.history.push("/admin/vehicleType");
       // window.location = "/";
     } else {
       //console.log(7777777777777777,userData?.user?._id);
       const result = await getRateModal(userData?.user?._id);
-      //console.log(result.data);
+      console.log(result.data);
       if (result.data.length > 0) {
         console.log(1);
         this.setState({ booking: result.data });
-        this.setState({user:userData?.user});
+        this.setState({ user: userData?.user });
         this.toggleModal("formModal");
       } else {
         console.log(0);
@@ -76,13 +77,13 @@ class Home extends Component {
     const rates = {
       rate: this.state.stars,
       review: this.state.review,
-      spId:this.state.booking[0].sp,
-      voId:this.state.user._id,
-      voName:this.state.user.name,
+      spId: this.state.booking[0].sp,
+      voId: this.state.user._id,
+      voName: this.state.user.name,
     };
-    console.log(rates);
     const res = await addRate(rates);
-    this.toggleModal("formModal")
+    this.toggleModal("formModal");
+    const result = await updateisRated(this.state.booking[0]._id);
   }
 
   render() {

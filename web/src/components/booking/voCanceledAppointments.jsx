@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Container, Row, CardHeader, CardBody, Button, Col } from "reactstrap";
 import { Card } from "@material-ui/core";
 
 const VoCanceledAppointments = (props) => {
-  const { canceled} = props;
+  const { canceled } = props;
 
   const changeDateFormat = (f) => {
     let d = new Date(f);
@@ -13,7 +13,7 @@ const VoCanceledAppointments = (props) => {
 
   return (
     <div className="">
-      <div className="ml-8 mt-4">
+      <div className=" mt-4">
         {canceled.map((i) => (
           <Card className="ml-30 mr-30 mb-3" style={{ width: 900 }} key={i._id}>
             <CardHeader className="m-0 p-1  pt-2 bg-default">
@@ -33,11 +33,7 @@ const VoCanceledAppointments = (props) => {
                       {i?.time}
                     </small>
                     <div>
-                      <Button
-                        size="sm"
-                        color="danger"
-                        disabled
-                      >
+                      <Button size="sm" color="danger" disabled>
                         Canceled
                       </Button>
                     </div>

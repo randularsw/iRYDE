@@ -67,10 +67,12 @@ class _AddQuestionState extends State<AddQuestion> {
         Map question = {
           "title": _questionTitle,
           "text": _questionText,
-          "userHandle": user['_id']
+          "userHandle": user['_id'],
+          "userName": user['name'],
         };
         print(question);
         Map d = await questionService.addQuestion(question);
+        // Navigator.pop(context);
       }
     } catch (err) {
       print(err);
@@ -126,7 +128,7 @@ class _AddQuestionState extends State<AddQuestion> {
                         buttonText: 'Post',
                         onPressed: () {
                           addQuestion();
-                          Navigator.push(
+                          Navigator.pop(
                             context,
                             new MaterialPageRoute(
                                 builder: (context) =>

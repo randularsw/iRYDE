@@ -17,6 +17,7 @@ class UserProvider extends Component {
         const isAuthenticated = true;
         this.setState({ isAuthenticated, user });
       }
+      return user;
     } catch (ex) {
       console.log("exception", ex);
     }
@@ -38,6 +39,18 @@ class UserProvider extends Component {
     try {
       // console.log(data);
       const user = await userService.addPhoto(data);
+      if (user._id) {
+        this.setState({ user });
+      }
+    } catch (ex) {
+      console.log("exception", ex);
+    }
+  };
+
+  doPayment = async (data) => {
+    try {
+      // console.log(data);
+      const user = await userService.addPayment(data);
       if (user._id) {
         this.setState({ user });
       }
@@ -82,6 +95,7 @@ class UserProvider extends Component {
       const isAuthenticated = true;
       this.setState({ isAuthenticated, user });
     }
+    return user;
   };
 
   render() {
@@ -96,6 +110,7 @@ class UserProvider extends Component {
           getUserOnPageLoad: this.getUserOnPageLoad,
           updateUser: this.updateUser,
           uploadPhoto: this.uploadPhoto,
+          doPayment: this.doPayment,
         }}
       >
         {this.props.children}

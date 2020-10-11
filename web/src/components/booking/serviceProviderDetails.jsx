@@ -32,6 +32,8 @@ import { getUnavailableDates } from "services/unavailableDatesService";
 import Gallery from "./gallery";
 import ServiceSummary from "./serviceSummary";
 import { getPromotions } from "services/promotionService";
+import { getRates } from "services/rateService";
+import { getImages } from "services/galleryService";
 
 class serviceProviderDetails extends Component {
   static contextType = UserContext;
@@ -45,6 +47,10 @@ class serviceProviderDetails extends Component {
     unavailableDates: [],
     daysDiff: [],
     promotions: [],
+    ratings: [],
+    avgRate: 0,
+    images: [],
+    upload: "",
   };
 
   async componentDidMount() {
@@ -64,20 +70,28 @@ class serviceProviderDetails extends Component {
         this.props.match.params.id
       );
       this.setState({ promotions });
-      console.log("protions", this.state.promotions);
+      //console.log("protions", this.state.promotions);
+      //get gallery
+      const { data: received } = await getImages(this.state.details?._id);
+      console.log(received);
+      if (received) {
+        this.setState({ images: received.images });
+      }
       //get unavailable dates
       this.setState({ unavailableDates: unavailableDates[0].dates });
-      //console.log(this.state.unavailableDates);
       this.state.unavailableDates.map((d) => {
         const unavailable = new Date(d.date);
-        //console.log(unavailable);
         const today = new Date().toISOString();
         const diff =
           new Date(unavailable).getTime() - new Date(today).getTime(); // Gives difference between 2 days
         const diffDates = Math.round(diff / (1000 * 3600 * 24)); // convert it to np of days format
         this.state.daysDiff.push(diffDates);
       });
-      //console.log(this.state.daysDiff);
+
+      //get ratings
+      const { data: ratings } = await getRates(this.props.match.params.id);
+      this.setState({ ratings });
+      this.getAverageRate();
     } catch (err) {
       console.log("Error", err);
     }
@@ -92,6 +106,18 @@ class serviceProviderDetails extends Component {
       [state]: !this.state[state],
     });
   };
+
+  getAverageRate() {
+    let total = 0;
+    if (this.state.ratings.length > 0) {
+      this.state.ratings.map((r) => {
+        total = total + r.rate;
+      });
+      let avgRate = total / this.state.ratings.length;
+
+      this.setState({ avgRate });
+    }
+  }
 
   render() {
     return (
@@ -116,7 +142,23 @@ class serviceProviderDetails extends Component {
                       className="container bg-default"
                       style={{ height: 200, margin: 1 }}
                     >
-                      <div className="col-8"></div>
+                      <div className="col-8 m-2">
+                        {/* <div className="card-profile-image"> */}
+                        {/* <label htmlFor="upload"> */}
+                        <img
+                          alt="..."
+                          className="rounded-circle"
+                          height="180"
+                          src={
+                            !this.state.details?.photo
+                              ? require("assets/images/voPhoto.png")
+                              : this.state.details?.photo
+                          }
+                          style={{ cursor: "pointer" }}
+                        />
+                        {/* </label> */}
+                        {/* </div> */}
+                      </div>
                       <div className="col ">
                         <h1 className="text-white pt-5">
                           {this.state.details.name}
@@ -126,25 +168,27 @@ class serviceProviderDetails extends Component {
                         </h3>
                         <div className="m-0 p-0 row">
                           <div className="col-7 m-0 p-0">
+                            {console.log(this.state.avgRate)}
                             <Rating
-                              name="half-rating"
-                              defaultValue={3}
-                              precision={0.5}
+                              value={this.state.avgRate}
                               size="large"
                               readOnly
+                              precision={0.5}
                             />
                           </div>
                           <div className="col m-0 p-0">
                             {/* <Button size="sm" color="primary" onClick={this.onBooking}>
                               Book Now
                             </Button> */}
-                            <Button
-                              size="sm"
-                              color="primary"
-                              onClick={() => this.toggleModal("formModal")}
-                            >
-                              Book Now
-                            </Button>
+                            {this.context.state.user?.type == "vo" && (
+                              <Button
+                                size="sm"
+                                color="primary"
+                                onClick={() => this.toggleModal("formModal")}
+                              >
+                                Book Now
+                              </Button>
+                            )}
                             <Modal
                               className="modal-dialog-centered"
                               size="sm"
@@ -178,7 +222,7 @@ class serviceProviderDetails extends Component {
                     </Row>
 
                     <Row className="ml-3">
-                      <div className=" col-7">
+                      <div className=" col-6">
                         <div className="mt-5 ">
                           <h2>Our Services</h2>
                           <div className="ml-4">
@@ -187,14 +231,20 @@ class serviceProviderDetails extends Component {
                             ))}
                           </div>
                         </div>
-                        <div style={{}} className="mt-5 ml-3">
+                        <div style={{}} className="mt-5">
                           <h2>Photos</h2>
-                          <Gallery />
+                          {this.state.images.length == 0 && (
+                            <p>There are no photos available yet.</p>
+                          )}
+                          <Gallery images={this.state.images} />
                         </div>
                       </div>
                       <Col>
                         <div className="mt-5 ml-2 ">
                           <h2>Promotions</h2>
+                          {this.state.promotions.length == 0 && (
+                            <p>There are no promotions available yet.</p>
+                          )}
                           {this.state.promotions.map((p) => (
                             <div
                               className="border p-2"
@@ -259,33 +309,42 @@ class serviceProviderDetails extends Component {
                         </div>
                         <div className="mt-5 ml-2">
                           <h2>Reviews</h2>
-                          <div className="border p-2">
-                            <Row>
-                              <div className="col-1 ">
-                                <img
-                                  class="avatar border-gray"
-                                  src="https://www.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
-                                  alt="..."
-                                  class="rounded-circle  border"
-                                  style={{ width: 30, height: 30 }}
-                                />
+                          {this.state.ratings.map((r) => (
+                            <div className="ml-2" key={r._id}>
+                              <div className="border p-2">
+                                <Row>
+                                  {/* <div className="col-1 ">
+                                  <img
+                                    class="avatar border-gray"
+                                    src="https://www.iconfinder.com/data/icons/ionicons/512/icon-image-512.png"
+                                    alt="..."
+                                    class="rounded-circle  border"
+                                    style={{ width: 30, height: 30 }}
+                                  />
+                                </div> */}
+                                  <div
+                                    className="col-7"
+                                    style={{ fontWeight: "bold" }}
+                                  >
+                                    {r.voName}
+                                  </div>
+                                  <div className="col mt-2">
+                                    <Rating
+                                      name="size-small"
+                                      defaultValue={r.rate}
+                                      size="small"
+                                      readOnly
+                                    />
+                                  </div>
+                                </Row>
+                                <Row>
+                                  <small className="ml-3 mr-2 ">
+                                    {r.review}
+                                  </small>
+                                </Row>
                               </div>
-                              <div className="col mt-1">
-                                <Rating
-                                  name="size-small"
-                                  defaultValue={2}
-                                  size="small"
-                                />
-                              </div>
-                            </Row>
-                            <Row>
-                              <small className="ml-3 mr-2 ">
-                                Lorem ipsum dolor sit amet consectetur,
-                                adipisicing elit. Odio consequatur sunt b. Odio
-                                consequatur sunt
-                              </small>
-                            </Row>
-                          </div>
+                            </div>
+                          ))}
                         </div>
                       </Col>
                     </Row>

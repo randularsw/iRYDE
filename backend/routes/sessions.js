@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
         const user = await User.findById(req.body.requesterId);
 
         const newNotification = new Notification({
-            title: `${user.name} is asking for your help. \nClick here to help.`,
+            title: `${user.name} is requesting your help. \nClick here to join the video.`,
             type: "session",
             forId: saved._id,
             createdAt: Date.now()

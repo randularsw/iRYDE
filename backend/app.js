@@ -20,7 +20,8 @@ const questionRouter = require("./routes/questions");
 const bookingRouter = require("./routes/bookings");
 const timeSlotRouter = require("./routes/timeSlots");
 const unavailableDateRouter = require("./routes/unavailableDates");
-const ratingRouter = require('./routes/rates');
+const ratingRouter = require("./routes/rates");
+const galleryRouter = require("./routes/gallery");
 
 const port = process.env.PORT || 4000;
 console.log(port);
@@ -49,6 +50,7 @@ app.use("/api/questions/:id", questionRouter);
 
 app.use("/sp/unavailabledates", unavailableDateRouter);
 app.use("/rating", ratingRouter);
+app.use("/gallery", galleryRouter);
 
 mongoose.connect(
   process.env.DB_URL,

@@ -49,6 +49,7 @@ router.get("/sp/confirmed/:id", async (req, res) => {
 //specific sp finished appointments
 router.get("/sp/finished/:id", async (req, res) => {
   try {
+    console.log(88888888888888888888, req.params);
     const received = await Booking.find({
       sp: req.params.id,
       status: "finished",
@@ -122,17 +123,52 @@ router.patch("/status/:id", async (req, res) => {
 });
 
 //checking isRated
-router.get("/isRated/:id",async(req,res)=>{
+router.get("/isRated/:id", async (req, res) => {
+  console.log(7, req.params.id);
   try {
     const result = await Booking.find({
-      vo:req.params.id,
-      status:"finished",
-      isRated:false
+      vo: req.params.id,
+      status: "finished",
+      isRated: false,
     });
+    console.log(3333333333333333, result);
     res.json(result);
   } catch (error) {
     res.json({ message: error });
   }
-})
+});
+
+//get all bookings
+router.get("/all-bookings", async (req, res) => {
+  try {
+    const result = await Booking.find();
+    res.json(result);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+//get all finished appointments
+router.get("/sp/finished/bookings", async (req, res) => {
+  try {
+    const finished = await Booking.find({ status: "finished" });
+    res.json(finished);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+//update isRated == true
+router.patch("/update/isRated/:id", async (req, res) => {
+  try {
+    const patchStatus = await Booking.updateOne(
+      { _id: req.params.id },
+      { $set: { isRated: true } }
+    );
+    res.json(patchStatus);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
 
 module.exports = router;

@@ -143,56 +143,47 @@ class _EmergencyHomeState extends State<EmergencyHome> {
       // body: SnackMessage(
       //   text: 'We are here for you !',
       // ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Center(
-              // child: Maps(),
-              child: Text('Map'),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              "Facing a trouble?",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
-          ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Facing a trouble?",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-                ),
-                Text("Request help from a user"),
-                Container(
-                  // margin: EdgeInsets.symmetric(horizontal: 120.0),
-                  child: RaisedButton(
-                    color: primaryColor,
-                    textColor: Colors.white,
-                    onPressed: (!isRequested)
-                        ? () {
-                            onRequest();
-                          }
-                        : null,
-                    child: (isRequested == true)
-                        ? Text('Requesting ')
-                        : Text('Request'),
-                  ),
-                ),
-                if (isRequested == true)
-                  SpinKitRipple(
-                    color: primaryColor,
-                    size: 80,
-                  ),
-                if (isRequested)
-                  GestureDetector(
-                    onTap: () => onCancel(),
-                    child: Text(
-                      'Cancel',
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, color: Colors.black),
-                    ),
-                  ),
-              ],
+            Text("Request help from a user"),
+            Container(
+              // margin: EdgeInsets.symmetric(horizontal: 120.0),
+              child: RaisedButton(
+                color: primaryColor,
+                textColor: Colors.white,
+                onPressed: (!isRequested)
+                    ? () {
+                        onRequest();
+                      }
+                    : null,
+                child: (isRequested == true)
+                    ? Text('Requesting ')
+                    : Text('Request'),
+              ),
             ),
-          ),
-        ],
+            if (isRequested == true)
+              SpinKitRipple(
+                color: primaryColor,
+                size: 80,
+              ),
+            if (isRequested)
+              GestureDetector(
+                onTap: () => onCancel(),
+                child: Text(
+                  'Cancel',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.black),
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

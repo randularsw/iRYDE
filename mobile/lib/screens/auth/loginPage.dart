@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iRYDE/components/bottomNavigationBar.dart';
 import 'package:iRYDE/core/userModel.dart';
 import 'package:iRYDE/screens/auth/registerPage.dart';
+import 'package:iRYDE/services/questionService.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

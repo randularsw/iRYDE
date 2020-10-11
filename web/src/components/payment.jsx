@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useContext } from "react";
 import Header from "./shared/header";
 import axios from "axios";
 import { Row, Card, CardHeader, CardBody, Container } from "reactstrap";
@@ -7,7 +7,13 @@ import { UserContext } from "core/userContext";
 import ReactPayPal from "components/ReactPaypal";
 
 export default function Payment() {
+  const context = useContext(UserContext);
   const [checkout, setCheckout] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+
+  const handleSuccess = () => {
+    setSuccess(true);
+  };
 
   return (
     <>
@@ -21,25 +27,54 @@ export default function Payment() {
           >
             <CardHeader className=" bg-transparent"></CardHeader>
             <CardBody>
-              <div style={{ minHeight: 400 }}>
-                {checkout === true ? (
-                  <div className="payment-div">
-                    <ReactPayPal />
+              {context.state.user?.paid && !success && (
+                <div style={{ minHeight: 400 }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      // marginLeft: "90px",
+                    }}
+                  >
+                    <img
+                      src={require("assets/images/check.jpg")}
+                      alt="alignment"
+                    />
                   </div>
-                ) : (
-                  <div>
-                    <h1>React-PayPal</h1>
-                    <button
-                      onClick={() => {
-                        setCheckout(true);
-                      }}
-                      className="checkout-button"
-                    >
-                      Pay Subscription
-                    </button>
+                  <p
+                    style={{
+                      fontWeight: "bold",
+                      textAlign: "center",
+                    }}
+                  >
+                    You have been already paid the amount
+                  </p>
+                </div>
+              )}
+              {(!context.state.user?.paid || success) && (
+                <>
+                  <div style={{ minHeight: 400 }}>
+                    {checkout === true ? (
+                      <div className="payment-div">
+                        <ReactPayPal onSuccess={() => handleSuccess} />
+                      </div>
+                    ) : (
+                      <div>
+                        <h1>React-PayPal</h1>
+                        <button
+                          onClick={() => {
+                            setCheckout(true);
+                          }}
+                          className="checkout-button"
+                        >
+                          Pay Subscription
+                        </button>
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
+                </>
+              )}
             </CardBody>
           </Card>
         </Col>
