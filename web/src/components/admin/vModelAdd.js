@@ -31,7 +31,7 @@ class ModelsAdd extends Component {
       listModels:[],
       type:"",
       model:"",
-      model:["a","b","c"],
+      model:[],
       vehicles:[],
       arrayIndex:0
     };
@@ -181,6 +181,7 @@ class ModelsAdd extends Component {
                               id="vehicleModel"
                               value={this.state.model}
                               onChange={this.onChangeModel}
+                              placeholder="Vehicle Model"
                             />
                           </FormGroup>
                         </Col>
@@ -188,6 +189,7 @@ class ModelsAdd extends Component {
 
                         <Col md="2">
                         <FormGroup>
+                          
                           <Input
                             // innerRef={(node) => (this.modelInputValue = node)}
                             name="typename"
@@ -196,6 +198,7 @@ class ModelsAdd extends Component {
                             id="vehicleType"
                             value={this.state.type}
                             onChange={this.onChangeType}
+                            placeholder="Vehicle Type"
                           />
                         </FormGroup>
                       </Col>
@@ -254,19 +257,8 @@ class ModelsAdd extends Component {
                                 </td>
 
                                 <td>
-                                  <Button
-                                    // onClick={(e) => this.removeItem(item._id)}
+                                  
                                     
-                                    color="danger"
-                                    outline
-                                    type="button"
-                                  >
-                                    <i
-                                      class="fa fa-trash"
-                                      aria-hidden="true"
-                                    ></i>
-                                    Delete
-                                  </Button>
                                 </td>
                               </tr>
                             );
