@@ -162,7 +162,7 @@ class Charts extends Component {
         ],
         datasets: [
           {
-            label: "Users",
+            label: "All Users",
             fill: false,
             lineTension: 0.5,
             backgroundColor: "rgba(75,192,192,1)",
@@ -192,13 +192,13 @@ class Charts extends Component {
       console.log(model2.data.length);
       data[1] = model2.data.length;
       var pie = {
-        labels: ["SP", "VO"],
+        labels: ["Service Providers", "Vehicle Owners"],
         datasets: [
           {
             label: "User Types",
             fill: false,
             lineTension: 0.5,
-            backgroundColor: ["#B21F00", "#C9DE00"],
+            backgroundColor: ["#5e72e4", "#f4f5f7"],
             hoverBackgroundColor: ["#501800", "#4B5000"],
             borderWidth: 2,
             data: data,
@@ -257,7 +257,7 @@ class Charts extends Component {
                             options={{
                               title: {
                                 display: true,
-                                text: "Users per month",
+                                text: "All Users",
                                 fontSize: 20,
                               },
                               legend: {
@@ -272,7 +272,7 @@ class Charts extends Component {
                     </Card>
 
                     <Label>
-                      <h1>users created at </h1>
+                      <h1>New Users </h1>
                     </Label>
                     <Card>
                       <CardBody>
@@ -283,7 +283,7 @@ class Charts extends Component {
                             options={{
                               title: {
                                 display: true,
-                                text: "Bookings per month",
+                                text: "Users per month",
                                 fontSize: 20,
                               },
                               legend: {
