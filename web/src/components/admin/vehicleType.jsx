@@ -227,7 +227,7 @@ class VehicleType extends Component {
                                     Add Model
                                   </Link>
                                 </td>
-                                <td></td>
+                                
                                 <input type="hidden" value={count += 1}/>
                               
                                 <td>
