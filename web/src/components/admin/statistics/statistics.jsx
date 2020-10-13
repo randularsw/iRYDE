@@ -30,7 +30,7 @@ class Statistics extends Component {
                       <Counts />
                     </div>
                     <div>
-                      <Bookings />
+                      
                     </div>
 
                     <div>
